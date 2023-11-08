@@ -1,5 +1,6 @@
 package services.fileHandler;
 
+import models.AppConfiguration;
 import models.ApplicationTheme;
 import models.LoggerColumns;
 import org.json.simple.JSONArray;
@@ -7,27 +8,24 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ConfigJsonFileHandler {
+public class FileLoader {
     private ApplicationTheme theme;
     private String folderPath;
     private List<LoggerColumns> selectedColumns = new ArrayList<>();
 
-    public ConfigJsonFileHandler() {
+    public FileLoader() {
         loadAppConfig();
     }
 
     private void loadAppConfig() {
         try {
             JSONParser parser = new JSONParser();
-            Reader reader = new FileReader("C:\\Users\\rouve\\Documents\\Programming\\AstroLogger\\AstroLogger-app\\configuration.json");
+            Reader reader = new FileReader("C:\\Users\\rouve\\Documents\\Programming\\AstroLogger\\AstroLogger-app\\configuration_test.json");
 
             Object jsonObj = parser.parse(reader);
 
@@ -65,10 +63,6 @@ public class ConfigJsonFileHandler {
             System.out.println("Error while parsing JSON:");
             System.out.println(e.getMessage());
         }
-    }
-
-    public void saveAppConfig() {
-
     }
 
     public ApplicationTheme getTheme() {

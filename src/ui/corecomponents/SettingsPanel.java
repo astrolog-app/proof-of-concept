@@ -3,6 +3,7 @@ package ui.corecomponents;
 import models.AppConfiguration;
 import models.ApplicationTheme;
 import services.ApplicationActions;
+import services.fileHandler.FileSaver;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +13,8 @@ import java.io.File;
 public class SettingsPanel {
     private final AppConfiguration appConfig;
     private File selectedFile;
-    private boolean settingsChanged = false;
+    private boolean settingsChanged = true;
+    private String folderPath;
 
     private JPanel mainPanel;
     private JTextField textField1;
@@ -30,10 +32,23 @@ public class SettingsPanel {
         saveButton.setEnabled(settingsChanged);
 
         restartButton.addActionListener(e -> ApplicationActions.restart());
+
+        saveButton.addActionListener(e -> {
+            if (darkRadioButton.isSelected()) {
+                appConfig.setTheme(ApplicationTheme.DARK);
+            } else {
+                appConfig.setTheme(ApplicationTheme.LIGHT);
+            }
+            appConfig.setFolderPath(folderPath);
+            //appConfig.setSelectedColumns();
+
+            FileSaver fileSaver = new FileSaver(appConfig);
+            fileSaver.saveAppConfig();
+        });
     }
 
     private void imagingFolderPathHandler() {
-        String folderPath = appConfig.getFolderPath();
+        folderPath = appConfig.getFolderPath();
         selectedFile = new File(folderPath);
 
         textField1.setText(folderPath);

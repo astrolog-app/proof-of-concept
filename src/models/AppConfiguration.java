@@ -1,16 +1,16 @@
 package models;
 
-import services.fileHandler.ConfigJsonFileHandler;
+import services.fileHandler.FileLoader;
 
 import java.util.List;
 
 public class AppConfiguration {
-    private final ApplicationTheme theme;
+    private ApplicationTheme theme;
     private String folderPath;
     private List<LoggerColumns> selectedColumns;
 
     public AppConfiguration() {
-        ConfigJsonFileHandler appConfigLoader = new ConfigJsonFileHandler();
+        FileLoader appConfigLoader = new FileLoader();
         theme = appConfigLoader.getTheme();
         folderPath = appConfigLoader.getFolderPath();
         selectedColumns = appConfigLoader.getSelectedColumns();
@@ -18,6 +18,9 @@ public class AppConfiguration {
 
     public ApplicationTheme getTheme() {
         return theme;
+    }
+    public void setTheme(ApplicationTheme theme) {
+        this.theme = theme;
     }
 
     public String getFolderPath() {
