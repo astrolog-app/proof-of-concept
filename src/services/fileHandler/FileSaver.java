@@ -1,7 +1,6 @@
 package services.fileHandler;
 
 import models.AppConfiguration;
-import models.ImagingSession;
 import models.LoggerColumns;
 import org.json.simple.JSONObject;
 

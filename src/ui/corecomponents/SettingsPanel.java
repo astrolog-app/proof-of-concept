@@ -6,13 +6,11 @@ import services.ApplicationActions;
 import services.fileHandler.FileSaver;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 public class SettingsPanel {
     private final AppConfiguration appConfig;
-    private File selectedFile;
+    private File selectedDirectory;
     private boolean settingsChanged = true;
     private String folderPath;
 
@@ -49,22 +47,20 @@ public class SettingsPanel {
 
     private void imagingFolderPathHandler() {
         folderPath = appConfig.getFolderPath();
-        selectedFile = new File(folderPath);
+        selectedDirectory = new File(folderPath);
 
         textField1.setText(folderPath);
         textField1.setEditable(false);
         textField1.setEnabled(false);
 
-        JFileChooser chooser = new JFileChooser();
+        changeButton.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setAcceptAllFileFilterUsed(false);
 
-        changeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                chooser.showOpenDialog(null);
-                selectedFile = chooser.getSelectedFile();
-                if (selectedFile != null)
-                    textField1.setText(selectedFile.toString());
-
+            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                selectedDirectory = chooser.getCurrentDirectory();
+                textField1.setText(selectedDirectory.toString());
             }
         });
     }
