@@ -42,8 +42,8 @@ public class SettingsPanel {
             appConfig.setFolderPath(folderPath);
             //appConfig.setSelectedColumns();
 
-            FileSaver fileSaver = new FileSaver(appConfig);
-            fileSaver.saveAppConfig();
+            FileSaver fileSaver = new FileSaver();
+            fileSaver.saveAppConfig(appConfig);
         });
     }
 

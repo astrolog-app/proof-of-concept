@@ -31,8 +31,8 @@ public class ApplicationActions {
             list.add(LoggerColumns.OBJECT);
             appConfig.setSelectedColumns(list);
 
-            FileSaver fileSaver = new FileSaver(appConfig);
-            fileSaver.saveAppConfig();
+            FileSaver fileSaver = new FileSaver();
+            fileSaver.saveAppConfig(appConfig);
             ApplicationActions.restart();
 
             //new WelcomePanel();

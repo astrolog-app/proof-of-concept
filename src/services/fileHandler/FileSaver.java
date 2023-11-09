@@ -4,6 +4,7 @@ import models.AppConfiguration;
 import models.LoggerColumns;
 import org.json.simple.JSONObject;
 import models.Path;
+import services.ApplicationActions;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,13 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileSaver {
-    private final AppConfiguration appConfig;
-
-    public FileSaver(AppConfiguration appConfig) {
-        this.appConfig = appConfig;
-    }
-
-    public void saveAppConfig() {
+    public void saveAppConfig(AppConfiguration appConfig) {
         JSONObject obj = new JSONObject();
 
         obj.put("theme", appConfig.getTheme().toString());
