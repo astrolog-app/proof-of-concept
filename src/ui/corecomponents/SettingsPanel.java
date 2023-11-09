@@ -23,14 +23,14 @@ public class SettingsPanel {
     private boolean momentaryStartInFullscreen;
 
     private JPanel mainPanel;
-    private JTextField textField1;
-    private JButton changeButton;
-    private JRadioButton lightRadioButton;
-    private JRadioButton darkRadioButton;
-    private JButton saveButton;
-    private JButton restartButton;
-    private JRadioButton yesRadioButton;
-    private JRadioButton noRadioButton;
+    private JTextField folderPathField;
+    private JButton changeFolderPathButton;
+    private JRadioButton lightThemeRadioButton;
+    private JRadioButton darkThemeRadioButton;
+    private JButton saveChangesButton;
+    private JButton restartAppButton;
+    private JRadioButton startInFullscreenRadioButton;
+    private JRadioButton doNotStartInFullscreenRadioButton;
 
     public SettingsPanel(AppConfiguration appConfig) {
         this.appConfig = appConfig;
@@ -39,18 +39,19 @@ public class SettingsPanel {
         momentarySelectedColumns = appConfig.getSelectedColumns();
         momentaryStartInFullscreen = appConfig.getStartInFullscreen();
 
-        saveButton.setEnabled(false);
+        saveChangesButton.setEnabled(false);
         imagingFolderPathHandler();
         themeHandler();
         fullscreenHandler();
 
-        restartButton.addActionListener(e -> AppActions.restart());
+        restartAppButton.addActionListener(e -> AppActions.restart());
 
-        saveButton.addActionListener(e -> {
+        saveChangesButton.addActionListener(e -> {
             appConfig.setTheme(momentaryTheme);
             appConfig.setFolderPath(folderPath);
             //appConfig.setSelectedColumns();
             appConfig.setStartInFullscreen(momentaryStartInFullscreen);
+            updateChangeState();
 
             ConfigurationSaver configurationSaver = new ConfigurationSaver();
             configurationSaver.saveAppConfig(appConfig);
@@ -61,19 +62,19 @@ public class SettingsPanel {
         folderPath = appConfig.getFolderPath();
         selectedFile = new File(folderPath);
 
-        textField1.setText(folderPath);
-        textField1.setEditable(false);
-        textField1.setEnabled(false);
+        folderPathField.setText(folderPath);
+        folderPathField.setEditable(false);
+        folderPathField.setEnabled(false);
 
         JFileChooser chooser = new JFileChooser();
 
-        changeButton.addActionListener(new ActionListener() {
+        changeFolderPathButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 chooser.showOpenDialog(null);
                 selectedFile = chooser.getSelectedFile();
                 if (selectedFile != null)
-                    textField1.setText(selectedFile.toString());
+                    folderPathField.setText(selectedFile.toString());
 
             }
         });
@@ -81,38 +82,38 @@ public class SettingsPanel {
 
     private void themeHandler() {
         if (appConfig.getTheme().equals(AppTheme.DARK)) {
-            darkRadioButton.setSelected(true);
+            darkThemeRadioButton.setSelected(true);
         } else {
-            lightRadioButton.setSelected(true);
+            lightThemeRadioButton.setSelected(true);
         }
 
-        lightRadioButton.addActionListener(e -> {
-            lightRadioButton.setSelected(true);
-            darkRadioButton.setSelected(false);
+        lightThemeRadioButton.addActionListener(e -> {
+            lightThemeRadioButton.setSelected(true);
+            darkThemeRadioButton.setSelected(false);
             momentaryTheme = AppTheme.LIGHT;
             updateChangeState();
         });
-        darkRadioButton.addActionListener(e -> {
-            lightRadioButton.setSelected(false);
-            darkRadioButton.setSelected(true);
+        darkThemeRadioButton.addActionListener(e -> {
+            lightThemeRadioButton.setSelected(false);
+            darkThemeRadioButton.setSelected(true);
             momentaryTheme = AppTheme.DARK;
             updateChangeState();
         });
     }
 
     private void fullscreenHandler() {
-        yesRadioButton.setSelected(appConfig.getStartInFullscreen());
-        noRadioButton.setSelected(!appConfig.getStartInFullscreen());
+        startInFullscreenRadioButton.setSelected(appConfig.getStartInFullscreen());
+        doNotStartInFullscreenRadioButton.setSelected(!appConfig.getStartInFullscreen());
 
-        yesRadioButton.addActionListener(e -> {
-            yesRadioButton.setSelected(true);
-            noRadioButton.setSelected(false);
+        startInFullscreenRadioButton.addActionListener(e -> {
+            startInFullscreenRadioButton.setSelected(true);
+            doNotStartInFullscreenRadioButton.setSelected(false);
             momentaryStartInFullscreen = true;
             updateChangeState();
         });
-        noRadioButton.addActionListener(e -> {
-            yesRadioButton.setSelected(false);
-            noRadioButton.setSelected(true);
+        doNotStartInFullscreenRadioButton.addActionListener(e -> {
+            startInFullscreenRadioButton.setSelected(false);
+            doNotStartInFullscreenRadioButton.setSelected(true);
             momentaryStartInFullscreen = false;
             updateChangeState();
         });
@@ -122,9 +123,9 @@ public class SettingsPanel {
         if (momentaryTheme == appConfig.getTheme() && momentaryFolderPath.equals(appConfig.getFolderPath())
                 && momentarySelectedColumns == appConfig.getSelectedColumns()
                 && momentaryStartInFullscreen == appConfig.getStartInFullscreen()) {
-            saveButton.setEnabled(false);
+            saveChangesButton.setEnabled(false);
         } else {
-            saveButton.setEnabled(true);
+            saveChangesButton.setEnabled(true);
         }
     }
 
