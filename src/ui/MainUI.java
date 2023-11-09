@@ -2,6 +2,7 @@ package ui;
 
 import models.AppConfiguration;
 import models.AppTheme;
+import ui.corecomponents.EquipmentPanel;
 import utils.Paths;
 import services.fileHandler.ConfigurationStore;
 import ui.corecomponents.AnalysisPanel;
@@ -25,6 +26,9 @@ public class MainUI extends JFrame {
         AnalysisPanel analysisPanelClass = new AnalysisPanel();
         JPanel analysisPanel = analysisPanelClass.getPanel();
 
+        EquipmentPanel equipmentPanelClass = new EquipmentPanel();
+        JPanel equipmentPanel = equipmentPanelClass.getPanel();
+
         SettingsPanel settingsPanelClass = new SettingsPanel(appConfig, configStore);
         JPanel settingsPanel = settingsPanelClass.getPanel();
 
@@ -41,6 +45,7 @@ public class MainUI extends JFrame {
 
         tabbedPane.addTab("History", imagingHistoryPanel);
         tabbedPane.addTab("Analysis", analysisPanel);
+        tabbedPane.addTab("Equipment", equipmentPanel);
         tabbedPane.addTab("", settingsIcon, settingsPanel);
 
         this.add(tabbedPane);
