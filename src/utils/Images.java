@@ -1,7 +1,5 @@
 package utils;
 
-import models.Paths;
-
 import javax.swing.*;
 import java.awt.*;
 
