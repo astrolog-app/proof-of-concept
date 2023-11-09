@@ -2,6 +2,7 @@ package ui.corecomponents;
 
 import models.AppConfiguration;
 import models.AppTheme;
+import models.LoggerColumns;
 import services.AppActions;
 import services.fileHandler.ConfigurationSaver;
 
@@ -9,12 +10,16 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.List;
 
 public class SettingsPanel {
     private final AppConfiguration appConfig;
     private File selectedFile;
     private String folderPath;
+
     private AppTheme momentaryTheme;
+    private String momentaryFolderPath;
+    private List<LoggerColumns> momentarySelectedColumns;
     private boolean momentaryStartInFullscreen;
 
     private JPanel mainPanel;
@@ -30,6 +35,8 @@ public class SettingsPanel {
     public SettingsPanel(AppConfiguration appConfig) {
         this.appConfig = appConfig;
         momentaryTheme = appConfig.getTheme();
+        momentaryFolderPath = appConfig.getFolderPath();
+        momentarySelectedColumns = appConfig.getSelectedColumns();
         momentaryStartInFullscreen = appConfig.getStartInFullscreen();
 
         saveButton.setEnabled(false);
@@ -112,7 +119,9 @@ public class SettingsPanel {
     }
 
     private void updateChangeState() {
-        if (momentaryTheme == appConfig.getTheme() && momentaryStartInFullscreen == appConfig.getStartInFullscreen()) {
+        if (momentaryTheme == appConfig.getTheme() && momentaryFolderPath.equals(appConfig.getFolderPath())
+                && momentarySelectedColumns == appConfig.getSelectedColumns()
+                && momentaryStartInFullscreen == appConfig.getStartInFullscreen()) {
             saveButton.setEnabled(false);
         } else {
             saveButton.setEnabled(true);
