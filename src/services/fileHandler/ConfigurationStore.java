@@ -16,10 +16,7 @@ import java.util.List;
 
 public class ConfigurationStore {
     private final AppConfiguration appConfig;
-    private AppTheme theme;
-    private String folderPath;
-    private List<LoggerColumns> selectedColumns = new ArrayList<>();
-    private boolean startInFullscreen;
+    private final List<LoggerColumns> selectedColumns = new ArrayList<>();
 
     public ConfigurationStore(AppConfiguration appConfig) {
         this.appConfig = appConfig;
@@ -35,13 +32,14 @@ public class ConfigurationStore {
             JSONObject jsonObject = (JSONObject) jsonObj;
 
             String themeString = (String) jsonObject.get("theme");
+            AppTheme theme;
             if (themeString.equals("DARK")) {
                 theme = AppTheme.DARK;
             } else {
                 theme = AppTheme.LIGHT;
             }
 
-            folderPath = (String) jsonObject.get("folder_path");
+            String folderPath = (String) jsonObject.get("folder_path");
 
             JSONArray selectedColumnsJSON = (JSONArray) jsonObject.get("selected_columns");
             @SuppressWarnings("unchecked")
@@ -55,7 +53,7 @@ public class ConfigurationStore {
                 }
             }
 
-            startInFullscreen = (boolean) jsonObject.get("start_in_fullscreen");
+            boolean startInFullscreen = (boolean) jsonObject.get("start_in_fullscreen");
 
             reader.close();
 
