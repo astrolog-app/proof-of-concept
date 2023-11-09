@@ -1,11 +1,13 @@
 package ui;
 
 import models.AppConfiguration;
+import models.AppTheme;
 import models.Paths;
 import services.fileHandler.ConfigurationStore;
 import ui.corecomponents.AnalysisPanel;
 import ui.corecomponents.ImagingHistoryPanel;
 import ui.corecomponents.SettingsPanel;
+import utils.Images;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,15 +25,20 @@ public class MainUI extends JFrame {
         SettingsPanel settingsPanelClass = new SettingsPanel(appConfig, configStore);
         JPanel settingsPanel = settingsPanelClass.getPanel();
 
-        ImageIcon originalSettingsIcon = new ImageIcon(Paths.IMAGE_PATH + "/settings.png");
-        int width = 16; // Desired width of the icon
-        int height = 16; // Desired height of the icon
-        Image scaledImage = originalSettingsIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        ImageIcon scaledSettingsIcon = new ImageIcon(scaledImage);
+        ImageIcon settingsIcon;
+        ImageIcon originalSettingsIconLight = new ImageIcon(Paths.IMAGE_PATH + "/settingsLIGHT.png");
+        ImageIcon scaledSettingsIconLight = Images.scaleImage(originalSettingsIconLight, 16, 16);
+        ImageIcon originalSettingsIconDark = new ImageIcon(Paths.IMAGE_PATH + "/settingsDARK.png");
+        ImageIcon scaledSettingsIconDark = Images.scaleImage(originalSettingsIconDark, 16, 16);
+        if (appConfig.getTheme().equals(AppTheme.DARK)) {
+            settingsIcon = scaledSettingsIconDark;
+        } else {
+            settingsIcon = scaledSettingsIconLight;
+        }
 
         tabbedPane.addTab("History", imagingHistoryPanel);
         tabbedPane.addTab("Analysis", analysisPanel);
-        tabbedPane.addTab("", scaledSettingsIcon, settingsPanel);
+        tabbedPane.addTab("", settingsIcon, settingsPanel);
 
         this.add(tabbedPane);
 
