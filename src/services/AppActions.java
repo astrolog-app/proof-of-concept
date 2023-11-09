@@ -38,7 +38,7 @@ public class AppActions {
 
     public static void restart() {
         String java = System.getProperty("java.home") + "/bin/java";
-        String className = "Application";
+        String className = "App";
 
         ProcessBuilder builder = new ProcessBuilder(java, "-cp", System.getProperty("java.class.path"), className);
 
