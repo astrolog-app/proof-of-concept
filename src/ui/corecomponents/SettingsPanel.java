@@ -1,8 +1,8 @@
 package ui.corecomponents;
 
 import models.AppConfiguration;
-import models.ApplicationTheme;
-import services.ApplicationActions;
+import models.AppTheme;
+import services.AppActions;
 import services.fileHandler.FileSaver;
 
 import javax.swing.*;
@@ -31,13 +31,13 @@ public class SettingsPanel {
         themeHandler();
         saveButton.setEnabled(settingsChanged);
 
-        restartButton.addActionListener(e -> ApplicationActions.restart());
+        restartButton.addActionListener(e -> AppActions.restart());
 
         saveButton.addActionListener(e -> {
             if (darkRadioButton.isSelected()) {
-                appConfig.setTheme(ApplicationTheme.DARK);
+                appConfig.setTheme(AppTheme.DARK);
             } else {
-                appConfig.setTheme(ApplicationTheme.LIGHT);
+                appConfig.setTheme(AppTheme.LIGHT);
             }
             appConfig.setFolderPath(folderPath);
             //appConfig.setSelectedColumns();
@@ -70,7 +70,7 @@ public class SettingsPanel {
     }
 
     private void themeHandler() {
-        if (appConfig.getTheme().equals(ApplicationTheme.DARK)) {
+        if (appConfig.getTheme().equals(AppTheme.DARK)) {
             darkRadioButton.setSelected(true);
         } else {
             lightRadioButton.setSelected(true);

@@ -1,6 +1,6 @@
 package services.fileHandler;
 
-import models.ApplicationTheme;
+import models.AppTheme;
 import models.LoggerColumns;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,7 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FileLoader {
-    private ApplicationTheme theme;
+    private AppTheme theme;
     private String folderPath;
     private List<LoggerColumns> selectedColumns = new ArrayList<>();
 
@@ -33,9 +33,9 @@ public class FileLoader {
 
             String themeString = (String) jsonObject.get("theme");
             if (themeString.equals("DARK")) {
-                theme = ApplicationTheme.DARK;
+                theme = AppTheme.DARK;
             } else {
-                theme = ApplicationTheme.LIGHT;
+                theme = AppTheme.LIGHT;
             }
 
             folderPath = (String) jsonObject.get("folder_path");
@@ -65,7 +65,7 @@ public class FileLoader {
         }
     }
 
-    public ApplicationTheme getTheme() {
+    public AppTheme getTheme() {
         return theme;
     }
 

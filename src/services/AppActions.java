@@ -3,19 +3,18 @@ package services;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import models.AppConfiguration;
-import models.ApplicationTheme;
+import models.AppTheme;
 import models.LoggerColumns;
 import services.fileHandler.FileSaver;
 import ui.MainUI;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
-public class ApplicationActions {
+public class AppActions {
     private final AppConfiguration appConfig;
 
-    public ApplicationActions(AppConfiguration appConfig) {
+    public AppActions(AppConfiguration appConfig) {
         this.appConfig = appConfig;
     }
 
@@ -24,7 +23,7 @@ public class ApplicationActions {
             setApplicationTheme();
             new MainUI(appConfig);
         } catch (Exception e) {
-            appConfig.setTheme(ApplicationTheme.LIGHT);
+            appConfig.setTheme(AppTheme.LIGHT);
             appConfig.setFolderPath("path");
             List<LoggerColumns> list = new ArrayList<>();
             list.add(LoggerColumns.DATE);
@@ -33,7 +32,7 @@ public class ApplicationActions {
 
             FileSaver fileSaver = new FileSaver();
             fileSaver.saveAppConfig(appConfig);
-            ApplicationActions.restart();
+            AppActions.restart();
 
             //new WelcomePanel();
         }
@@ -54,9 +53,9 @@ public class ApplicationActions {
     }
 
     private void setApplicationTheme() throws Exception {
-        if (appConfig.getTheme() == ApplicationTheme.DARK) {
+        if (appConfig.getTheme() == AppTheme.DARK) {
             FlatDarkLaf.setup();
-        } else if (appConfig.getTheme() == ApplicationTheme.LIGHT){
+        } else if (appConfig.getTheme() == AppTheme.LIGHT){
             FlatLightLaf.setup();
         } else {
             FlatLightLaf.setup();

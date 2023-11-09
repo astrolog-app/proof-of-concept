@@ -5,7 +5,7 @@ import services.fileHandler.FileLoader;
 import java.util.List;
 
 public class AppConfiguration {
-    private ApplicationTheme theme;
+    private AppTheme theme;
     private String folderPath;
     private List<LoggerColumns> selectedColumns;
 
@@ -16,10 +16,10 @@ public class AppConfiguration {
         selectedColumns = appConfigLoader.getSelectedColumns();
     }
 
-    public ApplicationTheme getTheme() {
+    public AppTheme getTheme() {
         return theme;
     }
-    public void setTheme(ApplicationTheme theme) {
+    public void setTheme(AppTheme theme) {
         this.theme = theme;
     }
 
