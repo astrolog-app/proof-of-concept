@@ -1,7 +1,5 @@
 package models;
 
-import services.fileHandler.ConfigurationStore;
-
 import java.util.List;
 
 public class AppConfiguration {
