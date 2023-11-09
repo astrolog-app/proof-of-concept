@@ -1,12 +1,12 @@
 package services.fileHandler;
 
-import models.AppConfiguration;
 import models.ApplicationTheme;
 import models.LoggerColumns;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import models.Path;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class FileLoader {
     private void loadAppConfig() {
         try {
             JSONParser parser = new JSONParser();
-            Reader reader = new FileReader("C:\\Users\\rouve\\Documents\\Programming\\AstroLogger\\AstroLogger-app\\configuration_test.json");
+            Reader reader = new FileReader(Path.configurationPath + "/configuration_test.json");
 
             Object jsonObj = parser.parse(reader);
 

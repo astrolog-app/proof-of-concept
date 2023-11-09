@@ -4,7 +4,13 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import models.AppConfiguration;
 import models.ApplicationTheme;
+import models.LoggerColumns;
+import services.fileHandler.FileSaver;
 import ui.MainUI;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class ApplicationActions {
     private final AppConfiguration appConfig;
@@ -18,6 +24,17 @@ public class ApplicationActions {
             setApplicationTheme();
             new MainUI(appConfig);
         } catch (Exception e) {
+            appConfig.setTheme(ApplicationTheme.LIGHT);
+            appConfig.setFolderPath("path");
+            List<LoggerColumns> list = new ArrayList<>();
+            list.add(LoggerColumns.DATE);
+            list.add(LoggerColumns.OBJECT);
+            appConfig.setSelectedColumns(list);
+
+            FileSaver fileSaver = new FileSaver(appConfig);
+            fileSaver.saveAppConfig();
+            ApplicationActions.restart();
+
             //new WelcomePanel();
         }
     }

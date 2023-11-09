@@ -1,9 +1,9 @@
 package services.fileHandler;
 
 import models.AppConfiguration;
-import models.ImagingSession;
 import models.LoggerColumns;
 import org.json.simple.JSONObject;
+import models.Path;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class FileSaver {
         obj.put("selected_columns", selectedColumns);
 
         try {
-            FileWriter file = new FileWriter("C:\\Users\\rouve\\Documents\\Programming\\AstroLogger\\AstroLogger-app\\configuration_test.json");
+            FileWriter file = new FileWriter(Path.configurationPath + "/configuration_test.json");
             file.write(obj.toJSONString());
             file.flush();
             file.close();
