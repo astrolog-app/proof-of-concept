@@ -26,10 +26,10 @@ public class MainUI extends JFrame {
         JPanel settingsPanel = settingsPanelClass.getPanel();
 
         ImageIcon settingsIcon;
-        ImageIcon originalSettingsIconLight = new ImageIcon(Paths.IMAGE_PATH + "/settingsLIGHT.png");
-        ImageIcon scaledSettingsIconLight = Images.scaleImage(originalSettingsIconLight, 16, 16);
-        ImageIcon originalSettingsIconDark = new ImageIcon(Paths.IMAGE_PATH + "/settingsDARK.png");
-        ImageIcon scaledSettingsIconDark = Images.scaleImage(originalSettingsIconDark, 16, 16);
+        ImageIcon originalSettingsIconLight = new ImageIcon(Paths.IMAGE_PATH + "settingsLIGHT.png");
+        ImageIcon scaledSettingsIconLight = Images.scaleImage(originalSettingsIconLight, 15, 15);
+        ImageIcon originalSettingsIconDark = new ImageIcon(Paths.IMAGE_PATH + "settingsDARK.png");
+        ImageIcon scaledSettingsIconDark = Images.scaleImage(originalSettingsIconDark, 15, 15);
         if (appConfig.getTheme().equals(AppTheme.DARK)) {
             settingsIcon = scaledSettingsIconDark;
         } else {
