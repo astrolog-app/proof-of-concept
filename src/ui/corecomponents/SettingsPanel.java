@@ -15,6 +15,8 @@ public class SettingsPanel {
     private File selectedFile;
     private boolean settingsChanged = true;
     private String folderPath;
+    private AppTheme momentaryTheme;
+    private boolean momentaryStartInFullscreen;
 
     private JPanel mainPanel;
     private JTextField textField1;
@@ -29,19 +31,15 @@ public class SettingsPanel {
     public SettingsPanel(AppConfiguration appConfig) {
         this.appConfig = appConfig;
 
+        saveButton.setEnabled(false);
         imagingFolderPathHandler();
         themeHandler();
         fullscreenHandler();
-        saveButton.setEnabled(settingsChanged);
 
         restartButton.addActionListener(e -> AppActions.restart());
 
         saveButton.addActionListener(e -> {
-            if (darkRadioButton.isSelected()) {
-                appConfig.setTheme(AppTheme.DARK);
-            } else {
-                appConfig.setTheme(AppTheme.LIGHT);
-            }
+            appConfig.setTheme(momentaryTheme);
             appConfig.setFolderPath(folderPath);
             //appConfig.setSelectedColumns();
             appConfig.setStartInFullscreen(yesRadioButton.isSelected());
@@ -83,10 +81,14 @@ public class SettingsPanel {
         lightRadioButton.addActionListener(e -> {
             lightRadioButton.setSelected(true);
             darkRadioButton.setSelected(false);
+            momentaryTheme = AppTheme.LIGHT;
+            updateChangeState();
         });
         darkRadioButton.addActionListener(e -> {
             lightRadioButton.setSelected(false);
             darkRadioButton.setSelected(true);
+            momentaryTheme = AppTheme.DARK;
+            updateChangeState();
         });
     }
 
@@ -97,15 +99,23 @@ public class SettingsPanel {
         yesRadioButton.addActionListener(e -> {
             yesRadioButton.setSelected(true);
             noRadioButton.setSelected(false);
+            momentaryStartInFullscreen = true;
+            updateChangeState();
         });
         noRadioButton.addActionListener(e -> {
             yesRadioButton.setSelected(false);
             noRadioButton.setSelected(true);
+            momentaryStartInFullscreen = false;
+            updateChangeState();
         });
     }
 
     private void updateChangeState() {
-        settingsChanged = !settingsChanged;
+        if (momentaryTheme == appConfig.getTheme() && momentaryStartInFullscreen == appConfig.getStartInFullscreen()) {
+            saveButton.setEnabled(false);
+        } else {
+            saveButton.setEnabled(true);
+        }
     }
 
     public JPanel getPanel() {

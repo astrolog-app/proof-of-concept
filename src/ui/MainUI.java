@@ -22,7 +22,7 @@ public class MainUI extends JFrame {
         this.add(tabbedPane);
 
         setVisible(true);
-        setTitle("Astro Logger V.0.01");
+        setTitle("Astro Logger");
         if (appConfig.getStartInFullscreen()) {
             setExtendedState(JFrame.MAXIMIZED_BOTH);
         } else {

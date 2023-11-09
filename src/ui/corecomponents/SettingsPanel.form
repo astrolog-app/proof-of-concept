@@ -117,6 +117,15 @@
           <text value="No"/>
         </properties>
       </component>
+      <component id="61cd7" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font size="10"/>
+          <text value="©Rouven Spaar V.0.01"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
