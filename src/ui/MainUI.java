@@ -1,6 +1,7 @@
 package ui;
 
 import models.AppConfiguration;
+import models.Paths;
 import services.fileHandler.ConfigurationStore;
 import ui.corecomponents.AnalysisPanel;
 import ui.corecomponents.ImagingHistoryPanel;
@@ -22,9 +23,15 @@ public class MainUI extends JFrame {
         SettingsPanel settingsPanelClass = new SettingsPanel(appConfig, configStore);
         JPanel settingsPanel = settingsPanelClass.getPanel();
 
-        tabbedPane.add("History", imagingHistoryPanel);
-        tabbedPane.add("Analysis", analysisPanel);
-        tabbedPane.add("Settings", settingsPanel);
+        ImageIcon originalSettingsIcon = new ImageIcon(Paths.IMAGE_PATH + "/settings.png");
+        int width = 16; // Desired width of the icon
+        int height = 16; // Desired height of the icon
+        Image scaledImage = originalSettingsIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        ImageIcon scaledSettingsIcon = new ImageIcon(scaledImage);
+
+        tabbedPane.addTab("History", imagingHistoryPanel);
+        tabbedPane.addTab("Analysis", analysisPanel);
+        tabbedPane.addTab("", scaledSettingsIcon, settingsPanel);
 
         this.add(tabbedPane);
 

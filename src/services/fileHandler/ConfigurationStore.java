@@ -7,7 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import models.Path;
+import models.Paths;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class ConfigurationStore {
     public void load() {
         try {
             JSONParser parser = new JSONParser();
-            Reader reader = new FileReader(Path.configurationPath);
+            Reader reader = new FileReader(Paths.CONFIGURATION_PATH);
 
             Object jsonObj = parser.parse(reader);
 
@@ -86,7 +86,7 @@ public class ConfigurationStore {
         obj.put("start_in_fullscreen", appConfig.getStartInFullscreen());
 
         try {
-            FileWriter file = new FileWriter(Path.configurationPath);
+            FileWriter file = new FileWriter(Paths.CONFIGURATION_PATH);
             file.write(obj.toJSONString());
             file.flush();
             file.close();
