@@ -2,7 +2,7 @@ package ui.corecomponents;
 
 import javax.swing.*;
 
-public class ImagingHistoryPanel {
+public class LogPanel {
     private JPanel panel1;
 
     public JPanel getPanel() {

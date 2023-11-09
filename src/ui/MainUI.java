@@ -6,7 +6,7 @@ import ui.corecomponents.EquipmentPanel;
 import utils.Paths;
 import services.fileHandler.ConfigurationStore;
 import ui.corecomponents.AnalysisPanel;
-import ui.corecomponents.ImagingHistoryPanel;
+import ui.corecomponents.LogPanel;
 import ui.corecomponents.SettingsPanel;
 import utils.Images;
 
@@ -20,8 +20,8 @@ public class MainUI extends JFrame {
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
-        ImagingHistoryPanel imagingHistoryPanelClass = new ImagingHistoryPanel();
-        JPanel imagingHistoryPanel = imagingHistoryPanelClass.getPanel();
+        LogPanel logPanelClass = new LogPanel();
+        JPanel imagingHistoryPanel = logPanelClass.getPanel();
 
         AnalysisPanel analysisPanelClass = new AnalysisPanel();
         JPanel analysisPanel = analysisPanelClass.getPanel();
@@ -43,7 +43,7 @@ public class MainUI extends JFrame {
             settingsIcon = scaledSettingsIconLight;
         }
 
-        tabbedPane.addTab("History", imagingHistoryPanel);
+        tabbedPane.addTab("Log", imagingHistoryPanel);
         tabbedPane.addTab("Analysis", analysisPanel);
         tabbedPane.addTab("Equipment", equipmentPanel);
         tabbedPane.addTab("", settingsIcon, settingsPanel);
