@@ -30,6 +30,8 @@ public class SettingsPanel {
 
     public SettingsPanel(AppConfiguration appConfig) {
         this.appConfig = appConfig;
+        momentaryTheme = appConfig.getTheme();
+        momentaryStartInFullscreen = appConfig.getStartInFullscreen();
 
         saveButton.setEnabled(false);
         imagingFolderPathHandler();
@@ -42,7 +44,7 @@ public class SettingsPanel {
             appConfig.setTheme(momentaryTheme);
             appConfig.setFolderPath(folderPath);
             //appConfig.setSelectedColumns();
-            appConfig.setStartInFullscreen(yesRadioButton.isSelected());
+            appConfig.setStartInFullscreen(momentaryStartInFullscreen);
 
             FileSaver fileSaver = new FileSaver();
             fileSaver.saveAppConfig(appConfig);
