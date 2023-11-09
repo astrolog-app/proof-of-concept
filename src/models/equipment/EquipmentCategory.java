@@ -1,6 +1,6 @@
-package models;
+package models.equipment;
 
-public enum Equipment {
+public enum EquipmentCategory {
     TELESCOPES,
     CAMERAS,
     MOUNTS,
