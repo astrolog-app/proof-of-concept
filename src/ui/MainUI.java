@@ -6,6 +6,7 @@ import ui.corecomponents.ImagingHistoryPanel;
 import ui.corecomponents.SettingsPanel;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MainUI extends JFrame {
     public MainUI(AppConfiguration appConfig) {
@@ -28,6 +29,7 @@ public class MainUI extends JFrame {
 
         setVisible(true);
         setTitle("Astro Logger");
+        setMinimumSize(new Dimension(720, 550));
         if (appConfig.getStartInFullscreen()) {
             setExtendedState(JFrame.MAXIMIZED_BOTH);
         } else {
