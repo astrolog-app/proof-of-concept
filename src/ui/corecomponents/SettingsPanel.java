@@ -13,7 +13,6 @@ import java.io.File;
 public class SettingsPanel {
     private final AppConfiguration appConfig;
     private File selectedFile;
-    private boolean settingsChanged = true;
     private String folderPath;
     private AppTheme momentaryTheme;
     private boolean momentaryStartInFullscreen;
