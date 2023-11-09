@@ -3,7 +3,7 @@ package ui.corecomponents;
 import models.AppConfiguration;
 import models.AppTheme;
 import services.AppActions;
-import services.fileHandler.FileSaver;
+import services.fileHandler.ConfigurationSaver;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -45,8 +45,8 @@ public class SettingsPanel {
             //appConfig.setSelectedColumns();
             appConfig.setStartInFullscreen(momentaryStartInFullscreen);
 
-            FileSaver fileSaver = new FileSaver();
-            fileSaver.saveAppConfig(appConfig);
+            ConfigurationSaver configurationSaver = new ConfigurationSaver();
+            configurationSaver.saveAppConfig(appConfig);
         });
     }
 

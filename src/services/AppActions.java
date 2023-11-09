@@ -5,7 +5,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import models.AppConfiguration;
 import models.AppTheme;
 import models.LoggerColumns;
-import services.fileHandler.FileSaver;
+import services.fileHandler.ConfigurationSaver;
 import ui.MainUI;
 
 import java.util.ArrayList;
@@ -31,8 +31,8 @@ public class AppActions {
             appConfig.setSelectedColumns(list);
             appConfig.setStartInFullscreen(false);
 
-            FileSaver fileSaver = new FileSaver();
-            fileSaver.saveAppConfig(appConfig);
+            ConfigurationSaver configurationSaver = new ConfigurationSaver();
+            configurationSaver.saveAppConfig(appConfig);
             AppActions.restart();
 
             //new WelcomePanel();

@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FileLoader {
+public class ConfigurationLoader {
     private AppTheme theme;
     private String folderPath;
     private List<LoggerColumns> selectedColumns = new ArrayList<>();
     private boolean startInFullscreen;
 
-    public FileLoader() {
+    public ConfigurationLoader() {
         loadAppConfig();
     }
 

@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileSaver {
+public class ConfigurationSaver {
     public void saveAppConfig(AppConfiguration appConfig) {
         JSONObject obj = new JSONObject();
 
