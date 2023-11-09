@@ -26,7 +26,7 @@ public class FileLoader {
     private void loadAppConfig() {
         try {
             JSONParser parser = new JSONParser();
-            Reader reader = new FileReader(Path.configurationPath + "/configuration_test.json");
+            Reader reader = new FileReader(Path.configurationPath + "/configuration.json");
 
             Object jsonObj = parser.parse(reader);
 

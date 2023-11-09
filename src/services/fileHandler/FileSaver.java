@@ -24,7 +24,7 @@ public class FileSaver {
         obj.put("start_in_fullscreen", appConfig.getStartInFullscreen());
 
         try {
-            FileWriter file = new FileWriter(Path.configurationPath + "/configuration_test.json");
+            FileWriter file = new FileWriter(Path.configurationPath + "/configuration.json");
             file.write(obj.toJSONString());
             file.flush();
             file.close();
