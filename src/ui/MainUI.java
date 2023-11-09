@@ -2,7 +2,7 @@ package ui;
 
 import models.AppConfiguration;
 import models.AppTheme;
-import models.Paths;
+import utils.Paths;
 import services.fileHandler.ConfigurationStore;
 import ui.corecomponents.AnalysisPanel;
 import ui.corecomponents.ImagingHistoryPanel;

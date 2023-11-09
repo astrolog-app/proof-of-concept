@@ -1,4 +1,4 @@
-package models;
+package utils;
 
 public class Paths {
     private static final String PROJECT_PATH = System.getProperty("user.dir");
