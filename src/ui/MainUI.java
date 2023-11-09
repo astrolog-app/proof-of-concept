@@ -10,12 +10,17 @@ import javax.swing.*;
 public class MainUI extends JFrame {
     public MainUI(AppConfiguration appConfig) {
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        JPanel imagingHistory = new ImagingHistoryPanel();
-        JPanel analysisPanel = new AnalysisPanel();
+
+        ImagingHistoryPanel imagingHistoryPanelClass = new ImagingHistoryPanel();
+        JPanel imagingHistoryPanel = imagingHistoryPanelClass.getPanel();
+
+        AnalysisPanel analysisPanelClass = new AnalysisPanel();
+        JPanel analysisPanel = analysisPanelClass.getPanel();
+
         SettingsPanel settingsPanelClass = new SettingsPanel(appConfig);
         JPanel settingsPanel = settingsPanelClass.getPanel();
 
-        tabbedPane.add("History", imagingHistory);
+        tabbedPane.add("History", imagingHistoryPanel);
         tabbedPane.add("Analysis", analysisPanel);
         tabbedPane.add("Settings", settingsPanel);
 
