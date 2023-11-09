@@ -5,23 +5,21 @@ import com.formdev.flatlaf.FlatLightLaf;
 import models.AppConfiguration;
 import models.AppTheme;
 import models.LoggerColumns;
-import services.fileHandler.ConfigurationSaver;
+import services.fileHandler.ConfigurationStore;
 import ui.MainUI;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AppActions {
-    private final AppConfiguration appConfig;
-
-    public AppActions(AppConfiguration appConfig) {
-        this.appConfig = appConfig;
-    }
+    private final AppConfiguration appConfig = new AppConfiguration();
+    private final ConfigurationStore configStore = new ConfigurationStore(appConfig);
 
     public void initialize() {
         try {
+            configStore.load();
             setApplicationTheme();
-            new MainUI(appConfig);
+            new MainUI(appConfig, configStore);
         } catch (Exception e) {
             appConfig.setTheme(AppTheme.LIGHT);
             appConfig.setFolderPath("path");
@@ -31,8 +29,7 @@ public class AppActions {
             appConfig.setSelectedColumns(list);
             appConfig.setStartInFullscreen(false);
 
-            ConfigurationSaver configurationSaver = new ConfigurationSaver();
-            configurationSaver.saveAppConfig(appConfig);
+            configStore.save();
             AppActions.restart();
 
             //new WelcomePanel();

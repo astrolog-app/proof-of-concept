@@ -1,6 +1,7 @@
 package ui;
 
 import models.AppConfiguration;
+import services.fileHandler.ConfigurationStore;
 import ui.corecomponents.AnalysisPanel;
 import ui.corecomponents.ImagingHistoryPanel;
 import ui.corecomponents.SettingsPanel;
@@ -9,7 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainUI extends JFrame {
-    public MainUI(AppConfiguration appConfig) {
+    public MainUI(AppConfiguration appConfig, ConfigurationStore configStore) {
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
         ImagingHistoryPanel imagingHistoryPanelClass = new ImagingHistoryPanel();
@@ -18,7 +19,7 @@ public class MainUI extends JFrame {
         AnalysisPanel analysisPanelClass = new AnalysisPanel();
         JPanel analysisPanel = analysisPanelClass.getPanel();
 
-        SettingsPanel settingsPanelClass = new SettingsPanel(appConfig);
+        SettingsPanel settingsPanelClass = new SettingsPanel(appConfig, configStore);
         JPanel settingsPanel = settingsPanelClass.getPanel();
 
         tabbedPane.add("History", imagingHistoryPanel);

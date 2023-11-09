@@ -1,6 +1,6 @@
 package models;
 
-import services.fileHandler.ConfigurationLoader;
+import services.fileHandler.ConfigurationStore;
 
 import java.util.List;
 
@@ -9,14 +9,6 @@ public class AppConfiguration {
     private String folderPath;
     private List<LoggerColumns> selectedColumns;
     private boolean startInFullscreen;
-
-    public AppConfiguration() {
-        ConfigurationLoader appConfigLoader = new ConfigurationLoader();
-        theme = appConfigLoader.getTheme();
-        folderPath = appConfigLoader.getFolderPath();
-        selectedColumns = appConfigLoader.getSelectedColumns();
-        startInFullscreen = appConfigLoader.getStartInFullscreen();
-    }
 
     public AppTheme getTheme() {
         return theme;

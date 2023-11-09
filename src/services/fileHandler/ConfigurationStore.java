@@ -1,5 +1,6 @@
 package services.fileHandler;
 
+import models.AppConfiguration;
 import models.AppTheme;
 import models.LoggerColumns;
 import org.json.simple.JSONArray;
@@ -13,17 +14,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ConfigurationLoader {
+public class ConfigurationStore {
+    private final AppConfiguration appConfig;
     private AppTheme theme;
     private String folderPath;
     private List<LoggerColumns> selectedColumns = new ArrayList<>();
     private boolean startInFullscreen;
 
-    public ConfigurationLoader() {
-        loadAppConfig();
+    public ConfigurationStore(AppConfiguration appConfig) {
+        this.appConfig = appConfig;
     }
 
-    private void loadAppConfig() {
+    public void load() {
         try {
             JSONParser parser = new JSONParser();
             Reader reader = new FileReader(Path.configurationPath);
@@ -56,6 +58,11 @@ public class ConfigurationLoader {
             startInFullscreen = (boolean) jsonObject.get("start_in_fullscreen");
 
             reader.close();
+
+            appConfig.setTheme(theme);
+            appConfig.setFolderPath(folderPath);
+            appConfig.setSelectedColumns(selectedColumns);
+            appConfig.setStartInFullscreen(startInFullscreen);
         } catch (FileNotFoundException e) {
             System.out.println("Error: Config File not found:");
             System.out.println(e.getMessage());
@@ -68,19 +75,26 @@ public class ConfigurationLoader {
         }
     }
 
-    public AppTheme getTheme() {
-        return theme;
-    }
+    public void save() {
+        JSONObject obj = new JSONObject();
 
-    public String getFolderPath() {
-        return folderPath;
-    }
+        obj.put("theme", appConfig.getTheme().toString());
+        obj.put("folder_path", appConfig.getFolderPath());
+        List<String> selectedColumns = new ArrayList<>();
+        for (LoggerColumns lc : appConfig.getSelectedColumns()) {
+            selectedColumns.add(lc.toString());
+        }
+        obj.put("selected_columns", selectedColumns);
+        obj.put("start_in_fullscreen", appConfig.getStartInFullscreen());
 
-    public List<LoggerColumns> getSelectedColumns() {
-        return selectedColumns;
-    }
+        try {
+            FileWriter file = new FileWriter(Path.configurationPath);
+            file.write(obj.toJSONString());
+            file.flush();
+            file.close();
 
-    public boolean getStartInFullscreen() {
-        return startInFullscreen;
+        } catch (IOException e) {
+            System.out.println("Error writing Json file.");
+        }
     }
 }

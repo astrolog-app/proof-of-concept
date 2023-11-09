@@ -4,7 +4,7 @@ import models.AppConfiguration;
 import models.AppTheme;
 import models.LoggerColumns;
 import services.AppActions;
-import services.fileHandler.ConfigurationSaver;
+import services.fileHandler.ConfigurationStore;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +14,7 @@ import java.util.List;
 
 public class SettingsPanel {
     private final AppConfiguration appConfig;
+    private final ConfigurationStore configStore;
     private File selectedFile;
     private String folderPath;
 
@@ -32,8 +33,9 @@ public class SettingsPanel {
     private JRadioButton startInFullscreenRadioButton;
     private JRadioButton doNotStartInFullscreenRadioButton;
 
-    public SettingsPanel(AppConfiguration appConfig) {
+    public SettingsPanel(AppConfiguration appConfig, ConfigurationStore configStore) {
         this.appConfig = appConfig;
+        this.configStore = configStore;
         momentaryTheme = appConfig.getTheme();
         momentaryFolderPath = appConfig.getFolderPath();
         momentarySelectedColumns = appConfig.getSelectedColumns();
@@ -53,8 +55,7 @@ public class SettingsPanel {
             appConfig.setStartInFullscreen(momentaryStartInFullscreen);
             updateChangeState();
 
-            ConfigurationSaver configurationSaver = new ConfigurationSaver();
-            configurationSaver.saveAppConfig(appConfig);
+            configStore.save();
         });
     }
 

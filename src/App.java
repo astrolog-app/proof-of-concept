@@ -3,7 +3,7 @@ import services.AppActions;
 
 public class App {
     public static void main(String[] args) {
-        AppActions appActions = new AppActions(new AppConfiguration());
+        AppActions appActions = new AppActions();
 
         appActions.initialize();
     }
