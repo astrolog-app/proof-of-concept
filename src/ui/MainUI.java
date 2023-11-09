@@ -23,7 +23,11 @@ public class MainUI extends JFrame {
 
         setVisible(true);
         setTitle("Astro Logger V.0.01");
-        setSize(800, 600);
+        if (appConfig.getStartInFullscreen()) {
+            setExtendedState(JFrame.MAXIMIZED_BOTH);
+        } else {
+            setSize(800, 600);
+        }
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }

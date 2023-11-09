@@ -23,12 +23,15 @@ public class SettingsPanel {
     private JRadioButton darkRadioButton;
     private JButton saveButton;
     private JButton restartButton;
+    private JRadioButton yesRadioButton;
+    private JRadioButton noRadioButton;
 
     public SettingsPanel(AppConfiguration appConfig) {
         this.appConfig = appConfig;
 
         imagingFolderPathHandler();
         themeHandler();
+        fullscreenHandler();
         saveButton.setEnabled(settingsChanged);
 
         restartButton.addActionListener(e -> AppActions.restart());
@@ -41,6 +44,7 @@ public class SettingsPanel {
             }
             appConfig.setFolderPath(folderPath);
             //appConfig.setSelectedColumns();
+            appConfig.setStartInFullscreen(yesRadioButton.isSelected());
 
             FileSaver fileSaver = new FileSaver();
             fileSaver.saveAppConfig(appConfig);
@@ -83,6 +87,20 @@ public class SettingsPanel {
         darkRadioButton.addActionListener(e -> {
             lightRadioButton.setSelected(false);
             darkRadioButton.setSelected(true);
+        });
+    }
+
+    private void fullscreenHandler() {
+        yesRadioButton.setSelected(appConfig.getStartInFullscreen());
+        noRadioButton.setSelected(!appConfig.getStartInFullscreen());
+
+        yesRadioButton.addActionListener(e -> {
+            yesRadioButton.setSelected(true);
+            noRadioButton.setSelected(false);
+        });
+        noRadioButton.addActionListener(e -> {
+            yesRadioButton.setSelected(false);
+            noRadioButton.setSelected(true);
         });
     }
 

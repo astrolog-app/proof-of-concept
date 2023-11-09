@@ -21,6 +21,7 @@ public class FileSaver {
             selectedColumns.add(lc.toString());
         }
         obj.put("selected_columns", selectedColumns);
+        obj.put("start_in_fullscreen", appConfig.getStartInFullscreen());
 
         try {
             FileWriter file = new FileWriter(Path.configurationPath + "/configuration_test.json");

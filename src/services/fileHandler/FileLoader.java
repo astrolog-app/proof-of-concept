@@ -17,6 +17,7 @@ public class FileLoader {
     private AppTheme theme;
     private String folderPath;
     private List<LoggerColumns> selectedColumns = new ArrayList<>();
+    private boolean startInFullscreen;
 
     public FileLoader() {
         loadAppConfig();
@@ -52,6 +53,8 @@ public class FileLoader {
                 }
             }
 
+            startInFullscreen = (boolean) jsonObject.get("start_in_fullscreen");
+
             reader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Error: Config File not found:");
@@ -75,5 +78,9 @@ public class FileLoader {
 
     public List<LoggerColumns> getSelectedColumns() {
         return selectedColumns;
+    }
+
+    public boolean getStartInFullscreen() {
+        return startInFullscreen;
     }
 }

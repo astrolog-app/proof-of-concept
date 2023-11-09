@@ -8,12 +8,14 @@ public class AppConfiguration {
     private AppTheme theme;
     private String folderPath;
     private List<LoggerColumns> selectedColumns;
+    private boolean startInFullscreen;
 
     public AppConfiguration() {
         FileLoader appConfigLoader = new FileLoader();
         theme = appConfigLoader.getTheme();
         folderPath = appConfigLoader.getFolderPath();
         selectedColumns = appConfigLoader.getSelectedColumns();
+        startInFullscreen = appConfigLoader.getStartInFullscreen();
     }
 
     public AppTheme getTheme() {
@@ -35,5 +37,12 @@ public class AppConfiguration {
     }
     public void setSelectedColumns(List<LoggerColumns> selectedColumns) {
         this.selectedColumns = selectedColumns;
+    }
+
+    public boolean getStartInFullscreen() {
+        return startInFullscreen;
+    }
+    public void setStartInFullscreen(boolean startInFullscreen) {
+        this.startInFullscreen = startInFullscreen;
     }
 }

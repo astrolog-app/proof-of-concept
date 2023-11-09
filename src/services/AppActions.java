@@ -29,6 +29,7 @@ public class AppActions {
             list.add(LoggerColumns.DATE);
             list.add(LoggerColumns.OBJECT);
             appConfig.setSelectedColumns(list);
+            appConfig.setStartInFullscreen(false);
 
             FileSaver fileSaver = new FileSaver();
             fileSaver.saveAppConfig(appConfig);
