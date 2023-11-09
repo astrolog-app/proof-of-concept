@@ -1,27 +1,18 @@
 package models;
 
-import java.time.Instant;
+import java.util.EnumMap;
 
 public class ImagingSession {
-    private Instant date;
-    private String object;
+    EnumMap<LoggerColumns, Object> imagingSessionMap;
 
-    public ImagingSession(Instant date, String object) {
-        this.date = date;
-        this.object = object;
+    public ImagingSession(EnumMap<LoggerColumns, Object> imagingSessionMap) {
+        this.imagingSessionMap = imagingSessionMap;
     }
 
-    public Instant getDate() {
-        return date;
+    public Object getParameter(LoggerColumns loggerColumn) {
+        return imagingSessionMap.get(loggerColumn);
     }
-    public void setDate(Instant date) {
-        this.date = date;
-    }
-
-    public String getObject() {
-        return object;
-    }
-    public void setObject(String object) {
-        this.object = object;
+    public void setParameter(LoggerColumns loggerColumn, Object object) {
+        imagingSessionMap.put(loggerColumn, object);
     }
 }

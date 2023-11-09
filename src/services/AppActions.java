@@ -26,7 +26,7 @@ public class AppActions {
             appConfig.setFolderPath("path");
             List<LoggerColumns> list = new ArrayList<>();
             list.add(LoggerColumns.DATE);
-            list.add(LoggerColumns.OBJECT);
+            list.add(LoggerColumns.TARGET);
             appConfig.setSelectedColumns(list);
             appConfig.setStartInFullscreen(false);
 
