@@ -1,6 +1,6 @@
 package models;
 
-public enum ApplicationTheme {
+public enum AppTheme {
     LIGHT,
     DARK
 }

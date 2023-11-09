@@ -1,89 +1,131 @@
 package ui.corecomponents;
 
 import models.AppConfiguration;
-import models.ApplicationTheme;
-import services.ApplicationActions;
-import services.fileHandler.FileSaver;
+import models.AppTheme;
+import models.LoggerColumns;
+import services.AppActions;
+import services.fileHandler.ConfigurationStore;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.List;
 
 public class SettingsPanel {
     private final AppConfiguration appConfig;
-    private File selectedDirectory;
-    private boolean settingsChanged = true;
+    private File selectedFile;
     private String folderPath;
 
+    private AppTheme momentaryTheme;
+    private String momentaryFolderPath;
+    private List<LoggerColumns> momentarySelectedColumns;
+    private boolean momentaryStartInFullscreen;
+
     private JPanel mainPanel;
-    private JTextField textField1;
-    private JButton changeButton;
-    private JRadioButton lightRadioButton;
-    private JRadioButton darkRadioButton;
-    private JButton saveButton;
-    private JButton restartButton;
+    private JTextField folderPathField;
+    private JButton changeFolderPathButton;
+    private JRadioButton lightThemeRadioButton;
+    private JRadioButton darkThemeRadioButton;
+    private JButton saveChangesButton;
+    private JButton restartAppButton;
+    private JRadioButton startInFullscreenRadioButton;
+    private JRadioButton doNotStartInFullscreenRadioButton;
 
-    public SettingsPanel(AppConfiguration appConfig) {
+    public SettingsPanel(AppConfiguration appConfig, ConfigurationStore configStore) {
         this.appConfig = appConfig;
+        momentaryTheme = appConfig.getTheme();
+        momentaryFolderPath = appConfig.getFolderPath();
+        momentarySelectedColumns = appConfig.getSelectedColumns();
+        momentaryStartInFullscreen = appConfig.getStartInFullscreen();
 
+        saveChangesButton.setEnabled(false);
         imagingFolderPathHandler();
         themeHandler();
-        saveButton.setEnabled(settingsChanged);
+        fullscreenHandler();
 
-        restartButton.addActionListener(e -> ApplicationActions.restart());
+        restartAppButton.addActionListener(e -> AppActions.restart());
 
-        saveButton.addActionListener(e -> {
-            if (darkRadioButton.isSelected()) {
-                appConfig.setTheme(ApplicationTheme.DARK);
-            } else {
-                appConfig.setTheme(ApplicationTheme.LIGHT);
-            }
+        saveChangesButton.addActionListener(e -> {
+            appConfig.setTheme(momentaryTheme);
             appConfig.setFolderPath(folderPath);
             //appConfig.setSelectedColumns();
+            appConfig.setStartInFullscreen(momentaryStartInFullscreen);
+            updateChangeState();
 
-            FileSaver fileSaver = new FileSaver(appConfig);
-            fileSaver.saveAppConfig();
+            configStore.save();
         });
     }
 
     private void imagingFolderPathHandler() {
         folderPath = appConfig.getFolderPath();
-        selectedDirectory = new File(folderPath);
+        selectedFile = new File(folderPath);
 
-        textField1.setText(folderPath);
-        textField1.setEditable(false);
-        textField1.setEnabled(false);
+        folderPathField.setText(folderPath);
+        folderPathField.setEditable(false);
+        folderPathField.setEnabled(false);
 
-        changeButton.addActionListener(e -> {
-            JFileChooser chooser = new JFileChooser();
-            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            chooser.setAcceptAllFileFilterUsed(false);
+        JFileChooser chooser = new JFileChooser();
 
-            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                selectedDirectory = chooser.getCurrentDirectory();
-                textField1.setText(selectedDirectory.toString());
+        changeFolderPathButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                chooser.showOpenDialog(null);
+                selectedFile = chooser.getSelectedFile();
+                if (selectedFile != null)
+                    folderPathField.setText(selectedFile.toString());
+
             }
         });
     }
 
     private void themeHandler() {
-        if (appConfig.getTheme().equals(ApplicationTheme.DARK)) {
-            darkRadioButton.setSelected(true);
+        if (appConfig.getTheme().equals(AppTheme.DARK)) {
+            darkThemeRadioButton.setSelected(true);
         } else {
-            lightRadioButton.setSelected(true);
+            lightThemeRadioButton.setSelected(true);
         }
 
-        lightRadioButton.addActionListener(e -> {
-            lightRadioButton.setSelected(true);
-            darkRadioButton.setSelected(false);
+        lightThemeRadioButton.addActionListener(e -> {
+            lightThemeRadioButton.setSelected(true);
+            darkThemeRadioButton.setSelected(false);
+            momentaryTheme = AppTheme.LIGHT;
+            updateChangeState();
         });
-        darkRadioButton.addActionListener(e -> {
-            lightRadioButton.setSelected(false);
-            darkRadioButton.setSelected(true);
+        darkThemeRadioButton.addActionListener(e -> {
+            lightThemeRadioButton.setSelected(false);
+            darkThemeRadioButton.setSelected(true);
+            momentaryTheme = AppTheme.DARK;
+            updateChangeState();
+        });
+    }
+
+    private void fullscreenHandler() {
+        startInFullscreenRadioButton.setSelected(appConfig.getStartInFullscreen());
+        doNotStartInFullscreenRadioButton.setSelected(!appConfig.getStartInFullscreen());
+
+        startInFullscreenRadioButton.addActionListener(e -> {
+            startInFullscreenRadioButton.setSelected(true);
+            doNotStartInFullscreenRadioButton.setSelected(false);
+            momentaryStartInFullscreen = true;
+            updateChangeState();
+        });
+        doNotStartInFullscreenRadioButton.addActionListener(e -> {
+            startInFullscreenRadioButton.setSelected(false);
+            doNotStartInFullscreenRadioButton.setSelected(true);
+            momentaryStartInFullscreen = false;
+            updateChangeState();
         });
     }
 
     private void updateChangeState() {
-        settingsChanged = !settingsChanged;
+        if (momentaryTheme == appConfig.getTheme() && momentaryFolderPath.equals(appConfig.getFolderPath())
+                && momentarySelectedColumns == appConfig.getSelectedColumns()
+                && momentaryStartInFullscreen == appConfig.getStartInFullscreen()) {
+            saveChangesButton.setEnabled(false);
+        } else {
+            saveChangesButton.setEnabled(true);
+        }
     }
 
     public JPanel getPanel() {

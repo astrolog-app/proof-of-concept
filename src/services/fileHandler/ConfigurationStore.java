@@ -1,44 +1,45 @@
 package services.fileHandler;
 
 import models.AppConfiguration;
-import models.ApplicationTheme;
+import models.AppTheme;
 import models.LoggerColumns;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import utils.Paths;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FileLoader {
-    private ApplicationTheme theme;
-    private String folderPath;
-    private List<LoggerColumns> selectedColumns = new ArrayList<>();
+public class ConfigurationStore {
+    private final AppConfiguration appConfig;
+    private final List<LoggerColumns> selectedColumns = new ArrayList<>();
 
-    public FileLoader() {
-        loadAppConfig();
+    public ConfigurationStore(AppConfiguration appConfig) {
+        this.appConfig = appConfig;
     }
 
-    private void loadAppConfig() {
+    public void load() {
         try {
             JSONParser parser = new JSONParser();
-            Reader reader = new FileReader("C:\\Users\\rouve\\Documents\\Programming\\AstroLogger\\AstroLogger-app\\configuration_test.json");
+            Reader reader = new FileReader(Paths.CONFIGURATION_PATH);
 
             Object jsonObj = parser.parse(reader);
 
             JSONObject jsonObject = (JSONObject) jsonObj;
 
             String themeString = (String) jsonObject.get("theme");
+            AppTheme theme;
             if (themeString.equals("DARK")) {
-                theme = ApplicationTheme.DARK;
+                theme = AppTheme.DARK;
             } else {
-                theme = ApplicationTheme.LIGHT;
+                theme = AppTheme.LIGHT;
             }
 
-            folderPath = (String) jsonObject.get("folder_path");
+            String folderPath = (String) jsonObject.get("folder_path");
 
             JSONArray selectedColumnsJSON = (JSONArray) jsonObject.get("selected_columns");
             @SuppressWarnings("unchecked")
@@ -52,7 +53,14 @@ public class FileLoader {
                 }
             }
 
+            boolean startInFullscreen = (boolean) jsonObject.get("start_in_fullscreen");
+
             reader.close();
+
+            appConfig.setTheme(theme);
+            appConfig.setFolderPath(folderPath);
+            appConfig.setSelectedColumns(selectedColumns);
+            appConfig.setStartInFullscreen(startInFullscreen);
         } catch (FileNotFoundException e) {
             System.out.println("Error: Config File not found:");
             System.out.println(e.getMessage());
@@ -65,15 +73,26 @@ public class FileLoader {
         }
     }
 
-    public ApplicationTheme getTheme() {
-        return theme;
-    }
+    public void save() {
+        JSONObject obj = new JSONObject();
 
-    public String getFolderPath() {
-        return folderPath;
-    }
+        obj.put("theme", appConfig.getTheme().toString());
+        obj.put("folder_path", appConfig.getFolderPath());
+        List<String> selectedColumns = new ArrayList<>();
+        for (LoggerColumns lc : appConfig.getSelectedColumns()) {
+            selectedColumns.add(lc.toString());
+        }
+        obj.put("selected_columns", selectedColumns);
+        obj.put("start_in_fullscreen", appConfig.getStartInFullscreen());
 
-    public List<LoggerColumns> getSelectedColumns() {
-        return selectedColumns;
+        try {
+            FileWriter file = new FileWriter(Paths.CONFIGURATION_PATH);
+            file.write(obj.toJSONString());
+            file.flush();
+            file.close();
+
+        } catch (IOException e) {
+            System.out.println("Error writing Json file.");
+        }
     }
 }
