@@ -14,7 +14,6 @@ import java.util.List;
 
 public class SettingsPanel {
     private final AppConfiguration appConfig;
-    private final ConfigurationStore configStore;
     private File selectedFile;
     private String folderPath;
 
@@ -35,7 +34,6 @@ public class SettingsPanel {
 
     public SettingsPanel(AppConfiguration appConfig, ConfigurationStore configStore) {
         this.appConfig = appConfig;
-        this.configStore = configStore;
         momentaryTheme = appConfig.getTheme();
         momentaryFolderPath = appConfig.getFolderPath();
         momentarySelectedColumns = appConfig.getSelectedColumns();
