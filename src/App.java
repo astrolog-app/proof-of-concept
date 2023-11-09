@@ -1,4 +1,3 @@
-import models.AppConfiguration;
 import services.AppActions;
 
 public class App {
