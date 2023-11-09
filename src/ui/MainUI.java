@@ -14,6 +14,9 @@ import java.awt.*;
 
 public class MainUI extends JFrame {
     public MainUI(AppConfiguration appConfig, ConfigurationStore configStore) {
+        Image img = Toolkit.getDefaultToolkit().getImage(Paths.IMAGE_PATH + "appLogo.png");
+        setIconImage(img);
+
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
         ImagingHistoryPanel imagingHistoryPanelClass = new ImagingHistoryPanel();
@@ -27,9 +30,9 @@ public class MainUI extends JFrame {
 
         ImageIcon settingsIcon;
         ImageIcon originalSettingsIconLight = new ImageIcon(Paths.IMAGE_PATH + "settingsLIGHT.png");
-        ImageIcon scaledSettingsIconLight = Images.scaleImage(originalSettingsIconLight, 15, 15);
+        ImageIcon scaledSettingsIconLight = Images.scaleImage(originalSettingsIconLight, 14, 14);
         ImageIcon originalSettingsIconDark = new ImageIcon(Paths.IMAGE_PATH + "settingsDARK.png");
-        ImageIcon scaledSettingsIconDark = Images.scaleImage(originalSettingsIconDark, 15, 15);
+        ImageIcon scaledSettingsIconDark = Images.scaleImage(originalSettingsIconDark, 14, 14);
         if (appConfig.getTheme().equals(AppTheme.DARK)) {
             settingsIcon = scaledSettingsIconDark;
         } else {

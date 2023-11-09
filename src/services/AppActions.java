@@ -7,6 +7,7 @@ import models.AppTheme;
 import models.LoggerColumns;
 import services.fileHandler.ConfigurationStore;
 import ui.MainUI;
+import utils.Paths;
 
 import java.util.ArrayList;
 import java.util.List;
