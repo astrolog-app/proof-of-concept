@@ -14,12 +14,9 @@ import java.util.List;
 
 public class SettingsPanel {
     private final AppConfiguration appConfig;
-    private File selectedFile;
-    private String folderPath;
 
     private AppTheme momentaryTheme;
     private String momentaryFolderPath;
-    private List<LoggerColumns> momentarySelectedColumns;
     private boolean momentaryStartInFullscreen;
 
     private JPanel mainPanel;
@@ -36,7 +33,6 @@ public class SettingsPanel {
         this.appConfig = appConfig;
         momentaryTheme = appConfig.getTheme();
         momentaryFolderPath = appConfig.getFolderPath();
-        momentarySelectedColumns = appConfig.getSelectedColumns();
         momentaryStartInFullscreen = appConfig.getStartInFullscreen();
 
         saveChangesButton.setEnabled(false);
@@ -48,8 +44,7 @@ public class SettingsPanel {
 
         saveChangesButton.addActionListener(e -> {
             appConfig.setTheme(momentaryTheme);
-            appConfig.setFolderPath(folderPath);
-            //appConfig.setSelectedColumns();
+            appConfig.setFolderPath(momentaryFolderPath);
             appConfig.setStartInFullscreen(momentaryStartInFullscreen);
             updateChangeState();
 
@@ -58,23 +53,26 @@ public class SettingsPanel {
     }
 
     private void imagingFolderPathHandler() {
-        folderPath = appConfig.getFolderPath();
-        selectedFile = new File(folderPath);
+        String folderPath = appConfig.getFolderPath();
+        File selectedFile = new File(folderPath);
 
         folderPathField.setText(folderPath);
         folderPathField.setEditable(false);
         folderPathField.setEnabled(false);
 
         JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.setDialogTitle("select folder");
 
         changeFolderPathButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                chooser.showOpenDialog(null);
-                selectedFile = chooser.getSelectedFile();
-                if (selectedFile != null)
-                    folderPathField.setText(selectedFile.toString());
-
+                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    momentaryFolderPath = chooser.getSelectedFile().toString();
+                    folderPathField.setText(momentaryFolderPath);
+                    updateChangeState();
+                }
             }
         });
     }
@@ -119,8 +117,8 @@ public class SettingsPanel {
     }
 
     private void updateChangeState() {
-        if (momentaryTheme == appConfig.getTheme() && momentaryFolderPath.equals(appConfig.getFolderPath())
-                && momentarySelectedColumns == appConfig.getSelectedColumns()
+        if (momentaryTheme == appConfig.getTheme()
+                && momentaryFolderPath.equals(appConfig.getFolderPath())
                 && momentaryStartInFullscreen == appConfig.getStartInFullscreen()) {
             saveChangesButton.setEnabled(false);
         } else {
