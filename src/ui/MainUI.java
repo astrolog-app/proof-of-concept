@@ -59,7 +59,7 @@ public class MainUI extends JFrame {
         tabbedPane.addTab("Equipment", equipmentPanel);
         tabbedPane.addTab("", settingsIcon, settingsPanel);
 
-        this.add(tabbedPane);
+        add(tabbedPane);
 
         setVisible(true);
         setTitle("Astro Logger");

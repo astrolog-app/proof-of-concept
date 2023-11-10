@@ -142,14 +142,10 @@ public class SettingsPanel {
     }
 
     private void updateChangeState() {
-        if (momentaryTheme == appConfig.getTheme()
-                && momentaryFolderPath.equals(appConfig.getFolderPath())
-                && momentaryNavBarPlacement == (appConfig.getNavBarPlacement())
-                && momentaryStartInFullscreen == appConfig.getStartInFullscreen()) {
-            saveChangesButton.setEnabled(false);
-        } else {
-            saveChangesButton.setEnabled(true);
-        }
+        saveChangesButton.setEnabled(momentaryTheme != appConfig.getTheme()
+                || !momentaryFolderPath.equals(appConfig.getFolderPath())
+                || momentaryNavBarPlacement != (appConfig.getNavBarPlacement())
+                || momentaryStartInFullscreen != appConfig.getStartInFullscreen());
     }
 
     public JPanel getPanel() {
