@@ -20,7 +20,7 @@ public class NewTelescopePanel extends JDialog {
     private JTextField apertureField;
 
     public NewTelescopePanel(Equipment equipment, EquipmentStore equipmentStore) {
-        saveButton.setEnabled(false);
+//        saveButton.setEnabled(false);
 
         setContentPane(mainPanel);
         setMinimumSize(new Dimension(200,125));
@@ -38,6 +38,8 @@ public class NewTelescopePanel extends JDialog {
             Telescope telescope = new Telescope(nameField.getText(), brandField.getText(), focalLength, aperture);
             equipment.addTelescope(telescope);
             equipmentStore.save();
+            dispose();
         });
+        cancelButton.addActionListener(e -> dispose());
     }
 }
