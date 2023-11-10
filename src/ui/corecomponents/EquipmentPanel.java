@@ -1,5 +1,7 @@
 package ui.corecomponents;
 
+import ui.popUps.NewTelescopePanel;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +20,7 @@ public class EquipmentPanel {
         newTelescopeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new NewTelescopePanel();
             }
         });
     }
