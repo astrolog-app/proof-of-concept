@@ -47,28 +47,31 @@ public class EquipmentStore {
         }
     }
 
-//    public void save() {
-//        JSONObject obj = new JSONObject();
-//
-//        obj.put("theme", appConfig.getTheme().toString());
-//        obj.put("folder_path", appConfig.getFolderPath());
-//        List<String> selectedColumns = new ArrayList<>();
-//        for (LoggerColumns lc : appConfig.getSelectedColumns()) {
-//            selectedColumns.add(lc.toString());
-//        }
-//        obj.put("selected_columns", selectedColumns);
-//        obj.put("start_in_fullscreen", appConfig.getStartInFullscreen());
-//
-//        try {
-//            FileWriter file = new FileWriter(Paths.CONFIGURATION_PATH);
-//            file.write(obj.toJSONString());
-//            file.flush();
-//            file.close();
-//
-//        } catch (IOException e) {
-//            System.out.println("Error writing Json file.");
-//        }
-//    }
+    public void save() {
+        JSONObject obj = new JSONObject();
+
+        JSONArray telescopes = new JSONArray();
+        for (Telescope telescope : equipment.getTelescopes()) {
+            JSONObject telescopeComponent = new JSONObject();
+            telescopeComponent.put("name", telescope.getName());
+            telescopeComponent.put("brand", telescope.getBrand());
+            telescopeComponent.put("focal_length", telescope.getFocalLength());
+            telescopeComponent.put("aperture", telescope.getAperture());
+            telescopes.add(telescopeComponent);
+        }
+
+        obj.put("telescopes", telescopes);
+
+        try {
+            FileWriter file = new FileWriter(Paths.EQUIPMENT_PATH);
+            file.write(obj.toJSONString());
+            file.flush();
+            file.close();
+
+        } catch (IOException e) {
+            System.out.println("Error writing Json file.");
+        }
+    }
 
     private List<Telescope> readTelescopes(JSONObject jsonObject) {
         List<Telescope> telescopes = new ArrayList<>();
@@ -78,9 +81,9 @@ public class EquipmentStore {
             JSONObject telescopeObj = (JSONObject) telescopeIterator.next();
             String name = (String) telescopeObj.get("name");
             String brand = (String) telescopeObj.get("brand");
-            Integer focalLength = (Integer) telescopeObj.get("focal_length");
-            Integer aperture = (Integer) telescopeObj.get("aperture");
-            Telescope telescope = new Telescope(name, brand, focalLength, aperture);
+            Long focalLength = (Long) telescopeObj.get("focal_length");
+            Long aperture = (Long) telescopeObj.get("aperture");
+            Telescope telescope = new Telescope(name, brand, focalLength.intValue(), aperture.intValue());
             telescopes.add(telescope);
         }
 
