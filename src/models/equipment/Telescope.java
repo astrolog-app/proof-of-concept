@@ -1,12 +1,12 @@
 package models.equipment;
 
-public class Telescope implements Equipment {
+public class Telescope implements EquipmentItem {
     private String name;
     private String brand;
-    private int focalLength;
-    private int aperture;
+    private Integer focalLength;
+    private Integer aperture;
 
-    public Telescope(String name, String brand, int focalLength, int aperture) {
+    public Telescope(String name, String brand, Integer focalLength, Integer aperture) {
         this.name = name;
         this.brand = brand;
         this.focalLength = focalLength;

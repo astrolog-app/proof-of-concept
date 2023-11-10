@@ -1,6 +1,8 @@
 package ui.corecomponents;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class EquipmentPanel {
     private JPanel mainPanel;
@@ -9,9 +11,16 @@ public class EquipmentPanel {
     private JTextField textField3;
     private JTextField textField4;
     private JTextField textField5;
+    private JButton newTelescopeButton;
 
     public EquipmentPanel() {
 
+        newTelescopeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public JPanel getPanel() {

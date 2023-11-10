@@ -15,7 +15,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="c847b" layout-manager="GridLayoutManager" row-count="15" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="c847b" layout-manager="GridLayoutManager" row-count="15" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="5" left="10" bottom="10" right="10"/>
             <constraints/>
             <properties/>
@@ -130,6 +130,14 @@
                   </grid>
                 </constraints>
                 <properties/>
+              </component>
+              <component id="dc4d6" class="javax.swing.JButton" binding="newTelescopeButton">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="New"/>
+                </properties>
               </component>
             </children>
           </grid>

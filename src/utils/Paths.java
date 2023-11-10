@@ -7,5 +7,6 @@ public class Paths {
     public static final String APP_PATH = (
             PROJECT_PATH.replace("AstroLogger-code", "") + "AstroLogger-app");
     public static final String CONFIGURATION_PATH = APP_PATH + File.separator + "configuration.json";
+    public static final String EQUIPMENT_PATH = APP_PATH + File.separator + "equipment.json";
     public static final String IMAGE_PATH = APP_PATH + File.separator + "images" + File.separator;
 }
