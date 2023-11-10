@@ -25,7 +25,8 @@ public class NewTelescopePanel extends JFrame {
 //        saveButton.setEnabled(false);
 
         setContentPane(mainPanel);
-        setSize(500, 275);
+        setTitle("Add new Telescope");
+        setSize(500, 250);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
