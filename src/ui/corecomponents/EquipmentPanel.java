@@ -1,5 +1,7 @@
 package ui.corecomponents;
 
+import models.equipment.Equipment;
+import services.fileHandler.EquipmentStore;
 import ui.popUps.NewTelescopePanel;
 
 import javax.swing.*;
@@ -15,12 +17,12 @@ public class EquipmentPanel {
     private JTextField textField5;
     private JButton newTelescopeButton;
 
-    public EquipmentPanel() {
+    public EquipmentPanel(Equipment equipment, EquipmentStore equipmentStore) {
 
         newTelescopeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new NewTelescopePanel();
+                new NewTelescopePanel(equipment, equipmentStore);
             }
         });
     }

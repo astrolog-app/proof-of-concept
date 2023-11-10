@@ -2,6 +2,8 @@ package ui;
 
 import models.AppConfiguration;
 import models.AppTheme;
+import models.equipment.Equipment;
+import services.fileHandler.EquipmentStore;
 import ui.corecomponents.EquipmentPanel;
 import utils.Paths;
 import services.fileHandler.ConfigurationStore;
@@ -17,6 +19,8 @@ public class MainUI extends JFrame {
     public MainUI(AppConfiguration appConfig, ConfigurationStore configStore) {
         Image img = Toolkit.getDefaultToolkit().getImage(Paths.IMAGE_PATH + "appLogo.png");
         setIconImage(img);
+        Equipment equipment = new Equipment();
+        EquipmentStore equipmentStore = new EquipmentStore(equipment);
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
@@ -26,7 +30,7 @@ public class MainUI extends JFrame {
         AnalysisPanel analysisPanelClass = new AnalysisPanel();
         JPanel analysisPanel = analysisPanelClass.getPanel();
 
-        EquipmentPanel equipmentPanelClass = new EquipmentPanel();
+        EquipmentPanel equipmentPanelClass = new EquipmentPanel(equipment, equipmentStore);
         JPanel equipmentPanel = equipmentPanelClass.getPanel();
 
         SettingsPanel settingsPanelClass = new SettingsPanel(appConfig, configStore);
