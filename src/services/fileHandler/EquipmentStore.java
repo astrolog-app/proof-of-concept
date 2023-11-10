@@ -1,6 +1,5 @@
 package services.fileHandler;
 
-import models.LoggerColumns;
 import models.equipment.Equipment;
 import models.equipment.Telescope;
 import org.json.simple.JSONArray;

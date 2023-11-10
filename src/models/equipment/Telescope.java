@@ -17,6 +17,7 @@ public class Telescope implements EquipmentItem {
     public String getName() {
         return name;
     }
+    @Override
     public void setName(String name) {
         this.name = name;
     }
@@ -25,6 +26,7 @@ public class Telescope implements EquipmentItem {
     public String getBrand() {
         return brand;
     }
+    @Override
     public void setBrand(String brand) {
         this.brand = brand;
     }
