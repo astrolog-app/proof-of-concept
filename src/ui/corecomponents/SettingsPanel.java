@@ -2,7 +2,7 @@ package ui.corecomponents;
 
 import models.AppConfiguration;
 import models.AppTheme;
-import models.LoggerColumns;
+import models.NavigationBarPlacement;
 import services.AppActions;
 import services.fileHandler.ConfigurationStore;
 
@@ -10,13 +10,13 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.List;
 
 public class SettingsPanel {
     private final AppConfiguration appConfig;
 
     private AppTheme momentaryTheme;
     private String momentaryFolderPath;
+    private NavigationBarPlacement momentaryNavBarPlacement;
     private boolean momentaryStartInFullscreen;
 
     private JPanel mainPanel;
@@ -28,6 +28,7 @@ public class SettingsPanel {
     private JButton restartAppButton;
     private JRadioButton startInFullscreenRadioButton;
     private JRadioButton doNotStartInFullscreenRadioButton;
+    private JComboBox navigationBarPlacementDropdown;
 
     public SettingsPanel(AppConfiguration appConfig, ConfigurationStore configStore) {
         this.appConfig = appConfig;
@@ -38,6 +39,7 @@ public class SettingsPanel {
         saveChangesButton.setEnabled(false);
         imagingFolderPathHandler();
         themeHandler();
+        navigationBarPlacementHandler();
         fullscreenHandler();
 
         restartAppButton.addActionListener(e -> AppActions.restart());
@@ -98,6 +100,16 @@ public class SettingsPanel {
         });
     }
 
+    private void navigationBarPlacementHandler() {
+        NavigationBarPlacement navigationBarPlacement = appConfig.getNavBarPlacement();
+        switch (navigationBarPlacement) {
+            case LEFT -> navigationBarPlacementDropdown.setSelectedItem("Left");
+            case TOP -> navigationBarPlacementDropdown.setSelectedItem("Top");
+            case RIGHT -> navigationBarPlacementDropdown.setSelectedItem("Right");
+            case BOTTOM -> navigationBarPlacementDropdown.setSelectedItem("Bottom");
+        }
+    }
+
     private void fullscreenHandler() {
         startInFullscreenRadioButton.setSelected(appConfig.getStartInFullscreen());
         doNotStartInFullscreenRadioButton.setSelected(!appConfig.getStartInFullscreen());
@@ -119,6 +131,7 @@ public class SettingsPanel {
     private void updateChangeState() {
         if (momentaryTheme == appConfig.getTheme()
                 && momentaryFolderPath.equals(appConfig.getFolderPath())
+//                && momentaryNavBarPlacement.equals(appConfig.getNavBarPlacement())
                 && momentaryStartInFullscreen == appConfig.getStartInFullscreen()) {
             saveChangesButton.setEnabled(false);
         } else {

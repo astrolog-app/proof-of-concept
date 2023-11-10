@@ -5,6 +5,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import models.AppConfiguration;
 import models.AppTheme;
 import models.LoggerColumns;
+import models.NavigationBarPlacement;
 import services.fileHandler.ConfigurationStore;
 import ui.MainUI;
 
@@ -27,6 +28,7 @@ public class AppActions {
             list.add(LoggerColumns.DATE);
             list.add(LoggerColumns.TARGET);
             appConfig.setSelectedColumns(list);
+            appConfig.setNavBarPlacement(NavigationBarPlacement.LEFT);
             appConfig.setStartInFullscreen(false);
 
             configStore.save();

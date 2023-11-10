@@ -22,7 +22,7 @@ public class MainUI extends JFrame {
         Equipment equipment = new Equipment();
         EquipmentStore equipmentStore = new EquipmentStore(equipment);
 
-        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 
         LogPanel logPanelClass = new LogPanel();
         JPanel imagingHistoryPanel = logPanelClass.getPanel();
@@ -60,7 +60,7 @@ public class MainUI extends JFrame {
         if (appConfig.getStartInFullscreen()) {
             setExtendedState(JFrame.MAXIMIZED_BOTH);
         } else {
-            setSize(800, 600);
+            setSize(875, 650);
         }
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

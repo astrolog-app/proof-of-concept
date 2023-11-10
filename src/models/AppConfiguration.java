@@ -6,6 +6,7 @@ public class AppConfiguration {
     private AppTheme theme;
     private String folderPath;
     private List<LoggerColumns> selectedColumns;
+    private NavigationBarPlacement navBarPlacement;
     private boolean startInFullscreen;
 
     public AppTheme getTheme() {
@@ -27,6 +28,13 @@ public class AppConfiguration {
     }
     public void setSelectedColumns(List<LoggerColumns> selectedColumns) {
         this.selectedColumns = selectedColumns;
+    }
+
+    public NavigationBarPlacement getNavBarPlacement() {
+        return navBarPlacement;
+    }
+    public void setNavBarPlacement(NavigationBarPlacement navBarPlacement) {
+        this.navBarPlacement = navBarPlacement;
     }
 
     public boolean getStartInFullscreen() {

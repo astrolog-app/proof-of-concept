@@ -3,6 +3,7 @@ package services.fileHandler;
 import models.AppConfiguration;
 import models.AppTheme;
 import models.LoggerColumns;
+import models.NavigationBarPlacement;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -53,6 +54,16 @@ public class ConfigurationStore {
                 }
             }
 
+            NavigationBarPlacement navBarPlacement = null;
+            String navBarPlacementString = (String) jsonObject.get("navigation_bar_placement");
+            navBarPlacement = switch (navBarPlacementString) {
+                case "LEFT" -> NavigationBarPlacement.LEFT;
+                case "TOP" -> NavigationBarPlacement.TOP;
+                case "RIGHT" -> NavigationBarPlacement.RIGHT;
+                case "BOTTOM" -> NavigationBarPlacement.BOTTOM;
+                default -> navBarPlacement;
+            };
+
             boolean startInFullscreen = (boolean) jsonObject.get("start_in_fullscreen");
 
             reader.close();
@@ -60,6 +71,7 @@ public class ConfigurationStore {
             appConfig.setTheme(theme);
             appConfig.setFolderPath(folderPath);
             appConfig.setSelectedColumns(selectedColumns);
+            appConfig.setNavBarPlacement(navBarPlacement);
             appConfig.setStartInFullscreen(startInFullscreen);
         } catch (FileNotFoundException e) {
             System.out.println("Error: Config File not found:");
@@ -83,6 +95,7 @@ public class ConfigurationStore {
             selectedColumns.add(lc.toString());
         }
         obj.put("selected_columns", selectedColumns);
+        obj.put("navigation_bar_placement", appConfig.getNavBarPlacement().toString());
         obj.put("start_in_fullscreen", appConfig.getStartInFullscreen());
 
         try {

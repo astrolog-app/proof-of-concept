@@ -5,12 +5,14 @@ import models.equipment.Telescope;
 import services.fileHandler.EquipmentStore;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 
-public class NewTelescopePanel extends JDialog {
+public class NewTelescopePanel extends JFrame {
     private JPanel mainPanel;
     private JButton saveButton;
     private JButton cancelButton;
@@ -23,8 +25,8 @@ public class NewTelescopePanel extends JDialog {
 //        saveButton.setEnabled(false);
 
         setContentPane(mainPanel);
-        setMinimumSize(new Dimension(200,125));
         setSize(500, 275);
+        setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
 
