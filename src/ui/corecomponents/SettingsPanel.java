@@ -34,6 +34,7 @@ public class SettingsPanel {
         this.appConfig = appConfig;
         momentaryTheme = appConfig.getTheme();
         momentaryFolderPath = appConfig.getFolderPath();
+        momentaryNavBarPlacement = appConfig.getNavBarPlacement();
         momentaryStartInFullscreen = appConfig.getStartInFullscreen();
 
         saveChangesButton.setEnabled(false);
@@ -47,6 +48,7 @@ public class SettingsPanel {
         saveChangesButton.addActionListener(e -> {
             appConfig.setTheme(momentaryTheme);
             appConfig.setFolderPath(momentaryFolderPath);
+            appConfig.setNavBarPlacement(momentaryNavBarPlacement);
             appConfig.setStartInFullscreen(momentaryStartInFullscreen);
             updateChangeState();
 
@@ -108,6 +110,17 @@ public class SettingsPanel {
             case RIGHT -> navigationBarPlacementDropdown.setSelectedItem("Right");
             case BOTTOM -> navigationBarPlacementDropdown.setSelectedItem("Bottom");
         }
+
+        navigationBarPlacementDropdown.addActionListener(e -> {
+            String s = (String) navigationBarPlacementDropdown.getSelectedItem();
+            switch (s) {
+                case "Left" -> momentaryNavBarPlacement = NavigationBarPlacement.LEFT;
+                case "Top" -> momentaryNavBarPlacement = NavigationBarPlacement.TOP;
+                case "Right" -> momentaryNavBarPlacement = NavigationBarPlacement.RIGHT;
+                case "Bottom" -> momentaryNavBarPlacement = NavigationBarPlacement.BOTTOM;
+            }
+            updateChangeState();
+        });
     }
 
     private void fullscreenHandler() {
@@ -131,7 +144,7 @@ public class SettingsPanel {
     private void updateChangeState() {
         if (momentaryTheme == appConfig.getTheme()
                 && momentaryFolderPath.equals(appConfig.getFolderPath())
-//                && momentaryNavBarPlacement.equals(appConfig.getNavBarPlacement())
+                && momentaryNavBarPlacement == (appConfig.getNavBarPlacement())
                 && momentaryStartInFullscreen == appConfig.getStartInFullscreen()) {
             saveChangesButton.setEnabled(false);
         } else {

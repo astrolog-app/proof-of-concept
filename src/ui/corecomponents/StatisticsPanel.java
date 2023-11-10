@@ -2,7 +2,7 @@ package ui.corecomponents;
 
 import javax.swing.*;
 
-public class AnalysisPanel {
+public class StatisticsPanel {
     private JPanel mainPanel;
 
     public JPanel getPanel() {

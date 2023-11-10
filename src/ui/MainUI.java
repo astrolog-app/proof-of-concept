@@ -2,12 +2,13 @@ package ui;
 
 import models.AppConfiguration;
 import models.AppTheme;
+import models.NavigationBarPlacement;
 import models.equipment.Equipment;
 import services.fileHandler.EquipmentStore;
 import ui.corecomponents.EquipmentPanel;
 import utils.Paths;
 import services.fileHandler.ConfigurationStore;
-import ui.corecomponents.AnalysisPanel;
+import ui.corecomponents.StatisticsPanel;
 import ui.corecomponents.LogPanel;
 import ui.corecomponents.SettingsPanel;
 import utils.Images;
@@ -22,13 +23,19 @@ public class MainUI extends JFrame {
         Equipment equipment = new Equipment();
         EquipmentStore equipmentStore = new EquipmentStore(equipment);
 
-        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
+        int tabPlacement = JTabbedPane.LEFT;
+        switch (appConfig.getNavBarPlacement()) {
+            case TOP -> tabPlacement = JTabbedPane.TOP;
+            case RIGHT -> tabPlacement = JTabbedPane.RIGHT;
+            case BOTTOM -> tabPlacement = JTabbedPane.BOTTOM;
+        }
+        JTabbedPane tabbedPane = new JTabbedPane(tabPlacement);
 
         LogPanel logPanelClass = new LogPanel();
         JPanel imagingHistoryPanel = logPanelClass.getPanel();
 
-        AnalysisPanel analysisPanelClass = new AnalysisPanel();
-        JPanel analysisPanel = analysisPanelClass.getPanel();
+        StatisticsPanel statisticsPanelClass = new StatisticsPanel();
+        JPanel analysisPanel = statisticsPanelClass.getPanel();
 
         EquipmentPanel equipmentPanelClass = new EquipmentPanel(equipment, equipmentStore);
         JPanel equipmentPanel = equipmentPanelClass.getPanel();
@@ -48,7 +55,7 @@ public class MainUI extends JFrame {
         }
 
         tabbedPane.addTab("Log", imagingHistoryPanel);
-        tabbedPane.addTab("Analysis", analysisPanel);
+        tabbedPane.addTab("Statistics", analysisPanel);
         tabbedPane.addTab("Equipment", equipmentPanel);
         tabbedPane.addTab("", settingsIcon, settingsPanel);
 
