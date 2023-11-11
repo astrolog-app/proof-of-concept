@@ -16,6 +16,7 @@ public class EquipmentPanel {
     private JTextField textField4;
     private JTextField textField5;
     private JButton newTelescopeButton;
+    private JLabel placeHolder1;
 
     public EquipmentPanel(Equipment equipment, EquipmentStore equipmentStore) {
 

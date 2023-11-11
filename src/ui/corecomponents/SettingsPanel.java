@@ -29,6 +29,7 @@ public class SettingsPanel {
     private JRadioButton startInFullscreenRadioButton;
     private JRadioButton doNotStartInFullscreenRadioButton;
     private JComboBox navigationBarPlacementDropdown;
+    private JLabel placeHolder1;
 
     public SettingsPanel(AppConfiguration appConfig, ConfigurationStore configStore) {
         this.appConfig = appConfig;
