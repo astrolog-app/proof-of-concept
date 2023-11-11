@@ -2,10 +2,10 @@ package services;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import models.AppConfiguration;
-import models.AppTheme;
+import models.settings.AppConfiguration;
+import models.settings.AppTheme;
 import models.LoggerColumns;
-import models.NavigationBarPlacement;
+import models.settings.NavigationBarPlacement;
 import services.fileHandler.ConfigurationStore;
 import ui.MainUI;
 

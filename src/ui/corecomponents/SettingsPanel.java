@@ -1,8 +1,8 @@
 package ui.corecomponents;
 
-import models.AppConfiguration;
-import models.AppTheme;
-import models.NavigationBarPlacement;
+import models.settings.AppConfiguration;
+import models.settings.AppTheme;
+import models.settings.NavigationBarPlacement;
 import services.AppActions;
 import services.fileHandler.ConfigurationStore;
 

@@ -1,4 +1,6 @@
-package models;
+package models.settings;
+
+import models.LoggerColumns;
 
 import java.util.List;
 

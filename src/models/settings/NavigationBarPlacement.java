@@ -1,4 +1,4 @@
-package models;
+package models.settings;
 
 public enum NavigationBarPlacement {
     LEFT,

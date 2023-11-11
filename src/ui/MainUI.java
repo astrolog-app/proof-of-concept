@@ -1,8 +1,7 @@
 package ui;
 
-import models.AppConfiguration;
-import models.AppTheme;
-import models.NavigationBarPlacement;
+import models.settings.AppConfiguration;
+import models.settings.AppTheme;
 import models.equipment.Equipment;
 import services.fileHandler.EquipmentStore;
 import ui.corecomponents.EquipmentPanel;

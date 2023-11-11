@@ -1,9 +1,9 @@
 package services.fileHandler;
 
-import models.AppConfiguration;
-import models.AppTheme;
+import models.settings.AppConfiguration;
+import models.settings.AppTheme;
 import models.LoggerColumns;
-import models.NavigationBarPlacement;
+import models.settings.NavigationBarPlacement;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
