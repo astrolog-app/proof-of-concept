@@ -18,18 +18,6 @@ public class NewTelescopePanel extends JDialog {
     public NewTelescopePanel(Equipment equipment, EquipmentStore equipmentStore) {
         saveButton.setEnabled(false);
 
-        setModal(true);
-        setContentPane(mainPanel);
-        setTitle("Add new Telescope");
-        setSize(500, 250);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setVisible(true);
-
-        if (nameField.getText() != null) {
-            setEnabled(true);
-        }
-
         saveButton.addActionListener(e -> {
             int focalLength = Integer.parseInt(focalLengthField.getText());
             int aperture = Integer.parseInt(apertureField.getText());
@@ -38,6 +26,15 @@ public class NewTelescopePanel extends JDialog {
             equipmentStore.save();
             dispose();
         });
+
         cancelButton.addActionListener(e -> this.dispose());
+
+        setModal(true);
+        setContentPane(mainPanel);
+        setTitle("Add New Telescope");
+        setSize(500, 250);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 }
