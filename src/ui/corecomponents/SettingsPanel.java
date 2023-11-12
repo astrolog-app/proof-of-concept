@@ -46,7 +46,7 @@ public class SettingsPanel {
         originalNavBarPlacement = appConfig.getNavBarPlacement();
         originalStartInFullscreen = appConfig.getStartInFullscreen();
 
-        setRestartButtonState();
+        setSaveButtonState();
         setRestartButtonState();
         imagingFolderPathHandler();
         themeHandler();
