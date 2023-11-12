@@ -5,14 +5,8 @@ import models.equipment.Telescope;
 import services.fileHandler.EquipmentStore;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
 
-public class NewTelescopePanel extends JFrame {
+public class NewTelescopePanel extends JDialog {
     private JPanel mainPanel;
     private JButton saveButton;
     private JButton cancelButton;
@@ -22,8 +16,9 @@ public class NewTelescopePanel extends JFrame {
     private JTextField apertureField;
 
     public NewTelescopePanel(Equipment equipment, EquipmentStore equipmentStore) {
-//        saveButton.setEnabled(false);
+        saveButton.setEnabled(false);
 
+        setModal(true);
         setContentPane(mainPanel);
         setTitle("Add new Telescope");
         setSize(500, 250);
@@ -43,6 +38,6 @@ public class NewTelescopePanel extends JFrame {
             equipmentStore.save();
             dispose();
         });
-        cancelButton.addActionListener(e -> dispose());
+        cancelButton.addActionListener(e -> this.dispose());
     }
 }

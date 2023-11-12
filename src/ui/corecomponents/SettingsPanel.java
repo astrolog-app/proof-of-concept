@@ -19,6 +19,10 @@ public class SettingsPanel {
     private NavigationBarPlacement momentaryNavBarPlacement;
     private boolean momentaryStartInFullscreen;
 
+    private AppTheme originalTheme;
+    private NavigationBarPlacement originalNavBarPlacement;
+    private boolean originalStartInFullscreen;
+
     private JPanel mainPanel;
     private JTextField folderPathField;
     private JButton changeFolderPathButton;
@@ -38,7 +42,12 @@ public class SettingsPanel {
         momentaryNavBarPlacement = appConfig.getNavBarPlacement();
         momentaryStartInFullscreen = appConfig.getStartInFullscreen();
 
+        originalTheme = appConfig.getTheme();
+        originalNavBarPlacement = appConfig.getNavBarPlacement();
+        originalStartInFullscreen = appConfig.getStartInFullscreen();
+
         saveChangesButton.setEnabled(false);
+        setResetButtonState();
         imagingFolderPathHandler();
         themeHandler();
         navigationBarPlacementHandler();
@@ -52,6 +61,7 @@ public class SettingsPanel {
             appConfig.setNavBarPlacement(momentaryNavBarPlacement);
             appConfig.setStartInFullscreen(momentaryStartInFullscreen);
             updateChangeState();
+            setResetButtonState();
 
             configStore.save();
         });
@@ -59,7 +69,6 @@ public class SettingsPanel {
 
     private void imagingFolderPathHandler() {
         String folderPath = appConfig.getFolderPath();
-        File selectedFile = new File(folderPath);
 
         folderPathField.setText(folderPath);
         folderPathField.setEditable(false);
@@ -147,6 +156,12 @@ public class SettingsPanel {
                 || !momentaryFolderPath.equals(appConfig.getFolderPath())
                 || momentaryNavBarPlacement != (appConfig.getNavBarPlacement())
                 || momentaryStartInFullscreen != appConfig.getStartInFullscreen());
+    }
+
+    private void setResetButtonState() {
+        restartAppButton.setVisible(momentaryTheme != originalTheme
+                || momentaryNavBarPlacement != originalNavBarPlacement
+                || momentaryStartInFullscreen != originalStartInFullscreen);
     }
 
     public JPanel getPanel() {
