@@ -9,7 +9,6 @@ import services.fileHandler.ConfigurationStore;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 public class SettingsPanel {
     private final AppConfiguration appConfig;
@@ -34,6 +33,7 @@ public class SettingsPanel {
     private JRadioButton doNotStartInFullscreenRadioButton;
     private JComboBox navigationBarPlacementDropdown;
     private JLabel placeHolder1;
+    private JLabel restartMessage;
 
     public SettingsPanel(AppConfiguration appConfig, ConfigurationStore configStore) {
         this.appConfig = appConfig;
@@ -46,8 +46,8 @@ public class SettingsPanel {
         originalNavBarPlacement = appConfig.getNavBarPlacement();
         originalStartInFullscreen = appConfig.getStartInFullscreen();
 
-        saveChangesButton.setEnabled(false);
-        setResetButtonState();
+        setRestartButtonState();
+        setRestartButtonState();
         imagingFolderPathHandler();
         themeHandler();
         navigationBarPlacementHandler();
@@ -60,8 +60,8 @@ public class SettingsPanel {
             appConfig.setFolderPath(momentaryFolderPath);
             appConfig.setNavBarPlacement(momentaryNavBarPlacement);
             appConfig.setStartInFullscreen(momentaryStartInFullscreen);
-            updateChangeState();
-            setResetButtonState();
+            setSaveButtonState();
+            setRestartButtonState();
 
             configStore.save();
         });
@@ -85,7 +85,7 @@ public class SettingsPanel {
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     momentaryFolderPath = chooser.getSelectedFile().toString();
                     folderPathField.setText(momentaryFolderPath);
-                    updateChangeState();
+                    setSaveButtonState();
                 }
             }
         });
@@ -102,13 +102,13 @@ public class SettingsPanel {
             lightThemeRadioButton.setSelected(true);
             darkThemeRadioButton.setSelected(false);
             momentaryTheme = AppTheme.LIGHT;
-            updateChangeState();
+            setSaveButtonState();
         });
         darkThemeRadioButton.addActionListener(e -> {
             lightThemeRadioButton.setSelected(false);
             darkThemeRadioButton.setSelected(true);
             momentaryTheme = AppTheme.DARK;
-            updateChangeState();
+            setSaveButtonState();
         });
     }
 
@@ -129,7 +129,7 @@ public class SettingsPanel {
                 case "Right" -> momentaryNavBarPlacement = NavigationBarPlacement.RIGHT;
                 case "Bottom" -> momentaryNavBarPlacement = NavigationBarPlacement.BOTTOM;
             }
-            updateChangeState();
+            setSaveButtonState();
         });
     }
 
@@ -141,27 +141,33 @@ public class SettingsPanel {
             startInFullscreenRadioButton.setSelected(true);
             doNotStartInFullscreenRadioButton.setSelected(false);
             momentaryStartInFullscreen = true;
-            updateChangeState();
+            setSaveButtonState();
         });
         doNotStartInFullscreenRadioButton.addActionListener(e -> {
             startInFullscreenRadioButton.setSelected(false);
             doNotStartInFullscreenRadioButton.setSelected(true);
             momentaryStartInFullscreen = false;
-            updateChangeState();
+            setSaveButtonState();
         });
     }
 
-    private void updateChangeState() {
+    private void setSaveButtonState() {
         saveChangesButton.setEnabled(momentaryTheme != appConfig.getTheme()
                 || !momentaryFolderPath.equals(appConfig.getFolderPath())
                 || momentaryNavBarPlacement != (appConfig.getNavBarPlacement())
                 || momentaryStartInFullscreen != appConfig.getStartInFullscreen());
     }
 
-    private void setResetButtonState() {
-        restartAppButton.setVisible(momentaryTheme != originalTheme
-                || momentaryNavBarPlacement != originalNavBarPlacement
-                || momentaryStartInFullscreen != originalStartInFullscreen);
+    private void setRestartButtonState() {
+        if (momentaryTheme == originalTheme
+                && momentaryStartInFullscreen == originalStartInFullscreen
+                && momentaryNavBarPlacement == originalNavBarPlacement) {
+            restartAppButton.setVisible(false);
+            restartMessage.setVisible(false);
+        } else {
+            restartAppButton.setVisible(true);
+            restartMessage.setVisible(true);
+        }
     }
 
     public JPanel getPanel() {
