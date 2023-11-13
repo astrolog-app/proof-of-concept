@@ -30,7 +30,7 @@ public class MainUI extends JFrame {
         }
         JTabbedPane tabbedPane = new JTabbedPane(tabPlacement);
 
-        LogPanel logPanelClass = new LogPanel(configStore);
+        LogPanel logPanelClass = new LogPanel();
         JPanel imagingHistoryPanel = logPanelClass.getPanel();
 
         StatisticsPanel statisticsPanelClass = new StatisticsPanel();
