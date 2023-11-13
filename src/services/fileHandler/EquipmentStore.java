@@ -12,6 +12,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class EquipmentStore {
     private Equipment equipment;
@@ -46,8 +47,9 @@ public class EquipmentStore {
         }
     }
 
-    public void save() {
+    public void save(String path) {
         JSONObject obj = new JSONObject();
+        String configPath = Objects.requireNonNullElse(path, Paths.CONFIGURATION_PATH);
 
         JSONArray telescopes = new JSONArray();
         for (Telescope telescope : equipment.getTelescopes()) {
@@ -62,7 +64,7 @@ public class EquipmentStore {
         obj.put("telescopes", telescopes);
 
         try {
-            FileWriter file = new FileWriter(Paths.EQUIPMENT_PATH);
+            FileWriter file = new FileWriter(configPath);
             file.write(obj.toJSONString());
             file.flush();
             file.close();

@@ -63,7 +63,7 @@ public class SettingsPanel {
             setSaveButtonState();
             setRestartButtonState();
 
-            configStore.save();
+            configStore.save(null);
         });
     }
 
@@ -77,7 +77,7 @@ public class SettingsPanel {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooser.setAcceptAllFileFilterUsed(false);
-        chooser.setDialogTitle("select folder");
+        chooser.setDialogTitle("Select Folder");
 
         changeFolderPathButton.addActionListener(new ActionListener() {
             @Override

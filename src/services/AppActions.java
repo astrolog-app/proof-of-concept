@@ -31,7 +31,7 @@ public class AppActions {
             appConfig.setNavBarPlacement(NavigationBarPlacement.LEFT);
             appConfig.setStartInFullscreen(false);
 
-            configStore.save();
+            configStore.save(null);
             AppActions.restart();
 
             //new WelcomePanel();

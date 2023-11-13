@@ -14,6 +14,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class ConfigurationStore {
     private final AppConfiguration appConfig;
@@ -85,8 +86,9 @@ public class ConfigurationStore {
         }
     }
 
-    public void save() {
+    public void save(String path) {
         JSONObject obj = new JSONObject();
+        String configPath = Objects.requireNonNullElse(path, Paths.CONFIGURATION_PATH);
 
         obj.put("theme", appConfig.getTheme().toString());
         obj.put("folder_path", appConfig.getFolderPath());
@@ -99,7 +101,7 @@ public class ConfigurationStore {
         obj.put("start_in_fullscreen", appConfig.getStartInFullscreen());
 
         try {
-            FileWriter file = new FileWriter(Paths.CONFIGURATION_PATH);
+            FileWriter file = new FileWriter(configPath);
             file.write(obj.toJSONString());
             file.flush();
             file.close();
