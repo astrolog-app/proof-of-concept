@@ -7,10 +7,8 @@ public class LogPanel {
     private JLabel placeHolder1;
     private JButton fromExistingFolderButton;
     private JButton manuallyButton;
-    private JButton allButton;
-    private JButton imagingSessionsButton;
-    private JButton equipmentListButton;
-    private JButton settingsButton;
+    private JButton createLocalBackupButton;
+    private JCheckBox enableRegularBackupsCheckBox;
     private JButton saveBackupConfigButton;
 
     public JPanel getPanel() {
