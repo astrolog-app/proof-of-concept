@@ -9,6 +9,7 @@ public class AppConfiguration {
     private String folderPath;
     private List<LoggerColumns> selectedColumns;
     private NavigationBarPlacement navBarPlacement;
+    private boolean enableRegularBackups;
     private boolean startInFullscreen;
 
     public AppTheme getTheme() {
@@ -37,6 +38,13 @@ public class AppConfiguration {
     }
     public void setNavBarPlacement(NavigationBarPlacement navBarPlacement) {
         this.navBarPlacement = navBarPlacement;
+    }
+
+    public boolean getEnableRegularBackups() {
+        return enableRegularBackups;
+    }
+    public void setEnableRegularBackups(boolean enableRegularBackups) {
+        this.enableRegularBackups = enableRegularBackups;
     }
 
     public boolean getStartInFullscreen() {

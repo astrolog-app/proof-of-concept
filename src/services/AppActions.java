@@ -29,6 +29,7 @@ public class AppActions {
             list.add(LoggerColumns.TARGET);
             appConfig.setSelectedColumns(list);
             appConfig.setNavBarPlacement(NavigationBarPlacement.LEFT);
+            appConfig.setEnableRegularBackups(true);
             appConfig.setStartInFullscreen(false);
 
             configStore.save(null);

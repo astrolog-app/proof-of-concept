@@ -65,6 +65,8 @@ public class ConfigurationStore {
                 default -> navBarPlacement;
             };
 
+            boolean enableRegularBackups = (boolean) jsonObject.get("enable_regular_backups");
+
             boolean startInFullscreen = (boolean) jsonObject.get("start_in_fullscreen");
 
             reader.close();
@@ -73,6 +75,7 @@ public class ConfigurationStore {
             appConfig.setFolderPath(folderPath);
             appConfig.setSelectedColumns(selectedColumns);
             appConfig.setNavBarPlacement(navBarPlacement);
+            appConfig.setEnableRegularBackups(enableRegularBackups);
             appConfig.setStartInFullscreen(startInFullscreen);
         } catch (FileNotFoundException e) {
             System.out.println("Error: Config File not found:");
@@ -98,6 +101,7 @@ public class ConfigurationStore {
         }
         obj.put("selected_columns", selectedColumns);
         obj.put("navigation_bar_placement", appConfig.getNavBarPlacement().toString());
+        obj.put("enable_regular_backups", appConfig.getEnableRegularBackups());
         obj.put("start_in_fullscreen", appConfig.getStartInFullscreen());
 
         try {

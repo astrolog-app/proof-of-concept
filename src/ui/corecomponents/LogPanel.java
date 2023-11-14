@@ -9,6 +9,7 @@ public class LogPanel {
     private JButton manuallyButton;
     private JButton createLocalBackupButton;
     private JCheckBox enableRegularBackupsCheckBox;
+    private JButton configureRegularBackupsButton;
     private JButton saveBackupConfigButton;
 
     public JPanel getPanel() {
