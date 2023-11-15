@@ -1,4 +1,4 @@
-package ui.corecomponents;
+package ui.corecomponents.logPanel;
 
 import models.settings.AppConfiguration;
 import services.fileHandler.ConfigurationStore;
