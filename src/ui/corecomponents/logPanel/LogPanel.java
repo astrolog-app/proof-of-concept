@@ -17,6 +17,7 @@ public class LogPanel {
     private JButton createLocalBackupButton;
     private JCheckBox enableRegularBackupsCheckBox;
     private JButton configureRegularBackupsButton;
+    private LogTableScrollPane logTableScrollPane1;
     private JButton saveBackupConfigButton;
 
     public LogPanel(AppConfiguration appConfig, ConfigurationStore configStore) {
@@ -33,6 +34,10 @@ public class LogPanel {
             appConfig.setEnableRegularBackups(enableRegularBackupsCheckBox.isSelected());
             configStore.save(null);
         });
+    }
+
+    private void createUIComponents() {
+        logTableScrollPane1 = new LogTableScrollPane();
     }
 
     public JPanel getPanel() {
