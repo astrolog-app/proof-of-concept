@@ -1,5 +1,10 @@
 package ui.popUps;
 
+import models.equipment.Equipment;
+import models.settings.AppConfiguration;
+import services.fileHandler.ConfigurationStore;
+import services.fileHandler.EquipmentStore;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -28,10 +33,11 @@ public class NewImagingSessionManually extends JDialog {
     private JComboBox telescopeComboBox;
     private JTextField notesTextField;
 
-    public NewImagingSessionManually() {
+    public NewImagingSessionManually(Equipment equipment, EquipmentStore equipmentStore) {
         generalHandler();
 
         cancelButton.addActionListener(e -> this.dispose());
+        saveHandler();
 
         SpinnerModel model = new SpinnerNumberModel(0,0,100,1);
         cloudCoverSpinner.setModel(model);
@@ -47,5 +53,9 @@ public class NewImagingSessionManually extends JDialog {
 
     private void generalHandler() {
 
+    }
+
+    private void saveHandler() {
+        saveButton.addActionListener(e -> {});
     }
 }

@@ -1,11 +1,6 @@
-package ui.customPanels;
-
-import models.ImagingSession;
-import models.LoggerColumns;
+package ui.customComponents;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.List;
 
 public class LogTableScrollPane extends JPanel {
     public LogTableScrollPane() {

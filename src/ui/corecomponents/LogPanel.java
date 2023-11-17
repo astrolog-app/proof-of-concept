@@ -1,8 +1,10 @@
 package ui.corecomponents;
 
+import models.equipment.Equipment;
 import models.settings.AppConfiguration;
 import services.fileHandler.ConfigurationStore;
-import ui.customPanels.LogTableScrollPane;
+import services.fileHandler.EquipmentStore;
+import ui.customComponents.LogTableScrollPane;
 import ui.popUps.NewImagingSessionManually;
 
 import javax.swing.*;
@@ -22,7 +24,7 @@ public class LogPanel {
     private LogTableScrollPane logTableScrollPane1;
     private JButton saveBackupConfigButton;
 
-    public LogPanel(AppConfiguration appConfig, ConfigurationStore configStore) {
+    public LogPanel(AppConfiguration appConfig, ConfigurationStore configStore, Equipment equipment, EquipmentStore equipmentStore) {
         this.appConfig = appConfig;
         this.configStore = configStore;
 
@@ -30,7 +32,7 @@ public class LogPanel {
         manuallyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                NewImagingSessionManually p = new NewImagingSessionManually();
+                NewImagingSessionManually p = new NewImagingSessionManually(equipment, equipmentStore);
             }
         });
     }
