@@ -8,7 +8,7 @@ import ui.corecomponents.EquipmentPanel;
 import utils.Paths;
 import services.fileHandler.ConfigurationStore;
 import ui.corecomponents.StatisticsPanel;
-import ui.corecomponents.logPanel.LogPanel;
+import ui.corecomponents.LogPanel;
 import ui.corecomponents.SettingsPanel;
 import utils.Images;
 

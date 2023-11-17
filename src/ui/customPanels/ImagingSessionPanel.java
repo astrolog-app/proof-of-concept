@@ -1,4 +1,4 @@
-package ui.corecomponents.logPanel;
+package ui.customPanels;
 
 import models.ImagingSession;
 import models.LoggerColumns;

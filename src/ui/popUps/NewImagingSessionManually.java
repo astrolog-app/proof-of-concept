@@ -39,7 +39,8 @@ public class NewImagingSessionManually extends JDialog {
         setModal(true);
         add(mainPanel);
         setTitle("Add New Imaging Session");
-        setSize(750, 900);
+        setSize(800, 900);
+        setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
     }

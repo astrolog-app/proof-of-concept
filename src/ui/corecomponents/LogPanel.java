@@ -1,7 +1,8 @@
-package ui.corecomponents.logPanel;
+package ui.corecomponents;
 
 import models.settings.AppConfiguration;
 import services.fileHandler.ConfigurationStore;
+import ui.customPanels.LogTableScrollPane;
 import ui.popUps.NewImagingSessionManually;
 
 import javax.swing.*;
