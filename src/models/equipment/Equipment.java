@@ -18,14 +18,4 @@ public class Equipment {
     public void removeTelescope(Telescope telescope) {
         telescopes.remove(telescope);
     }
-
-    public Object[] getAllBrands() {
-        HashSet<String> allBrands = new HashSet<>();
-
-        for(Telescope telescope : telescopes) {
-            allBrands.add(telescope.getBrand());
-        }
-
-        return allBrands.toArray();
-    }
 }

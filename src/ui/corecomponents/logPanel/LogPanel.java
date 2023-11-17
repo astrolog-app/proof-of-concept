@@ -2,6 +2,7 @@ package ui.corecomponents.logPanel;
 
 import models.settings.AppConfiguration;
 import services.fileHandler.ConfigurationStore;
+import ui.popUps.NewImagingSessionManually;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,6 +26,12 @@ public class LogPanel {
         this.configStore = configStore;
 
         backupHandler();
+        manuallyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                NewImagingSessionManually p = new NewImagingSessionManually();
+            }
+        });
     }
 
     private void backupHandler() {
