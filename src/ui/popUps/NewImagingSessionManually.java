@@ -23,6 +23,12 @@ public class NewImagingSessionManually extends JDialog {
     private JComboBox comboBox4;
 
     public NewImagingSessionManually() {
+        cancelButton.addActionListener(e -> this.dispose());
+
+        SpinnerModel model = new SpinnerNumberModel(0,0,100,1);
+        spinner6.setModel(model);
+
+        setModal(true);
         add(mainPanel);
         setTitle("Add New Imaging Session");
         setSize(750, 900);
