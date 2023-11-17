@@ -1,16 +1,9 @@
 package ui.popUps;
 
 import models.equipment.Equipment;
-import models.settings.AppConfiguration;
-import services.fileHandler.ConfigurationStore;
 import services.fileHandler.EquipmentStore;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class NewImagingSessionManually extends JDialog {
     private JPanel mainPanel;
