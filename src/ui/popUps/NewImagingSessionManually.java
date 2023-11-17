@@ -1,32 +1,40 @@
 package ui.popUps;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class NewImagingSessionManually extends JDialog {
     private JPanel mainPanel;
     private JButton saveButton;
     private JButton cancelButton;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JSpinner textField5;
-    private JSpinner spinner1;
-    private JSpinner spinner2;
-    private JSpinner spinner3;
-    private JSpinner spinner4;
-    private JSpinner spinner5;
-    private JComboBox comboBox1;
-    private JSpinner spinner6;
-    private JSpinner spinner7;
-    private JSpinner spinner8;
-    private JComboBox comboBox2;
-    private JComboBox comboBox3;
-    private JComboBox comboBox4;
+    private JTextField dateTextField;
+    private JTextField targetTextField;
+    private JSpinner chipTempSpinner;
+    private JSpinner gainSpinner;
+    private JSpinner integratedSubsSpinner;
+    private JSpinner subLengthSpinner;
+    private JSpinner offsetSpinner;
+    private JSpinner totalSubsSpinner;
+    private JComboBox filterComboBox;
+    private JSpinner cloudCoverSpinner;
+    private JSpinner averageSeeingSpinner;
+    private JSpinner tempSpinner;
+    private JComboBox flatennerComboBox;
+    private JComboBox cameraComboBox;
+    private JComboBox telescopeComboBox;
+    private JTextField notesTextField;
 
     public NewImagingSessionManually() {
+        generalHandler();
+
         cancelButton.addActionListener(e -> this.dispose());
 
         SpinnerModel model = new SpinnerNumberModel(0,0,100,1);
-        spinner6.setModel(model);
+        cloudCoverSpinner.setModel(model);
 
         setModal(true);
         add(mainPanel);
@@ -34,5 +42,9 @@ public class NewImagingSessionManually extends JDialog {
         setSize(750, 900);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private void generalHandler() {
+
     }
 }

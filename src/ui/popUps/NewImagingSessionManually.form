@@ -68,7 +68,7 @@
                   <text value="Date"/>
                 </properties>
               </component>
-              <component id="7f8ac" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+              <component id="7f8ac" class="javax.swing.JTextField" binding="dateTextField">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -76,21 +76,6 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="2c7db" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <font size="17"/>
-                  <foreground color="-1766397"/>
-                  <text value="*"/>
-                </properties>
-              </component>
-              <hspacer id="5fb2d">
-                <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </hspacer>
             </children>
           </grid>
           <grid id="2aa7c" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -109,7 +94,7 @@
                   <text value="Target"/>
                 </properties>
               </component>
-              <component id="7b00a" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+              <component id="7b00a" class="javax.swing.JTextField" binding="targetTextField">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -181,10 +166,11 @@
                   <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <opaque value="false"/>
                   <text value="Chiptemperature"/>
                 </properties>
               </component>
-              <component id="79801" class="javax.swing.JSpinner" binding="textField5" default-binding="true">
+              <component id="79801" class="javax.swing.JSpinner" binding="chipTempSpinner">
                 <constraints>
                   <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -192,19 +178,19 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="d9a23" class="javax.swing.JSpinner" binding="spinner1" default-binding="true">
+              <component id="d9a23" class="javax.swing.JSpinner" binding="gainSpinner">
                 <constraints>
                   <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
-              <component id="21f0c" class="javax.swing.JSpinner" binding="spinner2" default-binding="true">
+              <component id="21f0c" class="javax.swing.JSpinner" binding="integratedSubsSpinner">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
-              <component id="3c010" class="javax.swing.JSpinner" binding="spinner3" default-binding="true">
+              <component id="3c010" class="javax.swing.JSpinner" binding="subLengthSpinner">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -249,19 +235,19 @@
                   <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
               </vspacer>
-              <component id="4303c" class="javax.swing.JSpinner" binding="spinner4" default-binding="true">
+              <component id="4303c" class="javax.swing.JSpinner" binding="offsetSpinner">
                 <constraints>
                   <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
-              <component id="c3ee" class="javax.swing.JSpinner" binding="spinner5" default-binding="true">
+              <component id="c3ee" class="javax.swing.JSpinner" binding="totalSubsSpinner">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
-              <component id="6b140" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+              <component id="6b140" class="javax.swing.JComboBox" binding="filterComboBox">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -318,13 +304,13 @@
                   <text value="Average Cloud Cover"/>
                 </properties>
               </component>
-              <component id="95a78" class="javax.swing.JSpinner" binding="spinner6" default-binding="true">
+              <component id="95a78" class="javax.swing.JSpinner" binding="cloudCoverSpinner">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
-              <component id="190d2" class="javax.swing.JSpinner" binding="spinner8" default-binding="true">
+              <component id="190d2" class="javax.swing.JSpinner" binding="tempSpinner">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -353,7 +339,7 @@
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
               </vspacer>
-              <component id="120ae" class="javax.swing.JSpinner" binding="spinner7" default-binding="true">
+              <component id="120ae" class="javax.swing.JSpinner" binding="averageSeeingSpinner">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -407,16 +393,16 @@
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Flattener"/>
+                  <text value="Flattener/Reducer"/>
                 </properties>
               </component>
-              <component id="9b4d5" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+              <component id="9b4d5" class="javax.swing.JComboBox" binding="flatennerComboBox">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
-              <component id="c243c" class="javax.swing.JComboBox" binding="comboBox4" default-binding="true">
+              <component id="c243c" class="javax.swing.JComboBox" binding="telescopeComboBox">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -447,7 +433,7 @@
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
               </vspacer>
-              <component id="aaf7c" class="javax.swing.JComboBox" binding="comboBox3" default-binding="true">
+              <component id="aaf7c" class="javax.swing.JComboBox" binding="cameraComboBox">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -496,7 +482,7 @@
                   <text value="Notes"/>
                 </properties>
               </component>
-              <component id="a0533" class="javax.swing.JTextField" default-binding="true">
+              <component id="a0533" class="javax.swing.JTextField" binding="notesTextField">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
