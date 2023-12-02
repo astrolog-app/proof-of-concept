@@ -24,7 +24,7 @@ public class NewImagingSessionManually extends JDialog {
     private JComboBox flatennerComboBox;
     private JComboBox cameraComboBox;
     private JComboBox telescopeComboBox;
-    private JTextField notesTextField;
+    private JEditorPane editorPane1;
 
     public NewImagingSessionManually(Equipment equipment, EquipmentStore equipmentStore) {
         generalHandler();
