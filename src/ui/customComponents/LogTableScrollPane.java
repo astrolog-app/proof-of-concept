@@ -1,50 +1,74 @@
 package ui.customComponents;
 
-import javax.swing.*;
+import ui.popUps.ImagingSessionInfo;
 
-public class LogTableScrollPane extends JPanel {
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class LogTableScrollPane extends JTable {
     public LogTableScrollPane() {
         String[][] data = {
-                { "Kundan Kumar Jha", "4031", "CSE" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" },
-                { "Anand Jha", "6014", "IT" }
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"},
+                {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics"}
         };
 
-        // Column Names
-        String[] columnNames = { "Name", "Roll Number", "Department" };
+        String[] columnNames = { "Date", "Target", "Subs", "Sub Length", "Telescope" };
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Make all cells non-editable
+                return false;
+            }
+        };
 
-        // Initializing the JTable
-        JTable j = new JTable(data, columnNames);
-        j.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        setModel(tableModel);
 
-        // adding it to JScrollPane
-        JScrollPane sp = new JScrollPane(j);
-        add(sp);
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int selectedRow = getSelectedRow();
+                    if (selectedRow != -1) {
+                        new ImagingSessionInfo();
+//                        JOptionPane.showMessageDialog(null, "Double-clicked on row: " +
+//                                tableModel.getValueAt(selectedRow, 0));
+                    }
+                }
+            }
+        });
     }
 }
