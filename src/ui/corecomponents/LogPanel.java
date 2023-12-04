@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 
 public class LogPanel {
     ImagingSessionController imagingSessionController = new ImagingSessionController();
+    Equipment equipment;
 
     AppConfiguration appConfig;
     private JPanel panel1;
@@ -34,6 +35,7 @@ public class LogPanel {
 
     public LogPanel(AppConfiguration appConfig, Equipment equipment) {
         this.appConfig = appConfig;
+        this.equipment = equipment;
 
         ImageIcon binIcon = Images.getThemeBasedIcon(appConfig, "bin", 18, 18);
         deleteButton.setIcon(binIcon);
@@ -60,7 +62,7 @@ public class LogPanel {
     }
 
     private void createUIComponents() {
-        logTableScrollPane1 = new LogTableScrollPane(imagingSessionController);
+        logTableScrollPane1 = new LogTableScrollPane(imagingSessionController, equipment);
     }
 
     public JPanel getPanel() {
