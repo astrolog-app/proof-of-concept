@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LogPanel {
+    ImagingSessionController imagingSessionController = new ImagingSessionController();
+
     AppConfiguration appConfig;
     private JPanel panel1;
     private JLabel placeHolder1;
@@ -43,8 +45,9 @@ public class LogPanel {
 
         backupHandler();
 
-        ImagingSessionController imagingSessionController = new ImagingSessionController();
         manuallyButton.addActionListener(e -> imagingSessionController.addImagingSessionManually(equipment));
+        detailsButton.addActionListener(e -> imagingSessionController.showImagingSessionDetails());
+        deleteButton.addActionListener(e -> imagingSessionController.removeImagingSession());
     }
 
     private void backupHandler() {
@@ -57,7 +60,7 @@ public class LogPanel {
     }
 
     private void createUIComponents() {
-        logTableScrollPane1 = new LogTableScrollPane();
+        logTableScrollPane1 = new LogTableScrollPane(imagingSessionController);
     }
 
     public JPanel getPanel() {
