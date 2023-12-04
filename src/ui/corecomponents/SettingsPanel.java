@@ -35,7 +35,7 @@ public class SettingsPanel {
     private JLabel placeHolder1;
     private JLabel restartMessage;
 
-    public SettingsPanel(AppConfiguration appConfig, ConfigurationStore configStore) {
+    public SettingsPanel(AppConfiguration appConfig) {
         this.appConfig = appConfig;
         momentaryTheme = appConfig.getTheme();
         momentaryFolderPath = appConfig.getFolderPath();
@@ -63,7 +63,7 @@ public class SettingsPanel {
             setSaveButtonState();
             setRestartButtonState();
 
-            configStore.save(null);
+            ConfigurationStore.save(appConfig, null);
         });
     }
 

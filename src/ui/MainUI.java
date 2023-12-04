@@ -16,11 +16,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainUI extends JFrame {
-    public MainUI(AppConfiguration appConfig, ConfigurationStore configStore) {
+    public MainUI(AppConfiguration appConfig) {
         Image img = Toolkit.getDefaultToolkit().getImage(Paths.IMAGE_PATH + "app_logo.png");
         setIconImage(img);
         Equipment equipment = new Equipment();
-        EquipmentStore equipmentStore = new EquipmentStore(equipment);
 
         int tabPlacement = JTabbedPane.LEFT;
         switch (appConfig.getNavBarPlacement()) {
@@ -30,16 +29,16 @@ public class MainUI extends JFrame {
         }
         JTabbedPane tabbedPane = new JTabbedPane(tabPlacement);
 
-        LogPanel logPanelClass = new LogPanel(appConfig, configStore, equipment, equipmentStore);
+        LogPanel logPanelClass = new LogPanel(appConfig, equipment);
         JPanel imagingHistoryPanel = logPanelClass.getPanel();
 
         StatisticsPanel statisticsPanelClass = new StatisticsPanel();
         JPanel analysisPanel = statisticsPanelClass.getPanel();
 
-        EquipmentPanel equipmentPanelClass = new EquipmentPanel(equipment, equipmentStore);
+        EquipmentPanel equipmentPanelClass = new EquipmentPanel(equipment);
         JPanel equipmentPanel = equipmentPanelClass.getPanel();
 
-        SettingsPanel settingsPanelClass = new SettingsPanel(appConfig, configStore);
+        SettingsPanel settingsPanelClass = new SettingsPanel(appConfig);
         JPanel settingsPanel = settingsPanelClass.getPanel();
 
         ImageIcon settingsIcon = Images.getThemeBasedIcon(appConfig, "settings", 14, 14);

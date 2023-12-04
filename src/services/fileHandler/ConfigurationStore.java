@@ -17,15 +17,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class ConfigurationStore {
-    private final AppConfiguration appConfig;
-    private final List<LoggerColumns> selectedColumns = new ArrayList<>();
 
-    public ConfigurationStore(AppConfiguration appConfig) {
-        this.appConfig = appConfig;
-    }
-
-    public void load() {
+    public static void load(AppConfiguration appConfig) {
         try {
+            List<LoggerColumns> selectedColumns = new ArrayList<>();
+
             JSONParser parser = new JSONParser();
             Reader reader = new FileReader(Paths.CONFIGURATION_PATH);
 
@@ -89,7 +85,7 @@ public class ConfigurationStore {
         }
     }
 
-    public void save(String path) {
+    public static void save(AppConfiguration appConfig, String path) {
         JSONObject obj = new JSONObject();
         String configPath = Objects.requireNonNullElse(path, Paths.CONFIGURATION_PATH);
 

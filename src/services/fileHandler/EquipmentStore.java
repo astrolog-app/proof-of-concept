@@ -15,13 +15,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class EquipmentStore {
-    private Equipment equipment;
 
-    public EquipmentStore(Equipment equipment) {
-        this.equipment = equipment;
-    }
-
-    public void load() {
+    public static void load(Equipment equipment) {
         try {
             JSONParser parser = new JSONParser();
             Reader reader = new FileReader(Paths.EQUIPMENT_PATH);
@@ -47,7 +42,7 @@ public class EquipmentStore {
         }
     }
 
-    public void save(String path) {
+    public static void save(Equipment equipment, String path) {
         JSONObject obj = new JSONObject();
         String configPath = Objects.requireNonNullElse(path, Paths.CONFIGURATION_PATH);
 
@@ -74,7 +69,7 @@ public class EquipmentStore {
         }
     }
 
-    private List<Telescope> readTelescopes(JSONObject jsonObject) {
+    private static List<Telescope> readTelescopes(JSONObject jsonObject) {
         List<Telescope> telescopes = new ArrayList<>();
         JSONArray telescopesJson = (JSONArray) jsonObject.get("telescopes");
         Iterator<JSONObject> telescopeIterator = telescopesJson.iterator();

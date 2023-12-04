@@ -18,12 +18,12 @@ public class EquipmentPanel {
     private JButton newTelescopeButton;
     private JLabel placeHolder1;
 
-    public EquipmentPanel(Equipment equipment, EquipmentStore equipmentStore) {
+    public EquipmentPanel(Equipment equipment) {
 
         newTelescopeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new NewTelescopePanel(equipment, equipmentStore);
+                new NewTelescopePanel(equipment);
             }
         });
     }

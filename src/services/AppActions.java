@@ -14,13 +14,12 @@ import java.util.List;
 
 public class AppActions {
     private final AppConfiguration appConfig = new AppConfiguration();
-    private final ConfigurationStore configStore = new ConfigurationStore(appConfig);
 
     public void initialize() {
         try {
-            configStore.load();
+            ConfigurationStore.load(appConfig);
             setApplicationTheme();
-            new MainUI(appConfig, configStore);
+            new MainUI(appConfig);
         } catch (Exception e) {
             appConfig.setTheme(AppTheme.LIGHT);
             appConfig.setFolderPath("path");
@@ -32,7 +31,7 @@ public class AppActions {
             appConfig.setEnableRegularBackups(true);
             appConfig.setStartInFullscreen(false);
 
-            configStore.save(null);
+            ConfigurationStore.save( appConfig, null);
             AppActions.restart();
 
             //new WelcomePanel();

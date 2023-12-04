@@ -15,7 +15,7 @@ public class NewTelescopePanel extends JDialog {
     private JTextField focalLengthField;
     private JTextField apertureField;
 
-    public NewTelescopePanel(Equipment equipment, EquipmentStore equipmentStore) {
+    public NewTelescopePanel(Equipment equipment) {
         saveButton.setEnabled(false);
 
         saveButton.addActionListener(e -> {
@@ -23,7 +23,7 @@ public class NewTelescopePanel extends JDialog {
             int aperture = Integer.parseInt(apertureField.getText());
             Telescope telescope = new Telescope(nameField.getText(), "test", focalLength, aperture);
             equipment.addTelescope(telescope);
-            equipmentStore.save(null);
+            EquipmentStore.save(equipment, null);
             dispose();
         });
 

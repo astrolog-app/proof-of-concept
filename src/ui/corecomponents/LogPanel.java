@@ -1,5 +1,6 @@
 package ui.corecomponents;
 
+import controllers.ImagingSessionController;
 import models.equipment.Equipment;
 import models.settings.AppConfiguration;
 import services.fileHandler.ConfigurationStore;
@@ -15,7 +16,6 @@ import java.awt.event.ActionListener;
 
 public class LogPanel {
     AppConfiguration appConfig;
-    ConfigurationStore configStore;
     private JPanel panel1;
     private JLabel placeHolder1;
     private JButton fromExistingFolderButton;
@@ -30,9 +30,8 @@ public class LogPanel {
     private JButton xMarklButton;
     private JButton saveBackupConfigButton;
 
-    public LogPanel(AppConfiguration appConfig, ConfigurationStore configStore, Equipment equipment, EquipmentStore equipmentStore) {
+    public LogPanel(AppConfiguration appConfig, Equipment equipment) {
         this.appConfig = appConfig;
-        this.configStore = configStore;
 
         ImageIcon binIcon = Images.getThemeBasedIcon(appConfig, "bin", 18, 18);
         deleteButton.setIcon(binIcon);
@@ -43,12 +42,9 @@ public class LogPanel {
         xMarklButton.setText("");
 
         backupHandler();
-        manuallyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                NewImagingSessionManually p = new NewImagingSessionManually(equipment, equipmentStore);
-            }
-        });
+
+        ImagingSessionController imagingSessionController = new ImagingSessionController();
+        manuallyButton.addActionListener(e -> imagingSessionController.addImagingSessionManually(equipment));
     }
 
     private void backupHandler() {
@@ -56,7 +52,7 @@ public class LogPanel {
 
         enableRegularBackupsCheckBox.addActionListener(e -> {
             appConfig.setEnableRegularBackups(enableRegularBackupsCheckBox.isSelected());
-            configStore.save(null);
+            ConfigurationStore.save(appConfig, null);
         });
     }
 
