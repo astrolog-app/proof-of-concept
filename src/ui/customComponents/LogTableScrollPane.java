@@ -75,14 +75,9 @@ public class LogTableScrollPane extends JTable {
         setModel(tableModel);
         showHorizontalLines = true;
 
-        this.getColumnModel().getColumn(0).setPreferredWidth(125);
-        this.getColumnModel().getColumn(1).setPreferredWidth(100);
-        this.getColumnModel().getColumn(2).setPreferredWidth(50);
-        this.getColumnModel().getColumn(3).setPreferredWidth(150);
-        this.getColumnModel().getColumn(3).setPreferredWidth(150);
-        this.getColumnModel().getColumn(4).setPreferredWidth(150);
-        this.getColumnModel().getColumn(5).setPreferredWidth(150);
-        this.getColumnModel().getColumn(6).setPreferredWidth(150);
+        for (int i = 0; i < getColumnCount(); i++) {
+            getColumnModel().getColumn(i).setPreferredWidth(125);
+        }
 
         addMouseListener(new MouseAdapter() {
             @Override

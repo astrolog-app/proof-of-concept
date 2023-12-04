@@ -1,13 +1,9 @@
-import com.formdev.flatlaf.FlatLightLaf;
-import ui.welcome.WelcomeDialogue;
+import services.AppActions;
 
 public class App {
     public static void main(String[] args) {
-//        AppActions appActions = new AppActions();
+        AppActions appActions = new AppActions();
 
-        FlatLightLaf.setup();
-        new WelcomeDialogue();
-
-//        appActions.initialize();
+        appActions.initialize();
     }
 }

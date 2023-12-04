@@ -1,4 +1,4 @@
-package ui.welcome;
+package ui.startUp.welcome;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
