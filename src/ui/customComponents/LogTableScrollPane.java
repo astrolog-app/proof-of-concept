@@ -3,13 +3,15 @@ package ui.customComponents;
 import ui.popUps.ImagingSessionInfo;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class LogTableScrollPane extends JTable {
     public LogTableScrollPane() {
-        String[][] data = {
+        Object[][] data = {
                 {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics", "AD", "dahoasdhuashd"},
                 {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics", "AD", "dahoasdhuashd"},
                 {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics", "AD", "dahoasdhuashd"},
@@ -61,23 +63,9 @@ public class LogTableScrollPane extends JTable {
                 {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics", "AD", "dahoasdhuashd"},
         };
 
-        String[] columnNames = { "Date", "Target", "Subs", "Sub Length", "Telescope", "da", "ASdad" };
-        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                // Make all cells non-editable
-                return false;
-            }
-        };
+        Object[] columnNames = { "Date", "Target", "Subs", "Sub Length", "Telescope", "da", "ASdad" };
 
-        setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-        setModel(tableModel);
-        showHorizontalLines = true;
-
-        for (int i = 0; i < getColumnCount(); i++) {
-            getColumnModel().getColumn(i).setPreferredWidth(125);
-        }
+        createTable(data, columnNames);
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -92,5 +80,25 @@ public class LogTableScrollPane extends JTable {
                 }
             }
         });
+    }
+
+    private void createTable(Object[][] data, Object[] columnNames) {
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Make all cells non-editable
+                return false;
+            }
+        };
+
+        setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        setRowHeight(45);
+        setModel(tableModel);
+        showHorizontalLines = true;
+
+        for (int i = 0; i < getColumnCount(); i++) {
+            getColumnModel().getColumn(i).setPreferredWidth(125);
+        }
     }
 }

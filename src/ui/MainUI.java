@@ -42,16 +42,7 @@ public class MainUI extends JFrame {
         SettingsPanel settingsPanelClass = new SettingsPanel(appConfig, configStore);
         JPanel settingsPanel = settingsPanelClass.getPanel();
 
-        ImageIcon settingsIcon;
-        ImageIcon originalSettingsIconLight = new ImageIcon(Paths.IMAGE_PATH + "settings_light.png");
-        ImageIcon scaledSettingsIconLight = Images.scaleImage(originalSettingsIconLight, 14, 14);
-        ImageIcon originalSettingsIconDark = new ImageIcon(Paths.IMAGE_PATH + "settings_dark.png");
-        ImageIcon scaledSettingsIconDark = Images.scaleImage(originalSettingsIconDark, 14, 14);
-        if (appConfig.getTheme().equals(AppTheme.DARK)) {
-            settingsIcon = scaledSettingsIconDark;
-        } else {
-            settingsIcon = scaledSettingsIconLight;
-        }
+        ImageIcon settingsIcon = Images.getThemeBasedIcon(appConfig, "settings", 14, 14);
 
         tabbedPane.addTab("Log", imagingHistoryPanel);
         tabbedPane.addTab("Statistics", analysisPanel);
