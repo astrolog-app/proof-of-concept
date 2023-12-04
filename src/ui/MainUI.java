@@ -51,7 +51,7 @@ public class MainUI extends JFrame {
         add(tabbedPane);
 
         setVisible(true);
-        setTitle("Astro Logger");
+        setTitle("AstroLog Ultimate");
         setMinimumSize(new Dimension(720, 621));
         if (appConfig.getStartInFullscreen()) {
             setExtendedState(JFrame.MAXIMIZED_BOTH);

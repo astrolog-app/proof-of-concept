@@ -136,9 +136,13 @@ public class LogTableScrollPane extends JTable {
         menuItem3.addActionListener((ActionEvent e) -> imagingSessionController.showImagingSessionDetails());
         popupMenu.add(menuItem3);
 
-        JMenuItem menuItem4 = new JMenuItem("Delete");
-        menuItem4.addActionListener((ActionEvent e) -> imagingSessionController.removeImagingSession());
+        JMenuItem menuItem4 = new JMenuItem("Edit");
+        menuItem4.addActionListener((ActionEvent e) -> imagingSessionController.editImagingSession());
         popupMenu.add(menuItem4);
+
+        JMenuItem menuItem5 = new JMenuItem("Delete");
+        menuItem5.addActionListener((ActionEvent e) -> imagingSessionController.removeImagingSession());
+        popupMenu.add(menuItem5);
 
         return popupMenu;
     }

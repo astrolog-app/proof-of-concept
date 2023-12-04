@@ -4,18 +4,13 @@ import controllers.ImagingSessionController;
 import models.equipment.Equipment;
 import models.settings.AppConfiguration;
 import services.fileHandler.ConfigurationStore;
-import services.fileHandler.EquipmentStore;
 import ui.customComponents.LogTableScrollPane;
-import ui.popUps.NewImagingSessionManually;
 import utils.Images;
-import utils.Paths;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class LogPanel {
-    ImagingSessionController imagingSessionController = new ImagingSessionController();
+    ImagingSessionController imagingSessionController;
     Equipment equipment;
 
     AppConfiguration appConfig;
@@ -31,6 +26,8 @@ public class LogPanel {
     private JButton deleteButton;
     private JButton detailsButton;
     private JButton xMarklButton;
+    private JButton editButton;
+    private JButton imagingSessionSettings;
     private JButton saveBackupConfigButton;
 
     public LogPanel(AppConfiguration appConfig, Equipment equipment) {
@@ -45,11 +42,16 @@ public class LogPanel {
         xMarklButton.setIcon(xMarkIcon);
         xMarklButton.setText("");
 
+        ImageIcon settingsIcon = Images.getThemeBasedIcon(appConfig, "settings", 18, 18);
+        imagingSessionSettings.setIcon(settingsIcon);
+        imagingSessionSettings.setText("");
+
         backupHandler();
 
         manuallyButton.addActionListener(e -> imagingSessionController.addImagingSessionManually(equipment));
         detailsButton.addActionListener(e -> imagingSessionController.showImagingSessionDetails());
         deleteButton.addActionListener(e -> imagingSessionController.removeImagingSession());
+        editButton.addActionListener(e -> imagingSessionController.editImagingSession());
     }
 
     private void backupHandler() {
@@ -62,6 +64,7 @@ public class LogPanel {
     }
 
     private void createUIComponents() {
+        this.imagingSessionController = new ImagingSessionController();
         logTableScrollPane1 = new LogTableScrollPane(imagingSessionController, equipment);
     }
 

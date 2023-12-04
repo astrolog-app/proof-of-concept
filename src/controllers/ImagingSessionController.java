@@ -1,11 +1,10 @@
 package controllers;
 
 import models.equipment.Equipment;
-import services.fileHandler.EquipmentStore;
 
 public class ImagingSessionController {
     public void addImagingSessionManually(Equipment equipment) {
-
+        new ui.popUps.NewImagingSessionManually(equipment);
     }
 
     public void addImagingSessionAutomatically() {
@@ -13,6 +12,10 @@ public class ImagingSessionController {
     }
 
     public void removeImagingSession() {
+
+    }
+
+    public void editImagingSession() {
 
     }
 
