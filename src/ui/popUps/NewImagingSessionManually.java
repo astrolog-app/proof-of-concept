@@ -26,7 +26,7 @@ public class NewImagingSessionManually extends JDialog {
     private JComboBox telescopeComboBox;
     private JEditorPane editorPane1;
 
-    public NewImagingSessionManually(Equipment equipment, EquipmentStore equipmentStore) {
+    public NewImagingSessionManually(Equipment equipment) {
         generalHandler();
 
         cancelButton.addActionListener(e -> this.dispose());
