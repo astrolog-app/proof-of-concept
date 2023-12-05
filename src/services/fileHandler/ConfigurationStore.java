@@ -10,9 +10,7 @@ import org.json.simple.JSONObject;
 import utils.Paths;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class ConfigurationStore {
     static ObjectMapper objectMapper = new ObjectMapper();
@@ -21,16 +19,15 @@ public class ConfigurationStore {
         try {
             JsonNode jsonNode = objectMapper.readTree(new File(Paths.CONFIGURATION_PATH));
 
-            appConfig.setNavBarPlacement(NavigationBarPlacement.valueOf(jsonNode.path("application").path("navigation_bar_placement").asText()));
-            appConfig.setStartInFullscreen(jsonNode.path("application").path("start_in_fullscreen").asBoolean());
+            appConfig.setNavBarPlacement(NavigationBarPlacement.valueOf(jsonNode.path("application").path("navigationBarPlacement").asText()));
+            appConfig.setStartInFullscreen(jsonNode.path("application").path("startInFullscreen").asBoolean());
             appConfig.setTheme(AppTheme.valueOf(jsonNode.path("application").path("theme").asText()));
-            appConfig.setFolderPath(jsonNode.path("application").path("folder_path").asText());
-            appConfig.setEnableRegularBackups(jsonNode.path("application").path("enable_regular_backups").asBoolean());
+            appConfig.setFolderPath(jsonNode.path("application").path("folderPath").asText());
+            appConfig.setEnableRegularBackups(jsonNode.path("application").path("enableRegularBackups").asBoolean());
 
-//            JsonNode imagingSession = jsonNode.path("imaging_session");
-//            JsonNode selectedColumns = imagingSession.path("selected_columns");
-//            JsonNode columnsSize = imagingSession.path("columns_size");
+            JsonNode imagingSession = jsonNode.path("imagingSession");
 
+            JsonNode selectedColumnsNode = imagingSession.path("selectedColumns");
         } catch (FileNotFoundException e) {
             System.out.println("Error: Config File not found:");
             System.out.println(e.getMessage());

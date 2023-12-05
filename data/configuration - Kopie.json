@@ -1,10 +1,10 @@
 {
     "application": {
-        "navigation_bar_placement": "LEFT",
-        "start_in_fullscreen": false,
+        "navigationBarPlacement": "LEFT",
+        "startInFullscreen": false,
         "theme": "DARK",
-        "folder_path": "path",
-        "enable_regular_backups": true
+        "folderPath": "path",
+        "enableRegularBackups": true
     },
     "imaging_session": {
         "selected_columns": [
@@ -30,7 +30,7 @@
             "CAMERA",
             "NOTES"
         ],
-        "columns_size": {
+        "columnsSize": {
             "DATE": 150,
             "TARGET": 150,
             "SUB_LENGTH": 150,
