@@ -1,86 +1,41 @@
 package services.fileHandler;
 
+import models.LoggerColumns;
 import models.settings.AppConfiguration;
 import models.settings.AppTheme;
-import models.LoggerColumns;
 import models.settings.NavigationBarPlacement;
-import org.json.simple.JSONArray;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import utils.Paths;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
 public class ConfigurationStore {
+    static ObjectMapper objectMapper = new ObjectMapper();
 
     public static void load(AppConfiguration appConfig) {
         try {
-            List<LoggerColumns> selectedColumns = new ArrayList<>();
+            JsonNode jsonNode = objectMapper.readTree(new File(Paths.CONFIGURATION_PATH));
 
-            JSONParser parser = new JSONParser();
-            Reader reader = new FileReader(Paths.CONFIGURATION_PATH);
+            appConfig.setNavBarPlacement(NavigationBarPlacement.valueOf(jsonNode.path("application").path("navigation_bar_placement").asText()));
+            appConfig.setStartInFullscreen(jsonNode.path("application").path("start_in_fullscreen").asBoolean());
+            appConfig.setTheme(AppTheme.valueOf(jsonNode.path("application").path("theme").asText()));
+            appConfig.setFolderPath(jsonNode.path("application").path("folder_path").asText());
+            appConfig.setEnableRegularBackups(jsonNode.path("application").path("enable_regular_backups").asBoolean());
 
-            Object jsonObj = parser.parse(reader);
+//            JsonNode imagingSession = jsonNode.path("imaging_session");
+//            JsonNode selectedColumns = imagingSession.path("selected_columns");
+//            JsonNode columnsSize = imagingSession.path("columns_size");
 
-            JSONObject jsonObject = (JSONObject) jsonObj;
-
-            String themeString = (String) jsonObject.get("theme");
-            AppTheme theme;
-            if (themeString.equals("DARK")) {
-                theme = AppTheme.DARK;
-            } else {
-                theme = AppTheme.LIGHT;
-            }
-
-            String folderPath = (String) jsonObject.get("folder_path");
-
-            JSONArray selectedColumnsJSON = (JSONArray) jsonObject.get("selected_columns");
-            @SuppressWarnings("unchecked")
-            Iterator<String> it = selectedColumnsJSON.iterator();
-            while (it.hasNext()) {
-                String columnString = it.next();
-                for (LoggerColumns lc : LoggerColumns.values()) {
-                    if (lc.toString().equals(columnString)) {
-                        selectedColumns.add(lc);
-                    }
-                }
-            }
-
-            NavigationBarPlacement navBarPlacement = null;
-            String navBarPlacementString = (String) jsonObject.get("navigation_bar_placement");
-            navBarPlacement = switch (navBarPlacementString) {
-                case "LEFT" -> NavigationBarPlacement.LEFT;
-                case "TOP" -> NavigationBarPlacement.TOP;
-                case "RIGHT" -> NavigationBarPlacement.RIGHT;
-                case "BOTTOM" -> NavigationBarPlacement.BOTTOM;
-                default -> navBarPlacement;
-            };
-
-            boolean enableRegularBackups = (boolean) jsonObject.get("enable_regular_backups");
-
-            boolean startInFullscreen = (boolean) jsonObject.get("start_in_fullscreen");
-
-            reader.close();
-
-            appConfig.setTheme(theme);
-            appConfig.setFolderPath(folderPath);
-            appConfig.setSelectedColumns(selectedColumns);
-            appConfig.setNavBarPlacement(navBarPlacement);
-            appConfig.setEnableRegularBackups(enableRegularBackups);
-            appConfig.setStartInFullscreen(startInFullscreen);
         } catch (FileNotFoundException e) {
             System.out.println("Error: Config File not found:");
             System.out.println(e.getMessage());
         } catch (IOException e) {
             System.out.println("IO Exception:");
-            System.out.println(e.getMessage());
-        } catch (ParseException e) {
-            System.out.println("Error while parsing JSON:");
             System.out.println(e.getMessage());
         }
     }

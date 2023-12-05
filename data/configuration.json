@@ -1,1 +1,57 @@
-{"navigation_bar_placement":"LEFT","selected_columns":["DATE","TARGET"],"start_in_fullscreen":false,"theme":"DARK","folder_path":"path","enable_regular_backups":true}
+{
+    "application": {
+        "navigation_bar_placement": "LEFT",
+        "start_in_fullscreen": false,
+        "theme": "DARK",
+        "folder_path": "path",
+        "enable_regular_backups": true
+    },
+    "imaging_session": {
+        "selected_columns": [
+            "DATE",
+            "TARGET",
+            "SUB_LENGTH",
+            "TOTAL_SUBS",
+            "TOTAL_EXPOSURE",
+            "INTEGRATED_SUBS",
+            "INTEGRATED_EXPOSURE",
+            "FILTER",
+            "GAIN",
+            "OFFSET",
+            "CAMERA_TEMP_C",
+            "CAMERA_TEMP_F",
+            "OUTSIDE_TEMP_C",
+            "OUTSIDE_TEMP_F",
+            "AVERAGE_SEEING",
+            "AVERAGE_CLOUD_COVER",
+            "AVERAGE_MOON",
+            "TELESCOPE",
+            "FLATTENER",
+            "CAMERA",
+            "NOTES"
+        ],
+        "columns_size": {
+            "DATE": 150,
+            "TARGET": 150,
+            "SUB_LENGTH": 150,
+            "TOTAL_SUBS": 150,
+            "TOTAL_EXPOSURE": 150,
+            "INTEGRATED_SUBS": 150,
+            "INTEGRATED_EXPOSURE": 150,
+            "FILTER": 150,
+            "GAIN": 150,
+            "OFFSET": 150,
+            "CAMERA_TEMP_C": 150,
+            "CAMERA_TEMP_F": 150,
+            "OUTSIDE_TEMP_C": 150,
+            "OUTSIDE_TEMP_F": 150,
+            "AVERAGE_SEEING": 150,
+            "AVERAGE_CLOUD_COVER": 150,
+            "AVERAGE_MOON": 150,
+            "TELESCOPE": 150,
+            "FLATTENER": 150,
+            "CAMERA": 150,
+            "NOTES": 150
+        }
+    }
+}
