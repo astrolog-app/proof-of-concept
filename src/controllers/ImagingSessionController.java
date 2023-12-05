@@ -1,6 +1,7 @@
 package controllers;
 
 import models.equipment.Equipment;
+import ui.popUps.ImagingSessionInfo;
 
 public class ImagingSessionController {
     public void addImagingSessionManually(Equipment equipment) {
@@ -20,6 +21,6 @@ public class ImagingSessionController {
     }
 
     public void showImagingSessionDetails() {
-
+        new ImagingSessionInfo();
     }
 }

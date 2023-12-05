@@ -1,35 +1,31 @@
 package ui.startUp.welcome;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class WelcomeDialogue extends JFrame {
     private JPanel panel1;
     private JButton nextButton;
     private JButton previousButton;
     private JLabel stepLabel;
-    private WelcomeHandler welcomeHandler1;
+    private JComboBox comboBox1;
+    private JTextField textField1;
     int stepCount = 1;
 
     public WelcomeDialogue() {
+        comboBox1.addActionListener(e -> checkLicenseFieldState());
+
         String stepText = "Step " + stepCount + " of 4";
         stepLabel.setText(stepText);
-        previousButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                checkButtonState(stepCount + 1);
-                updateLabel();
-            }
+        previousButton.addActionListener(e -> {
+            checkButtonState(stepCount - 1);
+            updateLabel();
         });
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                checkButtonState(stepCount + 1);
-                updateLabel();
-            }
+        nextButton.addActionListener(e -> {
+            checkButtonState(stepCount + 1);
+            updateLabel();
         });
 
+        checkLicenseFieldState();
         checkButtonState(stepCount);
 
         add(panel1);
@@ -44,15 +40,15 @@ public class WelcomeDialogue extends JFrame {
     private void checkButtonState(int stepCount) {
         previousButton.setEnabled(stepCount != 1);
         nextButton.setEnabled(stepCount != 4);
+        this.stepCount = stepCount;
     }
 
     private void updateLabel() {
         String stepText = "Step " + stepCount + " of 4";
-        System.out.println(stepCount);
         stepLabel.setText(stepText);
     }
 
-    private void createUIComponents() {
-        welcomeHandler1 = new WelcomeHandler();
+    private void checkLicenseFieldState(){
+        textField1.setEnabled(comboBox1.getSelectedIndex() != 0);
     }
 }

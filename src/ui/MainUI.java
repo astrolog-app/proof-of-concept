@@ -1,12 +1,9 @@
 package ui;
 
 import models.settings.AppConfiguration;
-import models.settings.AppTheme;
 import models.equipment.Equipment;
-import services.fileHandler.EquipmentStore;
 import ui.corecomponents.EquipmentPanel;
 import utils.Paths;
-import services.fileHandler.ConfigurationStore;
 import ui.corecomponents.StatisticsPanel;
 import ui.corecomponents.LogPanel;
 import ui.corecomponents.SettingsPanel;
