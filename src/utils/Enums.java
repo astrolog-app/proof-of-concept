@@ -21,4 +21,23 @@ public class Enums {
 
         return new String(cList).trim();
     }
+
+    public static <T extends Enum<T>> String enumToAttribute(T en) {
+        String s = en.toString().toLowerCase();
+        char[] cList = s.toCharArray();
+
+        for (int i = 0; i < cList.length; i++) {
+            if (cList[i] == '_') {
+                cList[i] = cList[i + 1];
+                try {
+                    cList[i + 1] = Character.toUpperCase(cList[i + 1]);
+                } catch (Exception e) {
+                    System.out.println(" ");
+
+                }
+            }
+        }
+
+        return new String(cList).trim();
+    }
 }
