@@ -2,21 +2,24 @@ package ui.customComponents;
 
 import controllers.ImagingSessionController;
 import models.ImagingSession;
+import models.LoggerColumns;
 import models.equipment.Equipment;
-import ui.popUps.ImagingSessionInfo;
+import models.settings.ImagingSessionTableConfig;
+import services.fileHandler.ConfigurationStore;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class LogTableScrollPane extends JTable {
-    ImagingSessionController imagingSessionController;
-    Equipment equipment;
+    private final ImagingSessionController imagingSessionController;
+    private final Equipment equipment;
+    private final ImagingSessionTableConfig imagingSessionTableConfig = ConfigurationStore.loadImagingSessionTableConfig();
+
     public LogTableScrollPane(ImagingSessionController imagingSessionController, Equipment equipment) {
         this.imagingSessionController = imagingSessionController;
         this.equipment = equipment;
@@ -73,7 +76,13 @@ public class LogTableScrollPane extends JTable {
                 {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics", "AD", "dahoasdhuashd"},
         };
 
-        Object[] columnNames = { "Date", "Target", "Subs", "Sub Length", "Telescope", "da", "ASdad" };
+        List<LoggerColumns> selectedColumns = imagingSessionTableConfig.getSelectedColumns();
+        Object[] columnNames = new Object[selectedColumns.size()];
+        for (int i = 0; i < selectedColumns.size(); i++) {
+            columnNames[i] = selectedColumns.get(i);
+        }
+
+        System.out.println(imagingSessionTableConfig.getSelectedColumns());
 
         createTable(data, columnNames);
 
