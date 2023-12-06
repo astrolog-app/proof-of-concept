@@ -19,7 +19,7 @@ public class MainUI extends JFrame {
         Equipment equipment = new Equipment();
 
         int tabPlacement = JTabbedPane.LEFT;
-        switch (appConfig.getNavBarPlacement()) {
+        switch (appConfig.getNavigationBarPlacement()) {
             case TOP -> tabPlacement = JTabbedPane.TOP;
             case RIGHT -> tabPlacement = JTabbedPane.RIGHT;
             case BOTTOM -> tabPlacement = JTabbedPane.BOTTOM;

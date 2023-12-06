@@ -6,7 +6,7 @@
     "folderPath": "path",
     "enableRegularBackups": true
   },
-  "imaging_session": {
+  "imagingSessionTableConfiguration": {
     "selected_columns": [
       "DATE",
       "TARGET",

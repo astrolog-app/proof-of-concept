@@ -1,9 +1,12 @@
 import services.AppActions;
+import services.fileHandler.ConfigurationStore;
 
 public class App {
     public static void main(String[] args) {
-        AppActions appActions = new AppActions();
+//        AppActions appActions = new AppActions();
+//
+//        appActions.initialize();
 
-        appActions.initialize();
+        ConfigurationStore.load(null);
     }
 }

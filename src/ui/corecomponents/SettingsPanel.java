@@ -39,11 +39,11 @@ public class SettingsPanel {
         this.appConfig = appConfig;
         momentaryTheme = appConfig.getTheme();
         momentaryFolderPath = appConfig.getFolderPath();
-        momentaryNavBarPlacement = appConfig.getNavBarPlacement();
+        momentaryNavBarPlacement = appConfig.getNavigationBarPlacement();
         momentaryStartInFullscreen = appConfig.getStartInFullscreen();
 
         originalTheme = appConfig.getTheme();
-        originalNavBarPlacement = appConfig.getNavBarPlacement();
+        originalNavBarPlacement = appConfig.getNavigationBarPlacement();
         originalStartInFullscreen = appConfig.getStartInFullscreen();
 
         setSaveButtonState();
@@ -58,7 +58,7 @@ public class SettingsPanel {
         saveChangesButton.addActionListener(e -> {
             appConfig.setTheme(momentaryTheme);
             appConfig.setFolderPath(momentaryFolderPath);
-            appConfig.setNavBarPlacement(momentaryNavBarPlacement);
+            appConfig.setNavigationBarPlacement(momentaryNavBarPlacement);
             appConfig.setStartInFullscreen(momentaryStartInFullscreen);
             setSaveButtonState();
             setRestartButtonState();
@@ -113,7 +113,7 @@ public class SettingsPanel {
     }
 
     private void navigationBarPlacementHandler() {
-        NavigationBarPlacement navigationBarPlacement = appConfig.getNavBarPlacement();
+        NavigationBarPlacement navigationBarPlacement = appConfig.getNavigationBarPlacement();
         switch (navigationBarPlacement) {
             case LEFT -> navigationBarPlacementDropdown.setSelectedItem("Left");
             case TOP -> navigationBarPlacementDropdown.setSelectedItem("Top");
@@ -154,7 +154,7 @@ public class SettingsPanel {
     private void setSaveButtonState() {
         saveChangesButton.setEnabled(momentaryTheme != appConfig.getTheme()
                 || !momentaryFolderPath.equals(appConfig.getFolderPath())
-                || momentaryNavBarPlacement != (appConfig.getNavBarPlacement())
+                || momentaryNavBarPlacement != (appConfig.getNavigationBarPlacement())
                 || momentaryStartInFullscreen != appConfig.getStartInFullscreen());
     }
 

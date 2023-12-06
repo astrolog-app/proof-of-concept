@@ -8,7 +8,7 @@ import java.util.List;
 public class AppConfiguration {
     private AppTheme theme;
     private String folderPath;
-    private NavigationBarPlacement navBarPlacement;
+    private NavigationBarPlacement navigationBarPlacement;
     private boolean enableRegularBackups;
     private boolean startInFullscreen;
     private List<LoggerColumns> selectedColumns;
@@ -28,11 +28,11 @@ public class AppConfiguration {
         this.folderPath = folderPath;
     }
 
-    public NavigationBarPlacement getNavBarPlacement() {
-        return navBarPlacement;
+    public NavigationBarPlacement getNavigationBarPlacement() {
+        return navigationBarPlacement;
     }
-    public void setNavBarPlacement(NavigationBarPlacement navBarPlacement) {
-        this.navBarPlacement = navBarPlacement;
+    public void setNavigationBarPlacement(NavigationBarPlacement navigationBarPlacement) {
+        this.navigationBarPlacement = navigationBarPlacement;
     }
 
     public boolean getEnableRegularBackups() {
