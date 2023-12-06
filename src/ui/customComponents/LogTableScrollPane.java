@@ -2,7 +2,7 @@ package ui.customComponents;
 
 import controllers.ImagingSessionController;
 import models.ImagingSession;
-import models.LoggerColumns;
+import models.settings.LoggerColumns;
 import models.equipment.Equipment;
 import models.settings.ImagingSessionTableConfig;
 import services.fileHandler.ConfigurationStore;
@@ -79,7 +79,7 @@ public class LogTableScrollPane extends JTable {
         List<LoggerColumns> selectedColumns = imagingSessionTableConfig.getSelectedColumns();
         Object[] columnNames = new Object[selectedColumns.size()];
         for (int i = 0; i < selectedColumns.size(); i++) {
-            columnNames[i] = selectedColumns.get(i);
+            columnNames[i] = selectedColumns.get(i).toString();
         }
 
         System.out.println(imagingSessionTableConfig.getSelectedColumns());

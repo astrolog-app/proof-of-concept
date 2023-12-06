@@ -1,7 +1,5 @@
 package models.settings;
 
-import models.LoggerColumns;
-
 import java.util.HashMap;
 import java.util.List;
 

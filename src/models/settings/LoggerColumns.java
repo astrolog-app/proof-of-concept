@@ -1,4 +1,4 @@
-package models;
+package models.settings;
 
 public enum LoggerColumns {
     DATE,
@@ -21,5 +21,16 @@ public enum LoggerColumns {
     TELESCOPE,
     FLATTENER,
     CAMERA,
-    NOTES
+    NOTES;
+
+    @Override
+    public String toString() {
+        String newEnum = name().toLowerCase();
+
+        if (newEnum.contains("_")) {
+            newEnum = newEnum.replace("_", " ");
+        }
+
+        return newEnum;
+    }
 }

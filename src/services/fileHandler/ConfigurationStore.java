@@ -1,6 +1,6 @@
 package services.fileHandler;
 
-import models.LoggerColumns;
+import models.settings.LoggerColumns;
 import models.settings.AppConfiguration;
 import models.settings.ImagingSessionTableConfig;
 import org.codehaus.jackson.JsonNode;

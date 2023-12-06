@@ -4,7 +4,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import models.settings.AppConfiguration;
 import models.settings.AppTheme;
-import models.LoggerColumns;
+import models.settings.LoggerColumns;
 import models.settings.NavigationBarPlacement;
 import services.fileHandler.ConfigurationStore;
 import ui.MainUI;
