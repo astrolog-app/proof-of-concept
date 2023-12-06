@@ -22,15 +22,4 @@ public enum LoggerColumns {
     FLATTENER,
     CAMERA,
     NOTES;
-
-    @Override
-    public String toString() {
-        String newEnum = name().toLowerCase();
-
-        if (newEnum.contains("_")) {
-            newEnum = newEnum.replace("_", " ");
-        }
-
-        return newEnum;
-    }
 }

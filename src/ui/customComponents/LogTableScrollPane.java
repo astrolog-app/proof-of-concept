@@ -6,6 +6,7 @@ import models.settings.LoggerColumns;
 import models.equipment.Equipment;
 import models.settings.ImagingSessionTableConfig;
 import services.fileHandler.ConfigurationStore;
+import utils.Enums;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -79,7 +80,7 @@ public class LogTableScrollPane extends JTable {
         List<LoggerColumns> selectedColumns = imagingSessionTableConfig.getSelectedColumns();
         Object[] columnNames = new Object[selectedColumns.size()];
         for (int i = 0; i < selectedColumns.size(); i++) {
-            columnNames[i] = selectedColumns.get(i).toString();
+            columnNames[i] = Enums.enumToString(selectedColumns.get(i));
         }
 
         System.out.println(imagingSessionTableConfig.getSelectedColumns());
