@@ -1,10 +1,10 @@
 package ui.customComponents;
 
 import controllers.ImagingSessionController;
-import models.ImagingSession;
+import models.imagingSessions.ImagingSession;
 import models.settings.LoggerColumns;
 import models.equipment.Equipment;
-import models.settings.ImagingSessionTableConfig;
+import models.settings.ImagingSessionConfig;
 import services.fileHandler.ConfigurationStore;
 import utils.Enums;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class LogTableScrollPane extends JTable {
     private final ImagingSessionController imagingSessionController;
     private final Equipment equipment;
-    private final ImagingSessionTableConfig imagingSessionTableConfig = ConfigurationStore.loadImagingSessionTableConfig();
+    private final ImagingSessionConfig imagingSessionConfig = ConfigurationStore.loadImagingSessionTableConfig();
 
     public LogTableScrollPane(ImagingSessionController imagingSessionController, Equipment equipment) {
         this.imagingSessionController = imagingSessionController;
@@ -77,7 +77,7 @@ public class LogTableScrollPane extends JTable {
                 {"02.12.2023", "NGC 7000", "3", "300", "Ts-Optics", "AD", "dahoasdhuashd"},
         };
 
-        List<LoggerColumns> selectedColumns = imagingSessionTableConfig.getSelectedColumns();
+        List<LoggerColumns> selectedColumns = imagingSessionConfig.getSelectedColumns();
         Object[] columnNames = new Object[selectedColumns.size()];
         for (int i = 0; i < selectedColumns.size(); i++) {
             columnNames[i] = Enums.enumToString(selectedColumns.get(i));

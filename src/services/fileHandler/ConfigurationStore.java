@@ -2,7 +2,7 @@ package services.fileHandler;
 
 import models.settings.LoggerColumns;
 import models.settings.AppConfiguration;
-import models.settings.ImagingSessionTableConfig;
+import models.settings.ImagingSessionConfig;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
@@ -25,14 +25,14 @@ public class ConfigurationStore {
         }
     }
 
-    public static ImagingSessionTableConfig loadImagingSessionTableConfig() {
+    public static ImagingSessionConfig loadImagingSessionTableConfig() {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
             JsonNode jsonNode = objectMapper.readTree(new File(Paths.CONFIGURATION_PATH));
             JsonNode imagingSession = jsonNode.path("imagingSessionTableConfiguration");
 
-            return objectMapper.readValue(imagingSession, ImagingSessionTableConfig.class);
+            return objectMapper.readValue(imagingSession, ImagingSessionConfig.class);
         } catch (IOException e) {
             return null;
         }

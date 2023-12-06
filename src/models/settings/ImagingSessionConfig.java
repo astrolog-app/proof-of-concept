@@ -3,7 +3,7 @@ package models.settings;
 import java.util.HashMap;
 import java.util.List;
 
-public class ImagingSessionTableConfig {
+public class ImagingSessionConfig {
     private List<LoggerColumns> selectedColumns;
     private HashMap<LoggerColumns, Integer> columnsSize;
 

@@ -20,14 +20,17 @@
       "NOTES": null
     },
     "dark": {
+      "DATE": "01.12.2023",
       "TOTAL_SUBS": 20,
       "CAMERA_TEMP": -20
     },
     "flat": {
+      "DATE": "01.12.2023",
       "TOTAL_SUBS": 5,
       "SUB_LENGTH": 0.1
     },
     "bias": {
+      "DATE": "01.12.2023",
       "TOTAL_SUBS": 5,
       "SUB_LENGTH": 0.001
     }
@@ -53,14 +56,17 @@
       "NOTES": null
     },
     "dark": {
+      "DATE": "01.12.2023",
       "TOTAL_SUBS": 20,
       "CAMERA_TEMP": -20
     },
     "flat": {
+      "DATE": "01.12.2023",
       "TOTAL_SUBS": 5,
       "SUB_LENGTH": 0.1
     },
     "bias": {
+      "DATE": "01.12.2023",
       "TOTAL_SUBS": 5,
       "SUB_LENGTH": 0.001
     }
