@@ -2,6 +2,7 @@ package services.fileHandler;
 
 import models.LoggerColumns;
 import models.settings.AppConfiguration;
+import models.settings.ImagingSessionTableConfig;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
@@ -19,10 +20,13 @@ public class ConfigurationStore {
         try {
             JsonNode jsonNode = objectMapper.readTree(new File(Paths.CONFIGURATION_PATH));
             JsonNode application = jsonNode.path("application");
+            JsonNode imagingSession = jsonNode.path("imagingSessionTableConfiguration");
 
             AppConfiguration appConfiguration = objectMapper.readValue(application, AppConfiguration.class);
+            ImagingSessionTableConfig imagingSessionTableConfig = objectMapper.readValue(imagingSession, ImagingSessionTableConfig.class);
 
             System.out.println(appConfiguration.getTheme().toString());
+            System.out.println(imagingSessionTableConfig.getSelectedColumns());
         } catch (IOException e) {
             e.printStackTrace();
         }

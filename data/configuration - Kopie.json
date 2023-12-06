@@ -7,7 +7,7 @@
         "enableRegularBackups": true
     },
     "imagingSessionTableConfiguration": {
-        "selected_columns": [
+        "selectedColumns": [
             "DATE",
             "TARGET",
             "SUB_LENGTH",
