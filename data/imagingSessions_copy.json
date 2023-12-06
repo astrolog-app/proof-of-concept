@@ -1,68 +1,110 @@
 [
   {
-    "light": {
-      "DATE": "01.12.2023",
-      "TARGET": "NGC 7000",
-      "SUB_LENGTH": 300,
-      "TOTAL_SUBS": 10,
-      "INTEGRATED_SUBS": 8,
-      "FILTER": "Optolong l-eNhance",
-      "GAIN": 800,
-      "OFFSET": null,
-      "CAMERA_TEMP": null,
-      "OUTSIDE_TEMP": 12,
-      "AVERAGE_SEEING": 3.5,
-      "AVERAGE_CLOUD_COVER": 0.33,
-      "AVERAGE_MOON": 0.77,
-      "TELESCOPE": "Sky-Watcher Esprit 100ED",
-      "FLATTENER": null,
-      "CAMERA": "Nikon D5500a",
-      "NOTES": null
+    "lightFrame": {
+      "date": "01.12.2023",
+      "target": "NGC 7000",
+      "subLength": 300,
+      "totalSubs": 10,
+      "integratedSubs": 8,
+      "filter": "Optolong l-eNhance",
+      "gain": 800,
+      "offset": null,
+      "cameraTemp": null,
+      "outsideTemp": 12,
+      "averageSeeing": 3.5,
+      "averageCloudCover": 0.33,
+      "averageMoon": 0.77,
+      "telescope": "Sky-Watcher Esprit 100ED",
+      "flattener": null,
+      "camera": "Nikon D5500a",
+      "notes": null
     },
-    "dark": {
-      "TOTAL_SUBS": 20,
-      "CAMERA_TEMP": -20
+    "darkFrame": {
+      "date": "01.12.2023",
+      "totalSubs": 20,
+      "cameraTemp": -20
     },
-    "flat": {
-      "TOTAL_SUBS": 5,
-      "SUB_LENGTH": 0.1
+    "flatFrame": {
+      "date": "01.12.2023",
+      "totalSubs": 5,
+      "subLength": 0.1
     },
-    "bias": {
-      "TOTAL_SUBS": 5,
-      "SUB_LENGTH": 0.001
+    "biasFrame": {
+      "date": "01.12.2023",
+      "totalSubs": 5,
+      "subLength": 0.001
     }
   },
   {
-    "light": {
-      "DATE": "03.12.2023",
-      "TARGET": "M 32",
-      "SUB_LENGTH": 180,
-      "TOTAL_SUBS": 16,
-      "INTEGRATED_SUBS": 15,
-      "FILTER": "Optolong l-eNhance",
-      "GAIN": 400,
-      "OFFSET": null,
-      "CAMERA_TEMP": null,
-      "OUTSIDE_TEMP": 5,
-      "AVERAGE_SEEING": 2.7,
-      "AVERAGE_CLOUD_COVER": 0.21,
-      "AVERAGE_MOON": 0.35,
-      "TELESCOPE": "Sky-Watcher Esprit 100ED",
-      "FLATTENER": null,
-      "CAMERA": "Nikon D5500a",
-      "NOTES": null
+    "lightFrame": {
+      "date": "02.12.2023",
+      "target": "M 32",
+      "subLength": 300,
+      "totalSubs": 10,
+      "integratedSubs": 8,
+      "filter": "Optolong l-eNhance",
+      "gain": 800,
+      "offset": null,
+      "cameraTemp": null,
+      "outsideTemp": 12,
+      "averageSeeing": 3.5,
+      "averageCloudCover": 0.33,
+      "averageMoon": 0.77,
+      "telescope": "Sky-Watcher Esprit 100ED",
+      "flattener": null,
+      "camera": "Nikon D5500a",
+      "notes": null
     },
-    "dark": {
-      "TOTAL_SUBS": 20,
-      "CAMERA_TEMP": -20
+    "darkFrame": {
+      "date": "01.12.2023",
+      "totalSubs": 20,
+      "cameraTemp": -20
     },
-    "flat": {
-      "TOTAL_SUBS": 5,
-      "SUB_LENGTH": 0.1
+    "flatFrame": {
+      "date": "01.12.2023",
+      "totalSubs": 5,
+      "subLength": 0.1
     },
-    "bias": {
-      "TOTAL_SUBS": 5,
-      "SUB_LENGTH": 0.001
+    "biasFrame": {
+      "date": "01.12.2023",
+      "totalSubs": 5,
+      "subLength": 0.001
+    }
+  },
+  {
+    "lightFrame": {
+      "date": "04.12.2023",
+      "target": "M 41",
+      "subLength": 300,
+      "totalSubs": 10,
+      "integratedSubs": 8,
+      "filter": "Optolong l-eNhance",
+      "gain": 800,
+      "offset": null,
+      "cameraTemp": null,
+      "outsideTemp": 12,
+      "averageSeeing": 3.5,
+      "averageCloudCover": 0.33,
+      "averageMoon": 0.77,
+      "telescope": "Sky-Watcher Esprit 100ED",
+      "flattener": null,
+      "camera": "Nikon D5500a",
+      "notes": null
+    },
+    "darkFrame": {
+      "date": "01.12.2023",
+      "totalSubs": 20,
+      "cameraTemp": -20
+    },
+    "flatFrame": {
+      "date": "01.12.2023",
+      "totalSubs": 5,
+      "subLength": 0.1
+    },
+    "biasFrame": {
+      "date": "01.12.2023",
+      "totalSubs": 5,
+      "subLength": 0.001
     }
   }
 ]

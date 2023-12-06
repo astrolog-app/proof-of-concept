@@ -3,7 +3,7 @@ package models.imagingSessions;
 public class ImagingSession {
     private LightFrame lightFrame;
     private DarkFrame darkFrame;
-    private FlatFrame frame;
+    private FlatFrame flatFrame;
     private BiasFrame biasFrame;
 
     public LightFrame getLightFrame() {
@@ -20,11 +20,11 @@ public class ImagingSession {
         this.darkFrame = darkFrame;
     }
 
-    public FlatFrame getFrame() {
-        return frame;
+    public FlatFrame getFlatFrame() {
+        return flatFrame;
     }
-    public void setFrame(FlatFrame frame) {
-        this.frame = frame;
+    public void setFlatFrame(FlatFrame flatFrame) {
+        this.flatFrame = flatFrame;
     }
 
     public BiasFrame getBiasFrame() {
