@@ -83,8 +83,6 @@ public class LogTableScrollPane extends JTable {
             columnNames[i] = Enums.enumToString(selectedColumns.get(i));
         }
 
-        System.out.println(imagingSessionTableConfig.getSelectedColumns());
-
         createTable(data, columnNames);
 
         addMouseListener(new MouseAdapter() {
