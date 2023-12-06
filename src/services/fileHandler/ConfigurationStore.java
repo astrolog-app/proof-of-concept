@@ -12,23 +12,29 @@ import java.io.*;
 import java.util.*;
 
 public class ConfigurationStore {
-    static ObjectMapper objectMapper = new ObjectMapper();
-
-    public static void load(AppConfiguration appConfig) {
+    public static AppConfiguration loadAppConfig() {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
             JsonNode jsonNode = objectMapper.readTree(new File(Paths.CONFIGURATION_PATH));
             JsonNode application = jsonNode.path("application");
+
+            return objectMapper.readValue(application, AppConfiguration.class);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public static ImagingSessionTableConfig loadImagingSessionTableConfig() {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            JsonNode jsonNode = objectMapper.readTree(new File(Paths.CONFIGURATION_PATH));
             JsonNode imagingSession = jsonNode.path("imagingSessionTableConfiguration");
 
-            AppConfiguration appConfiguration = objectMapper.readValue(application, AppConfiguration.class);
-            ImagingSessionTableConfig imagingSessionTableConfig = objectMapper.readValue(imagingSession, ImagingSessionTableConfig.class);
-
-            System.out.println(appConfiguration.getTheme().toString());
-            System.out.println(imagingSessionTableConfig.getSelectedColumns());
+            return objectMapper.readValue(imagingSession, ImagingSessionTableConfig.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            return null;
         }
     }
 

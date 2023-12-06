@@ -13,11 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppActions {
-    private final AppConfiguration appConfig = new AppConfiguration();
+    private final AppConfiguration appConfig = ConfigurationStore.loadAppConfig();
 
     public void initialize() {
+        assert appConfig != null;
+
         try {
-            ConfigurationStore.load(appConfig);
             setApplicationTheme();
             new MainUI(appConfig);
         } catch (Exception e) {
@@ -53,6 +54,8 @@ public class AppActions {
     }
 
     private void setApplicationTheme() throws Exception {
+        assert appConfig != null;
+
         if (appConfig.getTheme() == AppTheme.DARK) {
             FlatDarkLaf.setup();
         } else if (appConfig.getTheme() == AppTheme.LIGHT){
