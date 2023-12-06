@@ -22,6 +22,7 @@ public class AppActions {
             setApplicationTheme();
             new MainUI(appConfig);
         } catch (Exception e) {
+            e.printStackTrace();
             appConfig.setTheme(AppTheme.LIGHT);
             appConfig.setFolderPath("path");
             List<LoggerColumns> list = new ArrayList<>();
