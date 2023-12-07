@@ -59,7 +59,7 @@ public class LogPanel {
 
         enableRegularBackupsCheckBox.addActionListener(e -> {
             appConfig.setEnableRegularBackups(enableRegularBackupsCheckBox.isSelected());
-            ConfigurationStore.save(appConfig, null);
+            //ConfigurationStore.save(appConfig, null);
         });
     }
 

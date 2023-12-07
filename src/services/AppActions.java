@@ -33,7 +33,7 @@ public class AppActions {
             appConfig.setEnableRegularBackups(true);
             appConfig.setStartInFullscreen(false);
 
-            ConfigurationStore.save( appConfig, null);
+            //ConfigurationStore.save( appConfig, null);
             AppActions.restart();
 
             //new WelcomePanel();

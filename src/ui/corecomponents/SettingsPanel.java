@@ -63,7 +63,7 @@ public class SettingsPanel {
             setSaveButtonState();
             setRestartButtonState();
 
-            ConfigurationStore.save(appConfig, null);
+            //ConfigurationStore.save(appConfig, null);
         });
     }
 
