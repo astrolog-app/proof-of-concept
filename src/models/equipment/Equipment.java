@@ -1,16 +1,14 @@
 package models.equipment;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 public class Equipment {
-    private HashSet<Telescope> telescopes = new HashSet<>();
-    private HashSet<Camera> cameras = new HashSet<>();
-    private HashSet<Mount> mounts = new HashSet<>();
-    private HashSet<Filter> filters = new HashSet<>();
-    private HashSet<Flattener> flatteners = new HashSet<>();
-    private HashSet<Accessoire> accessoires = new HashSet<>();
+    private final HashSet<Telescope> telescopes = new HashSet<>();
+    private final HashSet<Camera> cameras = new HashSet<>();
+    private final HashSet<Mount> mounts = new HashSet<>();
+    private final HashSet<Filter> filters = new HashSet<>();
+    private final HashSet<Flattener> flatteners = new HashSet<>();
+    private final HashSet<Accessoire> accessoires = new HashSet<>();
 
     public HashSet<Telescope> getTelescopes() {
         return telescopes;
@@ -72,14 +70,26 @@ public class Equipment {
         accessoires.remove(accessoire);
     }
 
-    public List<String> getAllBrands() {
-        List<String> brands = new ArrayList<>();
+    public HashSet<String> getAllBrands() {
+        HashSet<String> brands = new HashSet<>();
 
         for (Telescope t : telescopes) {
             brands.add(t.getBrand());
         }
         for (Camera c : cameras) {
             brands.add(c.getBrand());
+        }
+        for (Mount m : mounts) {
+            brands.add(m.getBrand());
+        }
+        for (Filter fi : filters) {
+            brands.add(fi.getBrand());
+        }
+        for (Flattener fl : flatteners) {
+            brands.add(fl.getBrand());
+        }
+        for (Accessoire a : accessoires) {
+            brands.add(a.getBrand());
         }
 
         return brands;
