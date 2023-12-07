@@ -30,7 +30,7 @@ public class ConfigurationStore {
 
         try {
             JsonNode jsonNode = objectMapper.readTree(new File(Paths.CONFIGURATION_PATH));
-            JsonNode imagingSession = jsonNode.path("imagingSessionTableConfiguration");
+            JsonNode imagingSession = jsonNode.path("imagingSessionConfiguration");
 
             return objectMapper.readValue(imagingSession, ImagingSessionConfig.class);
         } catch (IOException e) {

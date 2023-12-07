@@ -6,7 +6,7 @@
     "folderPath": "path",
     "enableRegularBackups": true
   },
-  "imagingSessionTableConfiguration": {
+  "imagingSessionConfiguration": {
     "selectedColumns": [
       "DATE",
       "TARGET",
@@ -48,6 +48,8 @@
       "FLATTENER": 150,
       "CAMERA": 150,
       "NOTES": 150
-    }
+    },
+    "defaultSortedColumn": "DATE",
+    "columnSortingType": "DESCENDING"
   }
 }
