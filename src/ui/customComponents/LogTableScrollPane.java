@@ -11,6 +11,8 @@ import utils.Enums;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -37,6 +39,11 @@ public class LogTableScrollPane extends JTable {
         }
 
         createTable(data, columnNames);
+
+        setAutoCreateRowSorter(true);
+        TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>) getRowSorter();
+        sorter.setSortKeys(java.util.List.of(new RowSorter.SortKey(0, SortOrder.DESCENDING)));
+        setRowSorter(sorter);
 
         addMouseListener(new MouseAdapter() {
             @Override
