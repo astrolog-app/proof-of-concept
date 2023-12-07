@@ -1,37 +1,18 @@
 package models.equipment;
 
-public class Camera implements EquipmentItem {
-    private String name;
-    private String brand;
+public class Camera extends EquipmentItem {
     private String chipSize;
     private int megaPixel;
     private boolean rgb;
 
+    public Camera() {}
 
     public Camera(String name, String brand, String chipSize, int megaPixel, boolean rgb) {
-        this.name = name;
-        this.brand = brand;
+        super.setName(name);
+        super.setBrand(brand);
         this.chipSize = chipSize;
         this.megaPixel = megaPixel;
         this.rgb = rgb;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String getBrand() {
-        return brand;
-    }
-    @Override
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     public String getChipSize() {

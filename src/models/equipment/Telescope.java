@@ -1,34 +1,16 @@
 package models.equipment;
 
-public class Telescope implements EquipmentItem {
-    private String name;
-    private String brand;
+public class Telescope extends EquipmentItem {
     private int focalLength;
     private int aperture;
 
+    public Telescope() {}
+
     public Telescope(String name, String brand, int focalLength, int aperture) {
-        this.name = name;
-        this.brand = brand;
+        super.setName(name);
+        super.setBrand(brand);
         this.focalLength = focalLength;
         this.aperture = aperture;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String getBrand() {
-        return brand;
-    }
-    @Override
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     public int getFocalLength() {

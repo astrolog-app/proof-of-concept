@@ -2,10 +2,11 @@ package services.fileHandler;
 
 import models.equipment.Equipment;
 import models.equipment.Telescope;
+import models.settings.AppConfiguration;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import utils.Paths;
 
 import java.io.*;
@@ -16,29 +17,14 @@ import java.util.Objects;
 
 public class EquipmentStore {
 
-    public static void load(Equipment equipment) {
+    public static Equipment load() {
+        ObjectMapper objectMapper = new ObjectMapper();
+
         try {
-            JSONParser parser = new JSONParser();
-            Reader reader = new FileReader(Paths.EQUIPMENT_PATH);
-
-            Object jsonObj = parser.parse(reader);
-
-            JSONObject jsonObject = (JSONObject) jsonObj;
-
-            List<Telescope> telescopes = readTelescopes(jsonObject);
-
-            reader.close();
-
-           equipment.addTelescopes(telescopes);
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: Config File not found:");
-            System.out.println(e.getMessage());
+            return objectMapper.readValue(new File(Paths.EQUIPMENT_PATH), Equipment.class);
         } catch (IOException e) {
-            System.out.println("IO Exception:");
-            System.out.println(e.getMessage());
-        } catch (ParseException e) {
-            System.out.println("Error while parsing JSON:");
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -67,22 +53,5 @@ public class EquipmentStore {
         } catch (IOException e) {
             System.out.println("Error writing Json file.");
         }
-    }
-
-    private static List<Telescope> readTelescopes(JSONObject jsonObject) {
-        List<Telescope> telescopes = new ArrayList<>();
-        JSONArray telescopesJson = (JSONArray) jsonObject.get("telescopes");
-        Iterator<JSONObject> telescopeIterator = telescopesJson.iterator();
-        while (telescopeIterator.hasNext()) {
-            JSONObject telescopeObj = (JSONObject) telescopeIterator.next();
-            String name = (String) telescopeObj.get("name");
-            String brand = (String) telescopeObj.get("brand");
-            Long focalLength = (Long) telescopeObj.get("focal_length");
-            Long aperture = (Long) telescopeObj.get("aperture");
-            Telescope telescope = new Telescope(name, brand, focalLength.intValue(), aperture.intValue());
-            telescopes.add(telescope);
-        }
-
-        return telescopes;
     }
 }
