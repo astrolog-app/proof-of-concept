@@ -2,11 +2,9 @@ package ui;
 
 import models.settings.AppConfiguration;
 import models.equipment.Equipment;
-import ui.corecomponents.EquipmentPanel;
+import services.fileHandler.EquipmentStore;
+import ui.corecomponents.*;
 import utils.Paths;
-import ui.corecomponents.StatisticsPanel;
-import ui.corecomponents.LogPanel;
-import ui.corecomponents.SettingsPanel;
 import utils.Images;
 
 import javax.swing.*;
@@ -14,9 +12,10 @@ import java.awt.*;
 
 public class MainUI extends JFrame {
     public MainUI(AppConfiguration appConfig) {
+        Equipment equipment = EquipmentStore.load();
+
         Image img = Toolkit.getDefaultToolkit().getImage(Paths.IMAGE_PATH + "app_logo.png");
         setIconImage(img);
-        Equipment equipment = new Equipment();
 
         int tabPlacement = JTabbedPane.LEFT;
         switch (appConfig.getNavigationBarPlacement()) {

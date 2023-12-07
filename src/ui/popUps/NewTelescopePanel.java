@@ -2,9 +2,11 @@ package ui.popUps;
 
 import models.equipment.Equipment;
 import models.equipment.Telescope;
-import services.fileHandler.EquipmentStore;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class NewTelescopePanel extends JDialog {
     private JPanel mainPanel;
@@ -16,6 +18,15 @@ public class NewTelescopePanel extends JDialog {
     private JTextField apertureField;
 
     public NewTelescopePanel(Equipment equipment) {
+        List<String> brandList = new ArrayList<>(equipment.getAllBrands());
+        Collections.sort(brandList);
+
+        brandField.addItem("Select Brand");
+        brandField.addItem("Add New");
+        for (String brand : brandList) {
+            brandField.addItem(brand);
+        }
+
         saveButton.setEnabled(false);
 
         saveButton.addActionListener(e -> {
