@@ -17,18 +17,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 import java.util.List;
 
 public class LogTableScrollPane extends JTable {
     private final ImagingSessionController imagingSessionController;
     private final Equipment equipment;
-    private final ImagingSessionConfig imagingSessionConfig = ConfigurationStore.loadImagingSessionTableConfig();
 
     public LogTableScrollPane(ImagingSessionController imagingSessionController, Equipment equipment) {
         this.imagingSessionController = imagingSessionController;
         this.equipment = equipment;
 
+        ImagingSessionConfig imagingSessionConfig = ConfigurationStore.loadImagingSessionTableConfig();
         List<LoggerColumns> selectedColumns = imagingSessionConfig.getSelectedColumns();
+        HashMap<LoggerColumns, Integer> selectedColumnsMap = new HashMap<>();
+        for (int i = 0; i < selectedColumns.size(); i++) {
+            selectedColumnsMap.put(selectedColumns.get(i), i);
+        }
 
         TableData tableData = new TableData();
         Object[][] data = tableData.generateTableData(selectedColumns);
@@ -40,9 +45,21 @@ public class LogTableScrollPane extends JTable {
 
         createTable(data, columnNames);
 
+        ImagingSessionConfig isConfig = ConfigurationStore.loadImagingSessionTableConfig();
+        LoggerColumns defaultSortedColumns;
+        SortOrder columnSortingType;
+        if (isConfig != null) {
+            defaultSortedColumns = isConfig.getDefaultSortedColumn();
+            columnSortingType = isConfig.getColumnSortingType();
+        } else  {
+            defaultSortedColumns = LoggerColumns.DATE;
+            columnSortingType = SortOrder.DESCENDING;
+        }
+        int defaultSortedColumnInt = selectedColumnsMap.get(defaultSortedColumns);
+
         setAutoCreateRowSorter(true);
         TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>) getRowSorter();
-        sorter.setSortKeys(java.util.List.of(new RowSorter.SortKey(0, SortOrder.DESCENDING)));
+        sorter.setSortKeys(java.util.List.of(new RowSorter.SortKey(defaultSortedColumnInt, columnSortingType)));
         setRowSorter(sorter);
 
         addMouseListener(new MouseAdapter() {
