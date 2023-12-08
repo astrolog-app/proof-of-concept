@@ -1,16 +1,11 @@
 package models.settings;
 
-import java.util.HashMap;
-import java.util.List;
-
-public class AppConfiguration {
+public class AppConfig {
     private AppTheme theme;
     private String folderPath;
     private NavigationBarPlacement navigationBarPlacement;
     private boolean enableRegularBackups;
     private boolean startInFullscreen;
-    private List<LoggerColumns> selectedColumns;
-    private HashMap<LoggerColumns, Integer> columnsSize;
 
     public AppTheme getTheme() {
         return theme;
@@ -45,19 +40,5 @@ public class AppConfiguration {
     }
     public void setStartInFullscreen(boolean startInFullscreen) {
         this.startInFullscreen = startInFullscreen;
-    }
-
-    public List<LoggerColumns> getSelectedColumns() {
-        return selectedColumns;
-    }
-    public void setSelectedColumns(List<LoggerColumns> selectedColumns) {
-        this.selectedColumns = selectedColumns;
-    }
-
-    public HashMap<LoggerColumns, Integer> getColumnsSize() {
-        return columnsSize;
-    }
-    public void setColumnsSize(HashMap<LoggerColumns, Integer> columnsSize) {
-        this.columnsSize = columnsSize;
     }
 }

@@ -2,8 +2,7 @@ package ui.corecomponents;
 
 import controllers.ImagingSessionController;
 import models.equipment.Equipment;
-import models.settings.AppConfiguration;
-import services.fileHandler.ConfigurationStore;
+import models.settings.AppConfig;
 import ui.customComponents.LogTableScrollPane;
 import utils.Images;
 
@@ -13,7 +12,7 @@ public class LogPanel {
     ImagingSessionController imagingSessionController;
     Equipment equipment;
 
-    AppConfiguration appConfig;
+    AppConfig appConfig;
     private JPanel panel1;
     private JLabel placeHolder1;
     private JButton fromExistingFolderButton;
@@ -30,7 +29,7 @@ public class LogPanel {
     private JButton imagingSessionSettings;
     private JButton saveBackupConfigButton;
 
-    public LogPanel(AppConfiguration appConfig, Equipment equipment) {
+    public LogPanel(AppConfig appConfig, Equipment equipment) {
         this.appConfig = appConfig;
         this.equipment = equipment;
 

@@ -1,17 +1,16 @@
 package ui.corecomponents;
 
-import models.settings.AppConfiguration;
+import models.settings.AppConfig;
 import models.settings.AppTheme;
 import models.settings.NavigationBarPlacement;
 import services.AppActions;
-import services.fileHandler.ConfigurationStore;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SettingsPanel {
-    private final AppConfiguration appConfig;
+    private final AppConfig appConfig;
 
     private AppTheme momentaryTheme;
     private String momentaryFolderPath;
@@ -35,7 +34,7 @@ public class SettingsPanel {
     private JLabel placeHolder1;
     private JLabel restartMessage;
 
-    public SettingsPanel(AppConfiguration appConfig) {
+    public SettingsPanel(AppConfig appConfig) {
         this.appConfig = appConfig;
         momentaryTheme = appConfig.getTheme();
         momentaryFolderPath = appConfig.getFolderPath();

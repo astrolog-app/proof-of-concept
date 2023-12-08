@@ -1,6 +1,6 @@
 package ui;
 
-import models.settings.AppConfiguration;
+import models.settings.AppConfig;
 import models.equipment.Equipment;
 import services.fileHandler.EquipmentStore;
 import ui.corecomponents.*;
@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainUI extends JFrame {
-    public MainUI(AppConfiguration appConfig) {
+    public MainUI(AppConfig appConfig) {
         Equipment equipment = EquipmentStore.load();
 
         Image img = Toolkit.getDefaultToolkit().getImage(Paths.IMAGE_PATH + "app_logo.png");

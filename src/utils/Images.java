@@ -1,6 +1,6 @@
 package utils;
 
-import models.settings.AppConfiguration;
+import models.settings.AppConfig;
 import models.settings.AppTheme;
 
 import javax.swing.*;
@@ -12,7 +12,7 @@ public class Images {
         return new ImageIcon(scaledImage);
     }
 
-    public static ImageIcon getThemeBasedIcon(AppConfiguration appConfig, String imageName, int x, int y) {
+    public static ImageIcon getThemeBasedIcon(AppConfig appConfig, String imageName, int x, int y) {
         ImageIcon icon;
         ImageIcon originalIconLight = new ImageIcon(Paths.IMAGE_PATH + imageName + "_light.png");
         ImageIcon scaledIconLight = Images.scaleImage(originalIconLight, x, y);

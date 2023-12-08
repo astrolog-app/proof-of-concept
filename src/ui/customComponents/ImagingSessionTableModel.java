@@ -18,7 +18,7 @@ public class ImagingSessionTableModel extends AbstractTableModel {
 
     public ImagingSessionTableModel() {
         sessions = new ArrayList<>();
-        selectedColumns = ConfigurationStore.loadImagingSessionTableConfig().getSelectedColumns();
+        selectedColumns = ConfigurationStore.loadImagingSessionConfig().getSelectedColumns();
 
         columnNames = new String[selectedColumns.size()];
         for (int i = 0; i < selectedColumns.size(); i++) {

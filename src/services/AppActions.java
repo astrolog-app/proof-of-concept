@@ -2,7 +2,7 @@ package services;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import models.settings.AppConfiguration;
+import models.settings.AppConfig;
 import models.settings.AppTheme;
 import models.settings.LoggerColumns;
 import models.settings.NavigationBarPlacement;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppActions {
-    private final AppConfiguration appConfig = ConfigurationStore.loadAppConfig();
+    private final AppConfig appConfig = ConfigurationStore.loadAppConfig();
 
     public void initialize() {
         assert appConfig != null;
@@ -28,7 +28,6 @@ public class AppActions {
             List<LoggerColumns> list = new ArrayList<>();
             list.add(LoggerColumns.DATE);
             list.add(LoggerColumns.TARGET);
-            appConfig.setSelectedColumns(list);
             appConfig.setNavigationBarPlacement(NavigationBarPlacement.LEFT);
             appConfig.setEnableRegularBackups(true);
             appConfig.setStartInFullscreen(false);

@@ -28,7 +28,7 @@ public class LogTableScrollPane extends JTable {
         this.imagingSessionController = imagingSessionController;
         this.equipment = equipment;
 
-        ImagingSessionConfig imagingSessionConfig = ConfigurationStore.loadImagingSessionTableConfig();
+        ImagingSessionConfig imagingSessionConfig = ConfigurationStore.loadImagingSessionConfig();
         List<LoggerColumns> selectedColumns = imagingSessionConfig.getSelectedColumns();
         HashMap<LoggerColumns, Integer> selectedColumnsMap = new HashMap<>();
         for (int i = 0; i < selectedColumns.size(); i++) {
@@ -45,7 +45,7 @@ public class LogTableScrollPane extends JTable {
 
         createTable(data, columnNames);
 
-        ImagingSessionConfig isConfig = ConfigurationStore.loadImagingSessionTableConfig();
+        ImagingSessionConfig isConfig = ConfigurationStore.loadImagingSessionConfig();
         LoggerColumns defaultSortedColumns;
         SortOrder columnSortingType;
         if (isConfig != null) {
