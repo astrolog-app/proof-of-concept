@@ -8,11 +8,17 @@ import models.settings.LoggerColumns;
 import models.settings.NavigationBarPlacement;
 import services.fileHandler.ConfigurationStore;
 import ui.MainUI;
+import utils.Paths;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class AppActions {
+    private final Logger logger = AppLogger.getLogger();
     private final AppConfig appConfig = ConfigurationStore.loadAppConfig();
 
     public void initialize() {
@@ -20,9 +26,14 @@ public class AppActions {
 
         try {
             setApplicationTheme();
+
+            logger.fine("Starting MainUI");
+
             new MainUI(appConfig);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.severe("Couldn't restart application!" + "\t" + e.getMessage());
+            System.out.println(e.getMessage());
+
             appConfig.setTheme(AppTheme.LIGHT);
             appConfig.setFolderPath("path");
             List<LoggerColumns> list = new ArrayList<>();

@@ -9,4 +9,5 @@ public class Paths {
     public static final String EQUIPMENT_PATH = DATA_PATH + "equipment.json";
     public static final String IMAGING_SESSIONS_PATH = DATA_PATH + "imagingSessions.json";
     public static final String IMAGE_PATH = DATA_PATH + "images" + File.separator;
+    public static final String LOG_PATH  = DATA_PATH + "log" + File.separator;
 }
