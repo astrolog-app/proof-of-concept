@@ -20,7 +20,7 @@ public class AppLogger {
     public static void save() {
         Instant instant = Instant.now();
         ZoneId zoneId = ZoneId.of("UTC");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")
                 .withZone(zoneId);
         String formattedDateTime = formatter.format(instant);
 

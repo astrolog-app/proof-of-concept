@@ -24,7 +24,6 @@ public class ConfigurationStore {
             JsonNode application = jsonNode.path("appConfig");
 
             return objectMapper.readValue(application, AppConfig.class);
-            logger.info("Loaded");
         } catch (IOException e) {
             return null;
         }
