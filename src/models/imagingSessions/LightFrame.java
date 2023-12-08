@@ -1,10 +1,8 @@
 package models.imagingSessions;
 
-public class LightFrame {
-    private String date;
+public class LightFrame extends ImagingFrame {
     private String target;
     private double subLength;
-    private double totalSubs;
     private double integratedSubs;
     private String filter;
     private double gain;
@@ -19,11 +17,10 @@ public class LightFrame {
     private String camera;
     private String notes;
 
-    public String getDate() {
-        return date;
-    }
-    public void setDate(String date) {
-        this.date = date;
+    public LightFrame() {}
+
+    public LightFrame(String date, int totalSubs) {
+        super(date, totalSubs);
     }
 
     public String getTarget() {
@@ -38,13 +35,6 @@ public class LightFrame {
     }
     public void setSubLength(double subLength) {
         this.subLength = subLength;
-    }
-
-    public double getTotalSubs() {
-        return totalSubs;
-    }
-    public void setTotalSubs(double totalSubs) {
-        this.totalSubs = totalSubs;
     }
 
     public double getIntegratedSubs() {

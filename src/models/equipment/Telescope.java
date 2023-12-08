@@ -7,8 +7,7 @@ public class Telescope extends EquipmentItem {
     public Telescope() {}
 
     public Telescope(String name, String brand, int focalLength, int aperture) {
-        super.setName(name);
-        super.setBrand(brand);
+        super(brand, name);
         this.focalLength = focalLength;
         this.aperture = aperture;
     }

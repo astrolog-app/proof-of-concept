@@ -6,8 +6,7 @@ public class Filter extends EquipmentItem {
     public Filter() {}
 
     public Filter(String brand, String name) {
-        super.setBrand(brand);
-        super.setName(name);
+        super(brand, name);
     }
 
     public String getBandType() {

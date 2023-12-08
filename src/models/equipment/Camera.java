@@ -8,8 +8,7 @@ public class Camera extends EquipmentItem {
     public Camera() {}
 
     public Camera(String name, String brand, String chipSize, int megaPixel, boolean rgb) {
-        super.setName(name);
-        super.setBrand(brand);
+        super(brand, name);
         this.chipSize = chipSize;
         this.megaPixel = megaPixel;
         this.rgb = rgb;

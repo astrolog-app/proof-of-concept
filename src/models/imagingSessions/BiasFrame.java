@@ -1,22 +1,12 @@
 package models.imagingSessions;
 
-public class BiasFrame {
-    private String date;
-    private double totalSubs;
+public class BiasFrame extends ImagingFrame {
     private double subLength;
 
-    public String getDate() {
-        return date;
-    }
-    public void setDate(String date) {
-        this.date = date;
-    }
+    public BiasFrame() {}
 
-    public double getTotalSubs() {
-        return totalSubs;
-    }
-    public void setTotalSubs(double totalSubs) {
-        this.totalSubs = totalSubs;
+    public BiasFrame(String date, int totalSubs) {
+        super(date, totalSubs);
     }
 
     public double getSubLength() {
