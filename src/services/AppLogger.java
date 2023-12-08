@@ -29,7 +29,7 @@ public class AppLogger {
 
         deleteOldLogFiles();
         try {
-            String logFilePath = Paths.LOG_PATH + formattedDateTime + ".txt";
+            String logFilePath = Paths.LOG_PATH + formattedDateTime + ".log";
             FileHandler fileHandler = new FileHandler(logFilePath);
 
             SimpleFormatter simpleFormatter = new SimpleFormatter();
