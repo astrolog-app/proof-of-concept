@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class AppActions {
-    private final Logger logger = AppLogger.getLogger();
+    private static final Logger logger = AppLogger.getLogger();
     private final AppConfig appConfig = ConfigurationStore.loadAppConfig();
 
     public void initialize() {
@@ -27,7 +27,7 @@ public class AppActions {
         try {
             setApplicationTheme();
 
-            logger.fine("Starting MainUI");
+            logger.info("Starting MainUI");
 
             new MainUI(appConfig);
         } catch (Exception e) {
@@ -58,8 +58,9 @@ public class AppActions {
 
         try {
             builder.start();
+            logger.info("Restarted Application.");
         } catch (Exception e) {
-            System.out.println("Couldn't restart Application!");
+            logger.severe("Couldn't restart Application!");
         }
         System.exit(0);
     }

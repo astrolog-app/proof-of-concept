@@ -6,12 +6,16 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.codehaus.jackson.node.ObjectNode;
+import services.AppLogger;
 import utils.Paths;
 
 import java.io.*;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public class ConfigurationStore {
+    private static final Logger logger = AppLogger.getLogger();
+
     public static AppConfig loadAppConfig() {
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -20,6 +24,7 @@ public class ConfigurationStore {
             JsonNode application = jsonNode.path("appConfig");
 
             return objectMapper.readValue(application, AppConfig.class);
+            logger.info("Loaded");
         } catch (IOException e) {
             return null;
         }

@@ -8,10 +8,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
+import java.util.logging.*;
 
 public class AppLogger {
     private static final Logger logger = Logger.getLogger(AppLogger.class.getName());
@@ -35,7 +32,7 @@ public class AppLogger {
             SimpleFormatter simpleFormatter = new SimpleFormatter();
             fileHandler.setFormatter(simpleFormatter);
 
-            logger.setLevel(Level.FINE);
+            logger.setLevel(Level.INFO);
 
             logger.addHandler(fileHandler);
         } catch (Exception e) {
