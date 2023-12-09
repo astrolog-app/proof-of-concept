@@ -8,6 +8,8 @@ import models.settings.LoggerColumns;
 import models.settings.NavigationBarPlacement;
 import services.fileHandler.ConfigurationStore;
 import ui.MainUI;
+import ui.startUp.StartUpPanel;
+import ui.startUp.welcome.WelcomeDialogue;
 import utils.Paths;
 
 import java.util.ArrayList;
@@ -27,26 +29,15 @@ public class AppActions {
         try {
             setApplicationTheme();
 
-            logger.info("Starting MainUI");
+            logger.info("starting MainUI");
 
             new MainUI(appConfig);
         } catch (Exception e) {
-            logger.severe("Couldn't restart application!" + "\t" + e.getMessage());
-            System.out.println(e.getMessage());
+            logger.warning("couldn't find config file:" + "\t" + e.getMessage());
 
-            appConfig.setTheme(AppTheme.LIGHT);
-            appConfig.setFolderPath("path");
-            List<LoggerColumns> list = new ArrayList<>();
-            list.add(LoggerColumns.DATE);
-            list.add(LoggerColumns.TARGET);
-            appConfig.setNavigationBarPlacement(NavigationBarPlacement.LEFT);
-            appConfig.setEnableRegularBackups(true);
-            appConfig.setStartInFullscreen(false);
-
-            //ConfigurationStore.save( appConfig, null);
-            AppActions.restart();
-
-            //new WelcomePanel();
+            logger.info("starting WelcomeDialogue");
+            FlatLightLaf.setup();
+            new WelcomeDialogue();
         }
     }
 
@@ -58,9 +49,9 @@ public class AppActions {
 
         try {
             builder.start();
-            logger.info("Restarted Application.");
+            logger.info("restarted application");
         } catch (Exception e) {
-            logger.severe("Couldn't restart Application!");
+            logger.severe("couldn't restart application:" + "\t" + e.getMessage());
         }
         System.exit(0);
     }

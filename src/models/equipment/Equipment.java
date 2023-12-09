@@ -1,5 +1,7 @@
 package models.equipment;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.HashSet;
 
 public class Equipment {
@@ -70,6 +72,7 @@ public class Equipment {
         accessoires.remove(accessoire);
     }
 
+    @JsonIgnore
     public HashSet<String> getAllBrands() {
         HashSet<String> brands = new HashSet<>();
 

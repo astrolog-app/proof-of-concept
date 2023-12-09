@@ -23,8 +23,14 @@ public class ConfigurationStore {
             JsonNode jsonNode = objectMapper.readTree(new File(Paths.CONFIGURATION_PATH));
             JsonNode application = jsonNode.path("appConfig");
 
-            return objectMapper.readValue(application, AppConfig.class);
+
+            AppConfig appConfig = objectMapper.readValue(application, AppConfig.class);
+
+            logger.info("loaded AppConfig successfully");
+
+            return appConfig;
         } catch (IOException e) {
+            logger.severe("couldn't load AppConfig:" + "\t" + e.getMessage());
             return null;
         }
     }
@@ -36,8 +42,13 @@ public class ConfigurationStore {
             JsonNode jsonNode = objectMapper.readTree(new File(Paths.CONFIGURATION_PATH));
             JsonNode imagingSession = jsonNode.path("imagingSessionConfig");
 
-            return objectMapper.readValue(imagingSession, ImagingSessionConfig.class);
+            ImagingSessionConfig imagingSessionConfig = objectMapper.readValue(imagingSession, ImagingSessionConfig.class);
+
+            logger.info("loaded ImagingSessionConfig successfully");
+
+            return imagingSessionConfig;
         } catch (IOException e) {
+            logger.severe("couldn't load ImagingSessionConfig:" + "\t" + e.getMessage());
             return null;
         }
     }
@@ -64,8 +75,9 @@ public class ConfigurationStore {
 
         try {
             writer.writeValue(new File(configPath), parentNode);
+            logger.info("saved config file successfully");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.severe("couldn't save Config" + "\t" + e.getMessage());
         }
     }
 }

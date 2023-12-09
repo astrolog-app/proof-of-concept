@@ -9,6 +9,9 @@ public class WelcomeDialogue extends JFrame {
     private JLabel stepLabel;
     private JComboBox comboBox1;
     private JTextField textField1;
+    private JPanel stepOne;
+    private JPanel stepTwo;
+    private JButton button1;
     int stepCount = 1;
 
     public WelcomeDialogue() {
@@ -19,12 +22,15 @@ public class WelcomeDialogue extends JFrame {
         previousButton.addActionListener(e -> {
             checkButtonState(stepCount - 1);
             updateLabel();
+            checkPanelState();
         });
         nextButton.addActionListener(e -> {
             checkButtonState(stepCount + 1);
             updateLabel();
+            checkPanelState();
         });
 
+        checkPanelState();
         checkLicenseFieldState();
         checkButtonState(stepCount);
 
@@ -46,6 +52,19 @@ public class WelcomeDialogue extends JFrame {
     private void updateLabel() {
         String stepText = "Step " + stepCount + " of 4";
         stepLabel.setText(stepText);
+    }
+
+    private void checkPanelState() {
+        setAllPanelInvisible();
+        switch (stepCount) {
+            case 1 -> stepOne.setVisible(true);
+            case 2 -> stepTwo.setVisible(true);
+        }
+    }
+
+    private void setAllPanelInvisible() {
+        stepOne.setVisible(false);
+        stepTwo.setVisible(false);
     }
 
     private void checkLicenseFieldState(){

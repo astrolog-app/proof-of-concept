@@ -36,7 +36,7 @@ public class AppLogger {
 
             logger.addHandler(fileHandler);
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error setting up FileHandler", e);
+            logger.log(Level.SEVERE, "error setting up FileHandler:", e.getMessage());
         }
     }
 
@@ -51,9 +51,9 @@ public class AppLogger {
 
             File oldestFile = files[0];
             if (oldestFile.delete()) {
-                logger.fine("Deleted the oldest file: " + oldestFile.getName());
+                logger.info("deleted oldest log file: " + oldestFile.getName());
             } else {
-                logger.severe("Failed to delete the oldest file: " + oldestFile.getName());
+                logger.severe("failed to delete the oldest file: " + oldestFile.getName());
             }
         }
     }
