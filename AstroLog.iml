@@ -18,5 +18,14 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="fasterxml.jackson.datatype.guava" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/batik-bin-1.17/batik-1.17/lib/batik-all-1.17.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

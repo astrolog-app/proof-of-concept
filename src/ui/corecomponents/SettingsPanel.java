@@ -4,6 +4,7 @@ import models.settings.AppConfig;
 import models.settings.AppTheme;
 import models.settings.NavigationBarPlacement;
 import services.AppActions;
+import services.fileHandler.ConfigurationStore;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -62,7 +63,7 @@ public class SettingsPanel {
             setSaveButtonState();
             setRestartButtonState();
 
-            //ConfigurationStore.save(appConfig, null);
+            ConfigurationStore.save(appConfig, null, null);
         });
     }
 
@@ -78,14 +79,11 @@ public class SettingsPanel {
         chooser.setAcceptAllFileFilterUsed(false);
         chooser.setDialogTitle("Select Folder");
 
-        changeFolderPathButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    momentaryFolderPath = chooser.getSelectedFile().toString();
-                    folderPathField.setText(momentaryFolderPath);
-                    setSaveButtonState();
-                }
+        changeFolderPathButton.addActionListener(e -> {
+            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                momentaryFolderPath = chooser.getSelectedFile().toString();
+                folderPathField.setText(momentaryFolderPath);
+                setSaveButtonState();
             }
         });
     }

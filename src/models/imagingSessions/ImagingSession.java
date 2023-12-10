@@ -1,10 +1,26 @@
 package models.imagingSessions;
 
 public class ImagingSession {
+    private String projectID;
+    private String folderDir;
     private LightFrame lightFrame;
     private DarkFrame darkFrame;
     private FlatFrame flatFrame;
     private BiasFrame biasFrame;
+
+    public String getProjectID() {
+        return projectID;
+    }
+    public void setProjectID(String projectID) {
+        this.projectID = projectID;
+    }
+
+    public String getFolderDir() {
+        return folderDir;
+    }
+    public void setFolderDir(String folderDir) {
+        this.folderDir = folderDir;
+    }
 
     public LightFrame getLightFrame() {
         return lightFrame;

@@ -1,5 +1,7 @@
 [
   {
+    "projectID": null,
+    "folderDir": null,
     "lightFrame": {
       "date": "01.12.2023",
       "target": "NGC 7000",
@@ -36,6 +38,8 @@
     }
   },
   {
+    "projectID": null,
+    "folderDir": null,
     "lightFrame": {
       "date": "02.12.2023",
       "target": "M 32",
@@ -72,6 +76,8 @@
     }
   },
   {
+    "projectID": null,
+    "folderDir": null,
     "lightFrame": {
       "date": "04.12.2023",
       "target": "M 41",
