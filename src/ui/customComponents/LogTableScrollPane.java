@@ -6,11 +6,9 @@ import models.settings.LoggerColumns;
 import models.equipment.Equipment;
 import models.settings.ImagingSessionConfig;
 import services.fileHandler.ConfigurationStore;
-import services.imagingSessions.TableData;
 import utils.Enums;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
@@ -35,15 +33,12 @@ public class LogTableScrollPane extends JTable {
             selectedColumnsMap.put(selectedColumns.get(i), i);
         }
 
-        TableData tableData = new TableData();
-        Object[][] data = tableData.generateTableData(selectedColumns);
-
         Object[] columnNames = new Object[selectedColumns.size()];
         for (int i = 0; i < selectedColumns.size(); i++) {
             columnNames[i] = Enums.enumToString(selectedColumns.get(i));
         }
 
-        createTable(data, columnNames);
+        createTable();
 
         ImagingSessionConfig isConfig = ConfigurationStore.loadImagingSessionConfig();
         LoggerColumns defaultSortedColumns;
@@ -86,19 +81,11 @@ public class LogTableScrollPane extends JTable {
         });
     }
 
-    private void createTable(Object[][] data, Object[] columnNames) {
-        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                // Make all cells non-editable
-                return false;
-            }
-        };
-
+    private void createTable() {
         setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
+        ImagingSessionTableModel model = new ImagingSessionTableModel();
+        setModel(model);
         setRowHeight(45);
-        setModel(tableModel);
         showHorizontalLines = true;
 
         for (int i = 0; i < getColumnCount(); i++) {

@@ -51,9 +51,9 @@ public class AppLogger {
 
             File oldestFile = files[0];
             if (oldestFile.delete()) {
-                logger.info("deleted oldest log file: " + oldestFile.getName());
+                logger.fine("Deleted the oldest file: " + oldestFile.getName());
             } else {
-                logger.severe("failed to delete the oldest file: " + oldestFile.getName());
+                logger.severe("Failed to delete the oldest file: " + oldestFile.getName());
             }
         }
     }
