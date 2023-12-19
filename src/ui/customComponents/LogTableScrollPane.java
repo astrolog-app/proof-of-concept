@@ -26,16 +26,13 @@ public class LogTableScrollPane extends JTable {
         this.imagingSessionController = imagingSessionController;
         this.equipment = equipment;
 
+        setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
         ImagingSessionConfig imagingSessionConfig = ConfigurationStore.loadImagingSessionConfig();
         List<LoggerColumns> selectedColumns = imagingSessionConfig.getSelectedColumns();
         HashMap<LoggerColumns, Integer> selectedColumnsMap = new HashMap<>();
         for (int i = 0; i < selectedColumns.size(); i++) {
             selectedColumnsMap.put(selectedColumns.get(i), i);
-        }
-
-        Object[] columnNames = new Object[selectedColumns.size()];
-        for (int i = 0; i < selectedColumns.size(); i++) {
-            columnNames[i] = Enums.enumToString(selectedColumns.get(i));
         }
 
         createTable();
@@ -117,9 +114,5 @@ public class LogTableScrollPane extends JTable {
         popupMenu.add(menuItem5);
 
         return popupMenu;
-    }
-
-    public ImagingSession getSelectedImagingSession() {
-        return null;
     }
 }
