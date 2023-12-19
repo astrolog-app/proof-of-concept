@@ -48,7 +48,7 @@ public class MainUI extends JFrame {
 
         setVisible(true);
         setTitle("AstroLog Ultimate");
-        setMinimumSize(new Dimension(720, 621));
+        setMinimumSize(new Dimension(650, 500));
         if (appConfig.getStartInFullscreen()) {
             setExtendedState(JFrame.MAXIMIZED_BOTH);
         } else {
