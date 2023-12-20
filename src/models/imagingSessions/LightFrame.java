@@ -2,16 +2,16 @@ package models.imagingSessions;
 
 public class LightFrame extends ImagingFrame {
     private String target;
-    private double subLength;
-    private double integratedSubs;
+    private Double subLength;
+    private Double integratedSubs;
     private String filter;
-    private double gain;
-    private double offset;
-    private double cameraTemp;
-    private double outsideTemp;
-    private double averageSeeing;
-    private double averageCloudCover;
-    private double averageMoon;
+    private Double gain;
+    private Double offset;
+    private Double cameraTemp;
+    private Double outsideTemp;
+    private Double averageSeeing;
+    private Double averageCloudCover;
+    private Double averageMoon;
     private String telescope;
     private String flattener;
     private String camera;
@@ -30,17 +30,17 @@ public class LightFrame extends ImagingFrame {
         this.target = target;
     }
 
-    public double getSubLength() {
+    public Double getSubLength() {
         return subLength;
     }
-    public void setSubLength(double subLength) {
+    public void setSubLength(Double subLength) {
         this.subLength = subLength;
     }
 
-    public double getIntegratedSubs() {
+    public Double getIntegratedSubs() {
         return integratedSubs;
     }
-    public void setIntegratedSubs(double integratedSubs) {
+    public void setIntegratedSubs(Double integratedSubs) {
         this.integratedSubs = integratedSubs;
     }
 
@@ -51,52 +51,52 @@ public class LightFrame extends ImagingFrame {
         this.filter = filter;
     }
 
-    public double getGain() {
+    public Double getGain() {
         return gain;
     }
-    public void setGain(double gain) {
+    public void setGain(Double gain) {
         this.gain = gain;
     }
 
-    public double getOffset() {
+    public Double getOffset() {
         return offset;
     }
-    public void setOffset(double offset) {
+    public void setOffset(Double offset) {
         this.offset = offset;
     }
 
-    public double getCameraTemp() {
+    public Double getCameraTemp() {
         return cameraTemp;
     }
-    public void setCameraTemp(double cameraTemp) {
+    public void setCameraTemp(Double cameraTemp) {
         this.cameraTemp = cameraTemp;
     }
 
-    public double getOutsideTemp() {
+    public Double getOutsideTemp() {
         return outsideTemp;
     }
-    public void setOutsideTemp(double outsideTemp) {
+    public void setOutsideTemp(Double outsideTemp) {
         this.outsideTemp = outsideTemp;
     }
 
-    public double getAverageSeeing() {
+    public Double getAverageSeeing() {
         return averageSeeing;
     }
-    public void setAverageSeeing(double averageSeeing) {
+    public void setAverageSeeing(Double averageSeeing) {
         this.averageSeeing = averageSeeing;
     }
 
-    public double getAverageCloudCover() {
+    public Double getAverageCloudCover() {
         return averageCloudCover;
     }
-    public void setAverageCloudCover(double averageCloudCover) {
+    public void setAverageCloudCover(Double averageCloudCover) {
         this.averageCloudCover = averageCloudCover;
     }
 
-    public double getAverageMoon() {
+    public Double getAverageMoon() {
         return averageMoon;
     }
-    public void setAverageMoon(double averageMoon) {
+    public void setAverageMoon(Double averageMoon) {
         this.averageMoon = averageMoon;
     }
 

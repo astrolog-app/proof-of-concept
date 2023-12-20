@@ -19,13 +19,7 @@ public class EquipmentPanel {
     private JLabel placeHolder1;
 
     public EquipmentPanel(Equipment equipment) {
-
-        newTelescopeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new NewTelescopePanel(equipment);
-            }
-        });
+        newTelescopeButton.addActionListener(e -> new NewTelescopePanel(equipment));
     }
 
     public JPanel getPanel() {

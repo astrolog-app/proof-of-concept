@@ -1,14 +1,13 @@
 package ui.customComponents;
 
 import models.imagingSessions.ImagingSession;
-import models.settings.ImagingSessionConfig;
 import models.settings.LoggerColumns;
 import services.fileHandler.ConfigurationStore;
 import services.fileHandler.ImagingSessionStore;
 import utils.Enums;
 
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,13 +18,13 @@ public class ImagingSessionTableModel extends AbstractTableModel {
     private final List<LoggerColumns> selectedColumns;
     private final Map<Integer, LoggerColumns> columnToEnumMap = new HashMap<>();
 
+
     public ImagingSessionTableModel() {
         data = ImagingSessionStore.loadImagingSessions();
         selectedColumns = ConfigurationStore.loadImagingSessionConfig().getSelectedColumns();
 
         updateRowMapping();
         updateColumnMapping();
-        setColumnsWidth();
     }
 
     public void updateRowMapping() {
@@ -39,19 +38,6 @@ public class ImagingSessionTableModel extends AbstractTableModel {
         columnToEnumMap.clear();
         for (int i = 0; i < selectedColumns.size(); i++) {
             columnToEnumMap.put(i, selectedColumns.get(i));
-        }
-    }
-
-    private void setColumnsWidth() {
-        ImagingSessionConfig isConfig = ConfigurationStore.loadImagingSessionConfig();
-        LoggerColumns defaultSortedColumns;
-        SortOrder columnSortingType;
-        if (isConfig != null) {
-            defaultSortedColumns = isConfig.getDefaultSortedColumn();
-            columnSortingType = isConfig.getColumnSortingType();
-        } else  {
-            defaultSortedColumns = LoggerColumns.DATE;
-            columnSortingType = SortOrder.DESCENDING;
         }
     }
 
@@ -91,19 +77,19 @@ public class ImagingSessionTableModel extends AbstractTableModel {
             return switch (lc) {
                 case DATE -> is.getLightFrame().getDate();
                 case TARGET -> is.getLightFrame().getTarget();
-                case SUB_LENGTH -> is.getLightFrame().getSubLength();
+                case SUB_LENGTH -> formatDouble(is.getLightFrame().getSubLength());
                 case TOTAL_SUBS -> is.getLightFrame().getTotalSubs();
-                case TOTAL_EXPOSURE -> is.getLightFrame().getTotalSubs() * is.getLightFrame().getSubLength();
-                case INTEGRATED_SUBS -> is.getLightFrame().getIntegratedSubs();
-                case INTEGRATED_EXPOSURE -> is.getLightFrame().getIntegratedSubs() * is.getLightFrame().getSubLength();
+                case TOTAL_EXPOSURE -> formatDouble(is.getLightFrame().getTotalSubs() * is.getLightFrame().getSubLength());
+                case INTEGRATED_SUBS -> formatDouble(is.getLightFrame().getIntegratedSubs());
+                case INTEGRATED_EXPOSURE -> formatDouble(is.getLightFrame().getIntegratedSubs() * is.getLightFrame().getSubLength());
                 case FILTER -> is.getLightFrame().getFilter();
-                case GAIN -> is.getLightFrame().getGain();
-                case OFFSET -> is.getLightFrame().getOffset();
-                case CAMERA_TEMP -> is.getLightFrame().getCameraTemp();
-                case OUTSIDE_TEMP -> is.getLightFrame().getOutsideTemp();
-                case AVERAGE_SEEING -> is.getLightFrame().getAverageSeeing();
-                case AVERAGE_CLOUD_COVER -> is.getLightFrame().getAverageCloudCover();
-                case AVERAGE_MOON -> is.getLightFrame().getAverageMoon();
+                case GAIN -> formatDouble(is.getLightFrame().getGain());
+                case OFFSET -> formatDouble(is.getLightFrame().getOffset());
+                case CAMERA_TEMP -> formatDouble(is.getLightFrame().getCameraTemp());
+                case OUTSIDE_TEMP -> formatDouble(is.getLightFrame().getOutsideTemp());
+                case AVERAGE_SEEING -> formatDouble(is.getLightFrame().getAverageSeeing());
+                case AVERAGE_CLOUD_COVER -> formatDouble(is.getLightFrame().getAverageCloudCover());
+                case AVERAGE_MOON -> formatDouble(is.getLightFrame().getAverageMoon());
                 case TELESCOPE -> is.getLightFrame().getTelescope();
                 case FLATTENER -> is.getLightFrame().getFlattener();
                 case CAMERA -> is.getLightFrame().getCamera();
@@ -111,12 +97,38 @@ public class ImagingSessionTableModel extends AbstractTableModel {
             };
         } else {
             return null;
-            // define content if imaging session are null
+            // TODO: define content if imaging session are null
+        }
+    }
+
+    private String formatDouble(Double d) {
+        DecimalFormat format = new DecimalFormat("0.#");
+
+        if (d != null) {
+            String formattedValue = format.format(d);
+
+            formattedValue = formattedValue.replaceAll("\\.0*$", "");
+
+            return formattedValue;
+        } else {
+            return "N/A";
         }
     }
 
     public ImagingSession getSession(int rowIndex) {
+        if (rowIndex == -1)
+            return null;
         return data.get(rowIndex);
+    }
+
+    public int getColumnAt(LoggerColumns lc) {
+        for (int i : columnToEnumMap.keySet()) {
+            if (columnToEnumMap.get(i) == lc) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     public List<LoggerColumns> getSelectedColumns() {

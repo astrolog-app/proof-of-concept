@@ -3,6 +3,7 @@ package ui.corecomponents;
 import controllers.ImagingSessionController;
 import models.equipment.Equipment;
 import models.settings.AppConfig;
+import services.fileHandler.ConfigurationStore;
 import ui.customComponents.LogTableScrollPane;
 import utils.Images;
 
@@ -33,6 +34,8 @@ public class LogPanel {
         this.appConfig = appConfig;
         this.equipment = equipment;
 
+        updateTableButtonState();
+
         ImageIcon binIcon = Images.getThemeBasedIcon(appConfig, "bin", 18, 18);
         deleteButton.setIcon(binIcon);
         deleteButton.setText("");
@@ -58,13 +61,20 @@ public class LogPanel {
 
         enableRegularBackupsCheckBox.addActionListener(e -> {
             appConfig.setEnableRegularBackups(enableRegularBackupsCheckBox.isSelected());
-            //ConfigurationStore.save(appConfig, null);
+            ConfigurationStore.save(appConfig, null,null);
         });
     }
 
     private void createUIComponents() {
         this.imagingSessionController = new ImagingSessionController();
-        logTableScrollPane1 = new LogTableScrollPane(imagingSessionController, equipment);
+        logTableScrollPane1 = new LogTableScrollPane(imagingSessionController, equipment, this);
+    }
+
+    public void updateTableButtonState() {
+        boolean b = logTableScrollPane1.getTableModel().getSession(logTableScrollPane1.getSelectedRow()) != null;
+        detailsButton.setEnabled(b);
+        editButton.setEnabled(b);
+        deleteButton.setEnabled(b);
     }
 
     public JPanel getPanel() {

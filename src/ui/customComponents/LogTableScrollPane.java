@@ -1,43 +1,72 @@
 package ui.customComponents;
 
 import controllers.ImagingSessionController;
-import models.imagingSessions.ImagingSession;
 import models.settings.LoggerColumns;
 import models.equipment.Equipment;
 import models.settings.ImagingSessionConfig;
 import services.fileHandler.ConfigurationStore;
-import utils.Enums;
+import ui.corecomponents.LogPanel;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
 public class LogTableScrollPane extends JTable {
+    private final ImagingSessionConfig isConfig;
     private final ImagingSessionController imagingSessionController;
     private final Equipment equipment;
+    private final LogPanel logPanel;
+    private final ImagingSessionTableModel tableModel;
+    private TableRowSorter<TableModel> sorter;
 
-    public LogTableScrollPane(ImagingSessionController imagingSessionController, Equipment equipment) {
+    public LogTableScrollPane(ImagingSessionController imagingSessionController, Equipment equipment, LogPanel logPanel) {
+        isConfig = ConfigurationStore.loadImagingSessionConfig();
         this.imagingSessionController = imagingSessionController;
+        this.logPanel = logPanel;
         this.equipment = equipment;
-
-        setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        ImagingSessionConfig imagingSessionConfig = ConfigurationStore.loadImagingSessionConfig();
-        List<LoggerColumns> selectedColumns = imagingSessionConfig.getSelectedColumns();
-        HashMap<LoggerColumns, Integer> selectedColumnsMap = new HashMap<>();
-        for (int i = 0; i < selectedColumns.size(); i++) {
-            selectedColumnsMap.put(selectedColumns.get(i), i);
-        }
+        this.tableModel = new ImagingSessionTableModel();
 
         createTable();
+        setColumnsWidth();
+        sortRows();
+        handleActions();
+    }
 
-        ImagingSessionConfig isConfig = ConfigurationStore.loadImagingSessionConfig();
+    private void createTable() {
+        setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        setModel(tableModel);
+
+        TableColumnModel columnModel = getColumnModel();
+        columnModel.addColumnModelListener(new ImagingSessionColumnModelListener());
+
+        setRowHeight(45);
+        showHorizontalLines = true;
+    }
+
+    private void setColumnsWidth() {
+        for (LoggerColumns lc : tableModel.getSelectedColumns()) {
+            Integer width = isConfig.getColumnsSize().get(lc);
+
+            if (width == null) {
+                width = 150;
+            }
+
+            getColumnModel().getColumn(tableModel.getColumnAt(lc)).setPreferredWidth(width);
+        }
+    }
+
+    private void sortRows() {
         LoggerColumns defaultSortedColumns;
         SortOrder columnSortingType;
         if (isConfig != null) {
@@ -47,12 +76,42 @@ public class LogTableScrollPane extends JTable {
             defaultSortedColumns = LoggerColumns.DATE;
             columnSortingType = SortOrder.DESCENDING;
         }
-        int defaultSortedColumnInt = selectedColumnsMap.get(defaultSortedColumns);
+        int defaultSortedColumnInt = tableModel.getColumnAt(defaultSortedColumns);
 
         setAutoCreateRowSorter(true);
-        TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>) getRowSorter();
-        sorter.setSortKeys(java.util.List.of(new RowSorter.SortKey(defaultSortedColumnInt, columnSortingType)));
+        sorter = (TableRowSorter<TableModel>) getRowSorter();
+        updateSortComparators();
+        sorter.setSortKeys(List.of(new RowSorter.SortKey(defaultSortedColumnInt, columnSortingType)));
         setRowSorter(sorter);
+    }
+
+    private void updateSortComparators() {
+        int column = 0;
+
+        for (LoggerColumns lc : tableModel.getSelectedColumns()) {
+            switch (lc) {
+                case SUB_LENGTH,
+                        TOTAL_EXPOSURE,
+                        INTEGRATED_SUBS,
+                        INTEGRATED_EXPOSURE,
+                        GAIN,
+                        OFFSET,
+                        CAMERA_TEMP,
+                        OUTSIDE_TEMP,
+                        AVERAGE_SEEING,
+                        AVERAGE_CLOUD_COVER,
+                        AVERAGE_MOON-> sorter.setComparator(column, Comparator.comparing(o -> Double.parseDouble(o.toString())));
+            }
+
+            column++;
+        }
+        setRowSorter(sorter);
+    }
+
+    private void handleActions() {
+        getSelectionModel().addListSelectionListener(e -> {
+            logPanel.updateTableButtonState();
+        });
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -61,8 +120,6 @@ public class LogTableScrollPane extends JTable {
                     int selectedRow = getSelectedRow();
                     if (selectedRow != -1) {
                         imagingSessionController.showImagingSessionDetails();
-//                        JOptionPane.showMessageDialog(null, "Double-clicked on row: " +
-//                                tableModel.getValueAt(selectedRow, 0));
                     }
                 }
             }
@@ -78,19 +135,8 @@ public class LogTableScrollPane extends JTable {
         });
     }
 
-    private void createTable() {
-        setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        ImagingSessionTableModel model = new ImagingSessionTableModel();
-        setModel(model);
-        setRowHeight(45);
-        showHorizontalLines = true;
-
-        for (int i = 0; i < getColumnCount(); i++) {
-            getColumnModel().getColumn(i).setPreferredWidth(125);
-        }
-    }
-
     private JPopupMenu createPopupMenu() {
+        boolean enableAll = tableModel.getSession(getSelectedRow()) != null;
         JPopupMenu popupMenu = new JPopupMenu();
 
         JMenuItem menuItem1 = new JMenuItem("Add From Existing Folder");
@@ -103,16 +149,23 @@ public class LogTableScrollPane extends JTable {
 
         JMenuItem menuItem3  = new JMenuItem("Show Details");
         menuItem3.addActionListener((ActionEvent e) -> imagingSessionController.showImagingSessionDetails());
+        menuItem3.setEnabled(enableAll);
         popupMenu.add(menuItem3);
 
         JMenuItem menuItem4 = new JMenuItem("Edit");
         menuItem4.addActionListener((ActionEvent e) -> imagingSessionController.editImagingSession());
+        menuItem4.setEnabled(enableAll);
         popupMenu.add(menuItem4);
 
         JMenuItem menuItem5 = new JMenuItem("Delete");
         menuItem5.addActionListener((ActionEvent e) -> imagingSessionController.removeImagingSession());
+        menuItem5.setEnabled(enableAll);
         popupMenu.add(menuItem5);
 
         return popupMenu;
+    }
+
+    public ImagingSessionTableModel getTableModel() {
+        return tableModel;
     }
 }
