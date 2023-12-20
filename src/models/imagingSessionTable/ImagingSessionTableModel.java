@@ -1,4 +1,4 @@
-package ui.customComponents;
+package models.imagingSessionTable;
 
 import models.imagingSessions.ImagingSession;
 import models.settings.LoggerColumns;

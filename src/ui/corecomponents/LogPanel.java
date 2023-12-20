@@ -4,7 +4,7 @@ import controllers.ImagingSessionController;
 import models.equipment.Equipment;
 import models.settings.AppConfig;
 import services.fileHandler.ConfigurationStore;
-import ui.customComponents.LogTableScrollPane;
+import ui.customComponents.ImagingSessionTable;
 import utils.Images;
 
 import javax.swing.*;
@@ -21,7 +21,7 @@ public class LogPanel {
     private JButton createLocalBackupButton;
     private JCheckBox enableRegularBackupsCheckBox;
     private JButton configureRegularBackupsButton;
-    private LogTableScrollPane logTableScrollPane1;
+    private ImagingSessionTable imagingSessionTable1;
     private JTextField textField1;
     private JButton deleteButton;
     private JButton detailsButton;
@@ -67,11 +67,11 @@ public class LogPanel {
 
     private void createUIComponents() {
         this.imagingSessionController = new ImagingSessionController();
-        logTableScrollPane1 = new LogTableScrollPane(imagingSessionController, equipment, this);
+        imagingSessionTable1 = new ImagingSessionTable(imagingSessionController, equipment, this);
     }
 
     public void updateTableButtonState() {
-        boolean b = logTableScrollPane1.getTableModel().getSession(logTableScrollPane1.getSelectedRow()) != null;
+        boolean b = imagingSessionTable1.getTableModel().getSession(imagingSessionTable1.getSelectedRow()) != null;
         detailsButton.setEnabled(b);
         editButton.setEnabled(b);
         deleteButton.setEnabled(b);

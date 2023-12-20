@@ -134,7 +134,7 @@
         <properties/>
         <border type="empty"/>
         <children>
-          <component id="5f733" class="ui.customComponents.LogTableScrollPane" binding="logTableScrollPane1" custom-create="true" default-binding="true">
+          <component id="5f733" class="ui.customComponents.ImagingSessionTable" binding="imagingSessionTable1" custom-create="true" default-binding="true">
             <constraints/>
             <properties/>
           </component>

@@ -1,6 +1,8 @@
 package ui.customComponents;
 
 import controllers.ImagingSessionController;
+import models.imagingSessionTable.ImagingSessionColumnModelListener;
+import models.imagingSessionTable.ImagingSessionTableModel;
 import models.settings.LoggerColumns;
 import models.equipment.Equipment;
 import models.settings.ImagingSessionConfig;
@@ -8,8 +10,6 @@ import services.fileHandler.ConfigurationStore;
 import ui.corecomponents.LogPanel;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -18,10 +18,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
-public class LogTableScrollPane extends JTable {
+public class ImagingSessionTable extends JTable {
     private final ImagingSessionConfig isConfig;
     private final ImagingSessionController imagingSessionController;
     private final Equipment equipment;
@@ -29,7 +28,7 @@ public class LogTableScrollPane extends JTable {
     private final ImagingSessionTableModel tableModel;
     private TableRowSorter<TableModel> sorter;
 
-    public LogTableScrollPane(ImagingSessionController imagingSessionController, Equipment equipment, LogPanel logPanel) {
+    public ImagingSessionTable(ImagingSessionController imagingSessionController, Equipment equipment, LogPanel logPanel) {
         isConfig = ConfigurationStore.loadImagingSessionConfig();
         this.imagingSessionController = imagingSessionController;
         this.logPanel = logPanel;

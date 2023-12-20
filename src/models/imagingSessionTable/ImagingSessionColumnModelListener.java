@@ -1,4 +1,4 @@
-package ui.customComponents;
+package models.imagingSessionTable;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
