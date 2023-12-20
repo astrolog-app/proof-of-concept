@@ -66,8 +66,8 @@ public class LogPanel {
     }
 
     private void createUIComponents() {
-        this.imagingSessionController = new ImagingSessionController();
         imagingSessionTable1 = new ImagingSessionTable(imagingSessionController, equipment, this);
+        this.imagingSessionController = new ImagingSessionController(imagingSessionTable1.getTableModel());
     }
 
     public void updateTableButtonState() {
