@@ -22,15 +22,14 @@ import java.util.List;
 
 public class ImagingSessionTable extends JTable {
     private final ImagingSessionConfig isConfig;
-    private final ImagingSessionController imagingSessionController;
+    private ImagingSessionController imagingSessionController;
     private final Equipment equipment;
     private final LogPanel logPanel;
     private final ImagingSessionTableModel tableModel;
     private TableRowSorter<TableModel> sorter;
 
-    public ImagingSessionTable(ImagingSessionController imagingSessionController, Equipment equipment, LogPanel logPanel) {
+    public ImagingSessionTable(Equipment equipment, LogPanel logPanel) {
         isConfig = ConfigurationStore.loadImagingSessionConfig();
-        this.imagingSessionController = imagingSessionController;
         this.logPanel = logPanel;
         this.equipment = equipment;
         this.tableModel = new ImagingSessionTableModel();
@@ -162,6 +161,10 @@ public class ImagingSessionTable extends JTable {
         popupMenu.add(menuItem5);
 
         return popupMenu;
+    }
+
+    public void setImagingSessionController(ImagingSessionController imagingSessionController) {
+        this.imagingSessionController = imagingSessionController;
     }
 
     public ImagingSessionTableModel getTableModel() {
