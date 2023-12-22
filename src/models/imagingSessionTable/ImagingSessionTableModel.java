@@ -49,8 +49,19 @@ public class ImagingSessionTableModel extends AbstractTableModel {
 
     public void removeSession(ImagingSession session) {
         data.remove(session);
-        //fireTableRowsInserted(sessions.size() - 1, sessions.size() - 1);
-        updateRowMapping();
+
+        int sessionIndex = -1;
+        for (Integer i : rowToInstanceMap.keySet()) {
+            if (session == rowToInstanceMap.get(i)) {
+                sessionIndex = i;
+                break;
+            }
+        }
+
+        if (sessionIndex != -1) {
+            fireTableRowsDeleted(sessionIndex, sessionIndex);
+            updateRowMapping();
+        }
     }
 
     @Override

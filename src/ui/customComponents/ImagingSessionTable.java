@@ -36,7 +36,7 @@ public class ImagingSessionTable extends JTable {
 
         createTable();
         setColumnsWidth();
-        sortRows();
+//        sortRows();
         handleActions();
     }
 
@@ -117,7 +117,7 @@ public class ImagingSessionTable extends JTable {
                 if (e.getClickCount() == 2) {
                     int selectedRow = getSelectedRow();
                     if (selectedRow != -1) {
-                        imagingSessionController.showImagingSessionDetails();
+                        imagingSessionController.showImagingSessionDetails(tableModel.getSession(getSelectedRow()));
                     }
                 }
             }
@@ -146,7 +146,7 @@ public class ImagingSessionTable extends JTable {
         popupMenu.add(menuItem2);
 
         JMenuItem menuItem3  = new JMenuItem("Show Details");
-        menuItem3.addActionListener((ActionEvent e) -> imagingSessionController.showImagingSessionDetails());
+        menuItem3.addActionListener((ActionEvent e) -> imagingSessionController.showImagingSessionDetails(tableModel.getSession(getSelectedRow())));
         menuItem3.setEnabled(enableAll);
         popupMenu.add(menuItem3);
 

@@ -51,7 +51,7 @@ public class LogPanel {
         backupHandler();
 
         manuallyButton.addActionListener(e -> imagingSessionController.addImagingSessionManually(equipment));
-        detailsButton.addActionListener(e -> imagingSessionController.showImagingSessionDetails());
+//        detailsButton.addActionListener(e -> imagingSessionController.showImagingSessionDetails());
         deleteButton.addActionListener(e -> imagingSessionController.removeImagingSession());
         editButton.addActionListener(e -> imagingSessionController.editImagingSession());
     }
@@ -67,7 +67,7 @@ public class LogPanel {
 
     private void createUIComponents() {
         imagingSessionTable1 = new ImagingSessionTable(equipment, this);
-        imagingSessionController = new ImagingSessionController(imagingSessionTable1.getTableModel());
+        imagingSessionController = new ImagingSessionController(imagingSessionTable1.getTableModel(), imagingSessionTable1);
         imagingSessionTable1.setImagingSessionController(imagingSessionController);
     }
 

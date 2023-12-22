@@ -2,15 +2,19 @@ package controllers;
 
 import models.equipment.Equipment;
 import models.imagingSessionTable.ImagingSessionTableModel;
+import models.imagingSessions.ImagingSession;
+import ui.customComponents.ImagingSessionTable;
 import ui.popUps.ImagingSessionInfo;
 
 import javax.swing.*;
 
 public class ImagingSessionController {
     private final ImagingSessionTableModel isTableModel;
+    private final ImagingSessionTable imagingSessionTable;
 
-    public ImagingSessionController(ImagingSessionTableModel isTableModel) {
+    public ImagingSessionController(ImagingSessionTableModel isTableModel, ImagingSessionTable imagingSessionTable) {
         this.isTableModel = isTableModel;
+        this.imagingSessionTable = imagingSessionTable;
     }
 
     public void addImagingSessionManually(Equipment equipment) {
@@ -33,7 +37,7 @@ public class ImagingSessionController {
         );
 
         if (dialogResult == JOptionPane.YES_NO_OPTION) {
-            isTableModel.removeSession(isTableModel.getSession(0));
+            isTableModel.removeSession(isTableModel.getSession(imagingSessionTable.getSelectedRow()));
         }
     }
 
@@ -41,7 +45,7 @@ public class ImagingSessionController {
 
     }
 
-    public void showImagingSessionDetails() {
-        new ImagingSessionInfo();
+    public void showImagingSessionDetails(ImagingSession session) {
+        new ImagingSessionInfo(session);
     }
 }
