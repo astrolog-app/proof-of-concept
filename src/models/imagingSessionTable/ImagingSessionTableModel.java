@@ -8,59 +8,36 @@ import utils.Enums;
 
 import javax.swing.table.AbstractTableModel;
 import java.text.DecimalFormat;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ImagingSessionTableModel extends AbstractTableModel {
     private final List<ImagingSession> data;
-    private final Map<Integer, ImagingSession> rowToInstanceMap = new HashMap<>();
     private final List<LoggerColumns> selectedColumns;
-    private final Map<Integer, LoggerColumns> columnToEnumMap = new HashMap<>();
-
 
     public ImagingSessionTableModel() {
         data = ImagingSessionStore.loadImagingSessions();
         selectedColumns = ConfigurationStore.loadImagingSessionConfig().getSelectedColumns();
-
-        updateRowMapping();
-        updateColumnMapping();
-    }
-
-    public void updateRowMapping() {
-        rowToInstanceMap.clear();
-        for (int i = 0; i < data.size(); i++) {
-            rowToInstanceMap.put(i, data.get(i));
-        }
-    }
-
-    public void updateColumnMapping() {
-        columnToEnumMap.clear();
-        for (int i = 0; i < selectedColumns.size(); i++) {
-            columnToEnumMap.put(i, selectedColumns.get(i));
-        }
     }
 
     public void addSession(ImagingSession session) {
         data.add(session);
         //fireTableRowsInserted(data.size() - 1, data.size() - 1);
-        updateRowMapping();
     }
 
     public void removeSession(ImagingSession session) {
-        data.remove(session);
-
         int sessionIndex = -1;
-        for (Integer i : rowToInstanceMap.keySet()) {
-            if (session == rowToInstanceMap.get(i)) {
+        for (int i = 0; i < data.size(); i++) {
+            System.out.println("test");
+            if (session == data.get(i)) {
                 sessionIndex = i;
                 break;
             }
         }
 
+        data.remove(session);
+
         if (sessionIndex != -1) {
             fireTableRowsDeleted(sessionIndex, sessionIndex);
-            updateRowMapping();
         }
     }
 
@@ -71,19 +48,19 @@ public class ImagingSessionTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return columnToEnumMap.size();
+        return selectedColumns.size();
     }
 
     @Override
     public String getColumnName(int column) {
-        return Enums.enumToString(columnToEnumMap.get(column));
+        return Enums.enumToString(selectedColumns.get(column));
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         if (data != null) {
-            ImagingSession is = rowToInstanceMap.get(rowIndex);
-            LoggerColumns lc = columnToEnumMap.get(columnIndex);
+            ImagingSession is = data.get(rowIndex);
+            LoggerColumns lc = selectedColumns.get(columnIndex);
 
             return switch (lc) {
                 case DATE -> is.getLightFrame().getDate();
@@ -106,10 +83,9 @@ public class ImagingSessionTableModel extends AbstractTableModel {
                 case CAMERA -> is.getLightFrame().getCamera();
                 case NOTES -> is.getLightFrame().getNotes();
             };
-        } else {
-            return null;
-            // TODO: define content if imaging session are null
         }
+
+        return null;
     }
 
     private String formatDouble(Double d) {
@@ -133,8 +109,8 @@ public class ImagingSessionTableModel extends AbstractTableModel {
     }
 
     public int getColumnAt(LoggerColumns lc) {
-        for (int i : columnToEnumMap.keySet()) {
-            if (columnToEnumMap.get(i) == lc) {
+        for (int i = 0; i < selectedColumns.size(); i++) {
+            if (selectedColumns.get(i) == lc) {
                 return i;
             }
         }
