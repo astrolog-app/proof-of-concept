@@ -30,7 +30,8 @@ public class ImagingSessionController {
         UIManager.put("OptionPane.yesButtonText", "Yes");
         UIManager.put("OptionPane.noButtonText", "No");
 
-        int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this session?",
+        int dialogResult = JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to delete this session?",
                 "Delete Session Confirmation",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE

@@ -27,7 +27,6 @@ public class ImagingSessionTableModel extends AbstractTableModel {
     public void removeSession(ImagingSession session) {
         int sessionIndex = -1;
         for (int i = 0; i < data.size(); i++) {
-            System.out.println("test");
             if (session == data.get(i)) {
                 sessionIndex = i;
                 break;
