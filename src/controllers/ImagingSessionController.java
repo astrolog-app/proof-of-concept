@@ -5,6 +5,7 @@ import models.imagingSessionTable.ImagingSessionTableModel;
 import models.imagingSessions.ImagingSession;
 import ui.customComponents.ImagingSessionTable;
 import ui.popUps.ImagingSessionInfo;
+import ui.popUps.NewImagingSessionManually;
 
 import javax.swing.*;
 
@@ -18,7 +19,8 @@ public class ImagingSessionController {
     }
 
     public void addImagingSessionManually(Equipment equipment) {
-        new ui.popUps.NewImagingSessionManually(equipment);
+        new NewImagingSessionManually(equipment, true);
+        // TODO: update sorting
     }
 
     public void addImagingSessionAutomatically() {
@@ -42,8 +44,8 @@ public class ImagingSessionController {
         }
     }
 
-    public void editImagingSession() {
-
+    public void editImagingSession(Equipment equipment) {
+        new NewImagingSessionManually(equipment, false);
     }
 
     public void showImagingSessionDetails(ImagingSession session) {

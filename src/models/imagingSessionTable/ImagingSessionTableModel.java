@@ -21,7 +21,7 @@ public class ImagingSessionTableModel extends AbstractTableModel {
 
     public void addSession(ImagingSession session) {
         data.add(session);
-        //fireTableRowsInserted(data.size() - 1, data.size() - 1);
+        fireTableRowsInserted(data.size() - 1, data.size() - 1);
     }
 
     public void removeSession(ImagingSession session) {

@@ -42,8 +42,8 @@ public class NewImagingSessionManually extends JDialog {
     private JComboBox comboBox4;
     private JSpinner cloudCoverSpinner;
 
-    public NewImagingSessionManually(Equipment equipment) {
-//        cancelButton.addActionListener(e -> this.dispose());
+    public NewImagingSessionManually(Equipment equipment, boolean addSession) {
+        cancelButton.addActionListener(e -> this.dispose());
 //
 //        SpinnerModel model = new SpinnerNumberModel(0,0,100,1);
 //        cloudCoverSpinner.setModel(model);

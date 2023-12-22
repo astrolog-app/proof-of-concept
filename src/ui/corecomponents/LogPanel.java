@@ -48,7 +48,16 @@ public class LogPanel {
         imagingSessionSettings.setIcon(settingsIcon);
         imagingSessionSettings.setText("");
 
-        backupHandler();
+        handleActions();
+    }
+
+    private void handleActions() {
+        enableRegularBackupsCheckBox.setSelected(appConfig.getEnableRegularBackups());
+
+        enableRegularBackupsCheckBox.addActionListener(e -> {
+            appConfig.setEnableRegularBackups(enableRegularBackupsCheckBox.isSelected());
+            ConfigurationStore.save(appConfig, null,null);
+        });
 
         manuallyButton.addActionListener(e -> imagingSessionController.addImagingSessionManually(equipment));
         detailsButton.addActionListener(e -> imagingSessionController
@@ -56,15 +65,10 @@ public class LogPanel {
                         imagingSessionTable1.getTableModel().getSession(imagingSessionTable1.getSelectedRow())
                 ));
         deleteButton.addActionListener(e -> imagingSessionController.removeImagingSession());
-        editButton.addActionListener(e -> imagingSessionController.editImagingSession());
-    }
-
-    private void backupHandler() {
-        enableRegularBackupsCheckBox.setSelected(appConfig.getEnableRegularBackups());
-
-        enableRegularBackupsCheckBox.addActionListener(e -> {
-            appConfig.setEnableRegularBackups(enableRegularBackupsCheckBox.isSelected());
-            ConfigurationStore.save(appConfig, null,null);
+        editButton.addActionListener(e -> imagingSessionController.editImagingSession(equipment));
+        xMarklButton.addActionListener(e -> {
+            textField1.setText("");
+            search();
         });
     }
 
@@ -72,6 +76,10 @@ public class LogPanel {
         imagingSessionTable1 = new ImagingSessionTable(equipment, this);
         imagingSessionController = new ImagingSessionController(imagingSessionTable1.getTableModel(), imagingSessionTable1);
         imagingSessionTable1.setImagingSessionController(imagingSessionController);
+    }
+
+    private void search() {
+
     }
 
     public void updateTableButtonState() {
