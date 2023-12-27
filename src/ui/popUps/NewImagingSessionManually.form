@@ -80,7 +80,7 @@
                             </constraints>
                             <properties/>
                           </component>
-                          <component id="bc01" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+                          <component id="bc01" class="javax.swing.JTextField" binding="target">
                             <constraints>
                               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
@@ -121,13 +121,13 @@
                               <text value="Data"/>
                             </properties>
                           </component>
-                          <component id="d09bc" class="javax.swing.JSpinner" binding="spinner3" default-binding="true">
+                          <component id="d09bc" class="javax.swing.JSpinner" binding="subLengthLight">
                             <constraints>
                               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties/>
                           </component>
-                          <component id="f962e" class="javax.swing.JSpinner" binding="spinner4" default-binding="true">
+                          <component id="f962e" class="javax.swing.JSpinner" binding="totalSubsLight">
                             <constraints>
                               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
@@ -165,7 +165,7 @@
                               <text value=""/>
                             </properties>
                           </component>
-                          <component id="9520a" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+                          <component id="9520a" class="javax.swing.JComboBox" binding="filter">
                             <constraints>
                               <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
@@ -187,7 +187,7 @@
                               <text value="Integrated Subs:"/>
                             </properties>
                           </component>
-                          <component id="90c73" class="javax.swing.JSpinner" binding="spinner5" default-binding="true">
+                          <component id="90c73" class="javax.swing.JSpinner" binding="integratedSubs">
                             <constraints>
                               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
@@ -217,7 +217,7 @@
                               <text value="Chiptemp.:"/>
                             </properties>
                           </component>
-                          <component id="c9fce" class="javax.swing.JSpinner" binding="spinner8" default-binding="true">
+                          <component id="c9fce" class="javax.swing.JSpinner" binding="chipTemp">
                             <constraints>
                               <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
@@ -231,13 +231,13 @@
                               <text value="Offset:"/>
                             </properties>
                           </component>
-                          <component id="3baa3" class="javax.swing.JSpinner" binding="spinner9" default-binding="true">
+                          <component id="3baa3" class="javax.swing.JSpinner" binding="offset">
                             <constraints>
                               <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties/>
                           </component>
-                          <component id="225a" class="javax.swing.JSpinner" binding="spinner10" default-binding="true">
+                          <component id="225a" class="javax.swing.JSpinner" binding="gain">
                             <constraints>
                               <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
@@ -280,13 +280,13 @@
                               <text value="Weather"/>
                             </properties>
                           </component>
-                          <component id="62f13" class="javax.swing.JSpinner" binding="spinner11" default-binding="true">
+                          <component id="62f13" class="javax.swing.JSpinner" binding="temp">
                             <constraints>
                               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties/>
                           </component>
-                          <component id="382d4" class="javax.swing.JSpinner" binding="spinner12" default-binding="true">
+                          <component id="382d4" class="javax.swing.JSpinner" binding="avgSeeing">
                             <constraints>
                               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
@@ -308,7 +308,7 @@
                               <text value="Avg. Seeing:"/>
                             </properties>
                           </component>
-                          <component id="1bfab" class="javax.swing.JSpinner" binding="spinner13" default-binding="true">
+                          <component id="1bfab" class="javax.swing.JSpinner" binding="avgCloudCover">
                             <constraints>
                               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
@@ -358,13 +358,13 @@
                               <text value="Equipment"/>
                             </properties>
                           </component>
-                          <component id="b7b52" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+                          <component id="b7b52" class="javax.swing.JComboBox" binding="telescope">
                             <constraints>
                               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties/>
                           </component>
-                          <component id="1c920" class="javax.swing.JComboBox" binding="comboBox3" default-binding="true">
+                          <component id="1c920" class="javax.swing.JComboBox" binding="camera">
                             <constraints>
                               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
@@ -394,7 +394,7 @@
                               <text value=""/>
                             </properties>
                           </component>
-                          <component id="ebec9" class="javax.swing.JComboBox" binding="comboBox4" default-binding="true">
+                          <component id="ebec9" class="javax.swing.JComboBox" binding="flattener">
                             <constraints>
                               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
@@ -407,6 +407,20 @@
                             <properties>
                               <text value="Flattener:"/>
                             </properties>
+                          </component>
+                          <component id="9bd3a" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <text value="Mount:"/>
+                            </properties>
+                          </component>
+                          <component id="dfc4e" class="javax.swing.JComboBox" binding="mount">
+                            <constraints>
+                              <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties/>
                           </component>
                         </children>
                       </grid>
@@ -502,7 +516,7 @@
                           <text value=""/>
                         </properties>
                       </component>
-                      <component id="d321b" class="javax.swing.JSpinner" binding="spinner6" default-binding="true">
+                      <component id="d321b" class="javax.swing.JSpinner" binding="totalSubsDark">
                         <constraints>
                           <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -615,7 +629,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="5f0a4" class="javax.swing.JSpinner" binding="spinner7" default-binding="true">
+                      <component id="5f0a4" class="javax.swing.JSpinner" binding="totalSubsBias">
                         <constraints>
                           <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -722,7 +736,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="52bfe" class="javax.swing.JSpinner" binding="spinner2" default-binding="true">
+                      <component id="52bfe" class="javax.swing.JSpinner" binding="totalSubsFlat">
                         <constraints>
                           <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -734,7 +748,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="1517e" class="javax.swing.JSpinner" binding="spinner1" default-binding="true">
+                      <component id="1517e" class="javax.swing.JSpinner" binding="subLengthFlat">
                         <constraints>
                           <grid row="0" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
