@@ -62,14 +62,14 @@ public class ImagingSessionTableModel extends AbstractTableModel {
             LoggerColumns lc = selectedColumns.get(columnIndex);
 
             return switch (lc) {
-                case DATE -> is.getLightFrame().getDate();
-                case TARGET -> is.getLightFrame().getTarget();
+                case DATE -> formatString(is.getLightFrame().getDate());
+                case TARGET -> formatString(is.getLightFrame().getTarget());
                 case SUB_LENGTH -> formatDouble(is.getLightFrame().getSubLength());
-                case TOTAL_SUBS -> is.getLightFrame().getTotalSubs();
+                case TOTAL_SUBS -> formatDouble(is.getLightFrame().getTotalSubs());
                 case TOTAL_EXPOSURE -> formatDouble(is.getLightFrame().getTotalSubs() * is.getLightFrame().getSubLength());
                 case INTEGRATED_SUBS -> formatDouble(is.getLightFrame().getIntegratedSubs());
                 case INTEGRATED_EXPOSURE -> formatDouble(is.getLightFrame().getIntegratedSubs() * is.getLightFrame().getSubLength());
-                case FILTER -> is.getLightFrame().getFilter();
+                case FILTER -> formatString(is.getLightFrame().getFilter());
                 case GAIN -> formatDouble(is.getLightFrame().getGain());
                 case OFFSET -> formatDouble(is.getLightFrame().getOffset());
                 case CAMERA_TEMP -> formatDouble(is.getLightFrame().getCameraTemp());
@@ -77,10 +77,10 @@ public class ImagingSessionTableModel extends AbstractTableModel {
                 case AVERAGE_SEEING -> formatDouble(is.getLightFrame().getAverageSeeing());
                 case AVERAGE_CLOUD_COVER -> formatDouble(is.getLightFrame().getAverageCloudCover());
                 case AVERAGE_MOON -> formatDouble(is.getLightFrame().getAverageMoon());
-                case TELESCOPE -> is.getLightFrame().getTelescope();
-                case FLATTENER -> is.getLightFrame().getFlattener();
-                case CAMERA -> is.getLightFrame().getCamera();
-                case NOTES -> is.getLightFrame().getNotes();
+                case TELESCOPE -> formatString(is.getLightFrame().getTelescope());
+                case FLATTENER -> formatString(is.getLightFrame().getFlattener());
+                case CAMERA -> formatString(is.getLightFrame().getCamera());
+                case NOTES -> formatString(is.getLightFrame().getNotes());
             };
         }
 
@@ -99,6 +99,14 @@ public class ImagingSessionTableModel extends AbstractTableModel {
         } else {
             return "N/A";
         }
+    }
+
+    private String formatString(String s) {
+        if (s == null) {
+            return "N/A";
+        }
+
+        return s;
     }
 
     public ImagingSession getSession(int rowIndex) {

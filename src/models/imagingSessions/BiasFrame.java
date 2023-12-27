@@ -5,7 +5,7 @@ public class BiasFrame extends ImagingFrame {
 
     public BiasFrame() {}
 
-    public BiasFrame(String date, int totalSubs) {
+    public BiasFrame(String date, Double totalSubs) {
         super(date, totalSubs);
     }
 

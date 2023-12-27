@@ -19,7 +19,7 @@ public class LightFrame extends ImagingFrame {
 
     public LightFrame() {}
 
-    public LightFrame(String date, int totalSubs) {
+    public LightFrame(String date, Double totalSubs) {
         super(date, totalSubs);
     }
 

@@ -519,7 +519,7 @@
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
-                          <text value="Chooese From Library: "/>
+                          <text value="Library: "/>
                         </properties>
                       </component>
                       <component id="ac98f" class="javax.swing.JLabel">
@@ -538,9 +538,11 @@
                           <text value="Total Subs"/>
                         </properties>
                       </component>
-                      <component id="47695" class="javax.swing.JLabel">
+                      <component id="ef1ab" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="60" height="-1"/>
+                          </grid>
                         </constraints>
                         <properties>
                           <text value=""/>
@@ -627,10 +629,10 @@
                       </component>
                       <component id="6027e" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
-                          <text value="Chooese From Library: "/>
+                          <text value="Library: "/>
                         </properties>
                       </component>
                       <component id="8f7ab" class="javax.swing.JLabel">
@@ -649,9 +651,11 @@
                           <text value="Total Subs:"/>
                         </properties>
                       </component>
-                      <component id="6b608" class="javax.swing.JLabel">
+                      <component id="d5f20" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="60" height="-1"/>
+                          </grid>
                         </constraints>
                         <properties>
                           <text value=""/>

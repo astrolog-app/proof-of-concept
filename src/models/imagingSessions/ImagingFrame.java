@@ -2,11 +2,11 @@ package models.imagingSessions;
 
 public abstract class ImagingFrame {
     private String date;
-    private int totalSubs;
+    private Double totalSubs;
 
     public ImagingFrame() {}
 
-    public ImagingFrame(String date, int totalSubs) {
+    public ImagingFrame(String date, Double totalSubs) {
         this.date = date;
         this.totalSubs = totalSubs;
     }
@@ -18,10 +18,10 @@ public abstract class ImagingFrame {
         this.date = date;
     }
 
-    public int getTotalSubs() {
+    public Double getTotalSubs() {
         return totalSubs;
     }
-    public void setTotalSubs(int totalSubs) {
+    public void setTotalSubs(Double totalSubs) {
         this.totalSubs = totalSubs;
     }
 }

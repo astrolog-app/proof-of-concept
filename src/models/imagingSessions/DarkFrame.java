@@ -5,7 +5,7 @@ public class DarkFrame extends ImagingFrame {
 
     public DarkFrame() {}
 
-    public DarkFrame(String date, int totalSubs) {
+    public DarkFrame(String date, Double totalSubs) {
         super(date, totalSubs);
     }
 
