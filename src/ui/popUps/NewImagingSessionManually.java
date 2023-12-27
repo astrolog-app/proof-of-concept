@@ -17,17 +17,17 @@ public class NewImagingSessionManually extends JDialog {
     private JPanel darkPanel;
     private JPanel biasPanel;
     private JPanel flatPanel;
-    private JCheckBox checkBox1;
+    private JCheckBox flatCheckBox;
     private JSpinner totalSubsFlat;
-    private JTextField textField1;
+    private JTextField dateFlat;
     private JTextField textField2;
     private JTextField target;
     private JSpinner subLengthLight;
     private JSpinner totalSubsLight;
-    private JCheckBox checkBox2;
-    private JCheckBox checkBox3;
-    private JTextField textField5;
-    private JTextField textField7;
+    private JCheckBox darkCheckBox;
+    private JCheckBox biasCheckBox;
+    private JTextField dateBias;
+    private JTextField dateDark;
     private JSpinner totalSubsDark;
     private JSpinner totalSubsBias;
     private JButton saveButton;
@@ -38,8 +38,8 @@ public class NewImagingSessionManually extends JDialog {
     private JComboBox telescope;
     private JComboBox camera;
     private JSpinner subLengthFlat;
-    private JComboBox comboBox5;
-    private JComboBox comboBox6;
+    private JComboBox libraryBias;
+    private JComboBox libraryDark;
     private JSpinner avgCloudCover;
     private JComboBox flattener;
     private JSpinner integratedSubs;
@@ -48,10 +48,29 @@ public class NewImagingSessionManually extends JDialog {
     private JSpinner gain;
     private JTextArea textArea1;
     private JComboBox mount;
+    private JTextField textField3;
+    private JButton changeButton;
+    private JLabel flatFramesLabel;
+    private JSeparator flatSeparator;
+    private JLabel subLengthFlatLabel;
+    private JLabel dateFlatLabel;
+    private JLabel totalSubsFlatLabel;
+    private JLabel darkFramesLabel;
+    private JLabel biasFramesLabel;
+    private JLabel libraryDarkLabel;
+    private JLabel totalSubsDarkLabel;
+    private JLabel totalSubsBiasLabel;
+    private JLabel dateBiasLabel;
+    private JLabel libraryBiasLabel;
+    private JLabel dateDarkLabel;
 
     public NewImagingSessionManually(Equipment equipment, ImagingSession session) {
         newSession = session;
         this.equipment = equipment;
+
+        updateFlatPanelState();
+        updateDarkPanelState();
+        updateBiasPanelState();
 
         setSpinnerModels();
         setComboBoxModels();
@@ -65,7 +84,7 @@ public class NewImagingSessionManually extends JDialog {
         } else {
             setTitle("Add New Imaging Session");
         }
-        setSize(1000, 700);
+        setSize(1000, 750);
         setMinimumSize(new Dimension(600, 400));
         setResizable(true);
         setLocationRelativeTo(null);
@@ -104,6 +123,74 @@ public class NewImagingSessionManually extends JDialog {
     private void handleActions(ImagingSession session) {
         saveButton.addActionListener(e -> {});
         cancelButton.addActionListener(e -> dispose());
+
+        flatCheckBox.addActionListener(e -> updateFlatPanelState());
+        darkCheckBox.addActionListener(e -> updateDarkPanelState());
+        biasCheckBox.addActionListener(e -> updateBiasPanelState());
+    }
+
+    private void updateDarkPanelState() {
+        if (darkCheckBox.isSelected()) {
+            dateDark.setEnabled(true);
+            totalSubsDark.setEnabled(true);
+            libraryDark.setEnabled(true);
+
+            darkFramesLabel.setForeground(null);
+            dateDarkLabel.setForeground(null);
+            totalSubsDarkLabel.setForeground(null);
+            libraryDarkLabel.setForeground(null);
+        } else {
+            dateDark.setEnabled(false);
+            totalSubsDark.setEnabled(false);
+            libraryDark.setEnabled(false);
+
+            darkFramesLabel.setForeground(Color.GRAY);
+            dateDarkLabel.setForeground(Color.GRAY);
+            totalSubsDarkLabel.setForeground(Color.GRAY);
+            libraryDarkLabel.setForeground(Color.GRAY);
+        }
+    }
+
+    private void updateBiasPanelState() {
+        if (biasCheckBox.isSelected()) {
+            dateBias.setEnabled(true);
+            totalSubsBias.setEnabled(true);
+            libraryBias.setEnabled(true);
+
+            biasFramesLabel.setForeground(null);
+            dateBiasLabel.setForeground(null);
+            totalSubsBiasLabel.setForeground(null);
+            libraryBiasLabel.setForeground(null);
+        } else {
+            dateBias.setEnabled(false);
+            totalSubsBias.setEnabled(false);
+            libraryBias.setEnabled(false);
+
+            biasFramesLabel.setForeground(Color.GRAY);
+            dateBiasLabel.setForeground(Color.GRAY);
+            totalSubsBiasLabel.setForeground(Color.GRAY);
+            libraryBiasLabel.setForeground(Color.GRAY);
+        }
+    }
+
+    private void updateFlatPanelState() {
+        if (flatCheckBox.isSelected()) {
+            dateFlat.setEnabled(true);
+            subLengthFlat.setEnabled(true);
+            totalSubsFlat.setEnabled(true);
+            flatFramesLabel.setForeground(null);
+            dateFlatLabel.setForeground(null);
+            totalSubsFlatLabel.setForeground(null);
+            subLengthFlatLabel.setForeground(null);
+        } else {
+            dateFlat.setEnabled(false);
+            subLengthFlat.setEnabled(false);
+            totalSubsFlat.setEnabled(false);
+            flatFramesLabel.setForeground(Color.GRAY);
+            dateFlatLabel.setForeground(Color.GRAY);
+            totalSubsFlatLabel.setForeground(Color.GRAY);
+            subLengthFlatLabel.setForeground(Color.GRAY);
+        }
     }
 
     public ImagingSession getUpdatedSession() {
