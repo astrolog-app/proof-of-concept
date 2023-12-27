@@ -826,7 +826,7 @@
                       <text value="Image Folder:"/>
                     </properties>
                   </component>
-                  <component id="a8cf" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+                  <component id="a8cf" class="javax.swing.JTextField" binding="imageFolderField">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
@@ -834,7 +834,7 @@
                     </constraints>
                     <properties/>
                   </component>
-                  <component id="14f64" class="javax.swing.JButton" binding="changeButton" default-binding="true">
+                  <component id="14f64" class="javax.swing.JButton" binding="changeImageFolder">
                     <constraints>
                       <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>

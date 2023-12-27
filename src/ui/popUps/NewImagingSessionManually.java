@@ -48,8 +48,8 @@ public class NewImagingSessionManually extends JDialog {
     private JSpinner gain;
     private JTextArea textArea1;
     private JComboBox mount;
-    private JTextField textField3;
-    private JButton changeButton;
+    private JTextField imageFolderField;
+    private JButton changeImageFolder;
     private JLabel flatFramesLabel;
     private JSeparator flatSeparator;
     private JLabel subLengthFlatLabel;
@@ -67,6 +67,7 @@ public class NewImagingSessionManually extends JDialog {
     public NewImagingSessionManually(Equipment equipment, ImagingSession session) {
         newSession = session;
         this.equipment = equipment;
+        imageFolderField.setEnabled(false);
 
         updateFlatPanelState();
         updateDarkPanelState();
@@ -74,6 +75,10 @@ public class NewImagingSessionManually extends JDialog {
 
         setSpinnerModels();
         setComboBoxModels();
+
+        if (session != null) {
+            fillOutPanel(session);
+        }
 
         handleActions(session);
 
@@ -89,6 +94,45 @@ public class NewImagingSessionManually extends JDialog {
         setResizable(true);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private void fillOutPanel(ImagingSession session) {
+        imageFolderField.setText(session.getFolderDir());
+
+        subLengthLight.setValue(checkSessionValue(session.getLightFrame().getSubLength()));
+        totalSubsLight.setValue(checkSessionValue(session.getLightFrame().getTotalSubs()));
+        integratedSubs.setValue(checkSessionValue(session.getLightFrame().getIntegratedSubs()));
+//        filter.setSelectedItem();
+        gain.setValue(checkSessionValue(session.getLightFrame().getGain()));
+        offset.setValue(checkSessionValue(session.getLightFrame().getOffset()));
+        chipTemp.setValue(checkSessionValue(session.getLightFrame().getCameraTemp()));
+        temp.setValue(checkSessionValue(session.getLightFrame().getOutsideTemp()));
+        avgSeeing.setValue(checkSessionValue(session.getLightFrame().getAverageSeeing()));
+        avgCloudCover.setValue(checkSessionValue(session.getLightFrame().getAverageCloudCover()));
+//        telescope.setSelectedItem();
+//        camera.setSelectedItem();
+//        flattener.setSelectedItem();
+//        mount.setSelectedItem();
+
+//        libraryDark.setSelectedItem();
+//        dateDark.setText();
+//        totalSubsDark.setValue();
+//
+//        libraryBias.setSelectedItem();
+//        dateBiasLabel.setText();
+//        totalSubsBias.setValue();
+//
+//        subLengthFlat.setValue();
+//        dateFlat.setText();
+//        totalSubsFlat.setValue();
+    }
+
+    private Double checkSessionValue(Double d) {
+        if (d == null) {
+            return 0.0;
+        }
+
+        return d;
     }
 
     private void setSpinnerModels() {
