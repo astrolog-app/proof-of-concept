@@ -19,7 +19,7 @@ public class ImagingSessionController {
     }
 
     public void addImagingSessionManually(Equipment equipment) {
-        new NewImagingSessionManually(equipment, true);
+        new NewImagingSessionManually(equipment, null);
         // TODO: update sorting
     }
 
@@ -44,8 +44,13 @@ public class ImagingSessionController {
         }
     }
 
-    public void editImagingSession(Equipment equipment) {
-        new NewImagingSessionManually(equipment, false);
+    public void editImagingSession(Equipment equipment, ImagingSession session) {
+        NewImagingSessionManually n = new NewImagingSessionManually(equipment, session);
+        ImagingSession newSession = n.getUpdatedSession();
+
+        if (newSession != session) {
+//            TODO: update table
+        }
     }
 
     public void showImagingSessionDetails(ImagingSession session) {

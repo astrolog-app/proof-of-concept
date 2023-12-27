@@ -151,7 +151,7 @@ public class ImagingSessionTable extends JTable {
         popupMenu.add(menuItem3);
 
         JMenuItem menuItem4 = new JMenuItem("Edit");
-        menuItem4.addActionListener((ActionEvent e) -> imagingSessionController.editImagingSession(equipment));
+        menuItem4.addActionListener((ActionEvent e) -> imagingSessionController.editImagingSession(equipment, tableModel.getSession(getSelectedRow())));
         menuItem4.setEnabled(enableAll);
         popupMenu.add(menuItem4);
 

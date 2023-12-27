@@ -65,7 +65,10 @@ public class LogPanel {
                         imagingSessionTable1.getTableModel().getSession(imagingSessionTable1.getSelectedRow())
                 ));
         deleteButton.addActionListener(e -> imagingSessionController.removeImagingSession());
-        editButton.addActionListener(e -> imagingSessionController.editImagingSession(equipment));
+        editButton.addActionListener(e -> imagingSessionController.editImagingSession(equipment, imagingSessionTable1
+                .getTableModel()
+                .getSession(imagingSessionTable1.getSelectedRow())
+        ));
         xMarklButton.addActionListener(e -> {
             textField1.setText("");
             search();
