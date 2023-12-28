@@ -1,7 +1,9 @@
 package ui.popUps;
 
 import models.equipment.*;
-import models.imagingSessions.ImagingSession;
+import models.imagingSessionTable.ImagingSessionTableModel;
+import models.imagingSessions.*;
+import services.fileHandler.ImagingSessionStore;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewImagingSessionManually extends JDialog {
-    private final ImagingSession newSession;
     private final Equipment equipment;
+    private final ImagingSessionTableModel isTableModel;
+    private final List<ImagingSession> imagingSessions;
 
     private JPanel mainPanel;
     private JPanel lightPanel;
@@ -20,7 +23,7 @@ public class NewImagingSessionManually extends JDialog {
     private JCheckBox flatCheckBox;
     private JSpinner totalSubsFlat;
     private JTextField dateFlat;
-    private JTextField textField2;
+    private JTextField dateLight;
     private JTextField target;
     private JSpinner subLengthLight;
     private JSpinner totalSubsLight;
@@ -64,9 +67,10 @@ public class NewImagingSessionManually extends JDialog {
     private JLabel libraryBiasLabel;
     private JLabel dateDarkLabel;
 
-    public NewImagingSessionManually(Equipment equipment, ImagingSession session) {
-        newSession = session;
+    public NewImagingSessionManually(Equipment equipment, ImagingSession session, ImagingSessionTableModel isTableModel, List<ImagingSession> imagingSessions) {
         this.equipment = equipment;
+        this.isTableModel = isTableModel;
+        this.imagingSessions = imagingSessions;
         imageFolderField.setEnabled(false);
 
         updateFlatPanelState();
@@ -165,12 +169,58 @@ public class NewImagingSessionManually extends JDialog {
     }
 
     private void handleActions(ImagingSession session) {
-        saveButton.addActionListener(e -> {});
+        saveButton.addActionListener(e -> {
+            if (session == null) {
+                ImagingSession newSession = createNewSession();
+
+                ImagingSessionStore.save(imagingSessions, null);
+                isTableModel.addSession(newSession);
+
+                dispose();
+            }
+        });
         cancelButton.addActionListener(e -> dispose());
 
         flatCheckBox.addActionListener(e -> updateFlatPanelState());
         darkCheckBox.addActionListener(e -> updateDarkPanelState());
         biasCheckBox.addActionListener(e -> updateBiasPanelState());
+    }
+
+    private ImagingSession createNewSession() {
+//        TODO: finish
+
+        ImagingSession newSession = new ImagingSession();
+
+        LightFrame lf = new LightFrame();
+        lf.setDate(dateLight.getText());
+        lf.setTarget(target.getText());
+        lf.setSubLength((Double) subLengthLight.getValue());
+        lf.setTotalSubs((Double) totalSubsLight.getValue());
+        lf.setIntegratedSubs((Double) integratedSubs.getValue());
+//        lf.setFilter();
+        lf.setGain((Double) gain.getValue());
+        lf.setOffset((Double) gain.getValue());
+        lf.setCameraTemp((Double) gain.getValue());
+        lf.setOutsideTemp((Double) temp.getValue());
+        lf.setAverageSeeing((Double) avgSeeing.getValue());
+        lf.setAverageCloudCover((Double) avgCloudCover.getValue());
+//        lf.setTelescope();
+//        lf.setCamera();
+//        lf.setFlattener();
+//        lf.setMount();
+
+        DarkFrame df = new DarkFrame();
+
+        BiasFrame bf = new BiasFrame();
+
+        FlatFrame ff = new FlatFrame();
+
+        newSession.setLightFrame(lf);
+        newSession.setDarkFrame(df);
+        newSession.setBiasFrame(bf);
+        newSession.setFlatFrame(ff);
+
+        return newSession;
     }
 
     private void updateDarkPanelState() {
@@ -235,9 +285,5 @@ public class NewImagingSessionManually extends JDialog {
             totalSubsFlatLabel.setForeground(Color.GRAY);
             subLengthFlatLabel.setForeground(Color.GRAY);
         }
-    }
-
-    public ImagingSession getUpdatedSession() {
-        return newSession;
     }
 }

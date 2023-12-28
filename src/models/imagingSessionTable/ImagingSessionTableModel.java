@@ -14,8 +14,8 @@ public class ImagingSessionTableModel extends AbstractTableModel {
     private final List<ImagingSession> data;
     private final List<LoggerColumns> selectedColumns;
 
-    public ImagingSessionTableModel() {
-        data = ImagingSessionStore.loadImagingSessions();
+    public ImagingSessionTableModel(List<ImagingSession> imagingSessions) {
+        data = imagingSessions;
         selectedColumns = ConfigurationStore.loadImagingSessionConfig().getSelectedColumns();
     }
 
@@ -66,9 +66,9 @@ public class ImagingSessionTableModel extends AbstractTableModel {
                 case TARGET -> formatString(is.getLightFrame().getTarget());
                 case SUB_LENGTH -> formatDouble(is.getLightFrame().getSubLength());
                 case TOTAL_SUBS -> formatDouble(is.getLightFrame().getTotalSubs());
-                case TOTAL_EXPOSURE -> formatDouble(is.getLightFrame().getTotalSubs() * is.getLightFrame().getSubLength());
+                case TOTAL_EXPOSURE -> formatDouble(calculateTotalExposure(is.getLightFrame().getTotalSubs(), is.getLightFrame().getSubLength()));
                 case INTEGRATED_SUBS -> formatDouble(is.getLightFrame().getIntegratedSubs());
-                case INTEGRATED_EXPOSURE -> formatDouble(is.getLightFrame().getIntegratedSubs() * is.getLightFrame().getSubLength());
+                case INTEGRATED_EXPOSURE -> formatDouble(calculateTotalExposure(is.getLightFrame().getIntegratedSubs(), is.getLightFrame().getSubLength()));
                 case FILTER -> formatString(is.getLightFrame().getFilter());
                 case GAIN -> formatDouble(is.getLightFrame().getGain());
                 case OFFSET -> formatDouble(is.getLightFrame().getOffset());
@@ -107,6 +107,14 @@ public class ImagingSessionTableModel extends AbstractTableModel {
         }
 
         return s;
+    }
+
+    private Double calculateTotalExposure(Double totalSubs, Double subLength) {
+        if (totalSubs == null || subLength == null) {
+            return null;
+        }
+
+        return totalSubs * subLength;
     }
 
     public ImagingSession getSession(int rowIndex) {

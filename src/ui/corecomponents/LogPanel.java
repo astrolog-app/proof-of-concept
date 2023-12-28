@@ -2,16 +2,20 @@ package ui.corecomponents;
 
 import controllers.ImagingSessionController;
 import models.equipment.Equipment;
+import models.imagingSessions.ImagingSession;
 import models.settings.AppConfig;
 import services.fileHandler.ConfigurationStore;
+import services.fileHandler.ImagingSessionStore;
 import ui.customComponents.ImagingSessionTable;
 import utils.Images;
 
 import javax.swing.*;
+import java.util.List;
 
 public class LogPanel {
-    ImagingSessionController imagingSessionController;
-    Equipment equipment;
+    private ImagingSessionController imagingSessionController;
+    private final Equipment equipment;
+    private List<ImagingSession> imagingSessions;
 
     AppConfig appConfig;
     private JPanel panel1;
@@ -59,15 +63,16 @@ public class LogPanel {
             ConfigurationStore.save(appConfig, null,null);
         });
 
-        manuallyButton.addActionListener(e -> imagingSessionController.addImagingSessionManually(equipment));
+        manuallyButton.addActionListener(e -> imagingSessionController.addImagingSessionManually(equipment, imagingSessions));
         detailsButton.addActionListener(e -> imagingSessionController
                 .showImagingSessionDetails(
                         imagingSessionTable1.getTableModel().getSession(imagingSessionTable1.getSelectedRow())
                 ));
         deleteButton.addActionListener(e -> imagingSessionController.removeImagingSession());
         editButton.addActionListener(e -> imagingSessionController.editImagingSession(equipment, imagingSessionTable1
-                .getTableModel()
-                .getSession(imagingSessionTable1.getSelectedRow())
+                        .getTableModel()
+                        .getSession(imagingSessionTable1.getSelectedRow()),
+                imagingSessions
         ));
         xMarklButton.addActionListener(e -> {
             textField1.setText("");
@@ -76,7 +81,9 @@ public class LogPanel {
     }
 
     private void createUIComponents() {
-        imagingSessionTable1 = new ImagingSessionTable(equipment, this);
+        imagingSessions = ImagingSessionStore.loadImagingSessions();
+
+        imagingSessionTable1 = new ImagingSessionTable(equipment, this, imagingSessions);
         imagingSessionController = new ImagingSessionController(imagingSessionTable1.getTableModel(), imagingSessionTable1);
         imagingSessionTable1.setImagingSessionController(imagingSessionController);
     }

@@ -3,11 +3,14 @@ package controllers;
 import models.equipment.Equipment;
 import models.imagingSessionTable.ImagingSessionTableModel;
 import models.imagingSessions.ImagingSession;
+import services.fileHandler.ConfigurationStore;
+import services.fileHandler.ImagingSessionStore;
 import ui.customComponents.ImagingSessionTable;
 import ui.popUps.ImagingSessionInfo;
 import ui.popUps.NewImagingSessionManually;
 
 import javax.swing.*;
+import java.util.List;
 
 public class ImagingSessionController {
     private final ImagingSessionTableModel isTableModel;
@@ -18,8 +21,8 @@ public class ImagingSessionController {
         this.imagingSessionTable = imagingSessionTable;
     }
 
-    public void addImagingSessionManually(Equipment equipment) {
-        new NewImagingSessionManually(equipment, null);
+    public void addImagingSessionManually(Equipment equipment, List<ImagingSession> imagingSessions) {
+        new NewImagingSessionManually(equipment, null, isTableModel, imagingSessions);
         // TODO: update sorting
     }
 
@@ -44,13 +47,8 @@ public class ImagingSessionController {
         }
     }
 
-    public void editImagingSession(Equipment equipment, ImagingSession session) {
-        NewImagingSessionManually n = new NewImagingSessionManually(equipment, session);
-        ImagingSession newSession = n.getUpdatedSession();
-
-        if (newSession != session) {
-//            TODO: update table
-        }
+    public void editImagingSession(Equipment equipment, ImagingSession session, List<ImagingSession> imagingSessions) {
+        NewImagingSessionManually n = new NewImagingSessionManually(equipment, session, isTableModel, imagingSessions);
     }
 
     public void showImagingSessionDetails(ImagingSession session) {

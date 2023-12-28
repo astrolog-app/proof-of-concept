@@ -5,7 +5,7 @@
     "lightFrame": {
       "date": "01.12.2023",
       "target": "NGC 7000",
-      "subLength": 20,
+      "subLength": 300,
       "totalSubs": 10,
       "integratedSubs": 8,
       "filter": "Optolong l-eNhance",
@@ -43,7 +43,7 @@
     "lightFrame": {
       "date": "02.12.2023",
       "target": "M 32",
-      "subLength": 40,
+      "subLength": 300,
       "totalSubs": 10,
       "integratedSubs": 8,
       "filter": "Optolong l-eNhance",
