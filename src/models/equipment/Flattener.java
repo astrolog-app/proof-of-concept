@@ -5,8 +5,8 @@ public class Flattener extends EquipmentItem {
 
     public Flattener() {}
 
-    public Flattener(String brand, String name) {
-        super(brand, name);
+    public Flattener(boolean used, String brand, String name) {
+        super(used, brand, name);
     }
 
     public double getFactor() {

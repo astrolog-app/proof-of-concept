@@ -1,12 +1,14 @@
 {
     "telescopes": [
         {
+            "used": true,
             "brand": "TS-OPTICS",
             "name": "Photoline 80mm",
             "focalLength": 480,
             "aperture": 80
         },
         {
+            "used": true,
             "brand": "Sky-Watcher",
             "name": "Esprit 100",
             "focalLength": 550,
@@ -15,6 +17,7 @@
     ],
     "cameras": [
         {
+            "used": true,
             "brand": "ZWO",
             "name": "ASI 2600MM",
             "chipSize": "APS_C",
@@ -22,6 +25,7 @@
             "megaPixel": 26.4
         },
         {
+            "used": true,
             "brand": "QHY",
             "name": "268C",
             "chipSize": "APS_C",
@@ -31,12 +35,14 @@
     ],
     "mounts": [
         {
+            "used": true,
             "brand": "ZWO",
             "name": "AM3"
         }
     ],
     "filters": [
         {
+            "used": true,
             "brand": "Optolong",
             "name": "l-eNhance",
             "bandType": "dual"
@@ -44,6 +50,7 @@
     ],
     "flatteners": [
         {
+            "used": true,
             "brand": "TS-OPTICS",
             "name": "0.79x Photoline",
             "factor": 0.79
@@ -51,6 +58,7 @@
     ],
     "accessoires": [
         {
+            "used": true,
             "brand": "Pegasus-Astro",
             "name": "PowerBox Advanced"
         }

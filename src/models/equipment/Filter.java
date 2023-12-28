@@ -5,8 +5,8 @@ public class Filter extends EquipmentItem {
 
     public Filter() {}
 
-    public Filter(String brand, String name) {
-        super(brand, name);
+    public Filter(boolean used, String brand, String name) {
+        super(used, brand, name);
     }
 
     public String getBandType() {
