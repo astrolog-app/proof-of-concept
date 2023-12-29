@@ -1,13 +1,15 @@
 package models.equipment;
 
+import java.util.UUID;
+
 public class Telescope extends EquipmentItem {
     private int focalLength;
     private int aperture;
 
     public Telescope() {}
 
-    public Telescope(boolean used, String name, String brand, int focalLength, int aperture) {
-        super(used, brand, name);
+    public Telescope(UUID id, boolean used, String name, String brand, int focalLength, int aperture) {
+        super(id, used, brand, name);
         this.focalLength = focalLength;
         this.aperture = aperture;
     }

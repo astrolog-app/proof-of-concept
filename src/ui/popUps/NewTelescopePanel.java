@@ -35,7 +35,7 @@ public class NewTelescopePanel extends JDialog {
         saveButton.addActionListener(e -> {
             int focalLength = Integer.parseInt(focalLengthField.getText());
             int aperture = Integer.parseInt(apertureField.getText());
-            Telescope telescope = new Telescope(true, nameField.getText(), "test", focalLength, aperture);
+            Telescope telescope = new Telescope(UUID.randomUUID(), true, nameField.getText(), "test", focalLength, aperture);
             equipment.addTelescope(telescope);
             //EquipmentStore.save(equipment, null);
             dispose();

@@ -1,5 +1,7 @@
 package models.equipment;
 
+import java.util.UUID;
+
 public class Camera extends EquipmentItem {
     private String chipSize;
     private int megaPixel;
@@ -7,8 +9,8 @@ public class Camera extends EquipmentItem {
 
     public Camera() {}
 
-    public Camera(boolean used, String name, String brand, String chipSize, int megaPixel, boolean rgb) {
-        super(used, brand, name);
+    public Camera(UUID id, boolean used, String name, String brand, String chipSize, int megaPixel, boolean rgb) {
+        super(id, used, brand, name);
         this.chipSize = chipSize;
         this.megaPixel = megaPixel;
         this.rgb = rgb;

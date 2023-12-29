@@ -1,12 +1,14 @@
 package models.equipment;
 
+import java.util.UUID;
+
 public class Filter extends EquipmentItem {
     private String bandType;
 
     public Filter() {}
 
-    public Filter(boolean used, String brand, String name) {
-        super(used, brand, name);
+    public Filter(UUID id, boolean used, String brand, String name) {
+        super(id, used, brand, name);
     }
 
     public String getBandType() {

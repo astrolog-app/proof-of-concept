@@ -1,6 +1,7 @@
 {
     "telescopes": [
         {
+            "id": "69359fdc-16ed-4476-b4f9-786bf22cd299",
             "used": true,
             "brand": "TS-OPTICS",
             "name": "Photoline 80mm",
@@ -8,6 +9,7 @@
             "aperture": 80
         },
         {
+            "id": "7133fa61-599d-425f-a2f3-2b04304f02d8",
             "used": true,
             "brand": "Sky-Watcher",
             "name": "Esprit 100",
@@ -17,6 +19,7 @@
     ],
     "cameras": [
         {
+            "id": "8d00c203-a73f-4a9c-ad3b-aa608aaa8f97",
             "used": true,
             "brand": "ZWO",
             "name": "ASI 2600MM",
@@ -25,9 +28,10 @@
             "megaPixel": 26.4
         },
         {
+            "id": "76a4468d-b33d-4285-b7ad-a936891a1291",
             "used": true,
-            "brand": "QHY",
-            "name": "268C",
+            "brand": "Nikon",
+            "name": "5500d",
             "chipSize": "APS_C",
             "rgb": true,
             "megaPixel": 26.4
@@ -35,6 +39,7 @@
     ],
     "mounts": [
         {
+            "id": "0c46ede3-a387-402f-b057-5a8471566d8f",
             "used": true,
             "brand": "ZWO",
             "name": "AM3"
@@ -42,6 +47,7 @@
     ],
     "filters": [
         {
+            "id": "b9177f55-02d6-40b3-8eb4-3ee939c0647d",
             "used": true,
             "brand": "Optolong",
             "name": "l-eNhance",
@@ -50,6 +56,7 @@
     ],
     "flatteners": [
         {
+            "id": "96f961e1-4fca-41b6-9990-2f7190bbb1d9",
             "used": true,
             "brand": "TS-OPTICS",
             "name": "0.79x Photoline",
@@ -58,6 +65,7 @@
     ],
     "accessoires": [
         {
+            "id": "dd6ecce2-7c6f-4229-8478-e77899b21251",
             "used": true,
             "brand": "Pegasus-Astro",
             "name": "PowerBox Advanced"
