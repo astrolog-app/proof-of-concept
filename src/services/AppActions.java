@@ -7,27 +7,34 @@ import models.settings.AppTheme;
 import services.fileHandler.ConfigurationStore;
 import ui.MainUI;
 import ui.startUp.welcome.WelcomeDialogue;
+
+import javax.swing.*;
 import java.util.logging.Logger;
 
 public class AppActions {
     private static final Logger logger = AppLogger.getLogger();
-    private final AppConfig appConfig = ConfigurationStore.loadAppConfig();
+    private final AppConfig appConfig;
 
+    public AppActions() {
+        appConfig = ConfigurationStore.loadAppConfig();
+    }
+
+    /**
+     * initializes the application and looks if the
+     * application is started for the first time
+     */
     public void initialize() {
-        assert appConfig != null;
+        setApplicationTheme();
 
-        try {
-            setApplicationTheme();
-
+        if (appConfig != null) {
             logger.info("starting MainUI");
 
-            new MainUI(appConfig);
-        } catch (Exception e) {
-            logger.warning("couldn't find config file:" + "\t" + e.getMessage());
-
+            SwingUtilities.invokeLater(() -> new MainUI(appConfig));
+        } else {
+            logger.info("appConfig is null");
             logger.info("starting WelcomeDialogue");
-            FlatLightLaf.setup();
-            new WelcomeDialogue();
+
+            SwingUtilities.invokeLater(WelcomeDialogue::new);
         }
     }
 
@@ -46,16 +53,19 @@ public class AppActions {
         System.exit(0);
     }
 
-    private void setApplicationTheme() throws Exception {
-        assert appConfig != null;
-
-        if (appConfig.getTheme() == AppTheme.DARK) {
-            FlatDarkLaf.setup();
-        } else if (appConfig.getTheme() == AppTheme.LIGHT){
-            FlatLightLaf.setup();
+    /**
+     * sets the application theme based on the config file;
+     * if it doesn't have a theme defined it sets it to light mode
+     */
+    private void setApplicationTheme() {
+        if (appConfig != null) {
+            if (appConfig.getTheme() == AppTheme.DARK) {
+                FlatDarkLaf.setup();
+            } else {
+                FlatLightLaf.setup();
+            }
         } else {
             FlatLightLaf.setup();
-            throw new Exception();
         }
     }
 }
