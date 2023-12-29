@@ -10,6 +10,8 @@ import ui.customComponents.ImagingSessionTable;
 import utils.Images;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.util.List;
 
 public class LogPanel {
@@ -26,12 +28,13 @@ public class LogPanel {
     private JCheckBox enableRegularBackupsCheckBox;
     private JButton configureRegularBackupsButton;
     private ImagingSessionTable imagingSessionTable1;
-    private JTextField textField1;
+    private JTextField searchField;
     private JButton deleteButton;
     private JButton detailsButton;
     private JButton xMarklButton;
     private JButton editButton;
     private JButton imagingSessionSettings;
+    private JButton searchButton;
     private JButton saveBackupConfigButton;
 
     public LogPanel(AppConfig appConfig, Equipment equipment) {
@@ -51,6 +54,10 @@ public class LogPanel {
         ImageIcon settingsIcon = Images.getThemeBasedIcon(appConfig, "settings", 18, 18);
         imagingSessionSettings.setIcon(settingsIcon);
         imagingSessionSettings.setText("");
+
+        ImageIcon searchIcon = Images.getThemeBasedIcon(appConfig, "right_arrow", 18, 18);
+        searchButton.setIcon(searchIcon);
+        searchButton.setText("");
 
         handleActions();
     }
@@ -75,9 +82,10 @@ public class LogPanel {
                 imagingSessions
         ));
         xMarklButton.addActionListener(e -> {
-            textField1.setText("");
+            searchField.setText("");
             search();
         });
+        searchButton.addActionListener(e -> search());
     }
 
     private void createUIComponents() {
@@ -89,7 +97,17 @@ public class LogPanel {
     }
 
     private void search() {
+        TableRowSorter<TableModel> sorter = imagingSessionTable1.getSorter();
+        String searchText = searchField.getText();
 
+        if (searchText.trim().isEmpty()) {
+            sorter.setRowFilter(null); // If the search text is empty, show all rows
+        } else {
+            // Use the filter to find matching rows based on the search text
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText));
+        }
+
+//        TODO: update data in the tableModel
     }
 
     public void updateTableButtonState() {

@@ -8,7 +8,6 @@ import models.settings.LoggerColumns;
 import models.equipment.Equipment;
 import models.settings.ImagingSessionConfig;
 import services.fileHandler.ConfigurationStore;
-import services.fileHandler.ImagingSessionStore;
 import ui.corecomponents.LogPanel;
 
 import javax.swing.*;
@@ -173,5 +172,9 @@ public class ImagingSessionTable extends JTable {
 
     public ImagingSessionTableModel getTableModel() {
         return tableModel;
+    }
+
+    public TableRowSorter<TableModel> getSorter() {
+        return sorter;
     }
 }
