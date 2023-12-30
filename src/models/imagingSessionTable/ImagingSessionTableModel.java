@@ -1,5 +1,7 @@
 package models.imagingSessionTable;
 
+import models.equipment.Equipment;
+import models.equipment.EquipmentItem;
 import models.imagingSessions.ImagingSession;
 import models.settings.LoggerColumns;
 import services.fileHandler.ConfigurationStore;
@@ -13,10 +15,12 @@ import java.util.List;
 public class ImagingSessionTableModel extends AbstractTableModel {
     private final List<ImagingSession> data;
     private final List<LoggerColumns> selectedColumns;
+    private final Equipment equipment;
 
-    public ImagingSessionTableModel(List<ImagingSession> imagingSessions) {
+    public ImagingSessionTableModel(List<ImagingSession> imagingSessions, Equipment equipment) {
         data = imagingSessions;
         selectedColumns = ConfigurationStore.loadImagingSessionConfig().getSelectedColumns();
+        this.equipment = equipment;
     }
 
     public void addSession(ImagingSession session) {
@@ -69,7 +73,7 @@ public class ImagingSessionTableModel extends AbstractTableModel {
                 case TOTAL_EXPOSURE -> formatDouble(calculateTotalExposure(is.getLightFrame().getTotalSubs(), is.getLightFrame().getSubLength()));
                 case INTEGRATED_SUBS -> formatDouble(is.getLightFrame().getIntegratedSubs());
                 case INTEGRATED_EXPOSURE -> formatDouble(calculateTotalExposure(is.getLightFrame().getIntegratedSubs(), is.getLightFrame().getSubLength()));
-                case FILTER -> formatString(is.getLightFrame().getFilter());
+                case FILTER -> formatString(buildString(is.getLightFrame().getFilter(equipment)));
                 case GAIN -> formatDouble(is.getLightFrame().getGain());
                 case OFFSET -> formatDouble(is.getLightFrame().getOffset());
                 case CAMERA_TEMP -> formatDouble(is.getLightFrame().getCameraTemp());
@@ -77,11 +81,19 @@ public class ImagingSessionTableModel extends AbstractTableModel {
                 case AVERAGE_SEEING -> formatDouble(is.getLightFrame().getAverageSeeing());
                 case AVERAGE_CLOUD_COVER -> formatDouble(is.getLightFrame().getAverageCloudCover());
                 case AVERAGE_MOON -> formatDouble(is.getLightFrame().getAverageMoon());
-                case TELESCOPE -> formatString(is.getLightFrame().getTelescope());
-                case FLATTENER -> formatString(is.getLightFrame().getFlattener());
-                case CAMERA -> formatString(is.getLightFrame().getCamera());
+                case TELESCOPE -> formatString(buildString(is.getLightFrame().getTelescope(equipment)));
+                case FLATTENER -> formatString(buildString(is.getLightFrame().getFlattener(equipment)));
+                case CAMERA -> formatString(buildString(is.getLightFrame().getCamera(equipment)));
                 case NOTES -> formatString(is.getLightFrame().getNotes());
             };
+        }
+
+        return null;
+    }
+
+    private String buildString(Object o) {
+        if (o != null) {
+            return ((EquipmentItem) o).getBrand() + " " + ((EquipmentItem) o).getName();
         }
 
         return null;

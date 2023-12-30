@@ -1,10 +1,14 @@
 package models.imagingSessions;
 
+import models.equipment.*;
+
+import java.util.UUID;
+
 public class LightFrame extends ImagingFrame {
     private String target;
     private Double subLength;
     private Double integratedSubs;
-    private String filter;
+    private UUID filterID;
     private Double gain;
     private Double offset;
     private Double cameraTemp;
@@ -12,9 +16,9 @@ public class LightFrame extends ImagingFrame {
     private Double averageSeeing;
     private Double averageCloudCover;
     private Double averageMoon;
-    private String telescope;
-    private String flattener;
-    private String camera;
+    private UUID telescopeID;
+    private UUID flattenerID;
+    private UUID cameraID;
     private String notes;
 
     public LightFrame() {}
@@ -44,11 +48,17 @@ public class LightFrame extends ImagingFrame {
         this.integratedSubs = integratedSubs;
     }
 
-    public String getFilter() {
-        return filter;
+    public Filter getFilter(Equipment equipment) {
+        for (Filter f : equipment.getFilters()) {
+            if (f.getId().equals(filterID)) {
+                return f;
+            }
+        }
+
+        return null;
     }
-    public void setFilter(String filter) {
-        this.filter = filter;
+    public void setFilterID(UUID filterID) {
+        this.filterID = filterID;
     }
 
     public Double getGain() {
@@ -100,25 +110,43 @@ public class LightFrame extends ImagingFrame {
         this.averageMoon = averageMoon;
     }
 
-    public String getTelescope() {
-        return telescope;
+    public Telescope getTelescope(Equipment equipment) {
+        for (Telescope t : equipment.getTelescopes()) {
+            if (t.getId().equals(telescopeID)) {
+                return t;
+            }
+        }
+
+        return null;
     }
-    public void setTelescope(String telescope) {
-        this.telescope = telescope;
+    public void setTelescopeID(UUID telescopeID) {
+        this.telescopeID = telescopeID;
     }
 
-    public String getFlattener() {
-        return flattener;
+    public Flattener getFlattener(Equipment equipment) {
+        for (Flattener f : equipment.getFlatteners()) {
+            if (f.getId().equals(flattenerID)) {
+                return f;
+            }
+        }
+
+        return null;
     }
-    public void setFlattener(String flattener) {
-        this.flattener = flattener;
+    public void setFlattenerID(UUID flattenerID) {
+        this.flattenerID = flattenerID;
     }
 
-    public String getCamera() {
-        return camera;
+    public Camera getCamera(Equipment equipment) {
+        for (Camera c : equipment.getCameras()) {
+            if (c.getId().equals(cameraID)) {
+                return c;
+            }
+        }
+
+        return null;
     }
-    public void setCamera(String camera) {
-        this.camera = camera;
+    public void setCameraID(UUID cameraID) {
+        this.cameraID = cameraID;
     }
 
     public String getNotes() {

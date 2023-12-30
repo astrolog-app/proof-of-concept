@@ -34,12 +34,12 @@ public class ImagingSessionTable extends JTable {
         isConfig = ConfigurationStore.loadImagingSessionConfig();
         this.logPanel = logPanel;
         this.equipment = equipment;
-        this.tableModel = new ImagingSessionTableModel(imagingSessions);
+        this.tableModel = new ImagingSessionTableModel(imagingSessions, equipment);
         this.imagingSessions = imagingSessions;
 
         createTable();
         setColumnsWidth();
-//        sortRows();
+        sortRows();
         handleActions();
     }
 

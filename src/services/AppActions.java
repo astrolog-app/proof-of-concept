@@ -46,6 +46,7 @@ public class AppActions {
 
         try {
             builder.start();
+
             logger.info("restarted application");
         } catch (Exception e) {
             logger.severe("couldn't restart application:" + "\t" + e.getMessage());
@@ -58,14 +59,11 @@ public class AppActions {
      * if it doesn't have a theme defined it sets it to light mode
      */
     private void setApplicationTheme() {
-        if (appConfig != null) {
-            if (appConfig.getTheme() == AppTheme.DARK) {
-                FlatDarkLaf.setup();
-            } else {
-                FlatLightLaf.setup();
-            }
-        } else {
-            FlatLightLaf.setup();
+        if (appConfig != null && appConfig.getTheme() == AppTheme.DARK) {
+            FlatDarkLaf.setup();
+            return;
         }
+
+        FlatLightLaf.setup();
     }
 }
