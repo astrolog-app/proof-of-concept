@@ -11,6 +11,8 @@ import services.fileHandler.ConfigurationStore;
 import ui.corecomponents.LogPanel;
 
 import javax.swing.*;
+import javax.swing.event.RowSorterEvent;
+import javax.swing.event.RowSorterListener;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -29,6 +31,8 @@ public class ImagingSessionTable extends JTable {
     private final ImagingSessionTableModel tableModel;
     private TableRowSorter<TableModel> sorter;
     private final List<ImagingSession> imagingSessions;
+    private LoggerColumns sortedColumn;
+    private SortOrder sortingDirection;
 
     public ImagingSessionTable(Equipment equipment, LogPanel logPanel, List<ImagingSession> imagingSessions) {
         isConfig = ConfigurationStore.loadImagingSessionConfig();
@@ -68,21 +72,19 @@ public class ImagingSessionTable extends JTable {
     }
 
     private void sortRows() {
-        LoggerColumns defaultSortedColumns;
-        SortOrder columnSortingType;
         if (isConfig != null) {
-            defaultSortedColumns = isConfig.getDefaultSortedColumn();
-            columnSortingType = isConfig.getColumnSortingType();
+            sortedColumn = isConfig.getDefaultSortedColumn();
+            sortingDirection = isConfig.getColumnSortingType();
         } else  {
-            defaultSortedColumns = LoggerColumns.DATE;
-            columnSortingType = SortOrder.DESCENDING;
+            sortedColumn = LoggerColumns.DATE;
+            sortingDirection = SortOrder.DESCENDING;
         }
-        int defaultSortedColumnInt = tableModel.getColumnAt(defaultSortedColumns);
+        int defaultSortedColumnInt = tableModel.getColumnAt(sortedColumn);
 
         setAutoCreateRowSorter(true);
         sorter = (TableRowSorter<TableModel>) getRowSorter();
         updateSortComparators();
-        sorter.setSortKeys(List.of(new RowSorter.SortKey(defaultSortedColumnInt, columnSortingType)));
+        sorter.setSortKeys(List.of(new RowSorter.SortKey(defaultSortedColumnInt, sortingDirection)));
         setRowSorter(sorter);
     }
 
@@ -134,6 +136,16 @@ public class ImagingSessionTable extends JTable {
                 }
             }
         });
+
+        getRowSorter().addRowSorterListener(e -> {
+            updateSortingInfo();
+            tableModel.updateDataSorting(sortedColumn, sortingDirection);
+        });
+    }
+
+    private void updateSortingInfo() {
+//        sortedColumn =
+        sortingDirection = sorter.getSortKeys().get(0).getSortOrder();
     }
 
     private JPopupMenu createPopupMenu() {

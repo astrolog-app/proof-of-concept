@@ -3,11 +3,14 @@ package models.imagingSessionTable;
 import models.equipment.Equipment;
 import models.equipment.EquipmentItem;
 import models.imagingSessions.ImagingSession;
+import models.imagingSessions.LightFrame;
+import models.settings.ImagingSessionConfig;
 import models.settings.LoggerColumns;
 import services.fileHandler.ConfigurationStore;
 import services.fileHandler.ImagingSessionStore;
 import utils.Enums;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -25,23 +28,16 @@ public class ImagingSessionTableModel extends AbstractTableModel {
 
     public void addSession(ImagingSession session) {
         data.add(session);
-        fireTableRowsInserted(data.size() - 1, data.size() - 1);
+        fireTableDataChanged();
     }
 
     public void removeSession(ImagingSession session) {
-        int sessionIndex = -1;
-        for (int i = 0; i < data.size(); i++) {
-            if (session == data.get(i)) {
-                sessionIndex = i;
-                break;
-            }
-        }
-
         data.remove(session);
+        fireTableDataChanged();
+    }
 
-        if (sessionIndex != -1) {
-            fireTableRowsDeleted(sessionIndex, sessionIndex);
-        }
+    public void updateDataSorting(LoggerColumns sortedColumn, SortOrder sortingDirection) {
+
     }
 
     @Override
@@ -64,27 +60,28 @@ public class ImagingSessionTableModel extends AbstractTableModel {
         if (data != null) {
             ImagingSession is = data.get(rowIndex);
             LoggerColumns lc = selectedColumns.get(columnIndex);
+            LightFrame lf = is.getLightFrame();
 
             return switch (lc) {
-                case DATE -> formatString(is.getLightFrame().getDate());
-                case TARGET -> formatString(is.getLightFrame().getTarget());
-                case SUB_LENGTH -> formatDouble(is.getLightFrame().getSubLength());
-                case TOTAL_SUBS -> formatDouble(is.getLightFrame().getTotalSubs());
-                case TOTAL_EXPOSURE -> formatDouble(calculateTotalExposure(is.getLightFrame().getTotalSubs(), is.getLightFrame().getSubLength()));
-                case INTEGRATED_SUBS -> formatDouble(is.getLightFrame().getIntegratedSubs());
-                case INTEGRATED_EXPOSURE -> formatDouble(calculateTotalExposure(is.getLightFrame().getIntegratedSubs(), is.getLightFrame().getSubLength()));
-                case FILTER -> formatString(buildString(is.getLightFrame().getFilter(equipment)));
-                case GAIN -> formatDouble(is.getLightFrame().getGain());
-                case OFFSET -> formatDouble(is.getLightFrame().getOffset());
-                case CAMERA_TEMP -> formatDouble(is.getLightFrame().getCameraTemp());
-                case OUTSIDE_TEMP -> formatDouble(is.getLightFrame().getOutsideTemp());
-                case AVERAGE_SEEING -> formatDouble(is.getLightFrame().getAverageSeeing());
-                case AVERAGE_CLOUD_COVER -> formatDouble(is.getLightFrame().getAverageCloudCover());
-                case AVERAGE_MOON -> formatDouble(is.getLightFrame().getAverageMoon());
-                case TELESCOPE -> formatString(buildString(is.getLightFrame().getTelescope(equipment)));
-                case FLATTENER -> formatString(buildString(is.getLightFrame().getFlattener(equipment)));
-                case CAMERA -> formatString(buildString(is.getLightFrame().getCamera(equipment)));
-                case NOTES -> formatString(is.getLightFrame().getNotes());
+                case DATE -> formatString(lf.getDate());
+                case TARGET -> formatString(lf.getTarget());
+                case SUB_LENGTH -> formatDouble(lf.getSubLength());
+                case TOTAL_SUBS -> formatDouble(lf.getTotalSubs());
+                case TOTAL_EXPOSURE -> formatDouble(calculateTotalExposure(lf.getTotalSubs(), lf.getSubLength()));
+                case INTEGRATED_SUBS -> formatDouble(lf.getIntegratedSubs());
+                case INTEGRATED_EXPOSURE -> formatDouble(calculateTotalExposure(lf.getIntegratedSubs(), lf.getSubLength()));
+                case FILTER -> formatString(buildString(lf.getFilter(equipment)));
+                case GAIN -> formatDouble(lf.getGain());
+                case OFFSET -> formatDouble(lf.getOffset());
+                case CAMERA_TEMP -> formatDouble(lf.getCameraTemp());
+                case OUTSIDE_TEMP -> formatDouble(lf.getOutsideTemp());
+                case AVERAGE_SEEING -> formatDouble(lf.getAverageSeeing());
+                case AVERAGE_CLOUD_COVER -> formatDouble(lf.getAverageCloudCover());
+                case AVERAGE_MOON -> formatDouble(lf.getAverageMoon());
+                case TELESCOPE -> formatString(buildString(lf.getTelescope(equipment)));
+                case FLATTENER -> formatString(buildString(lf.getFlattener(equipment)));
+                case CAMERA -> formatString(buildString(lf.getCamera(equipment)));
+                case NOTES -> formatString(lf.getNotes());
             };
         }
 
@@ -132,6 +129,7 @@ public class ImagingSessionTableModel extends AbstractTableModel {
     public ImagingSession getSession(int rowIndex) {
         if (rowIndex == -1)
             return null;
+
         return data.get(rowIndex);
     }
 
