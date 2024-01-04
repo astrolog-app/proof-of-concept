@@ -12,6 +12,8 @@ import utils.Images;
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 public class LogPanel {
@@ -31,7 +33,7 @@ public class LogPanel {
     private JTextField searchField;
     private JButton deleteButton;
     private JButton detailsButton;
-    private JButton xMarklButton;
+    private JButton xMarkButton;
     private JButton editButton;
     private JButton imagingSessionSettings;
     private JButton searchButton;
@@ -48,8 +50,8 @@ public class LogPanel {
         deleteButton.setText("");
 
         ImageIcon xMarkIcon = Images.getThemeBasedIcon(appConfig, "x-mark", 18, 18);
-        xMarklButton.setIcon(xMarkIcon);
-        xMarklButton.setText("");
+        xMarkButton.setIcon(xMarkIcon);
+        xMarkButton.setText("");
 
         ImageIcon settingsIcon = Images.getThemeBasedIcon(appConfig, "settings", 18, 18);
         imagingSessionSettings.setIcon(settingsIcon);
@@ -81,11 +83,26 @@ public class LogPanel {
                         .getSession(imagingSessionTable1.getSelectedRow()),
                 imagingSessions
         ));
-        xMarklButton.addActionListener(e -> {
+        xMarkButton.addActionListener(e -> {
             searchField.setText("");
             search();
         });
         searchButton.addActionListener(e -> search());
+
+        searchField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    search();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
     }
 
     private void createUIComponents() {
