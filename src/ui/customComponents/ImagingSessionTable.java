@@ -1,7 +1,6 @@
 package ui.customComponents;
 
 import controllers.ImagingSessionController;
-import models.imagingSessionTable.ImagingSessionColumnModelListener;
 import models.imagingSessionTable.ImagingSessionTableModel;
 import models.imagingSessions.ImagingSession;
 import models.settings.LoggerColumns;
@@ -11,9 +10,6 @@ import services.fileHandler.ConfigurationStore;
 import ui.corecomponents.LogPanel;
 
 import javax.swing.*;
-import javax.swing.event.RowSorterEvent;
-import javax.swing.event.RowSorterListener;
-import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
@@ -52,11 +48,10 @@ public class ImagingSessionTable extends JTable {
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setModel(tableModel);
 
-        TableColumnModel columnModel = getColumnModel();
-        columnModel.addColumnModelListener(new ImagingSessionColumnModelListener());
-
         setRowHeight(45);
         showHorizontalLines = true;
+
+        setAutoCreateRowSorter(true);
     }
 
     private void setColumnsWidth() {
@@ -81,9 +76,8 @@ public class ImagingSessionTable extends JTable {
         }
         int defaultSortedColumnInt = tableModel.getColumnAt(sortedColumn);
 
-        setAutoCreateRowSorter(true);
         sorter = (TableRowSorter<TableModel>) getRowSorter();
-        updateSortComparators();
+//        updateSortComparators();
         sorter.setSortKeys(List.of(new RowSorter.SortKey(defaultSortedColumnInt, sortingDirection)));
         setRowSorter(sorter);
     }
@@ -137,14 +131,21 @@ public class ImagingSessionTable extends JTable {
             }
         });
 
-        getRowSorter().addRowSorterListener(e -> {
-            updateSortingInfo();
-            tableModel.updateDataSorting(sortedColumn, sortingDirection);
+        getTableHeader().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int columnIndex = columnAtPoint(e.getPoint());
+                System.out.println("Column " + columnIndex + " clicked");
+                updateSortingInfo();
+                System.out.println(sortedColumn);
+                System.out.println(sortingDirection);
+                tableModel.updateDataSorting(sortedColumn, sortingDirection);
+            }
         });
     }
 
     private void updateSortingInfo() {
-//        sortedColumn =
+        sortedColumn = tableModel.getSelectedColumns().get(sorter.getSortKeys().get(0).getColumn());
         sortingDirection = sorter.getSortKeys().get(0).getSortOrder();
     }
 
