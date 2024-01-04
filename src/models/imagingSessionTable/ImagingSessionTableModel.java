@@ -4,10 +4,8 @@ import models.equipment.Equipment;
 import models.equipment.EquipmentItem;
 import models.imagingSessions.ImagingSession;
 import models.imagingSessions.LightFrame;
-import models.settings.ImagingSessionConfig;
 import models.settings.LoggerColumns;
 import services.fileHandler.ConfigurationStore;
-import services.fileHandler.ImagingSessionStore;
 import utils.Enums;
 
 import javax.swing.*;

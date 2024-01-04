@@ -2,6 +2,7 @@
   <library name="lib">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/flatlaf-3.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jfreechart-1.5.3-javadoc.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
