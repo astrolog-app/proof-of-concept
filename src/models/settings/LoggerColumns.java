@@ -18,6 +18,7 @@ public enum LoggerColumns {
     AVERAGE_MOON,
     TELESCOPE,
     FLATTENER,
+    MOUNT,
     CAMERA,
     NOTES;
 }

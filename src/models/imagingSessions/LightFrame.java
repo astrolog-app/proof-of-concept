@@ -18,6 +18,7 @@ public class LightFrame extends ImagingFrame {
     private Double averageMoon;
     private UUID telescopeID;
     private UUID flattenerID;
+    private UUID mountID;
     private UUID cameraID;
     private String notes;
 
@@ -134,6 +135,19 @@ public class LightFrame extends ImagingFrame {
     }
     public void setFlattenerID(UUID flattenerID) {
         this.flattenerID = flattenerID;
+    }
+
+    public Mount getMount(Equipment equipment) {
+        for (Mount m : equipment.getMounts()) {
+            if (m.getId().equals(mountID)) {
+                return m;
+            }
+        }
+
+        return null;
+    }
+    public void setMountID(UUID mountID) {
+        this.mountID = mountID;
     }
 
     public Camera getCamera(Equipment equipment) {

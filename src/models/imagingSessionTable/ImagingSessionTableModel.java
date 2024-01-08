@@ -78,6 +78,7 @@ public class ImagingSessionTableModel extends AbstractTableModel {
                 case AVERAGE_MOON -> formatDouble(lf.getAverageMoon());
                 case TELESCOPE -> formatString(buildString(lf.getTelescope(equipment)));
                 case FLATTENER -> formatString(buildString(lf.getFlattener(equipment)));
+                case MOUNT -> formatString(buildString(lf.getMount(equipment)));
                 case CAMERA -> formatString(buildString(lf.getCamera(equipment)));
                 case NOTES -> formatString(lf.getNotes());
             };
