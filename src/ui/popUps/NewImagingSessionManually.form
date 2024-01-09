@@ -165,7 +165,7 @@
                               <text value=""/>
                             </properties>
                           </component>
-                          <component id="9520a" class="javax.swing.JComboBox" binding="filter">
+                          <component id="9520a" class="javax.swing.JComboBox" binding="filter" custom-create="true">
                             <constraints>
                               <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
@@ -358,13 +358,13 @@
                               <text value="Equipment"/>
                             </properties>
                           </component>
-                          <component id="b7b52" class="javax.swing.JComboBox" binding="telescope">
+                          <component id="b7b52" class="javax.swing.JComboBox" binding="telescope" custom-create="true">
                             <constraints>
                               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties/>
                           </component>
-                          <component id="1c920" class="javax.swing.JComboBox" binding="camera">
+                          <component id="1c920" class="javax.swing.JComboBox" binding="camera" custom-create="true">
                             <constraints>
                               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
@@ -394,7 +394,7 @@
                               <text value=""/>
                             </properties>
                           </component>
-                          <component id="ebec9" class="javax.swing.JComboBox" binding="flattener">
+                          <component id="ebec9" class="javax.swing.JComboBox" binding="flattener" custom-create="true">
                             <constraints>
                               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>
@@ -416,7 +416,7 @@
                               <text value="Mount:"/>
                             </properties>
                           </component>
-                          <component id="dfc4e" class="javax.swing.JComboBox" binding="mount">
+                          <component id="dfc4e" class="javax.swing.JComboBox" binding="mount" custom-create="true">
                             <constraints>
                               <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                             </constraints>

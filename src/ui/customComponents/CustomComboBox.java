@@ -1,17 +1,15 @@
 package ui.customComponents;
 
-import ui.popUps.NewTelescopePanel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CustomComboBox extends JComboBox {
+public class CustomComboBox extends JComboBox<String> {
     public CustomComboBox(List<String> content, Class<? extends JDialog> newPanelClass) {
         addItem(null);
-        addItem("Add New");
+        addItem("Add New...");
         for (String s : content) {
             addItem(s);
         }
@@ -21,7 +19,7 @@ public class CustomComboBox extends JComboBox {
         addActionListener(e -> removeItem(null));
 
         addActionListener(e -> {
-            if (getSelectedItem().equals("Add New")) {
+            if (getSelectedItem() != null && getSelectedItem().equals("Add New...")) {
                 try {
                     newPanelClass.getDeclaredConstructor().newInstance();
                 } catch (Exception ex) {
@@ -37,7 +35,7 @@ public class CustomComboBox extends JComboBox {
         Map<String, Object> styleItem2 = new HashMap<>();
         styleItem2.put("Font", new Font(null, Font.BOLD, 14));
         styleItem2.put("Color", null);
-        itemStyles.put("Add New", styleItem2);
+        itemStyles.put("Add New...", styleItem2);
 
         comboBox.setRenderer(new DefaultListCellRenderer() {
             @Override

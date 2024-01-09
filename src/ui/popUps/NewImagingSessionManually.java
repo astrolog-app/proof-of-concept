@@ -4,6 +4,7 @@ import models.equipment.*;
 import models.imagingSessionTable.ImagingSessionTableModel;
 import models.imagingSessions.*;
 import services.fileHandler.ImagingSessionStore;
+import ui.customComponents.CustomComboBox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -78,7 +79,6 @@ public class NewImagingSessionManually extends JDialog {
         updateBiasPanelState();
 
         setSpinnerModels();
-        setComboBoxModels();
 
         if (session != null) {
             fillOutPanel(session);
@@ -155,17 +155,6 @@ public class NewImagingSessionManually extends JDialog {
 
         chipTemp.setModel(new SpinnerNumberModel(0, 0, 10000, 0.1));
         avgSeeing.setModel(new SpinnerNumberModel(0, 0, 10000, 0.01));
-    }
-
-    private void setComboBoxModels() {
-        List<String> filterNames = new ArrayList<>();
-        for (Filter f : equipment.getFilters()) {
-            filterNames.add(f.getName());
-        }
-        filter.addItem("Add New");
-        for (String filter : filterNames) {
-            this.filter.addItem(filter);
-        }
     }
 
     private void handleActions(ImagingSession session) {
@@ -285,5 +274,38 @@ public class NewImagingSessionManually extends JDialog {
             totalSubsFlatLabel.setForeground(Color.GRAY);
             subLengthFlatLabel.setForeground(Color.GRAY);
         }
+    }
+
+    private void createUIComponents() {
+        List<String> filterNames = new ArrayList<>();
+        for (Filter f : equipment.getFilters()) {
+            filterNames.add(f.getName());
+        }
+
+        List<String> telescopeNames = new ArrayList<>();
+        for (Telescope t : equipment.getTelescopes()) {
+            telescopeNames.add(t.getName());
+        }
+
+        List<String> cameraNames = new ArrayList<>();
+        for (Camera c : equipment.getCameras()) {
+            cameraNames.add(c.getName());
+        }
+
+        List<String> flattenerNames = new ArrayList<>();
+        for (Flattener f : equipment.getFlatteners()) {
+            flattenerNames.add(f.getName());
+        }
+
+        List<String> mountNames = new ArrayList<>();
+        for (Mount m : equipment.getMounts()) {
+            mountNames.add(m.getName());
+        }
+
+        filter = new CustomComboBox(filterNames, NewTelescopePanel.class);
+        telescope = new CustomComboBox(telescopeNames, NewTelescopePanel.class);
+        camera = new CustomComboBox(cameraNames, NewTelescopePanel.class);
+        flattener = new CustomComboBox(flattenerNames, NewTelescopePanel.class);
+        mount =  new CustomComboBox(mountNames, NewTelescopePanel.class);
     }
 }
