@@ -10,6 +10,7 @@ import services.fileHandler.ConfigurationStore;
 import ui.corecomponents.LogPanel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
@@ -47,6 +48,7 @@ public class ImagingSessionTable extends JTable {
         setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setModel(tableModel);
+        setDefaultRenderer(Object.class, new CustomRowRenderer());
 
         setRowHeight(45);
         showHorizontalLines = true;
@@ -177,6 +179,28 @@ public class ImagingSessionTable extends JTable {
         popupMenu.add(menuItem5);
 
         return popupMenu;
+    }
+
+    private static class CustomRowRenderer extends DefaultTableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+            if (isSelected) {
+                // Set the background color for selected rows
+                component.setBackground(table.getSelectionBackground());
+            } else {
+                Color two = new Color(110, 110, 110, 110);
+                // Check a condition to determine the color of the row
+                if (row % 2 == 0) {
+                    component.setBackground(two);
+                } else {
+                    component.setBackground(null);
+                }
+            }
+
+            return component;
+        }
     }
 
     public void setImagingSessionController(ImagingSessionController imagingSessionController) {
