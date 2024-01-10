@@ -1,12 +1,10 @@
 package ui.corecomponents;
 
 import models.equipment.Equipment;
-import services.fileHandler.EquipmentStore;
-import ui.popUps.NewTelescopePanel;
+import models.equipment.EquipmentType;
+import ui.popUps.NewEquipmentItemPanel;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class EquipmentPanel {
     private JPanel mainPanel;
@@ -19,7 +17,7 @@ public class EquipmentPanel {
     private JLabel placeHolder1;
 
     public EquipmentPanel(Equipment equipment) {
-        newTelescopeButton.addActionListener(e -> new NewTelescopePanel(equipment));
+        newTelescopeButton.addActionListener(e -> new NewEquipmentItemPanel(EquipmentType.TELESCOPE, equipment));
     }
 
     public JPanel getPanel() {

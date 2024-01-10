@@ -36,7 +36,6 @@ public class NewImagingSessionManually extends JDialog {
     private JSpinner totalSubsBias;
     private JButton saveButton;
     private JButton cancelButton;
-    private JComboBox filter;
     private JSpinner temp;
     private JSpinner avgSeeing;
     private JComboBox telescope;
@@ -277,35 +276,10 @@ public class NewImagingSessionManually extends JDialog {
     }
 
     private void createUIComponents() {
-        List<String> filterNames = new ArrayList<>();
-        for (Filter f : equipment.getFilters()) {
-            filterNames.add(f.getName());
-        }
-
-        List<String> telescopeNames = new ArrayList<>();
-        for (Telescope t : equipment.getTelescopes()) {
-            telescopeNames.add(t.getName());
-        }
-
-        List<String> cameraNames = new ArrayList<>();
-        for (Camera c : equipment.getCameras()) {
-            cameraNames.add(c.getName());
-        }
-
-        List<String> flattenerNames = new ArrayList<>();
-        for (Flattener f : equipment.getFlatteners()) {
-            flattenerNames.add(f.getName());
-        }
-
-        List<String> mountNames = new ArrayList<>();
-        for (Mount m : equipment.getMounts()) {
-            mountNames.add(m.getName());
-        }
-
-        filter = new CustomComboBox(filterNames, NewTelescopePanel.class);
-        telescope = new CustomComboBox(telescopeNames, NewTelescopePanel.class);
-        camera = new CustomComboBox(cameraNames, NewTelescopePanel.class);
-        flattener = new CustomComboBox(flattenerNames, NewTelescopePanel.class);
-        mount =  new CustomComboBox(mountNames, NewTelescopePanel.class);
+//        filter = new CustomComboBox(filterNames, EquipmentType.TELESCOPE, equipment);
+        telescope = new CustomComboBox(EquipmentType.TELESCOPE, equipment);
+        camera = new CustomComboBox(EquipmentType.CAMERA, equipment);
+        flattener = new CustomComboBox(EquipmentType.FLATTENER, equipment);
+        mount =  new CustomComboBox(EquipmentType.MOUNT, equipment);
     }
 }
