@@ -1,9 +1,11 @@
 package ui;
 
+import models.license.Licence;
 import models.settings.AppConfig;
 import models.equipment.Equipment;
 import services.fileHandler.EquipmentStore;
 import ui.corecomponents.*;
+import utils.Enums;
 import utils.Paths;
 import utils.Images;
 
@@ -11,7 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainUI extends JFrame {
-    public MainUI(AppConfig appConfig) {
+    public MainUI(Licence licence, AppConfig appConfig) {
         Equipment equipment = EquipmentStore.load();
 
         Image img = Toolkit.getDefaultToolkit().getImage(Paths.IMAGE_PATH + "app_logo.png");
@@ -47,7 +49,7 @@ public class MainUI extends JFrame {
         add(tabbedPane);
 
         setVisible(true);
-        setTitle("AstroLog Ultimate");
+        setTitle("AstroLog " + Enums.enumToString(licence.getLicenceType()));
         setMinimumSize(new Dimension(650, 500));
         if (appConfig.getStartInFullscreen()) {
             setExtendedState(JFrame.MAXIMIZED_BOTH);

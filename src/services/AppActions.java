@@ -2,9 +2,11 @@ package services;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import models.license.Licence;
 import models.settings.AppConfig;
 import models.settings.AppTheme;
 import services.fileHandler.ConfigurationStore;
+import services.fileHandler.LicenseStore;
 import ui.MainUI;
 import ui.startUp.welcome.WelcomeDialogue;
 
@@ -13,9 +15,11 @@ import java.util.logging.Logger;
 
 public class AppActions {
     private static final Logger logger = AppLogger.getLogger();
+    private final Licence licence;
     private final AppConfig appConfig;
 
     public AppActions() {
+        licence = LicenseStore.load();
         appConfig = ConfigurationStore.loadAppConfig();
     }
 
@@ -29,9 +33,9 @@ public class AppActions {
         if (appConfig != null) {
             logger.info("starting MainUI");
 
-            SwingUtilities.invokeLater(() -> new MainUI(appConfig));
+            SwingUtilities.invokeLater(() -> new MainUI(licence, appConfig));
         } else {
-            logger.info("appConfig is null");
+            logger.info("licence is null");
             logger.info("starting WelcomeDialogue");
 
             SwingUtilities.invokeLater(WelcomeDialogue::new);
