@@ -17,6 +17,11 @@ public class LicenceChecker {
     }
 
     public void check() {
+        checkLicenceFile();
+        checkApiRequest();
+    }
+
+    private void checkLicenceFile() {
         if (licence == null || (licence.getLicenceKey() == null && licence.getLicenceType() != LicenceType.LITE)) {
             Timer timer = new Timer(750, e -> new LicenceRequest(parentFrame));
 
@@ -25,5 +30,9 @@ public class LicenceChecker {
         } else {
             parentFrame.setTitle("AstroLog " + Enums.enumToString(licence.getLicenceType()));
         }
+    }
+
+    private void checkApiRequest() {
+
     }
 }
