@@ -6,7 +6,7 @@ import models.license.Licence;
 import models.settings.AppConfig;
 import models.settings.AppTheme;
 import services.fileHandler.ConfigurationStore;
-import services.fileHandler.LicenseStore;
+import services.fileHandler.LicenceStore;
 import ui.MainUI;
 import ui.startUp.welcome.WelcomeDialogue;
 
@@ -19,7 +19,7 @@ public class AppActions {
     private final AppConfig appConfig;
 
     public AppActions() {
-        licence = LicenseStore.load();
+        licence = LicenceStore.load();
         appConfig = ConfigurationStore.loadAppConfig();
     }
 

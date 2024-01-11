@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-public class LicenseStore {
+public class LicenceStore {
     private static final Logger logger = AppLogger.getLogger();
 
     public static Licence load() {

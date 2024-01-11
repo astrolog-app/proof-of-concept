@@ -8,10 +8,6 @@ public class Licence {
 
     public Licence() {}
 
-    public Licence(LicenceType licenceType) {
-        this.licenceType = licenceType;
-    }
-
     public LicenceType getLicenceType() {
         return licenceType;
     }
