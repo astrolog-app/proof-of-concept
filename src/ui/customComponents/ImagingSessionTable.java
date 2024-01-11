@@ -190,12 +190,14 @@ public class ImagingSessionTable extends JTable {
                 // Set the background color for selected rows
                 component.setBackground(table.getSelectionBackground());
             } else {
-                Color two = new Color(110, 110, 110, 110);
-                // Check a condition to determine the color of the row
+                Color grey = new Color(110, 110, 110, 110);
+
+                // TODO: group ImagingSession's from the same project
+
                 if (row % 2 == 0) {
-                    component.setBackground(two);
-                } else {
                     component.setBackground(null);
+                } else {
+                    component.setBackground(grey);
                 }
             }
 

@@ -25,11 +25,6 @@ public class NewEquipmentItemPanel extends JDialog {
         List<String> brandList = new ArrayList<>(equipment.getAllBrands());
         Collections.sort(brandList);
 
-        setFontsAndColorsForItems(brandField);
-
-        brandField.addItem(null);
-        //brandField.addItem("Select Brand");
-        brandField.addItem("Add New Brand");
         for (String brand : brandList) {
             brandField.addItem(brand);
         }
@@ -56,46 +51,5 @@ public class NewEquipmentItemPanel extends JDialog {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
-    }
-
-    private static void setFontsAndColorsForItems(JComboBox<String> comboBox) {
-        // Create a map to store fonts and colors for each item
-        Map<String, Map<String, Object>> itemStyles = new HashMap<>();
-
-        // Set custom fonts and colors for specific items
-       // Map<String, Object> styleItem1 = new HashMap<>();
-       // styleItem1.put("Font", new Font(null, Font.PLAIN, 12));
-       // styleItem1.put("Color", null);
-       // itemStyles.put("Select Brand", styleItem1);
-
-        Map<String, Object> styleItem2 = new HashMap<>();
-        styleItem2.put("Font", new Font(null, Font.BOLD, 14));
-        styleItem2.put("Color", null);
-        itemStyles.put("Add New Brand", styleItem2);
-
-        // Set the custom renderer for the JComboBox
-        comboBox.setRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                Component component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-
-                // Set the font and color based on the item
-                if (value != null && itemStyles.containsKey(value.toString())) {
-                    Map<String, Object> style = itemStyles.get(value.toString());
-
-                    // Set the font
-                    if (style.containsKey("Font")) {
-                        component.setFont((Font) style.get("Font"));
-                    }
-
-                    // Set the color
-                    if (style.containsKey("Color")) {
-                        component.setForeground((Color) style.get("Color"));
-                    }
-                }
-
-                return component;
-            }
-        });
     }
 }

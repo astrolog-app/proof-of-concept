@@ -172,6 +172,10 @@ public class NewImagingSessionManually extends JDialog {
         flatCheckBox.addActionListener(e -> updateFlatPanelState());
         darkCheckBox.addActionListener(e -> updateDarkPanelState());
         biasCheckBox.addActionListener(e -> updateBiasPanelState());
+        changeImageFolder.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.showDialog(null, "Select Imaging Folder");
+        });
     }
 
     private ImagingSession createNewSession() {
@@ -217,19 +221,19 @@ public class NewImagingSessionManually extends JDialog {
             totalSubsDark.setEnabled(true);
             libraryDark.setEnabled(true);
 
-            darkFramesLabel.setForeground(null);
-            dateDarkLabel.setForeground(null);
-            totalSubsDarkLabel.setForeground(null);
-            libraryDarkLabel.setForeground(null);
+            darkFramesLabel.setEnabled(true);
+            dateDarkLabel.setEnabled(true);
+            totalSubsDarkLabel.setEnabled(true);
+            libraryDarkLabel.setEnabled(true);
         } else {
             dateDark.setEnabled(false);
             totalSubsDark.setEnabled(false);
             libraryDark.setEnabled(false);
 
-            darkFramesLabel.setForeground(Color.GRAY);
-            dateDarkLabel.setForeground(Color.GRAY);
-            totalSubsDarkLabel.setForeground(Color.GRAY);
-            libraryDarkLabel.setForeground(Color.GRAY);
+            darkFramesLabel.setEnabled(false);
+            dateDarkLabel.setEnabled(false);
+            totalSubsDarkLabel.setEnabled(false);
+            libraryDarkLabel.setEnabled(false);
         }
     }
 
@@ -239,19 +243,19 @@ public class NewImagingSessionManually extends JDialog {
             totalSubsBias.setEnabled(true);
             libraryBias.setEnabled(true);
 
-            biasFramesLabel.setForeground(null);
-            dateBiasLabel.setForeground(null);
-            totalSubsBiasLabel.setForeground(null);
-            libraryBiasLabel.setForeground(null);
+            biasFramesLabel.setEnabled(true);
+            dateBiasLabel.setEnabled(true);
+            totalSubsBiasLabel.setEnabled(true);
+            libraryBiasLabel.setEnabled(true);
         } else {
             dateBias.setEnabled(false);
             totalSubsBias.setEnabled(false);
             libraryBias.setEnabled(false);
 
-            biasFramesLabel.setForeground(Color.GRAY);
-            dateBiasLabel.setForeground(Color.GRAY);
-            totalSubsBiasLabel.setForeground(Color.GRAY);
-            libraryBiasLabel.setForeground(Color.GRAY);
+            biasFramesLabel.setEnabled(false);
+            dateBiasLabel.setEnabled(false);
+            totalSubsBiasLabel.setEnabled(false);
+            libraryBiasLabel.setEnabled(false);
         }
     }
 
@@ -260,18 +264,18 @@ public class NewImagingSessionManually extends JDialog {
             dateFlat.setEnabled(true);
             subLengthFlat.setEnabled(true);
             totalSubsFlat.setEnabled(true);
-            flatFramesLabel.setForeground(null);
-            dateFlatLabel.setForeground(null);
-            totalSubsFlatLabel.setForeground(null);
-            subLengthFlatLabel.setForeground(null);
+            flatFramesLabel.setEnabled(true);
+            dateFlatLabel.setEnabled(true);
+            totalSubsFlatLabel.setEnabled(true);
+            subLengthFlatLabel.setEnabled(true);
         } else {
             dateFlat.setEnabled(false);
             subLengthFlat.setEnabled(false);
             totalSubsFlat.setEnabled(false);
-            flatFramesLabel.setForeground(Color.GRAY);
-            dateFlatLabel.setForeground(Color.GRAY);
-            totalSubsFlatLabel.setForeground(Color.GRAY);
-            subLengthFlatLabel.setForeground(Color.GRAY);
+            flatFramesLabel.setEnabled(false);
+            dateFlatLabel.setEnabled(false);
+            totalSubsFlatLabel.setEnabled(false);
+            subLengthFlatLabel.setEnabled(false);
         }
     }
 
