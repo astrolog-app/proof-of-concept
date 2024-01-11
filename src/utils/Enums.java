@@ -21,4 +21,8 @@ public class Enums {
 
         return new String(cList).trim();
     }
+
+    public static <T extends Enum<T>> T getEnumFromString(String string, Class<T> enumClass) {
+        return T.valueOf(enumClass, string.toUpperCase().replace(" ", "_").trim());
+    }
 }

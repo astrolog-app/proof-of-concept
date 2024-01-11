@@ -2,7 +2,6 @@ package models.license;
 
 public class Licence {
     private LicenceType licenceType;
-    private String mailAddress;
     private String licenceKey;
     private String purchaseDate;
 
@@ -13,13 +12,6 @@ public class Licence {
     }
     public void setLicenceType(LicenceType licenceType) {
         this.licenceType = licenceType;
-    }
-
-    public String getMailAddress() {
-        return mailAddress;
-    }
-    public void setMailAddress(String mailAddress) {
-        this.mailAddress = mailAddress;
     }
 
     public String getLicenceKey() {

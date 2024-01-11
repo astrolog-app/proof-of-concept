@@ -2,11 +2,13 @@ package services;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import com.sun.tools.javac.Main;
 import models.license.Licence;
 import models.settings.AppConfig;
 import models.settings.AppTheme;
 import services.fileHandler.ConfigurationStore;
 import services.fileHandler.LicenceStore;
+import services.licence.LicenceChecker;
 import ui.MainUI;
 import ui.startUp.welcome.WelcomeDialogue;
 
@@ -33,7 +35,13 @@ public class AppActions {
         if (appConfig != null) {
             logger.info("starting MainUI");
 
-            SwingUtilities.invokeLater(() -> new MainUI(licence, appConfig));
+            // start up the mainUI and check for valid licence
+            SwingUtilities.invokeLater(() -> {
+                MainUI mainUI = new MainUI(licence, appConfig);
+                LicenceChecker licenceChecker = new LicenceChecker(licence, mainUI);
+
+                licenceChecker.check();
+            });
         } else {
             logger.info("licence is null");
             logger.info("starting WelcomeDialogue");

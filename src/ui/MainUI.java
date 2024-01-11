@@ -5,8 +5,6 @@ import models.settings.AppConfig;
 import models.equipment.Equipment;
 import services.fileHandler.EquipmentStore;
 import ui.corecomponents.*;
-import ui.popUps.LicenceRequest;
-import utils.Enums;
 import utils.Paths;
 import utils.Images;
 
@@ -63,15 +61,5 @@ public class MainUI extends JFrame {
         }
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
-        test();
-    }
-
-    private void test() {
-        if (licence == null || licence.getLicenceKey() == null) {
-            new LicenceRequest(this);
-        } else {
-            setTitle("AstroLog " + Enums.enumToString(licence.getLicenceType()));
-        }
     }
 }

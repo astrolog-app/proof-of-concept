@@ -6,29 +6,30 @@ import services.fileHandler.LicenceStore;
 import utils.Enums;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Objects;
 
 public class LicenceRequest extends JDialog {
     private final JFrame parentFrame;
-    private Licence licence = new Licence();
+    private final Licence licence = new Licence();
     private JPanel mainPanel;
-    private JComboBox<String> comboBox1;
-    private JTextField textField1;
-    private JButton saveButton;
+    private JComboBox<String> licenceComboBox;
+    private JTextField keyTextField;
+    private JButton activateButton;
     private JButton closeButton;
+    private JLabel keyLabel;
 
     public LicenceRequest(JFrame parentFrame) {
         this.parentFrame = parentFrame;
         handleActions();
+        updateLicenceFieldState();
 
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         setModal(true);
         setContentPane(mainPanel);
-        setTitle("Add Licence");
-        setSize(500, 250);
+        setTitle("Licence Activation");
+        setSize(400, 260);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -42,12 +43,28 @@ public class LicenceRequest extends JDialog {
             }
         });
         closeButton.addActionListener(e -> System.exit(0));
-        saveButton.addActionListener(e -> {
-            licence.setLicenceType(LicenceType.LITE);
-            licence.setLicenceKey("test");
+        activateButton.addActionListener(e -> {
+            licence.setLicenceType(Enums.getEnumFromString(Objects.requireNonNull(licenceComboBox.getSelectedItem()).toString(), LicenceType.class));
+            if (licence.getLicenceType() == LicenceType.LITE) {
+                licence.setLicenceKey(null);
+            } else {
+                licence.setLicenceKey(keyTextField.getText());
+            }
+
             LicenceStore.save(licence);
             parentFrame.setTitle("AstroLog " + Enums.enumToString(licence.getLicenceType()));
             dispose();
         });
+        licenceComboBox.addActionListener(e -> updateLicenceFieldState());
+    }
+
+    private void updateLicenceFieldState() {
+        if (licenceComboBox.getSelectedIndex() != 0) {
+            keyTextField.setEnabled(true);
+            keyLabel.setEnabled(true);
+        } else {
+            keyTextField.setEnabled(false);
+            keyLabel.setEnabled(false);
+        }
     }
 }
