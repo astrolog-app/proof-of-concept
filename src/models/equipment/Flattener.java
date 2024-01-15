@@ -17,4 +17,9 @@ public class Flattener extends EquipmentItem {
     public void setFactor(double factor) {
         this.factor = factor;
     }
+
+    @Override
+    public String[] getParams() {
+        return new String[]{Double.toString(getFactor())};
+    }
 }

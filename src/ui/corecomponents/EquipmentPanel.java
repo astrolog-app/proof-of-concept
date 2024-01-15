@@ -1,23 +1,20 @@
 package ui.corecomponents;
 
 import models.equipment.Equipment;
-import models.equipment.EquipmentType;
-import ui.popUps.NewEquipmentItemPanel;
+import ui.customComponents.equipmentTable.EquipmentTable;
+import ui.customComponents.equipmentTable.EquipmentTableWrapper;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class EquipmentPanel {
+    private final Equipment equipment;
     private JPanel mainPanel;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JButton newTelescopeButton;
     private JLabel placeHolder1;
+    private EquipmentTableWrapper abc;
 
     public EquipmentPanel(Equipment equipment) {
-        newTelescopeButton.addActionListener(e -> new NewEquipmentItemPanel(EquipmentType.TELESCOPE, equipment));
+        this.equipment = equipment;
     }
 
     public JPanel getPanel() {

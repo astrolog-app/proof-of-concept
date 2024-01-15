@@ -1,7 +1,6 @@
-package models.imagingSessionTable;
+package models.tableModels;
 
 import models.equipment.Equipment;
-import models.equipment.EquipmentItem;
 import models.imagingSessions.ImagingSession;
 import models.imagingSessions.LightFrame;
 import models.settings.LoggerColumns;
@@ -21,7 +20,7 @@ public class ImagingSessionTableModel extends AbstractTableModel {
 
     public ImagingSessionTableModel(List<ImagingSession> imagingSessions, Equipment equipment) {
         data = imagingSessions;
-        selectedColumns = ConfigurationStore.loadImagingSessionConfig().getSelectedColumns();
+        selectedColumns = ConfigurationStore.loadImagingSessionConfig().getSelectedColumns(); // TODO: change
         this.equipment = equipment;
     }
 

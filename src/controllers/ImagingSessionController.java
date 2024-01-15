@@ -1,10 +1,8 @@
 package controllers;
 
 import models.equipment.Equipment;
-import models.imagingSessionTable.ImagingSessionTableModel;
+import models.tableModels.ImagingSessionTableModel;
 import models.imagingSessions.ImagingSession;
-import services.fileHandler.ConfigurationStore;
-import services.fileHandler.ImagingSessionStore;
 import ui.customComponents.ImagingSessionTable;
 import ui.popUps.ImagingSessionInfo;
 import ui.popUps.NewImagingSessionManually;

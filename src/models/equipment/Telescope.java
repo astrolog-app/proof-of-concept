@@ -27,4 +27,9 @@ public class Telescope extends EquipmentItem {
     public void setAperture(int aperture) {
         this.aperture = aperture;
     }
+
+    @Override
+    public String[] getParams() {
+        return new String[]{Integer.toString(getFocalLength()), Integer.toString(getAperture())};
+    }
 }

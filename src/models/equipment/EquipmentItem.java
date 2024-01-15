@@ -44,4 +44,6 @@ public abstract class EquipmentItem {
     public void setName(String name) {
         this.name = name;
     }
+
+    public abstract String[] getParams();
 }

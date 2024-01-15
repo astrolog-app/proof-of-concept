@@ -1,7 +1,7 @@
 package ui.customComponents;
 
 import controllers.ImagingSessionController;
-import models.imagingSessionTable.ImagingSessionTableModel;
+import models.tableModels.ImagingSessionTableModel;
 import models.imagingSessions.ImagingSession;
 import models.settings.LoggerColumns;
 import models.equipment.Equipment;

@@ -36,4 +36,9 @@ public class Camera extends EquipmentItem {
     public void setRgb(boolean rgb) {
         this.rgb = rgb;
     }
+
+    @Override
+    public String[] getParams() {
+        return new String[]{getChipSize(), Integer.toString(getMegaPixel()), String.valueOf(getRgb())};
+    }
 }

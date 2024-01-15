@@ -17,4 +17,9 @@ public class Filter extends EquipmentItem {
     public void setBandType(String bandType) {
         this.bandType = bandType;
     }
+
+    @Override
+    public String[] getParams() {
+        return new String[]{getBandType()};
+    }
 }

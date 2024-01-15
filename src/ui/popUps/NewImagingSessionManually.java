@@ -1,14 +1,13 @@
 package ui.popUps;
 
 import models.equipment.*;
-import models.imagingSessionTable.ImagingSessionTableModel;
+import models.tableModels.ImagingSessionTableModel;
 import models.imagingSessions.*;
 import services.fileHandler.ImagingSessionStore;
 import ui.customComponents.CustomComboBox;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class NewImagingSessionManually extends JDialog {
