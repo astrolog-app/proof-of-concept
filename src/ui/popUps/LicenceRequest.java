@@ -3,7 +3,6 @@ package ui.popUps;
 import models.license.Licence;
 import models.license.LicenceType;
 import services.fileHandler.LicenceStore;
-import utils.Enums;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -44,7 +43,7 @@ public class LicenceRequest extends JDialog {
         });
         closeButton.addActionListener(e -> System.exit(0));
         activateButton.addActionListener(e -> {
-            licence.setLicenceType(Enums.getEnumFromString(Objects.requireNonNull(licenceComboBox.getSelectedItem()).toString(), LicenceType.class));
+            licence.setLicenceType(LicenceType.getEnum(Objects.requireNonNull(licenceComboBox.getSelectedItem()).toString()));
             if (licence.getLicenceType() == LicenceType.LITE) {
                 licence.setLicenceKey(null);
             } else {
@@ -52,7 +51,7 @@ public class LicenceRequest extends JDialog {
             }
 
             LicenceStore.save(licence);
-            parentFrame.setTitle("AstroLog " + Enums.enumToString(licence.getLicenceType()));
+            parentFrame.setTitle("AstroLog " + licence.getLicenceType().getName());
             dispose();
         });
         licenceComboBox.addActionListener(e -> updateLicenceFieldState());

@@ -3,7 +3,6 @@ package services.licence;
 import models.license.Licence;
 import models.license.LicenceType;
 import ui.popUps.LicenceRequest;
-import utils.Enums;
 
 import javax.swing.*;
 
@@ -28,7 +27,7 @@ public class LicenceChecker {
             timer.setRepeats(false);
             timer.start();
         } else {
-            parentFrame.setTitle("AstroLog " + Enums.enumToString(licence.getLicenceType()));
+            parentFrame.setTitle("AstroLog " + licence.getLicenceType().getName());
         }
     }
 

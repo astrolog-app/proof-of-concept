@@ -5,7 +5,6 @@ import models.imagingSessions.ImagingSession;
 import models.imagingSessions.LightFrame;
 import models.settings.LoggerColumns;
 import services.fileHandler.ConfigurationStore;
-import utils.Enums;
 import utils.EquipmentItems;
 
 import javax.swing.*;
@@ -50,7 +49,7 @@ public class ImagingSessionTableModel extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        return Enums.enumToString(selectedColumns.get(column));
+        return selectedColumns.get(column).getName();
     }
 
     @Override

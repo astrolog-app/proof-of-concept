@@ -1,14 +1,11 @@
 package ui.popUps;
 
 import models.equipment.Equipment;
-import models.equipment.EquipmentItem;
 import models.equipment.EquipmentType;
 import models.equipment.Telescope;
 import services.fileHandler.EquipmentStore;
-import utils.Enums;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -46,7 +43,7 @@ public class NewEquipmentItemPanel extends JDialog {
 
         setModal(true);
         setContentPane(mainPanel);
-        setTitle("Add New " + Enums.enumToString(equipmentType));
+        setTitle("Add New " + equipmentType.getName());
         setSize(500, 250);
         setResizable(false);
         setLocationRelativeTo(null);
