@@ -19,7 +19,12 @@ public class Flattener extends EquipmentItem {
     }
 
     @Override
-    public String[] getParams() {
+    public String[] getProperties() {
         return new String[]{Double.toString(getFactor())};
+    }
+
+    @Override
+    public String[] getPropertyNames() {
+        return new String[]{"Factor"};
     }
 }

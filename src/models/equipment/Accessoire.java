@@ -10,7 +10,12 @@ public class Accessoire extends EquipmentItem {
     }
 
     @Override
-    public String[] getParams() {
+    public String[] getProperties() {
+        return new String[]{};
+    }
+
+    @Override
+    public String[] getPropertyNames() {
         return new String[]{};
     }
 }

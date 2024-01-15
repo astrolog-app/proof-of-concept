@@ -19,7 +19,12 @@ public class Filter extends EquipmentItem {
     }
 
     @Override
-    public String[] getParams() {
+    public String[] getProperties() {
         return new String[]{getBandType()};
+    }
+
+    @Override
+    public String[] getPropertyNames() {
+        return new String[]{"Band Type"};
     }
 }

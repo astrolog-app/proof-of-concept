@@ -31,10 +31,21 @@ public class EquipmentTableModel extends AbstractTableModel {
     @Override
     public int getColumnCount() {
         if (!data.isEmpty()) {
-            return data.get(0).getParams().length;
+            return data.get(0).getProperties().length + 1;
         }
 
         return 0;
+    }
+
+    @Override
+    public String getColumnName(int column) {
+        if (!data.isEmpty()) {
+            if (column == 0)
+                return "Name";
+            return data.get(0).getPropertyNames()[column - 1];
+        }
+
+        return "";
     }
 
     @Override
@@ -43,6 +54,6 @@ public class EquipmentTableModel extends AbstractTableModel {
             return EquipmentItems.constructName(data.get(rowIndex));
         }
 
-        return data.get(rowIndex).getParams()[columnIndex - 1];
+        return data.get(rowIndex).getProperties()[columnIndex - 1];
     }
 }

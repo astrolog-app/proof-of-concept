@@ -20,4 +20,8 @@ public class EquipmentPanel {
     public JPanel getPanel() {
         return mainPanel;
     }
+
+    private void createUIComponents() {
+        abc = new EquipmentTableWrapper(equipment);
+    }
 }

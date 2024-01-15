@@ -38,7 +38,12 @@ public class Camera extends EquipmentItem {
     }
 
     @Override
-    public String[] getParams() {
+    public String[] getProperties() {
         return new String[]{getChipSize(), Integer.toString(getMegaPixel()), String.valueOf(getRgb())};
+    }
+
+    @Override
+    public String[] getPropertyNames() {
+        return new String[]{"Chip Size", "Mega Pixel", "Color"};
     }
 }

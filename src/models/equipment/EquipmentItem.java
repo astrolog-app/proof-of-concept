@@ -45,5 +45,7 @@ public abstract class EquipmentItem {
         this.name = name;
     }
 
-    public abstract String[] getParams();
+    public abstract String[] getPropertyNames();
+
+    public abstract String[] getProperties();
 }

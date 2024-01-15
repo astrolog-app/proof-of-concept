@@ -29,7 +29,12 @@ public class Telescope extends EquipmentItem {
     }
 
     @Override
-    public String[] getParams() {
+    public String[] getProperties() {
         return new String[]{Integer.toString(getFocalLength()), Integer.toString(getAperture())};
+    }
+
+    @Override
+    public String[] getPropertyNames() {
+        return new String[]{"Focal Length", "Aperture"};
     }
 }
