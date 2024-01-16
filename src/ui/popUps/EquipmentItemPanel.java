@@ -1,6 +1,7 @@
 package ui.popUps;
 
 import models.equipment.Equipment;
+import models.equipment.EquipmentItem;
 import models.equipment.EquipmentType;
 import models.equipment.Telescope;
 import services.fileHandler.EquipmentStore;
@@ -9,7 +10,7 @@ import javax.swing.*;
 import java.util.*;
 import java.util.List;
 
-public class NewEquipmentItemPanel extends JDialog {
+public class EquipmentItemPanel extends JDialog {
     private JPanel mainPanel;
     private JButton saveButton;
     private JButton cancelButton;
@@ -18,7 +19,7 @@ public class NewEquipmentItemPanel extends JDialog {
     private JTextField focalLengthField;
     private JTextField apertureField;
 
-    public NewEquipmentItemPanel(EquipmentType equipmentType, Equipment equipment) {
+    public EquipmentItemPanel(EquipmentType equipmentType, Equipment equipment, EquipmentItem equipmentItem) {
         List<String> brandList = new ArrayList<>(equipment.getAllBrands());
         Collections.sort(brandList);
 
@@ -26,7 +27,9 @@ public class NewEquipmentItemPanel extends JDialog {
             brandField.addItem(brand);
         }
 
-        saveButton.setEnabled(true);
+        fillUp(equipmentItem, equipmentType);
+
+        saveButton.setEnabled(true); // TODO: handle save button
 
         saveButton.addActionListener(e -> {
             int focalLength = Integer.parseInt(focalLengthField.getText());
@@ -48,5 +51,16 @@ public class NewEquipmentItemPanel extends JDialog {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private void fillUp(EquipmentItem equipmentItem, EquipmentType equipmentType) {
+        if (equipmentItem != null) {
+            nameField.setText(equipmentItem.getName());
+            brandField.setSelectedItem(equipmentItem.getBrand());
+
+            switch (equipmentType) {
+                // TODO: add switch cases
+            }
+        }
     }
 }

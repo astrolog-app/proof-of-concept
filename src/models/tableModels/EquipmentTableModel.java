@@ -2,6 +2,7 @@ package models.tableModels;
 
 import models.equipment.Equipment;
 import models.equipment.EquipmentItem;
+import models.equipment.EquipmentType;
 import utils.EquipmentItems;
 
 import javax.swing.table.AbstractTableModel;
@@ -10,18 +11,20 @@ import java.util.List;
 public class EquipmentTableModel extends AbstractTableModel {
     private final List<EquipmentItem> data;
     private final Equipment equipment;
+    private final EquipmentType equipmentType;
 
-    public EquipmentTableModel(List<EquipmentItem> data, Equipment equipment) {
+    public EquipmentTableModel(List<EquipmentItem> data, Equipment equipment, EquipmentType equipmentType) {
         this.data = data;
         this.equipment = equipment;
+        this.equipmentType = equipmentType;
     }
 
     public void addItem(EquipmentItem equipmentItem) {
         data.add(equipmentItem);
+        fireTableDataChanged();
+
         // TODO: add it in the json file
     }
-
-    public void editItem() {}
 
     @Override
     public int getRowCount() {
@@ -55,5 +58,12 @@ public class EquipmentTableModel extends AbstractTableModel {
         }
 
         return data.get(rowIndex).getProperties()[columnIndex - 1];
+    }
+
+    public EquipmentItem getEquipmentItem(int rowIndex) {
+        if (rowIndex == -1)
+            return null;
+
+        return data.get(rowIndex);
     }
 }

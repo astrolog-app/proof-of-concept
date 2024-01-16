@@ -1,7 +1,7 @@
 package ui.customComponents;
 
 import models.equipment.*;
-import ui.popUps.NewEquipmentItemPanel;
+import ui.popUps.EquipmentItemPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +36,7 @@ public class CustomComboBox extends JComboBox<String> {
                 List<String> oldList = new ArrayList<>(content);
 
                 setSelectedIndex(0); // TODO: set the actual ListItem that was selected before
-                new NewEquipmentItemPanel(equipmentType, equipment);
+                new EquipmentItemPanel(equipmentType, equipment, null);
                 updateData();
 
                 if (oldList.size() != content.size()) {

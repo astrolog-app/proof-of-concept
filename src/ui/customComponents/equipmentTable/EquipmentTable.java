@@ -2,6 +2,7 @@ package ui.customComponents.equipmentTable;
 
 import models.equipment.Equipment;
 import models.equipment.EquipmentItem;
+import models.equipment.EquipmentType;
 import models.tableModels.EquipmentTableModel;
 
 import javax.swing.*;
@@ -9,9 +10,12 @@ import javax.swing.table.TableModel;
 import java.util.List;
 
 public class EquipmentTable extends JTable {
-    private final TableModel tableModel;
-    public EquipmentTable(Equipment equipment, List<EquipmentItem> data) {
-        tableModel = new EquipmentTableModel(data, equipment);
+    private final EquipmentTableModel tableModel;
+    private final EquipmentType equipmentType;
+
+    public EquipmentTable(Equipment equipment, List<EquipmentItem> data, EquipmentType equipmentType) {
+        tableModel = new EquipmentTableModel(data, equipment, equipmentType);
+        this.equipmentType = equipmentType;
 
         createTable();
     }
@@ -24,7 +28,7 @@ public class EquipmentTable extends JTable {
         showHorizontalLines = true;
     }
 
-    public TableModel getTableModel() {
+    public EquipmentTableModel getTableModel() {
         return tableModel;
     }
 }

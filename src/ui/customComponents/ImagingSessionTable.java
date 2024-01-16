@@ -108,9 +108,7 @@ public class ImagingSessionTable extends JTable {
     }
 
     private void handleActions() {
-        getSelectionModel().addListSelectionListener(e -> {
-            logPanel.updateTableButtonState();
-        });
+        getSelectionModel().addListSelectionListener(e -> logPanel.updateTableButtonState());
 
         addMouseListener(new MouseAdapter() {
             @Override
