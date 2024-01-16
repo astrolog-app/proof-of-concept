@@ -24,7 +24,7 @@ public abstract class EquipmentItem {
         this.id = id;
     }
 
-    public boolean isUsed() {
+    public boolean getUsed() {
         return used;
     }
     public void setUsed(boolean used) {
