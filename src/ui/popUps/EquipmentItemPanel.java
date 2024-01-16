@@ -1,9 +1,6 @@
 package ui.popUps;
 
-import models.equipment.Equipment;
-import models.equipment.EquipmentItem;
-import models.equipment.EquipmentType;
-import models.equipment.Telescope;
+import models.equipment.*;
 import services.fileHandler.EquipmentStore;
 
 import javax.swing.*;
@@ -32,10 +29,13 @@ public class EquipmentItemPanel extends JDialog {
     private JLabel spacer5;
     private JLabel megapixelLabel;
     private JLabel spacer6;
-    private JComboBox chipsize;
+    private JComboBox<String> chipSize;
     private JSpinner megapixel;
     private JRadioButton colorRadioButton;
     private JRadioButton monochromeRadioButton;
+    private JLabel spacer7;
+    private JLabel filterTypeLabel;
+    private JComboBox<String> filterType;
 
     public EquipmentItemPanel(EquipmentType equipmentType, Equipment equipment, EquipmentItem equipmentItem) {
         this.equipmentType = equipmentType;
@@ -49,16 +49,53 @@ public class EquipmentItemPanel extends JDialog {
 
         setAllInvisible();
         setSpinnerModels();
-        setupUI();
+        setComponentsVisible();
         fillUp(equipmentItem);
 
         saveButton.setEnabled(true); // TODO: handle save button
 
         saveButton.addActionListener(e -> {
-            int focalLength = (int) focalLengthField.getValue();
-            int aperture = (int) apertureField.getValue();
-            Telescope telescope = new Telescope(UUID.randomUUID(), true, nameField.getText(), "test", focalLength, aperture);
-            equipment.addTelescope(telescope);
+            String name = nameField.getText();
+            String brand = Objects.requireNonNull(brandField.getSelectedItem()).toString();
+
+            switch (equipmentType) {
+                case TELESCOPE -> {
+                    int focalLength = (int) focalLengthField.getValue();
+                    int aperture = (int) apertureField.getValue();
+
+                    Telescope telescope = new Telescope(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand, focalLength, aperture);
+                    equipment.addTelescope(telescope);
+                }
+                case ACCESSOIRE -> {
+                    Accessoire accessoire = new Accessoire(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand);
+                    equipment.addAccessoire(accessoire);
+                }
+                case MOUNT -> {
+                    Mount mount = new Mount(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand);
+                    equipment.addMount(mount);
+                }
+                case FILTER -> {
+                    String filterType = filterTypeLabel.getText();
+
+                    Filter filter = new Filter(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand, filterType);
+                    equipment.addFilter(filter);
+                }
+                case FLATTENER -> {
+                    double _factor = (double) factor.getValue();
+
+                    Flattener flattener = new Flattener(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand, _factor);
+                    equipment.addFlattener(flattener);
+                }
+                case CAMERA -> {
+                    String chipSize = chipSizeLabel.getText();
+                    int megaPixel = (int) megapixel.getValue();
+                    boolean rgb = colorRadioButton.isSelected();
+
+                    Camera camera = new Camera(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand, chipSize, megaPixel, rgb);
+                    equipment.addCamera(camera);
+                }
+            }
+
             EquipmentStore.save(equipment, null);
             dispose();
         });
@@ -82,7 +119,18 @@ public class EquipmentItemPanel extends JDialog {
             isUsedCheckBox.setSelected(equipmentItem.getUsed());
 
             switch (equipmentType) {
-                // TODO: add switch cases
+                case TELESCOPE -> {
+                    focalLengthField.setValue(((Telescope) equipmentItem).getFocalLength());
+                    apertureField.setValue(((Telescope) equipmentItem).getAperture());
+                }
+                case FLATTENER -> factor.setValue(((Flattener) equipmentItem).getFactor());
+                case CAMERA -> {
+                    chipSize.setSelectedItem(((Camera) equipmentItem).getChipSize());
+                    megapixel.setValue(((Camera) equipmentItem).getMegaPixel());
+                    colorRadioButton.setSelected(((Camera) equipmentItem).getRgb());
+                    monochromeRadioButton.setSelected(!((Camera) equipmentItem).getRgb());
+                }
+                case FILTER -> filterType.setSelectedItem(((Filter) equipmentItem).getFilterType());
             }
         }
     }
@@ -101,7 +149,7 @@ public class EquipmentItemPanel extends JDialog {
         factorLabel.setVisible(false);
 
         spacer4.setVisible(false);
-        chipsize.setVisible(false);
+        chipSize.setVisible(false);
         chipSizeLabel.setVisible(false);
 
         spacer5.setVisible(false);
@@ -109,8 +157,12 @@ public class EquipmentItemPanel extends JDialog {
         megapixelLabel.setVisible(false);
 
         spacer6.setVisible(false);
-        colorRadioButton.setVisible(false);
+        colorRadioButton.setVisible(false); // TODO: handle radio buttons
         monochromeRadioButton.setVisible(false);
+
+        spacer7.setVisible(false);
+        filterType.setVisible(false);
+        filterTypeLabel.setVisible(false);
     }
 
     private void setSpinnerModels() {
@@ -120,7 +172,7 @@ public class EquipmentItemPanel extends JDialog {
         megapixel.setModel(new SpinnerNumberModel(0, 0, 1000.00, 0.1));
     }
 
-    private void setupUI() {
+    private void setComponentsVisible() {
         isUsedCheckBox.setSelected(true);
         colorRadioButton.setSelected(true);
 
@@ -145,7 +197,7 @@ public class EquipmentItemPanel extends JDialog {
             }
             case CAMERA -> {
                 spacer4.setVisible(true);
-                chipsize.setVisible(true);
+                chipSize.setVisible(true);
                 chipSizeLabel.setVisible(true);
 
                 spacer5.setVisible(true);
@@ -157,6 +209,13 @@ public class EquipmentItemPanel extends JDialog {
                 monochromeRadioButton.setVisible(true);
 
                 setSize(500, 320);
+            }
+            case FILTER -> {
+                spacer7.setVisible(true);
+                filterType.setVisible(true);
+                filterTypeLabel.setVisible(true);
+
+                setSize(500, 230);
             }
             case ACCESSOIRE, MOUNT -> setSize(500, 180);
         }

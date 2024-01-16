@@ -3,24 +3,25 @@ package models.equipment;
 import java.util.UUID;
 
 public class Filter extends EquipmentItem {
-    private String bandType;
+    private String filterType;
 
     public Filter() {}
 
-    public Filter(UUID id, boolean used, String brand, String name) {
+    public Filter(UUID id, boolean used, String brand, String name, String filterType) {
         super(id, used, brand, name);
+        this.filterType = filterType;
     }
 
-    public String getBandType() {
-        return bandType;
+    public String getFilterType() {
+        return filterType;
     }
-    public void setBandType(String bandType) {
-        this.bandType = bandType;
+    public void setFilterType(String filterType) {
+        this.filterType = filterType;
     }
 
     @Override
     public String[] getProperties() {
-        return new String[]{getBandType()};
+        return new String[]{getFilterType()};
     }
 
     @Override

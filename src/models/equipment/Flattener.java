@@ -7,8 +7,9 @@ public class Flattener extends EquipmentItem {
 
     public Flattener() {}
 
-    public Flattener(UUID id, boolean used, String brand, String name) {
+    public Flattener(UUID id, boolean used, String brand, String name, double factor) {
         super(id, used, brand, name);
+        this.factor = factor;
     }
 
     public double getFactor() {

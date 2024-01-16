@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="ui.popUps.EquipmentItemPanel">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="21" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="23" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="540" height="616"/>
+      <xy x="20" y="20" width="540" height="701"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
       <component id="d5c92" class="javax.swing.JButton" binding="saveButton" default-binding="true">
         <constraints>
-          <grid row="20" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="22" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Save"/>
@@ -18,7 +18,7 @@
       </component>
       <component id="6d8b3" class="javax.swing.JButton" binding="cancelButton" default-binding="true">
         <constraints>
-          <grid row="20" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="22" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Cancel"/>
@@ -26,7 +26,7 @@
       </component>
       <hspacer id="f9fde">
         <constraints>
-          <grid row="20" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="22" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
       <component id="97afa" class="javax.swing.JTextField" binding="nameField">
@@ -63,7 +63,7 @@
       </component>
       <vspacer id="de738">
         <constraints>
-          <grid row="19" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="21" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
       <component id="3de66" class="javax.swing.JLabel">
@@ -129,7 +129,7 @@
       </vspacer>
       <component id="9665d" class="javax.swing.JLabel">
         <constraints>
-          <grid row="18" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="20" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Is Used:"/>
@@ -145,7 +145,7 @@
       </component>
       <component id="5067e" class="javax.swing.JCheckBox" binding="isUsedCheckBox">
         <constraints>
-          <grid row="18" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="20" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -205,7 +205,7 @@
           <text value=""/>
         </properties>
       </component>
-      <component id="b2af1" class="javax.swing.JComboBox" binding="chipsize">
+      <component id="b2af1" class="javax.swing.JComboBox" binding="chipSize">
         <constraints>
           <grid row="11" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -223,7 +223,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="39a75" class="javax.swing.JLabel">
+      <component id="39a75" class="javax.swing.JLabel" binding="spacer7">
         <constraints>
           <grid row="17" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -245,6 +245,40 @@
         </constraints>
         <properties>
           <text value="Monochrome"/>
+        </properties>
+      </component>
+      <component id="bd0e0" class="javax.swing.JLabel" binding="filterTypeLabel">
+        <constraints>
+          <grid row="18" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Filter Type:"/>
+        </properties>
+      </component>
+      <component id="80e4e" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="19" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="1547c" class="javax.swing.JComboBox" binding="filterType">
+        <constraints>
+          <grid row="18" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <model>
+            <item value="L"/>
+            <item value="R"/>
+            <item value="G"/>
+            <item value="B"/>
+            <item value="Broadband"/>
+            <item value="UHC"/>
+            <item value="Single Band"/>
+            <item value="Dual Band"/>
+            <item value="Quad Band"/>
+          </model>
         </properties>
       </component>
     </children>
