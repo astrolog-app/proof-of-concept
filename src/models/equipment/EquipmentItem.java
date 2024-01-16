@@ -1,5 +1,7 @@
 package models.equipment;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.UUID;
 
 public abstract class EquipmentItem {
@@ -45,7 +47,9 @@ public abstract class EquipmentItem {
         this.name = name;
     }
 
+    @JsonIgnore
     public abstract String[] getPropertyNames();
 
+    @JsonIgnore
     public abstract String[] getProperties();
 }
