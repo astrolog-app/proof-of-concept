@@ -12,10 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainUI extends JFrame {
-    private Licence licence;
-
     public MainUI(Licence licence, AppConfig appConfig) {
-        this.licence = licence;
 
         Equipment equipment = EquipmentStore.load();
 

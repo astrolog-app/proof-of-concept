@@ -1,13 +1,15 @@
 package ui.customComponents.equipmentTable;
 
 import models.equipment.Equipment;
+import models.equipment.EquipmentItem;
 import models.equipment.EquipmentType;
 import ui.popUps.EquipmentItemPanel;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
-public class EquipmentTableWrapper extends JScrollPane {
+public class EquipmentTableWrapper {
     private final Equipment equipment;
     private final EquipmentType equipmentType;
 
@@ -23,8 +25,6 @@ public class EquipmentTableWrapper extends JScrollPane {
         updateEditButtonState();
 
         handleActions();
-
-        add(mainPanel);
     }
 
     private void updateEditButtonState() {
@@ -45,6 +45,17 @@ public class EquipmentTableWrapper extends JScrollPane {
     }
 
     private void createUIComponents() {
-        equipmentTable1 = new EquipmentTable(equipment, new ArrayList<>(equipment.getTelescopes()), equipmentType);
+        List<EquipmentItem> data = new ArrayList<>();
+
+        switch (equipmentType) {
+            case TELESCOPE -> data = new ArrayList<>(equipment.getTelescopes());
+            case CAMERA -> data = new ArrayList<>(equipment.getCameras());
+            case FLATTENER -> data = new ArrayList<>(equipment.getFlatteners());
+            case MOUNT -> data = new ArrayList<>(equipment.getMounts());
+            case FILTER -> data = new ArrayList<>(equipment.getFilters());
+            case ACCESSOIRE -> data = new ArrayList<>(equipment.getAccessoires());
+        }
+
+        equipmentTable1 = new EquipmentTable(equipment, data, equipmentType);
     }
 }
