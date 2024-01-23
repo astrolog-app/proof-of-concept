@@ -2,7 +2,6 @@ package services;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import com.sun.tools.javac.Main;
 import models.license.Licence;
 import models.settings.AppConfig;
 import models.settings.AppTheme;

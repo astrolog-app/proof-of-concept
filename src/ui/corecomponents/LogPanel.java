@@ -24,7 +24,7 @@ public class LogPanel {
     AppConfig appConfig;
     private JPanel panel1;
     private JLabel placeHolder1;
-    private JButton fromExistingFolderButton;
+    private JButton automaticallyButton;
     private JButton manuallyButton;
     private JButton createLocalBackupButton;
     private JCheckBox enableRegularBackupsCheckBox;
@@ -32,7 +32,6 @@ public class LogPanel {
     private ImagingSessionTable imagingSessionTable1;
     private JTextField searchField;
     private JButton deleteButton;
-    private JButton detailsButton;
     private JButton xMarkButton;
     private JButton editButton;
     private JButton imagingSessionSettings;
@@ -73,10 +72,6 @@ public class LogPanel {
         });
 
         manuallyButton.addActionListener(e -> imagingSessionController.addImagingSessionManually(equipment, imagingSessions));
-        detailsButton.addActionListener(e -> imagingSessionController
-                .showImagingSessionDetails(
-                        imagingSessionTable1.getTableModel().getSession(imagingSessionTable1.getSelectedRow())
-                ));
         deleteButton.addActionListener(e -> imagingSessionController.removeImagingSession());
         editButton.addActionListener(e -> imagingSessionController.editImagingSession(equipment, imagingSessionTable1
                         .getTableModel()
@@ -129,7 +124,6 @@ public class LogPanel {
 
     public void updateTableButtonState() {
         boolean b = imagingSessionTable1.getTableModel().getSession(imagingSessionTable1.getSelectedRow()) != null;
-        detailsButton.setEnabled(b);
         editButton.setEnabled(b);
         deleteButton.setEnabled(b);
     }

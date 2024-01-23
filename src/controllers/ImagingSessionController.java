@@ -4,7 +4,6 @@ import models.equipment.Equipment;
 import models.tableModels.ImagingSessionTableModel;
 import models.imagingSessions.ImagingSession;
 import ui.customComponents.ImagingSessionTable;
-import ui.popUps.ImagingSessionInfo;
 import ui.popUps.NewImagingSessionManually;
 
 import javax.swing.*;
@@ -47,9 +46,5 @@ public class ImagingSessionController {
 
     public void editImagingSession(Equipment equipment, ImagingSession session, List<ImagingSession> imagingSessions) {
         NewImagingSessionManually n = new NewImagingSessionManually(equipment, session, isTableModel, imagingSessions);
-    }
-
-    public void showImagingSessionDetails(ImagingSession session) {
-        new ImagingSessionInfo(session);
     }
 }

@@ -113,17 +113,6 @@ public class ImagingSessionTable extends JTable {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    int selectedRow = getSelectedRow();
-                    if (selectedRow != -1) {
-                        imagingSessionController.showImagingSessionDetails(tableModel.getSession(getSelectedRow()));
-                    }
-                }
-            }
-        });
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
                 if (SwingUtilities.isRightMouseButton(e)) {
                     JPopupMenu popupMenu = createPopupMenu();
                     popupMenu.show((Component) e.getSource(), e.getX(), e.getY());
@@ -160,11 +149,6 @@ public class ImagingSessionTable extends JTable {
         JMenuItem menuItem2 = new JMenuItem("Add Manually");
         menuItem2.addActionListener((ActionEvent e) -> imagingSessionController.addImagingSessionManually(equipment, imagingSessions));
         popupMenu.add(menuItem2);
-
-        JMenuItem menuItem3  = new JMenuItem("Show Details");
-        menuItem3.addActionListener((ActionEvent e) -> imagingSessionController.showImagingSessionDetails(tableModel.getSession(getSelectedRow())));
-        menuItem3.setEnabled(enableAll);
-        popupMenu.add(menuItem3);
 
         JMenuItem menuItem4 = new JMenuItem("Edit");
         menuItem4.addActionListener((ActionEvent e) -> imagingSessionController.editImagingSession(equipment, tableModel.getSession(getSelectedRow()), imagingSessions));

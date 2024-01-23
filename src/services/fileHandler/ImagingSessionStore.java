@@ -28,6 +28,7 @@ public class ImagingSessionStore {
             return imagingSessionsList;
         } catch (Exception e) {
             logger.severe("couldn't load ImagingSession's:" + "\t" + e.getMessage());
+
             return null;
         }
     }

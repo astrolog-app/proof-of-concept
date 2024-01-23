@@ -101,6 +101,7 @@ public class NewImagingSessionManually extends JDialog {
     private void fillOutPanel(ImagingSession session) {
         imageFolderField.setText(session.getFolderDir());
 
+        target.setText(session.getLightFrame().getTarget());
         subLengthLight.setValue(checkSessionValue(session.getLightFrame().getSubLength()));
         totalSubsLight.setValue(checkSessionValue(session.getLightFrame().getTotalSubs()));
         integratedSubs.setValue(checkSessionValue(session.getLightFrame().getIntegratedSubs()));

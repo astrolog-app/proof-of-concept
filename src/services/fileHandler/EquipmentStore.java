@@ -23,6 +23,7 @@ public class EquipmentStore {
             return equipment;
         } catch (IOException e) {
             logger.severe("couldn't load Equipment:" + "\t" + e.getMessage());
+
             return null;
         }
     }

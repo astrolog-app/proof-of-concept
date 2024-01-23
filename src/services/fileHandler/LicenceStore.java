@@ -23,6 +23,7 @@ public class LicenceStore {
             return licence;
         } catch (IOException e) {
             logger.severe("couldn't load Licence:" + "\t" + e.getMessage());
+
             return null;
         }
     }

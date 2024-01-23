@@ -30,9 +30,6 @@ public class MainUI extends JFrame {
         LogPanel logPanelClass = new LogPanel(appConfig, equipment);
         JPanel imagingHistoryPanel = logPanelClass.getPanel();
 
-        StatisticsPanel statisticsPanelClass = new StatisticsPanel();
-        JPanel analysisPanel = statisticsPanelClass.getPanel();
-
         EquipmentPanel equipmentPanelClass = new EquipmentPanel(equipment);
         JPanel equipmentPanel = equipmentPanelClass.getPanel();
 
@@ -42,7 +39,6 @@ public class MainUI extends JFrame {
         ImageIcon settingsIcon = Images.getThemeBasedIcon(appConfig, "settings", 14, 14);
 
         tabbedPane.addTab("Log", imagingHistoryPanel);
-        tabbedPane.addTab("Statistics", analysisPanel);
         tabbedPane.addTab("Equipment", equipmentPanel);
         tabbedPane.addTab("", settingsIcon, settingsPanel);
 
