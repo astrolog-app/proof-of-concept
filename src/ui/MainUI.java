@@ -33,6 +33,9 @@ public class MainUI extends JFrame {
         EquipmentPanel equipmentPanelClass = new EquipmentPanel(equipment);
         JPanel equipmentPanel = equipmentPanelClass.getPanel();
 
+        LibraryPanel libraryPanelClass = new LibraryPanel(equipment);
+        JPanel libraryPanel = libraryPanelClass.getPanel();
+
         SettingsPanel settingsPanelClass = new SettingsPanel(appConfig);
         JPanel settingsPanel = settingsPanelClass.getPanel();
 
@@ -40,6 +43,7 @@ public class MainUI extends JFrame {
 
         tabbedPane.addTab("Log", imagingHistoryPanel);
         tabbedPane.addTab("Equipment", equipmentPanel);
+        tabbedPane.addTab("Library", libraryPanel);
         tabbedPane.addTab("", settingsIcon, settingsPanel);
 
         add(tabbedPane);
