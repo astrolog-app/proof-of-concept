@@ -48,7 +48,7 @@ public class EquipmentTableWrapper {
         List<EquipmentItem> data = new ArrayList<>();
 
         switch (equipmentType) {
-            case TELESCOPE -> data = new ArrayList<>(equipment.getTelescopes());
+            case TELESCOPE -> data = new ArrayList<>(equipment.getTelescopes().values());
             case CAMERA -> data = new ArrayList<>(equipment.getCameras());
             case FLATTENER -> data = new ArrayList<>(equipment.getFlatteners());
             case MOUNT -> data = new ArrayList<>(equipment.getMounts());

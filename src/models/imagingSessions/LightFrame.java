@@ -112,13 +112,7 @@ public class LightFrame extends ImagingFrame {
     }
 
     public Telescope getTelescope(Equipment equipment) {
-        for (Telescope t : equipment.getTelescopes()) {
-            if (t.getId().equals(telescopeID)) {
-                return t;
-            }
-        }
-
-        return null;
+        return equipment.getTelescopes().get(telescopeID);
     }
     public void setTelescopeID(UUID telescopeID) {
         this.telescopeID = telescopeID;

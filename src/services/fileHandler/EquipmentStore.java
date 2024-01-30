@@ -1,12 +1,17 @@
 package services.fileHandler;
 
 import models.equipment.Equipment;
+import models.equipment.EquipmentWrapper;
+import models.equipment.Telescope;
 import org.codehaus.jackson.map.ObjectMapper;
 import services.AppLogger;
 import utils.Paths;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 public class EquipmentStore {
@@ -16,9 +21,17 @@ public class EquipmentStore {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            Equipment equipment = objectMapper.readValue(new File(Paths.EQUIPMENT_PATH), Equipment.class);
+            EquipmentWrapper equipmentWrapper = objectMapper.readValue(new File(Paths.EQUIPMENT_PATH), EquipmentWrapper.class);
 
             logger.info("loaded Equipment successfully");
+
+            Equipment equipment = new Equipment();
+
+            Map<UUID, Telescope> telescopeMap = new HashMap<>();
+            for (Telescope t : equipmentWrapper.getTelescopes()) {
+                telescopeMap.put(t.getId(), t);
+            }
+            equipment.setTelescopes(telescopeMap);
 
             return equipment;
         } catch (IOException e) {

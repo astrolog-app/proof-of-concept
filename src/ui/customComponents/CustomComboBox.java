@@ -58,7 +58,7 @@ public class CustomComboBox extends JComboBox<String> {
 
         switch (equipmentType) {
             case TELESCOPE -> {
-                for (Telescope t : equipment.getTelescopes()) {
+                for (Telescope t : equipment.getTelescopes().values()) {
                     content.add(t.getName());
                 }
             }

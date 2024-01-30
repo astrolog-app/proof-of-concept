@@ -2,24 +2,30 @@ package models.equipment;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.UUID;
 
 public class Equipment {
-    private final HashSet<Telescope> telescopes = new HashSet<>();
+    private Map<UUID, Telescope> telescopes = new HashMap<>();
     private final HashSet<Camera> cameras = new HashSet<>();
     private final HashSet<Mount> mounts = new HashSet<>();
     private final HashSet<Filter> filters = new HashSet<>();
     private final HashSet<Flattener> flatteners = new HashSet<>();
     private final HashSet<Accessoire> accessoires = new HashSet<>();
 
-    public HashSet<Telescope> getTelescopes() {
+    public Map<UUID, Telescope> getTelescopes() {
         return telescopes;
     }
+    public void setTelescopes(Map<UUID, Telescope> telescopes) {
+        this.telescopes = telescopes;
+    }
     public void addTelescope(Telescope telescope) {
-        telescopes.add(telescope);
+        telescopes.put(telescope.getId(), telescope);
     }
     public void removeTelescope(Telescope telescope) {
-        telescopes.remove(telescope);
+        telescopes.remove(telescope.getId(), telescope);
     }
 
     public HashSet<Camera> getCameras() {
@@ -76,7 +82,7 @@ public class Equipment {
     public HashSet<String> getAllBrands() {
         HashSet<String> brands = new HashSet<>();
 
-        for (Telescope t : telescopes) {
+        for (Telescope t : telescopes.values()) {
             brands.add(t.getBrand());
         }
         for (Camera c : cameras) {
