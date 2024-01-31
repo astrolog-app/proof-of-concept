@@ -3,6 +3,7 @@ package models.equipment;
 import java.util.List;
 
 public class EquipmentWrapper {
+    // TODO: cleanUp (delete)
     private List<Telescope> telescopes;
     private List<Camera> cameras;
     private List<Mount> mounts;

@@ -9,11 +9,11 @@ import java.util.UUID;
 
 public class Equipment {
     private Map<UUID, Telescope> telescopes = new HashMap<>();
-    private final HashSet<Camera> cameras = new HashSet<>();
-    private final HashSet<Mount> mounts = new HashSet<>();
-    private final HashSet<Filter> filters = new HashSet<>();
-    private final HashSet<Flattener> flatteners = new HashSet<>();
-    private final HashSet<Accessoire> accessoires = new HashSet<>();
+    private Map<UUID, Camera> cameras = new HashMap<>();
+    private Map<UUID, Mount> mounts = new HashMap<>();
+    private Map<UUID, Filter> filters = new HashMap<>();
+    private Map<UUID, Flattener> flatteners = new HashMap<>();
+    private Map<UUID, Accessoire> accessoires = new HashMap<>();
 
     public Map<UUID, Telescope> getTelescopes() {
         return telescopes;
@@ -28,54 +28,69 @@ public class Equipment {
         telescopes.remove(telescope.getId(), telescope);
     }
 
-    public HashSet<Camera> getCameras() {
+    public Map<UUID, Camera> getCameras() {
         return cameras;
     }
+    public void setCameras(Map<UUID, Camera> cameras) {
+        this.cameras = cameras;
+    }
     public void addCamera(Camera camera) {
-        cameras.add(camera);
+        cameras.put(camera.getId(), camera);
     }
     public void removeCamera(Camera camera) {
-        cameras.remove(camera);
+        cameras.remove(camera.getId(), camera);
     }
 
-    public HashSet<Mount> getMounts() {
+    public Map<UUID, Mount> getMounts() {
         return mounts;
     }
+    public void setMounts(Map<UUID, Mount> mounts) {
+        this.mounts = mounts;
+    }
     public void addMount(Mount mount) {
-        mounts.add(mount);
+        mounts.put(mount.getId(), mount);
     }
     public void removeMount(Mount mount) {
-        mounts.remove(mount);
+        mounts.remove(mount.getId(), mount);
     }
 
-    public HashSet<Filter> getFilters() {
+    public Map<UUID, Filter> getFilters() {
         return filters;
     }
+    public void setFilters(Map<UUID, Filter> filters) {
+        this.filters = filters;
+    }
     public void addFilter(Filter filter) {
-        filters.add(filter);
+        filters.put(filter.getId(), filter);
     }
     public void removeFilter(Filter filter) {
-        filters.remove(filter);
+        filters.remove(filter.getId(), filter);
     }
 
-    public HashSet<Flattener> getFlatteners() {
+    public Map<UUID, Flattener> getFlatteners() {
         return flatteners;
     }
+    public void setFlatteners(Map<UUID, Flattener> flatteners) {
+        this.flatteners = flatteners;
+    }
     public void addFlattener(Flattener flattener) {
-        flatteners.add(flattener);
+        flatteners.put(flattener.getId(), flattener);
     }
     public void removeFlattener(Flattener flattener) {
-        flatteners.remove(flattener);
+        flatteners.remove(flattener.getId(), flattener);
     }
 
-    public HashSet<Accessoire> getAccessoires() {
+    public Map<UUID, Accessoire> getAccessoires() {
         return accessoires;
     }
+    public void setAccessoires(Map<UUID, Accessoire> accessoires) {
+        this.accessoires = accessoires;
+    }
     public void addAccessoire(Accessoire accessoire) {
-        accessoires.add(accessoire);
+        accessoires.put(accessoire.getId(), accessoire);
     }
     public void removeAccessoire(Accessoire accessoire) {
-        accessoires.remove(accessoire);
+        accessoires.remove(accessoire.getId(), accessoire);
     }
 
     @JsonIgnore
@@ -85,19 +100,19 @@ public class Equipment {
         for (Telescope t : telescopes.values()) {
             brands.add(t.getBrand());
         }
-        for (Camera c : cameras) {
+        for (Camera c : cameras.values()) {
             brands.add(c.getBrand());
         }
-        for (Mount m : mounts) {
+        for (Mount m : mounts.values()) {
             brands.add(m.getBrand());
         }
-        for (Filter fi : filters) {
+        for (Filter fi : filters.values()) {
             brands.add(fi.getBrand());
         }
-        for (Flattener fl : flatteners) {
+        for (Flattener fl : flatteners.values()) {
             brands.add(fl.getBrand());
         }
-        for (Accessoire a : accessoires) {
+        for (Accessoire a : accessoires.values()) {
             brands.add(a.getBrand());
         }
 

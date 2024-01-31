@@ -49,11 +49,11 @@ public class EquipmentTableWrapper {
 
         switch (equipmentType) {
             case TELESCOPE -> data = new ArrayList<>(equipment.getTelescopes().values());
-            case CAMERA -> data = new ArrayList<>(equipment.getCameras());
-            case FLATTENER -> data = new ArrayList<>(equipment.getFlatteners());
-            case MOUNT -> data = new ArrayList<>(equipment.getMounts());
-            case FILTER -> data = new ArrayList<>(equipment.getFilters());
-            case ACCESSOIRE -> data = new ArrayList<>(equipment.getAccessoires());
+            case CAMERA -> data = new ArrayList<>(equipment.getCameras().values());
+            case FLATTENER -> data = new ArrayList<>(equipment.getFlatteners().values());
+            case MOUNT -> data = new ArrayList<>(equipment.getMounts().values());
+            case FILTER -> data = new ArrayList<>(equipment.getFilters().values());
+            case ACCESSOIRE -> data = new ArrayList<>(equipment.getAccessoires().values());
         }
 
         equipmentTable1 = new EquipmentTable(equipment, data, equipmentType);

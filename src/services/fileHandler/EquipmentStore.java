@@ -1,8 +1,6 @@
 package services.fileHandler;
 
-import models.equipment.Equipment;
-import models.equipment.EquipmentWrapper;
-import models.equipment.Telescope;
+import models.equipment.*;
 import org.codehaus.jackson.map.ObjectMapper;
 import services.AppLogger;
 import utils.Paths;
@@ -27,11 +25,42 @@ public class EquipmentStore {
 
             Equipment equipment = new Equipment();
 
+            // TODO: cleanUp
             Map<UUID, Telescope> telescopeMap = new HashMap<>();
             for (Telescope t : equipmentWrapper.getTelescopes()) {
                 telescopeMap.put(t.getId(), t);
             }
             equipment.setTelescopes(telescopeMap);
+
+            Map<UUID, Camera> cameraMap = new HashMap<>();
+            for (Camera c : equipmentWrapper.getCameras()) {
+                cameraMap.put(c.getId(), c);
+            }
+            equipment.setCameras(cameraMap);
+
+            Map<UUID, Flattener> flattenerMap = new HashMap<>();
+            for (Flattener f : equipmentWrapper.getFlatteners()) {
+                flattenerMap.put(f.getId(), f);
+            }
+            equipment.setFlatteners(flattenerMap);
+
+            Map<UUID, Accessoire> accessoireMap = new HashMap<>();
+            for (Accessoire a : equipmentWrapper.getAccessoires()) {
+                accessoireMap.put(a.getId(), a);
+            }
+            equipment.setAccessoires(accessoireMap);
+
+            Map<UUID, Filter> filterMap = new HashMap<>();
+            for (Filter f : equipmentWrapper.getFilters()) {
+                filterMap.put(f.getId(), f);
+            }
+            equipment.setFilters(filterMap);
+
+            Map<UUID, Mount> mountMap = new HashMap<>();
+            for (Mount m : equipmentWrapper.getMounts()) {
+                mountMap.put(m.getId(), m);
+            }
+            equipment.setMounts(mountMap);
 
             return equipment;
         } catch (IOException e) {

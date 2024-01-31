@@ -63,27 +63,27 @@ public class CustomComboBox extends JComboBox<String> {
                 }
             }
             case MOUNT -> {
-                for (Mount m : equipment.getMounts()) {
+                for (Mount m : equipment.getMounts().values()) {
                     content.add(m.getName());
                 }
             }
             case CAMERA -> {
-                for (Camera c : equipment.getCameras()) {
+                for (Camera c : equipment.getCameras().values()) {
                     content.add(c.getName());
                 }
             }
             case FILTER -> {
-                for (Filter f : equipment.getFilters()) {
+                for (Filter f : equipment.getFilters().values()) {
                     content.add(f.getName());
                 }
             }
             case FLATTENER -> {
-                for (Flattener f : equipment.getFlatteners()) {
+                for (Flattener f : equipment.getFlatteners().values()) {
                     content.add(f.getName());
                 }
             }
             case ACCESSOIRE -> {
-                for (Accessoire a : equipment.getAccessoires()) {
+                for (Accessoire a : equipment.getAccessoires().values()) {
                     content.add(a.getName());
                 }
             }

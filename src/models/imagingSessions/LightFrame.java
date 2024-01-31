@@ -50,13 +50,7 @@ public class LightFrame extends ImagingFrame {
     }
 
     public Filter getFilter(Equipment equipment) {
-        for (Filter f : equipment.getFilters()) {
-            if (f.getId().equals(filterID)) {
-                return f;
-            }
-        }
-
-        return null;
+        return equipment.getFilters().get(filterID);
     }
     public void setFilterID(UUID filterID) {
         this.filterID = filterID;
@@ -119,39 +113,21 @@ public class LightFrame extends ImagingFrame {
     }
 
     public Flattener getFlattener(Equipment equipment) {
-        for (Flattener f : equipment.getFlatteners()) {
-            if (f.getId().equals(flattenerID)) {
-                return f;
-            }
-        }
-
-        return null;
+        return equipment.getFlatteners().get(flattenerID);
     }
     public void setFlattenerID(UUID flattenerID) {
         this.flattenerID = flattenerID;
     }
 
     public Mount getMount(Equipment equipment) {
-        for (Mount m : equipment.getMounts()) {
-            if (m.getId().equals(mountID)) {
-                return m;
-            }
-        }
-
-        return null;
+        return equipment.getMounts().get(mountID);
     }
     public void setMountID(UUID mountID) {
         this.mountID = mountID;
     }
 
     public Camera getCamera(Equipment equipment) {
-        for (Camera c : equipment.getCameras()) {
-            if (c.getId().equals(cameraID)) {
-                return c;
-            }
-        }
-
-        return null;
+        return equipment.getCameras().get(cameraID);
     }
     public void setCameraID(UUID cameraID) {
         this.cameraID = cameraID;
