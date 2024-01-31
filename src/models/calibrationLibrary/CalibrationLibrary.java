@@ -1,5 +1,8 @@
 package models.calibrationLibrary;
 
+import models.equipment.Camera;
+import models.equipment.Equipment;
+
 import java.util.UUID;
 
 public class CalibrationLibrary {
@@ -18,8 +21,8 @@ public class CalibrationLibrary {
         this.id = id;
     }
 
-    public UUID getCameraId() {
-        return cameraId;
+    public Camera getCamera(Equipment equipment) {
+        return equipment.getCameras().get(cameraId);
     }
     public void setCameraId(UUID cameraId) {
         this.cameraId = cameraId;

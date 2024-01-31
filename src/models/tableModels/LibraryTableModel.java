@@ -26,13 +26,28 @@ public class LibraryTableModel extends AbstractTableModel {
     }
 
     @Override
+    public String getColumnName(int column) {
+        return switch (column) {
+            case 0 -> "Camera";
+            case 1 -> "Calibration Type";
+            case 2 -> "Gain";
+            case 3 -> "Sub Length";
+            case 4 -> "Total Subs";
+            default -> "";
+        };
+    }
+
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         CalibrationLibrary lib = data.get(rowIndex);
 
-        switch (columnIndex) {
-            // TODO: to implement
-        }
-
-        return null;
+        return switch (columnIndex) {
+            case 0 -> lib.getCamera(equipment);
+            case 1 -> lib.getCalibrationType().getName();
+            case 2 -> lib.getGain();
+            case 3 -> lib.getSubLength();
+            case 4 -> lib.getTotalSubs();
+            default -> null;
+        };
     }
 }
