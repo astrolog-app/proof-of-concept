@@ -34,7 +34,6 @@ public class LogPanel {
     private JButton deleteButton;
     private JButton xMarkButton;
     private JButton editButton;
-    private JButton imagingSessionSettings;
     private JButton searchButton;
     private JButton saveBackupConfigButton;
 
@@ -51,10 +50,6 @@ public class LogPanel {
         ImageIcon xMarkIcon = Images.getThemeBasedIcon(appConfig, "x-mark", 18, 18);
         xMarkButton.setIcon(xMarkIcon);
         xMarkButton.setText("");
-
-        ImageIcon settingsIcon = Images.getThemeBasedIcon(appConfig, "settings", 18, 18);
-        imagingSessionSettings.setIcon(settingsIcon);
-        imagingSessionSettings.setText("");
 
         ImageIcon searchIcon = Images.getThemeBasedIcon(appConfig, "right_arrow", 18, 18);
         searchButton.setIcon(searchIcon);
