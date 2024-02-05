@@ -2,7 +2,7 @@ package ui.corecomponents;
 
 import models.equipment.Equipment;
 import models.equipment.EquipmentType;
-import ui.customComponents.equipmentTable.EquipmentTableWrapper;
+import ui.customComponents.tables.equipmentTable.EquipmentTableWrapper;
 
 import javax.swing.*;
 

@@ -1,4 +1,4 @@
-package ui.customComponents.equipmentTable;
+package ui.customComponents.tables.equipmentTable;
 
 import models.equipment.Equipment;
 import models.equipment.EquipmentItem;

@@ -1,11 +1,8 @@
 package ui.corecomponents;
 
 import models.equipment.Equipment;
-import models.equipment.EquipmentType;
 import services.fileHandler.CalibrationLibraryStore;
-import ui.customComponents.ImagingSessionTable;
-import ui.customComponents.LibraryTable;
-import ui.customComponents.equipmentTable.EquipmentTableWrapper;
+import ui.customComponents.tables.LibraryTable;
 
 import javax.swing.*;
 
@@ -13,6 +10,8 @@ public class LibraryPanel {
     private final Equipment equipment;
     private JPanel panel;
     private LibraryTable libraryTable1;
+    private JButton addButton;
+    private JButton editButton;
 
     public LibraryPanel(Equipment equipment) {
         this.equipment = equipment;

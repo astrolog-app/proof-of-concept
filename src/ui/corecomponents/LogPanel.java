@@ -6,7 +6,7 @@ import models.imagingSessions.ImagingSession;
 import models.settings.AppConfig;
 import services.fileHandler.ConfigurationStore;
 import services.fileHandler.ImagingSessionStore;
-import ui.customComponents.ImagingSessionTable;
+import ui.customComponents.tables.ImagingSessionTable;
 import utils.Images;
 
 import javax.swing.*;

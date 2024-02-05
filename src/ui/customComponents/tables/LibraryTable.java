@@ -1,4 +1,4 @@
-package ui.customComponents;
+package ui.customComponents.tables;
 
 import models.calibrationLibrary.CalibrationLibrary;
 import models.equipment.Equipment;
@@ -20,5 +20,6 @@ public class LibraryTable extends JTable {
         setModel(new LibraryTableModel(equipment, calibrationLibraries));
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         showHorizontalLines = true;
+        setRowHeight(30);
     }
 }

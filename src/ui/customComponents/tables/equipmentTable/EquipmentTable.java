@@ -1,4 +1,4 @@
-package ui.customComponents.equipmentTable;
+package ui.customComponents.tables.equipmentTable;
 
 import models.equipment.Equipment;
 import models.equipment.EquipmentItem;
@@ -6,7 +6,6 @@ import models.equipment.EquipmentType;
 import models.tableModels.EquipmentTableModel;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
 import java.util.List;
 
 public class EquipmentTable extends JTable {

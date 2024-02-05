@@ -1,4 +1,4 @@
-package ui.customComponents;
+package ui.customComponents.tables;
 
 import controllers.ImagingSessionController;
 import models.tableModels.ImagingSessionTableModel;
