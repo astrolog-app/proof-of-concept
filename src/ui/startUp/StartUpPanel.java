@@ -1,7 +1,6 @@
 package ui.startUp;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class StartUpPanel extends JDialog {
     private JPanel mainPanel;
