@@ -1,0 +1,9 @@
+[{
+  "id": "8d00c203-a73f-4a9c-ad3b-aa608aaa8f98",
+  "cameraId": "8d00c203-a73f-4a9c-ad3b-aa608aaa8f97",
+  "calibrationType": "DARK",
+  "subLength": 300,
+  "gain": 100,
+  "totalSubs": 50,
+  "path": "path"
+}]

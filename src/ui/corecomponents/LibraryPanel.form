@@ -27,7 +27,7 @@
         </constraints>
         <properties>
           <font size="18" style="1"/>
-          <text value="LIBRARY"/>
+          <text value="CALIBRATION LIBRARY"/>
         </properties>
       </component>
       <component id="833fb" class="javax.swing.JSeparator">
