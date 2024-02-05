@@ -2,7 +2,8 @@ package ui.corecomponents;
 
 import models.equipment.Equipment;
 import services.fileHandler.CalibrationLibraryStore;
-import ui.customComponents.tables.LibraryTable;
+import ui.customComponents.LibraryTable;
+import ui.popUps.LibraryRowEditor;
 
 import javax.swing.*;
 
@@ -15,6 +16,14 @@ public class LibraryPanel {
 
     public LibraryPanel(Equipment equipment) {
         this.equipment = equipment;
+
+        handleActions();
+    }
+
+    private void handleActions() {
+        addButton.addActionListener(e -> {
+            new LibraryRowEditor(null, equipment);
+        });
     }
 
     private void createUIComponents() {

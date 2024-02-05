@@ -3,7 +3,7 @@ package controllers;
 import models.equipment.Equipment;
 import models.tableModels.ImagingSessionTableModel;
 import models.imagingSessions.ImagingSession;
-import ui.customComponents.tables.ImagingSessionTable;
+import ui.customComponents.ImagingSessionTable;
 import ui.popUps.NewImagingSessionManually;
 
 import javax.swing.*;

@@ -1,4 +1,4 @@
-package ui.customComponents.tables;
+package ui.customComponents;
 
 import models.calibrationLibrary.CalibrationLibrary;
 import models.equipment.Equipment;

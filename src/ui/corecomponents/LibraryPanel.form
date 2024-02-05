@@ -15,7 +15,7 @@
         <properties/>
         <border type="empty"/>
         <children>
-          <component id="22216" class="ui.customComponents.tables.LibraryTable" binding="libraryTable1" custom-create="true" default-binding="true">
+          <component id="22216" class="ui.customComponents.LibraryTable" binding="libraryTable1" custom-create="true" default-binding="true">
             <constraints/>
             <properties/>
           </component>
