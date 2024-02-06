@@ -6,7 +6,6 @@ import models.imagingSessions.ImagingSession;
 import models.settings.LoggerColumns;
 import models.equipment.Equipment;
 import models.settings.ImagingSessionConfig;
-import services.fileHandler.ConfigurationStore;
 import ui.corecomponents.LogPanel;
 
 import javax.swing.*;
@@ -31,12 +30,12 @@ public class ImagingSessionTable extends JTable {
     private LoggerColumns sortedColumn;
     private SortOrder sortingDirection;
 
-    public ImagingSessionTable(Equipment equipment, LogPanel logPanel, List<ImagingSession> imagingSessions) {
-        isConfig = ConfigurationStore.loadImagingSessionConfig();
+    public ImagingSessionTable(Equipment equipment, LogPanel logPanel, List<ImagingSession> imagingSessions, ImagingSessionConfig isConfig) {
         this.logPanel = logPanel;
         this.equipment = equipment;
-        this.tableModel = new ImagingSessionTableModel(imagingSessions, equipment);
+        this.tableModel = new ImagingSessionTableModel(imagingSessions, equipment, isConfig);
         this.imagingSessions = imagingSessions;
+        this.isConfig = isConfig;
 
         createTable();
         setColumnsWidth();

@@ -3,8 +3,8 @@ package models.tableModels;
 import models.equipment.Equipment;
 import models.imagingSessions.ImagingSession;
 import models.imagingSessions.LightFrame;
+import models.settings.ImagingSessionConfig;
 import models.settings.LoggerColumns;
-import services.fileHandler.ConfigurationStore;
 import utils.EquipmentItems;
 
 import javax.swing.*;
@@ -17,9 +17,9 @@ public class ImagingSessionTableModel extends AbstractTableModel {
     private final List<LoggerColumns> selectedColumns;
     private final Equipment equipment;
 
-    public ImagingSessionTableModel(List<ImagingSession> imagingSessions, Equipment equipment) {
+    public ImagingSessionTableModel(List<ImagingSession> imagingSessions, Equipment equipment, ImagingSessionConfig isConfig) {
         data = imagingSessions;
-        selectedColumns = ConfigurationStore.loadImagingSessionConfig().getSelectedColumns(); // TODO: change
+        selectedColumns = isConfig.getSelectedColumns(); // TODO: change
         this.equipment = equipment;
     }
 

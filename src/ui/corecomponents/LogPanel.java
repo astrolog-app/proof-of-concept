@@ -4,8 +4,8 @@ import controllers.ImagingSessionController;
 import models.equipment.Equipment;
 import models.imagingSessions.ImagingSession;
 import models.settings.AppConfig;
+import models.settings.ImagingSessionConfig;
 import services.fileHandler.ConfigurationStore;
-import services.fileHandler.ImagingSessionStore;
 import ui.customComponents.ImagingSessionTable;
 import utils.Images;
 
@@ -19,7 +19,8 @@ import java.util.List;
 public class LogPanel {
     private ImagingSessionController imagingSessionController;
     private final Equipment equipment;
-    private List<ImagingSession> imagingSessions;
+    private final List<ImagingSession> imagingSessions;
+    private final ImagingSessionConfig isConfig;
 
     AppConfig appConfig;
     private JPanel panel1;
@@ -37,9 +38,11 @@ public class LogPanel {
     private JButton searchButton;
     private JButton saveBackupConfigButton;
 
-    public LogPanel(AppConfig appConfig, Equipment equipment) {
+    public LogPanel(AppConfig appConfig, Equipment equipment, List<ImagingSession> imagingSessions, ImagingSessionConfig isConfig) {
         this.appConfig = appConfig;
         this.equipment = equipment;
+        this.imagingSessions = imagingSessions;
+        this.isConfig = isConfig;
 
         updateTableButtonState();
 
@@ -96,9 +99,7 @@ public class LogPanel {
     }
 
     private void createUIComponents() {
-        imagingSessions = ImagingSessionStore.loadImagingSessions();
-
-        imagingSessionTable1 = new ImagingSessionTable(equipment, this, imagingSessions);
+        imagingSessionTable1 = new ImagingSessionTable(equipment, this, imagingSessions, isConfig);
         imagingSessionController = new ImagingSessionController(imagingSessionTable1.getTableModel(), imagingSessionTable1);
         imagingSessionTable1.setImagingSessionController(imagingSessionController);
     }

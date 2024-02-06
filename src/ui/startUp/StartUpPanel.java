@@ -9,15 +9,21 @@ public class StartUpPanel extends JDialog {
     private JPanel mainPanel;
     private JPanel backgroundPanel;
     private JProgressBar progressBar1;
+    private JLabel progressLabel;
 
     public StartUpPanel() {
+        setProgressLabel("starting application");
         setUndecorated(true);
-        setVisible(true);
         setSize(650, 300);
         setResizable(false);
         setLocationRelativeTo(null);
         add(mainPanel);
-        progressBar1.setValue(20);
+        progressBar1.setValue(0);
+        setAlwaysOnTop(true);
+        setVisible(true);
+
+        progressBar1.setMinimum(0);
+        progressBar1.setMaximum(6);
     }
 
     private void createUIComponents() {
@@ -31,5 +37,13 @@ public class StartUpPanel extends JDialog {
                 g.drawImage(backgroundImage.getImage(), 0, -55, getWidth(), 410, null); // TODO: correct image ratio
             }
         };
+    }
+
+    public void setProgressLabel(String text) {
+        progressLabel.setText(text + "...");
+    }
+
+    public void increaseProgress() {
+        progressBar1.setValue(progressBar1.getValue() + 1);
     }
 }

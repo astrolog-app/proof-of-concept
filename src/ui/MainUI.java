@@ -1,21 +1,21 @@
 package ui;
 
+import models.calibrationLibrary.CalibrationLibrary;
+import models.imagingSessions.ImagingSession;
 import models.license.Licence;
 import models.settings.AppConfig;
 import models.equipment.Equipment;
-import services.fileHandler.EquipmentStore;
+import models.settings.ImagingSessionConfig;
 import ui.corecomponents.*;
 import utils.Paths;
 import utils.Images;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class MainUI extends JFrame {
-    public MainUI(Licence licence, AppConfig appConfig) {
-
-        Equipment equipment = EquipmentStore.load();
-
+    public MainUI(Licence licence, AppConfig appConfig, List<ImagingSession> imagingSessions, ImagingSessionConfig isConfig, List<CalibrationLibrary> library, Equipment equipment) {
         Image img = Toolkit.getDefaultToolkit().getImage(Paths.IMAGE_PATH + "app_logo.png");
         setIconImage(img);
 
@@ -27,13 +27,13 @@ public class MainUI extends JFrame {
         }
         JTabbedPane tabbedPane = new JTabbedPane(tabPlacement);
 
-        LogPanel logPanelClass = new LogPanel(appConfig, equipment);
+        LogPanel logPanelClass = new LogPanel(appConfig, equipment, imagingSessions, isConfig);
         JPanel imagingHistoryPanel = logPanelClass.getPanel();
 
         EquipmentPanel equipmentPanelClass = new EquipmentPanel(equipment);
         JPanel equipmentPanel = equipmentPanelClass.getPanel();
 
-        LibraryPanel libraryPanelClass = new LibraryPanel(equipment);
+        LibraryPanel libraryPanelClass = new LibraryPanel(equipment, library);
         JPanel libraryPanel = libraryPanelClass.getPanel();
 
         SettingsPanel settingsPanelClass = new SettingsPanel(appConfig);
