@@ -2,7 +2,8 @@ package models.calibrationLibrary;
 
 public enum CalibrationType {
     DARK("Dark"),
-    BIAS("Bias");
+    BIAS("Bias"),
+    FLAT("Flat");
 
     private final String name;
 
@@ -12,5 +13,15 @@ public enum CalibrationType {
 
     public String getName() {
         return name;
+    }
+
+    public static CalibrationType getEnum(String name) {
+        for (CalibrationType calibrationType : CalibrationType.values()) {
+            if (calibrationType.getName().equalsIgnoreCase(name)) {
+                return calibrationType;
+            }
+        }
+
+        return null;
     }
 }

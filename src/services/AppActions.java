@@ -64,7 +64,7 @@ public class AppActions {
     }
 
     private void loadJson() {
-        sleep(400);
+        sleep(500);
         appConfig = ConfigurationStore.loadAppConfig();
         startUpPanel.setProgressLabel("loading configuration.json");
         startUpPanel.increaseProgress();

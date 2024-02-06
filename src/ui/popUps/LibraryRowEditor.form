@@ -16,11 +16,17 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="a86c7" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+          <component id="a86c7" class="javax.swing.JComboBox" binding="calibrationType">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <model>
+                <item value="Flat"/>
+                <item value="Bias"/>
+                <item value="Dark"/>
+              </model>
+            </properties>
           </component>
           <component id="bc40e" class="javax.swing.JComboBox" binding="camera" custom-create="true">
             <constraints>
@@ -28,19 +34,19 @@
             </constraints>
             <properties/>
           </component>
-          <component id="e34d2" class="javax.swing.JSpinner" binding="spinner1" default-binding="true">
+          <component id="e34d2" class="javax.swing.JSpinner" binding="gain">
             <constraints>
               <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="edb6f" class="javax.swing.JSpinner" binding="spinner2" default-binding="true">
+          <component id="edb6f" class="javax.swing.JSpinner" binding="subLength">
             <constraints>
               <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="617ed" class="javax.swing.JSpinner" binding="spinner3" default-binding="true">
+          <component id="617ed" class="javax.swing.JSpinner" binding="totalSubs">
             <constraints>
               <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>

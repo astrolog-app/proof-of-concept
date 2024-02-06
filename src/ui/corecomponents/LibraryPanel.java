@@ -25,7 +25,7 @@ public class LibraryPanel {
 
     private void handleActions() {
         addButton.addActionListener(e -> {
-            new LibraryRowEditor(null, equipment);
+            new LibraryRowEditor(null, equipment, library);
         });
     }
 
