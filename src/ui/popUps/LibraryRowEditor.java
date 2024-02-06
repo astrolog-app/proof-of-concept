@@ -61,11 +61,11 @@ public class LibraryRowEditor extends JDialog {
         boolean notNull = this.camera.getSelectedItem() != null;
         boolean camera = this.camera.getSelectedItem() != prevCamera;
         boolean calibrationType = this.calibrationType.getSelectedItem() != prevCalibrationType;
-//        boolean gain = this.gain.getValue() != prevGain;
-//        boolean subLength = this.subLength.getValue() != prevSubLength;
-//        boolean totalSubs = this.totalSubs.getValue() != prevTotalSubs;
+        boolean gain = !this.gain.getValue().equals(prevGain);
+        boolean subLength = !this.subLength.getValue().equals(prevSubLength);
+        boolean totalSubs = !this.totalSubs.getValue().equals(prevTotalSubs);
 
-        saveButton.setEnabled(notNull && (camera || calibrationType));
+        saveButton.setEnabled(notNull && (camera || calibrationType || gain || subLength || totalSubs));
     }
 
     private void fillUpUI() {
@@ -127,11 +127,6 @@ public class LibraryRowEditor extends JDialog {
     }
 
     private void createUIComponents() {
-        if (equipment == null) {
-            System.out.println("test");
-        } else {
-            System.out.println("not null");
-        }
         camera = new CustomComboBox(EquipmentType.CAMERA, equipment);
     }
 }
