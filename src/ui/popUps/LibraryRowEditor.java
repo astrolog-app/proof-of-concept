@@ -4,6 +4,7 @@ import models.calibrationLibrary.CalibrationLibrary;
 import models.calibrationLibrary.CalibrationType;
 import models.equipment.Equipment;
 import models.equipment.EquipmentType;
+import models.tableModels.LibraryTableModel;
 import services.fileHandler.CalibrationLibraryStore;
 import ui.customComponents.CustomComboBox;
 
@@ -17,6 +18,7 @@ public class LibraryRowEditor extends JDialog {
     private final CalibrationLibrary libraryRow;
     private final Equipment equipment;
     private final List<CalibrationLibrary> library;
+    private final LibraryTableModel tableModel;
     private String prevCamera = "";
     private String prevCalibrationType = "Flat";
     private int prevGain = 0;
@@ -31,11 +33,13 @@ public class LibraryRowEditor extends JDialog {
     private JSpinner subLength;
     private JSpinner totalSubs;
 
-    public LibraryRowEditor(CalibrationLibrary libraryRow, Equipment equipment, List<CalibrationLibrary> library) {
+    public LibraryRowEditor(CalibrationLibrary libraryRow, Equipment equipment, List<CalibrationLibrary> library, LibraryTableModel tableModel) {
         this.libraryRow = libraryRow;
         this.equipment = equipment;
         this.library = library;
+        this.tableModel = tableModel;
 
+        setSpinnerModels();
         fillUpUI();
         handleActions();
 
@@ -54,24 +58,39 @@ public class LibraryRowEditor extends JDialog {
     }
 
     private void updateButtonState() {
-        boolean camera = this.camera.getSelectedItem() != null && this.camera.getSelectedItem() != prevCamera;
+        boolean notNull = this.camera.getSelectedItem() != null;
+        boolean camera = this.camera.getSelectedItem() != prevCamera;
         boolean calibrationType = this.calibrationType.getSelectedItem() != prevCalibrationType;
+//        boolean gain = this.gain.getValue() != prevGain;
+//        boolean subLength = this.subLength.getValue() != prevSubLength;
+//        boolean totalSubs = this.totalSubs.getValue() != prevTotalSubs;
 
-        if (camera && calibrationType) {
-            saveButton.setEnabled(true);
-        } else {
-            saveButton.setEnabled(false);
-        }
+        saveButton.setEnabled(notNull && (camera || calibrationType));
     }
 
     private void fillUpUI() {
         if (libraryRow != null) {
-            camera.setSelectedItem(libraryRow.getCamera(equipment));
+            camera.setSelectedItem(libraryRow.getCamera(equipment).getName());
             prevCamera = libraryRow.getCamera(equipment).getName();
 
             calibrationType.setSelectedItem(libraryRow.getCalibrationType().getName());
             prevCalibrationType = libraryRow.getCalibrationType().getName();
+
+            gain.setValue(libraryRow.getGain());
+            prevGain = libraryRow.getGain();
+
+            subLength.setValue(libraryRow.getSubLength());
+            prevSubLength = libraryRow.getSubLength();
+
+            totalSubs.setValue(libraryRow.getTotalSubs());
+            prevTotalSubs = libraryRow.getTotalSubs();
         }
+    }
+
+    private void setSpinnerModels() {
+        gain.setModel(new SpinnerNumberModel(0,0,10000,1));
+        subLength.setModel(new SpinnerNumberModel(0,0,10000,1));
+        totalSubs.setModel(new SpinnerNumberModel(0,0,10000,1));
     }
 
     private void handleActions() {
@@ -88,6 +107,8 @@ public class LibraryRowEditor extends JDialog {
 
             library.add(calibrationLibrary);
             CalibrationLibraryStore.save(library, null);
+            tableModel.fireTableDataChanged();
+            dispose();
         });
 
         camera.addItemListener(e -> {
@@ -106,6 +127,11 @@ public class LibraryRowEditor extends JDialog {
     }
 
     private void createUIComponents() {
+        if (equipment == null) {
+            System.out.println("test");
+        } else {
+            System.out.println("not null");
+        }
         camera = new CustomComboBox(EquipmentType.CAMERA, equipment);
     }
 }

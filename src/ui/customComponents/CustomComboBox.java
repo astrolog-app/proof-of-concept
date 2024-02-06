@@ -21,7 +21,7 @@ public class CustomComboBox extends JComboBox<String> {
         this.equipmentType = equipmentType;
         this.equipment = equipment;
 
-        //updateData();
+        updateData();
         setFontsAndColorsForItems(this);
 
         addActionListener(e -> {
@@ -37,7 +37,7 @@ public class CustomComboBox extends JComboBox<String> {
 
                 setSelectedIndex(0); // TODO: set the actual ListItem that was selected before
                 new EquipmentItemPanel(equipmentType, equipment, null);
-                //updateData();
+                updateData();
 
                 if (oldList.size() != content.size()) {
                     removeItem(null);
