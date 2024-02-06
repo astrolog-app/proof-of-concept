@@ -64,26 +64,26 @@ public class AppActions {
     }
 
     private void loadJson() {
-        sleep(800);
+        sleep(400);
         appConfig = ConfigurationStore.loadAppConfig();
         startUpPanel.setProgressLabel("loading configuration.json");
         startUpPanel.increaseProgress();
 
-        sleep(150);
+        sleep(100);
         isConfig = ConfigurationStore.loadImagingSessionConfig();
         startUpPanel.increaseProgress();
 
-        sleep(150);
+        sleep(100);
         equipment = EquipmentStore.load();
         startUpPanel.setProgressLabel("loading equipment.json");
         startUpPanel.increaseProgress();
 
-        sleep(150);
+        sleep(100);
         imagingSessions = ImagingSessionStore.loadImagingSessions();
         startUpPanel.setProgressLabel("loading imagingSessions.json");
         startUpPanel.increaseProgress();
 
-        sleep(150);
+        sleep(100);
         library = CalibrationLibraryStore.load();
         startUpPanel.setProgressLabel("loading calibrationLibrary.json");
         startUpPanel.increaseProgress();
@@ -118,7 +118,7 @@ public class AppActions {
      * if it doesn't have a theme defined it sets it to light mode
      */
     private void setApplicationTheme() {
-        sleep(150);
+        sleep(100);
         startUpPanel.setProgressLabel("set application theme");
         startUpPanel.increaseProgress();
         sleep(50);

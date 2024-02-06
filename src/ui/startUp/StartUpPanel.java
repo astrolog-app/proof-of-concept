@@ -14,7 +14,7 @@ public class StartUpPanel extends JDialog {
     public StartUpPanel() {
         setProgressLabel("starting application");
         setUndecorated(true);
-        setSize(650, 300);
+        setSize(600, 350);
         setResizable(false);
         setLocationRelativeTo(null);
         add(mainPanel);
@@ -34,7 +34,7 @@ public class StartUpPanel extends JDialog {
                 // Load the background image
                 ImageIcon backgroundImage = new ImageIcon(Paths.IMAGE_PATH + "start_up_background.png");
                 // Draw the background image
-                g.drawImage(backgroundImage.getImage(), 0, -55, getWidth(), 410, null); // TODO: correct image ratio
+                g.drawImage(backgroundImage.getImage(), 0, -30, getWidth(), 380, null); // TODO: correct image ratio
             }
         };
     }
