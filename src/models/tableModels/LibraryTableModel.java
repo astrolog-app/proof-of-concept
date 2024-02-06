@@ -51,4 +51,11 @@ public class LibraryTableModel extends AbstractTableModel {
             default -> null;
         };
     }
+
+    public CalibrationLibrary getLibraryRow(int rowIndex) {
+        if (rowIndex == -1)
+            return null;
+
+        return data.get(rowIndex);
+    }
 }

@@ -24,9 +24,11 @@ public class LibraryPanel {
     }
 
     private void handleActions() {
-        addButton.addActionListener(e -> {
-            new LibraryRowEditor(null, equipment, library);
-        });
+        addButton.addActionListener(e -> new LibraryRowEditor(null, equipment, library, libraryTable1.getTableModel()));
+        editButton.addActionListener(e -> new LibraryRowEditor(libraryTable1.getTableModel().getLibraryRow(libraryTable1.getSelectedRow()),
+                equipment,
+                library,
+                libraryTable1.getTableModel()));
     }
 
     private void createUIComponents() {

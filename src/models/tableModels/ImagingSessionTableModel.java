@@ -23,11 +23,6 @@ public class ImagingSessionTableModel extends AbstractTableModel {
         this.equipment = equipment;
     }
 
-    public void addSession(ImagingSession session) {
-        data.add(session);
-        fireTableDataChanged();
-    }
-
     public void removeSession(ImagingSession session) {
         data.remove(session);
         fireTableDataChanged();

@@ -160,9 +160,10 @@ public class NewImagingSessionManually extends JDialog {
         saveButton.addActionListener(e -> {
             if (session == null) {
                 ImagingSession newSession = createNewSession();
+                imagingSessions.add(newSession);
 
                 ImagingSessionStore.save(imagingSessions, null);
-                isTableModel.addSession(newSession);
+                isTableModel.fireTableDataChanged();
 
                 dispose();
             }
@@ -186,16 +187,16 @@ public class NewImagingSessionManually extends JDialog {
         LightFrame lf = new LightFrame();
         lf.setDate(dateLight.getText());
         lf.setTarget(target.getText());
-        lf.setSubLength((Double) subLengthLight.getValue());
-        lf.setTotalSubs((Double) totalSubsLight.getValue());
-        lf.setIntegratedSubs((Double) integratedSubs.getValue());
+        //lf.setSubLength((Double) subLengthLight.getValue());
+        //lf.setTotalSubs((Double) totalSubsLight.getValue());
+        //lf.setIntegratedSubs((Double) integratedSubs.getValue());
 //        lf.setFilter();
-        lf.setGain((Double) gain.getValue());
-        lf.setOffset((Double) gain.getValue());
-        lf.setCameraTemp((Double) gain.getValue());
-        lf.setOutsideTemp((Double) temp.getValue());
-        lf.setAverageSeeing((Double) avgSeeing.getValue());
-        lf.setAverageCloudCover((Double) avgCloudCover.getValue());
+        //lf.setGain((Double) gain.getValue());
+        //lf.setOffset((Double) gain.getValue());
+        //lf.setCameraTemp((Double) gain.getValue());
+        //lf.setOutsideTemp((Double) temp.getValue());
+        //lf.setAverageSeeing((Double) avgSeeing.getValue());
+        //lf.setAverageCloudCover((Double) avgCloudCover.getValue());
 //        lf.setTelescope();
 //        lf.setCamera();
 //        lf.setFlattener();
