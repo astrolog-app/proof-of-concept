@@ -4,9 +4,11 @@ import models.calibrationLibrary.CalibrationLibrary;
 import models.equipment.Equipment;
 import models.tableModels.LibraryTableModel;
 import ui.corecomponents.LibraryPanel;
+import utils.FileExplorer;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class LibraryTable extends JTable {
@@ -31,6 +33,15 @@ public class LibraryTable extends JTable {
 
     private void handleActions() {
         getSelectionModel().addListSelectionListener(e -> libraryPanel.updateButtonState());
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    FileExplorer.openFileExplorer(libraryTableModel.getLibraryRow(getSelectedRow()).getPath());
+                }
+            }
+        });
     }
 
     public LibraryTableModel getTableModel() {
