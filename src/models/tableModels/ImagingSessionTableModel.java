@@ -1,6 +1,7 @@
 package models.tableModels;
 
 import models.equipment.Equipment;
+import models.equipment.EquipmentItem;
 import models.imagingSessions.ImagingSession;
 import models.imagingSessions.LightFrame;
 import models.settings.ImagingSessionConfig;
@@ -61,7 +62,7 @@ public class ImagingSessionTableModel extends AbstractTableModel {
                 case TOTAL_EXPOSURE -> formatDouble(calculateTotalExposure(lf.getTotalSubs(), lf.getSubLength()));
                 case INTEGRATED_SUBS -> formatDouble(lf.getIntegratedSubs());
                 case INTEGRATED_EXPOSURE -> formatDouble(calculateTotalExposure(lf.getIntegratedSubs(), lf.getSubLength()));
-                case FILTER -> formatString(lf.getFilter(equipment).getViewName());
+                case FILTER -> formatEquipmentName(lf.getFilter(equipment));
                 case GAIN -> formatDouble(lf.getGain());
                 case OFFSET -> formatDouble(lf.getOffset());
                 case CAMERA_TEMP -> formatDouble(lf.getCameraTemp());
@@ -69,10 +70,10 @@ public class ImagingSessionTableModel extends AbstractTableModel {
                 case AVERAGE_SEEING -> formatDouble(lf.getAverageSeeing());
                 case AVERAGE_CLOUD_COVER -> formatDouble(lf.getAverageCloudCover());
                 case AVERAGE_MOON -> formatDouble(lf.getAverageMoon());
-                case TELESCOPE -> formatString(lf.getTelescope(equipment).getViewName());
-                case FLATTENER -> formatString(lf.getFlattener(equipment).getViewName());
-                case MOUNT -> formatString(lf.getMount(equipment).getViewName());
-                case CAMERA -> formatString(lf.getCamera(equipment).getViewName());
+                case TELESCOPE -> formatEquipmentName(lf.getTelescope(equipment));
+                case FLATTENER -> formatEquipmentName(lf.getFlattener(equipment));
+                case MOUNT -> formatEquipmentName(lf.getMount(equipment));
+                case CAMERA -> formatEquipmentName(lf.getCamera(equipment));
                 case NOTES -> formatString(lf.getNotes());
             };
         }
@@ -92,6 +93,13 @@ public class ImagingSessionTableModel extends AbstractTableModel {
         } else {
             return "N/A";
         }
+    }
+
+    private String formatEquipmentName(EquipmentItem item) {
+        if (item == null)
+            return "N/A";
+
+        return item.getViewName();
     }
 
     private String formatString(String s) {
