@@ -12,7 +12,6 @@ import javax.swing.*;
 import java.awt.event.ItemEvent;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 public class LibraryRowEditor extends JDialog {
     private final CalibrationLibrary libraryRow;
@@ -26,7 +25,7 @@ public class LibraryRowEditor extends JDialog {
     private int prevTotalSubs = 0;
     private JPanel mainPanel;
     private JComboBox<String> calibrationType;
-    private JComboBox<String> camera;
+    private CustomComboBox camera;
     private JButton saveButton;
     private JButton cancelButton;
     private JSpinner gain;
@@ -99,7 +98,7 @@ public class LibraryRowEditor extends JDialog {
             CalibrationLibrary calibrationLibrary = new CalibrationLibrary();
 
             calibrationLibrary.setPath("");
-            calibrationLibrary.setCameraId(UUID.randomUUID());
+            calibrationLibrary.setCameraId(camera.getSelectedEquipmentItem().getId());
             calibrationLibrary.setCalibrationType(CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString()));
             calibrationLibrary.setGain((Integer) gain.getValue());
             calibrationLibrary.setSubLength((Integer) subLength.getValue());

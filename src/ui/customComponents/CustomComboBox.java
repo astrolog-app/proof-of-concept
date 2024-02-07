@@ -6,10 +6,8 @@ import ui.popUps.EquipmentItemPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class CustomComboBox extends JComboBox<String> {
     private final EquipmentType equipmentType;
@@ -146,5 +144,9 @@ public class CustomComboBox extends JComboBox<String> {
         }
 
         return null;
+    }
+
+    public EquipmentItem getSelectedEquipmentItem() {
+        return equipment.getItemFromViewName(Objects.requireNonNull(getSelectedItem()).toString());
     }
 }

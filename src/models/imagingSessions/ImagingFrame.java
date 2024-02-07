@@ -1,6 +1,6 @@
 package models.imagingSessions;
 
-public abstract class ImagingFrame {
+public class ImagingFrame {
     private String date;
     private Double totalSubs;
 

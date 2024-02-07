@@ -2,10 +2,7 @@ package models.equipment;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class Equipment {
     private Map<UUID, Telescope> telescopes = new HashMap<>();
@@ -117,5 +114,23 @@ public class Equipment {
         }
 
         return brands;
+    }
+
+    public EquipmentItem getItemFromViewName(String viewName) {
+        List<EquipmentItem> items = new ArrayList<>();
+        items.addAll(telescopes.values());
+        items.addAll(cameras.values());
+        items.addAll(mounts.values());
+        items.addAll(filters.values());
+        items.addAll(flatteners.values());
+        items.addAll(accessoires.values());
+
+        for (EquipmentItem e : items) {
+            if (e.getViewName().equals(viewName)) {
+                return e;
+            }
+        }
+
+        return null;
     }
 }
