@@ -33,7 +33,7 @@ public class MainUI extends JFrame {
         EquipmentPanel equipmentPanelClass = new EquipmentPanel(equipment);
         JPanel equipmentPanel = equipmentPanelClass.getPanel();
 
-        LibraryPanel libraryPanelClass = new LibraryPanel(equipment, library);
+        LibraryPanel libraryPanelClass = new LibraryPanel(equipment, library, appConfig);
         JPanel libraryPanel = libraryPanelClass.getPanel();
 
         SettingsPanel settingsPanelClass = new SettingsPanel(appConfig);

@@ -39,7 +39,7 @@ public class AppActions {
 
         if (licence != null) {
             FlatDarkLaf.setup();
-            SwingUtilities.invokeLater(() -> startUpPanel = new StartUpPanel());
+            startUpPanel = new StartUpPanel();
 
             logger.info("starting MainUI");
 

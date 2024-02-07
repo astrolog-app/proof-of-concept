@@ -2,8 +2,10 @@ package ui.corecomponents;
 
 import models.calibrationLibrary.CalibrationLibrary;
 import models.equipment.Equipment;
+import models.settings.AppConfig;
 import ui.customComponents.LibraryTable;
 import ui.popUps.LibraryRowEditor;
+import utils.Images;
 
 import javax.swing.*;
 import java.util.List;
@@ -15,10 +17,16 @@ public class LibraryPanel {
     private LibraryTable libraryTable1;
     private JButton addButton;
     private JButton editButton;
+    private JButton deleteButton;
 
-    public LibraryPanel(Equipment equipment, List<CalibrationLibrary> library) {
+    public LibraryPanel(Equipment equipment, List<CalibrationLibrary> library, AppConfig appConfig) {
         this.equipment = equipment;
         this.library = library;
+
+        updateButtonState();
+
+        ImageIcon searchIcon = Images.getThemeBasedIcon(appConfig, "bin", 18, 18);
+        deleteButton.setIcon(searchIcon);
 
         handleActions();
     }
@@ -31,8 +39,13 @@ public class LibraryPanel {
                 libraryTable1.getTableModel()));
     }
 
+    public void updateButtonState() {
+        boolean b = libraryTable1.getTableModel().getLibraryRow(libraryTable1.getSelectedRow()) != null;
+        editButton.setEnabled(b);
+    }
+
     private void createUIComponents() {
-        libraryTable1 = new LibraryTable(equipment, library);
+        libraryTable1 = new LibraryTable(equipment, library, this);
     }
 
     public JPanel getPanel() {
