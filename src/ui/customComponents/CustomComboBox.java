@@ -5,6 +5,7 @@ import ui.popUps.EquipmentItemPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ public class CustomComboBox extends JComboBox<String> {
     private final String newItemString = "Add New...";
     private final List<String> content = new ArrayList<>();
     private boolean nullItem = true;
+    private int selectedIndex = 0;
 
     public CustomComboBox(EquipmentType equipmentType, Equipment equipment) {
         this.equipmentType = equipmentType;
@@ -24,10 +26,19 @@ public class CustomComboBox extends JComboBox<String> {
         updateData();
         setFontsAndColorsForItems(this);
 
-        addActionListener(e -> {
+        addItemListener(e -> {
             if (getSelectedItem() != null && !getSelectedItem().equals(newItemString)) {
                 removeItem(null);
                 nullItem = false;
+            }
+
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                if (getSelectedIndex() != 0) {
+                    selectedIndex = getSelectedIndex();
+                    if (nullItem) {
+                        selectedIndex = 0;
+                    }
+                }
             }
         });
 
@@ -35,9 +46,9 @@ public class CustomComboBox extends JComboBox<String> {
             if (getSelectedItem() != null && getSelectedItem().equals(newItemString)) {
                 List<String> oldList = new ArrayList<>(content);
 
-                setSelectedIndex(0); // TODO: set the actual ListItem that was selected before
                 new EquipmentItemPanel(equipmentType, equipment, null);
                 updateData();
+                setSelectedIndex(selectedIndex);
 
                 if (oldList.size() != content.size()) {
                     removeItem(null);
