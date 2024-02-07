@@ -42,6 +42,7 @@ public class LibraryPanel {
     public void updateButtonState() {
         boolean b = libraryTable1.getTableModel().getLibraryRow(libraryTable1.getSelectedRow()) != null;
         editButton.setEnabled(b);
+        deleteButton.setEnabled(b);
     }
 
     private void createUIComponents() {
