@@ -48,6 +48,11 @@ public abstract class EquipmentItem {
     }
 
     @JsonIgnore
+    public String getViewName() {
+        return brand + " " + name;
+    }
+
+    @JsonIgnore
     public abstract String[] getPropertyNames();
 
     @JsonIgnore

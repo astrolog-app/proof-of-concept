@@ -70,32 +70,32 @@ public class CustomComboBox extends JComboBox<String> {
         switch (equipmentType) {
             case TELESCOPE -> {
                 for (Telescope t : equipment.getTelescopes().values()) {
-                    content.add(t.getName());
+                    content.add(t.getViewName());
                 }
             }
             case MOUNT -> {
                 for (Mount m : equipment.getMounts().values()) {
-                    content.add(m.getName());
+                    content.add(m.getViewName());
                 }
             }
             case CAMERA -> {
                 for (Camera c : equipment.getCameras().values()) {
-                    content.add(c.getName());
+                    content.add(c.getViewName());
                 }
             }
             case FILTER -> {
                 for (Filter f : equipment.getFilters().values()) {
-                    content.add(f.getName());
+                    content.add(f.getViewName());
                 }
             }
             case FLATTENER -> {
                 for (Flattener f : equipment.getFlatteners().values()) {
-                    content.add(f.getName());
+                    content.add(f.getViewName());
                 }
             }
             case ACCESSOIRE -> {
                 for (Accessoire a : equipment.getAccessoires().values()) {
-                    content.add(a.getName());
+                    content.add(a.getViewName());
                 }
             }
         }

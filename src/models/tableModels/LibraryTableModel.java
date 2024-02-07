@@ -2,7 +2,6 @@ package models.tableModels;
 
 import models.calibrationLibrary.CalibrationLibrary;
 import models.equipment.Equipment;
-import utils.EquipmentItems;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
@@ -43,7 +42,7 @@ public class LibraryTableModel extends AbstractTableModel {
         CalibrationLibrary lib = data.get(rowIndex);
 
         return switch (columnIndex) {
-            case 0 -> EquipmentItems.constructName(lib.getCamera(equipment));
+            case 0 -> lib.getCamera(equipment).getViewName();
             case 1 -> lib.getCalibrationType().getName();
             case 2 -> lib.getGain();
             case 3 -> lib.getSubLength();

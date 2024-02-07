@@ -5,7 +5,6 @@ import models.imagingSessions.ImagingSession;
 import models.imagingSessions.LightFrame;
 import models.settings.ImagingSessionConfig;
 import models.settings.LoggerColumns;
-import utils.EquipmentItems;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -62,7 +61,7 @@ public class ImagingSessionTableModel extends AbstractTableModel {
                 case TOTAL_EXPOSURE -> formatDouble(calculateTotalExposure(lf.getTotalSubs(), lf.getSubLength()));
                 case INTEGRATED_SUBS -> formatDouble(lf.getIntegratedSubs());
                 case INTEGRATED_EXPOSURE -> formatDouble(calculateTotalExposure(lf.getIntegratedSubs(), lf.getSubLength()));
-                case FILTER -> formatString(EquipmentItems.constructName(lf.getFilter(equipment)));
+                case FILTER -> formatString(lf.getFilter(equipment).getViewName());
                 case GAIN -> formatDouble(lf.getGain());
                 case OFFSET -> formatDouble(lf.getOffset());
                 case CAMERA_TEMP -> formatDouble(lf.getCameraTemp());
@@ -70,10 +69,10 @@ public class ImagingSessionTableModel extends AbstractTableModel {
                 case AVERAGE_SEEING -> formatDouble(lf.getAverageSeeing());
                 case AVERAGE_CLOUD_COVER -> formatDouble(lf.getAverageCloudCover());
                 case AVERAGE_MOON -> formatDouble(lf.getAverageMoon());
-                case TELESCOPE -> formatString(EquipmentItems.constructName(lf.getTelescope(equipment)));
-                case FLATTENER -> formatString(EquipmentItems.constructName(lf.getFlattener(equipment)));
-                case MOUNT -> formatString(EquipmentItems.constructName(lf.getMount(equipment)));
-                case CAMERA -> formatString(EquipmentItems.constructName(lf.getCamera(equipment)));
+                case TELESCOPE -> formatString(lf.getTelescope(equipment).getViewName());
+                case FLATTENER -> formatString(lf.getFlattener(equipment).getViewName());
+                case MOUNT -> formatString(lf.getMount(equipment).getViewName());
+                case CAMERA -> formatString(lf.getCamera(equipment).getViewName());
                 case NOTES -> formatString(lf.getNotes());
             };
         }

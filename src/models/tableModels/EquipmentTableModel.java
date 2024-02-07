@@ -3,7 +3,6 @@ package models.tableModels;
 import models.equipment.Equipment;
 import models.equipment.EquipmentItem;
 import models.equipment.EquipmentType;
-import utils.EquipmentItems;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
@@ -54,7 +53,7 @@ public class EquipmentTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         if (columnIndex == 0) {
-            return EquipmentItems.constructName(data.get(rowIndex));
+            return data.get(rowIndex).getViewName();
         }
 
         return data.get(rowIndex).getProperties()[columnIndex - 1];

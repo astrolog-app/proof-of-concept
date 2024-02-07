@@ -70,8 +70,8 @@ public class LibraryRowEditor extends JDialog {
 
     private void fillUpUI() {
         if (libraryRow != null) {
-            camera.setSelectedItem(libraryRow.getCamera(equipment).getName());
-            prevCamera = libraryRow.getCamera(equipment).getName();
+            camera.setSelectedItem(libraryRow.getCamera(equipment).getViewName());
+            prevCamera = libraryRow.getCamera(equipment).getViewName();
 
             calibrationType.setSelectedItem(libraryRow.getCalibrationType().getName());
             prevCalibrationType = libraryRow.getCalibrationType().getName();
