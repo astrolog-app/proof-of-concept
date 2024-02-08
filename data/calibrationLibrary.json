@@ -1,9 +1,17 @@
-[{
-  "id": "8d00c203-a73f-4a9c-ad3b-aa608aaa8f98",
-  "cameraId": "8d00c203-a73f-4a9c-ad3b-aa608aaa8f97",
-  "calibrationType": "DARK",
-  "subLength": 300,
-  "gain": 100,
-  "totalSubs": 50,
-  "path": "path"
-}]
+[ {
+  "id" : "f242f857-00c2-432f-b0a0-6bb0723ce5ca",
+  "cameraId" : "8d00c203-a73f-4a9c-ad3b-aa608aaa8f97",
+  "calibrationType" : "DARK",
+  "subLength" : 300,
+  "gain" : 100,
+  "totalSubs" : 50,
+  "path" : "/venv"
+}, {
+  "id" : "52e8b486-aa6a-495b-9c02-b28f6caf3547",
+  "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
+  "calibrationType" : "DARK",
+  "subLength" : 2,
+  "gain" : 4,
+  "totalSubs" : 7,
+  "path" : "/Downloads"
+} ]

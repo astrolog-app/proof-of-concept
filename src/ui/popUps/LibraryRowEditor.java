@@ -4,6 +4,7 @@ import models.calibrationLibrary.CalibrationLibrary;
 import models.calibrationLibrary.CalibrationType;
 import models.equipment.Equipment;
 import models.equipment.EquipmentType;
+import models.settings.AppConfig;
 import models.tableModels.LibraryTableModel;
 import services.fileHandler.CalibrationLibraryStore;
 import ui.customComponents.CustomComboBox;
@@ -20,6 +21,7 @@ public class LibraryRowEditor extends JDialog {
     private final Equipment equipment;
     private final List<CalibrationLibrary> library;
     private final LibraryTableModel tableModel;
+    private final AppConfig appConfig;
     private String prevPath = "";
     private String prevCamera = "";
     private String prevCalibrationType = "Flat";
@@ -38,11 +40,12 @@ public class LibraryRowEditor extends JDialog {
     private JButton changeButton;
     private JLabel subLengthLabel;
 
-    public LibraryRowEditor(CalibrationLibrary libraryRow, Equipment equipment, List<CalibrationLibrary> library, LibraryTableModel tableModel) {
+    public LibraryRowEditor(CalibrationLibrary libraryRow, Equipment equipment, List<CalibrationLibrary> library, LibraryTableModel tableModel, AppConfig appConfig) {
         this.libraryRow = libraryRow;
         this.equipment = equipment;
         this.library = library;
         this.tableModel = tableModel;
+        this.appConfig = appConfig;
 
         edit = libraryRow != null;
 
@@ -158,7 +161,7 @@ public class LibraryRowEditor extends JDialog {
             int userSelection = fileChooser.showDialog(null, "Select");
             if (userSelection == JFileChooser.APPROVE_OPTION) {
                 File selectedFolder = fileChooser.getSelectedFile();
-                pathField.setText(selectedFolder.getAbsolutePath());
+                pathField.setText(selectedFolder.getAbsolutePath().replace(appConfig.getFolderPath(),""));
                 updateButtonState();
             }
         });

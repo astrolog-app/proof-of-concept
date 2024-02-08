@@ -2,6 +2,7 @@ package ui.customComponents;
 
 import models.calibrationLibrary.CalibrationLibrary;
 import models.equipment.Equipment;
+import models.settings.AppConfig;
 import models.tableModels.LibraryTableModel;
 import ui.corecomponents.LibraryPanel;
 import utils.FileExplorer;
@@ -14,11 +15,13 @@ import java.util.List;
 public class LibraryTable extends JTable {
     private final Equipment equipment;
     private final LibraryPanel libraryPanel;
+    private final AppConfig appConfig;
     private LibraryTableModel libraryTableModel;
 
-    public LibraryTable(Equipment equipment, List<CalibrationLibrary> calibrationLibraries, LibraryPanel libraryPanel) {
+    public LibraryTable(Equipment equipment, List<CalibrationLibrary> calibrationLibraries, LibraryPanel libraryPanel, AppConfig appConfig) {
         this.equipment = equipment;
         this.libraryPanel = libraryPanel;
+        this.appConfig = appConfig;
 
         createTable(calibrationLibraries);
         handleActions();
@@ -38,7 +41,7 @@ public class LibraryTable extends JTable {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    FileExplorer.openFileExplorer(libraryTableModel.getLibraryRow(getSelectedRow()).getPath());
+                    FileExplorer.openFileExplorer(appConfig.getFolderPath() + libraryTableModel.getLibraryRow(getSelectedRow()).getPath());
                 }
             }
         });

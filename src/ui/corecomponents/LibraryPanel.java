@@ -12,6 +12,7 @@ import java.util.List;
 public class LibraryPanel {
     private final Equipment equipment;
     private final List<CalibrationLibrary> library;
+    private final AppConfig appConfig;
     private JPanel panel;
     private LibraryTable libraryTable1;
     private JButton addButton;
@@ -20,17 +21,19 @@ public class LibraryPanel {
     public LibraryPanel(Equipment equipment, List<CalibrationLibrary> library, AppConfig appConfig) {
         this.equipment = equipment;
         this.library = library;
+        this.appConfig = appConfig;
 
         updateButtonState();
         handleActions();
     }
 
     private void handleActions() {
-        addButton.addActionListener(e -> new LibraryRowEditor(null, equipment, library, libraryTable1.getTableModel()));
+        addButton.addActionListener(e -> new LibraryRowEditor(null, equipment, library, libraryTable1.getTableModel(), appConfig));
         editButton.addActionListener(e -> new LibraryRowEditor(libraryTable1.getTableModel().getLibraryRow(libraryTable1.getSelectedRow()),
                 equipment,
                 library,
-                libraryTable1.getTableModel()));
+                libraryTable1.getTableModel(),
+                appConfig));
     }
 
     public void updateButtonState() {
@@ -39,7 +42,7 @@ public class LibraryPanel {
     }
 
     private void createUIComponents() {
-        libraryTable1 = new LibraryTable(equipment, library, this);
+        libraryTable1 = new LibraryTable(equipment, library, this, appConfig);
     }
 
     public JPanel getPanel() {
