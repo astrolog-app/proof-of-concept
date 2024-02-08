@@ -22,9 +22,8 @@
             </constraints>
             <properties>
               <model>
-                <item value="Flat"/>
-                <item value="Bias"/>
                 <item value="Dark"/>
+                <item value="Bias"/>
               </model>
             </properties>
           </component>

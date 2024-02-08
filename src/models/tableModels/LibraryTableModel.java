@@ -7,6 +7,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class LibraryTableModel extends AbstractTableModel {
+    // TODO: add sorting
     private final Equipment equipment;
     private final List<CalibrationLibrary> data;
 
