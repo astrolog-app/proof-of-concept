@@ -2,8 +2,7 @@ package models.calibrationLibrary;
 
 public enum CalibrationType {
     DARK("Dark"),
-    BIAS("Bias"),
-    FLAT("Flat");
+    BIAS("Bias");
 
     private final String name;
 
