@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LibraryRowEditor extends JDialog {
+    private final boolean edit;
     private final CalibrationLibrary libraryRow;
     private final Equipment equipment;
     private final List<CalibrationLibrary> library;
@@ -35,12 +36,15 @@ public class LibraryRowEditor extends JDialog {
     private JSpinner totalSubs;
     private JTextField pathField;
     private JButton changeButton;
+    private JLabel subLengthLabel;
 
     public LibraryRowEditor(CalibrationLibrary libraryRow, Equipment equipment, List<CalibrationLibrary> library, LibraryTableModel tableModel) {
         this.libraryRow = libraryRow;
         this.equipment = equipment;
         this.library = library;
         this.tableModel = tableModel;
+
+        edit = libraryRow != null;
 
         setSpinnerModels();
         fillUpUI();
@@ -49,7 +53,7 @@ public class LibraryRowEditor extends JDialog {
         saveButton.setEnabled(false);
         setModal(true);
         add(mainPanel);
-        if (libraryRow != null) {
+        if (edit) {
             setTitle("Edit Library Entry");
         } else {
             setTitle("Add New Library Entry");
@@ -63,13 +67,17 @@ public class LibraryRowEditor extends JDialog {
     private void updateButtonState() {
         boolean notNull = this.camera.getSelectedItem() != null;
         boolean path = !pathField.getText().equals(prevPath);
-        boolean camera = !this.camera.getSelectedItem().equals(prevCamera);
+        boolean camera = !Objects.equals(this.camera.getSelectedItem(), prevCamera);
         boolean calibrationType = !Objects.equals(this.calibrationType.getSelectedItem(), prevCalibrationType);
         boolean gain = !this.gain.getValue().equals(prevGain);
         boolean subLength = !this.subLength.getValue().equals(prevSubLength);
         boolean totalSubs = !this.totalSubs.getValue().equals(prevTotalSubs);
 
-        saveButton.setEnabled(notNull && (path || camera || calibrationType || gain || subLength || totalSubs));
+        if (edit) {
+            saveButton.setEnabled(notNull && (path || camera || calibrationType || gain || subLength || totalSubs));
+        } else {
+            saveButton.setEnabled(notNull && path && camera);
+        }
     }
 
     private void fillUpUI() {
@@ -105,14 +113,14 @@ public class LibraryRowEditor extends JDialog {
         saveButton.addActionListener(e -> {
             CalibrationLibrary calibrationLibrary = new CalibrationLibrary();
 
-            calibrationLibrary.setPath(pathField.getText());
+            calibrationLibrary.setPath(pathField.getText()); // TODO: check for valid path
             calibrationLibrary.setCameraId(camera.getSelectedEquipmentItem().getId());
             calibrationLibrary.setCalibrationType(CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString()));
             calibrationLibrary.setGain((Integer) gain.getValue());
             calibrationLibrary.setSubLength((Integer) subLength.getValue());
             calibrationLibrary.setTotalSubs((Integer) totalSubs.getValue());
 
-            if (libraryRow != null) {
+            if (edit) {
                 library.remove(libraryRow);
             }
             library.add(calibrationLibrary);
@@ -130,6 +138,12 @@ public class LibraryRowEditor extends JDialog {
         calibrationType.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 updateButtonState();
+                boolean b = !Objects.equals(calibrationType.getSelectedItem(), CalibrationType.BIAS.getName());
+                subLength.setEnabled(b);
+                subLengthLabel.setEnabled(b);
+                if (!b) {
+                    subLength.setValue(0);
+                }
             }
         });
         gain.addChangeListener(e -> updateButtonState());
@@ -144,9 +158,8 @@ public class LibraryRowEditor extends JDialog {
             int userSelection = fileChooser.showDialog(null, "Select");
             if (userSelection == JFileChooser.APPROVE_OPTION) {
                 File selectedFolder = fileChooser.getSelectedFile();
+                pathField.setText(selectedFolder.getAbsolutePath());
                 updateButtonState();
-                prevPath = selectedFolder.getAbsolutePath();
-                pathField.setText(prevPath);
             }
         });
     }
