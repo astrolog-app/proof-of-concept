@@ -10,7 +10,9 @@ public abstract class EquipmentItem {
     private String brand;
     private String name;
 
-    public EquipmentItem() {}
+    public EquipmentItem() {
+        id = UUID.randomUUID();
+    }
 
     public EquipmentItem(UUID id, boolean used, String brand, String name) {
         this.id = id;

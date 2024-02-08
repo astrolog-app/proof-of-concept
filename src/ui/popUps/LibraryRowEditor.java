@@ -2,7 +2,6 @@ package ui.popUps;
 
 import models.calibrationLibrary.CalibrationLibrary;
 import models.calibrationLibrary.CalibrationType;
-import models.equipment.Camera;
 import models.equipment.Equipment;
 import models.equipment.EquipmentType;
 import models.tableModels.LibraryTableModel;
@@ -108,9 +107,6 @@ public class LibraryRowEditor extends JDialog {
 
             calibrationLibrary.setPath(pathField.getText());
             calibrationLibrary.setCameraId(camera.getSelectedEquipmentItem().getId());
-            System.out.println(camera.getSelectedEquipmentItem().getId());
-            System.out.println(calibrationLibrary.getId());
-            //TODO: fix bug
             calibrationLibrary.setCalibrationType(CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString()));
             calibrationLibrary.setGain((Integer) gain.getValue());
             calibrationLibrary.setSubLength((Integer) subLength.getValue());

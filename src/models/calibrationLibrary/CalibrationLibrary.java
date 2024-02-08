@@ -14,6 +14,10 @@ public class CalibrationLibrary {
     private Integer totalSubs;
     private String path;
 
+    public CalibrationLibrary() {
+        id = UUID.randomUUID();
+    }
+
     public UUID getId() {
         return id;
     }
@@ -23,6 +27,9 @@ public class CalibrationLibrary {
 
     public Camera getCamera(Equipment equipment) {
         return equipment.getCameras().get(cameraId);
+    }
+    public UUID getCameraId() {
+        return cameraId;
     }
     public void setCameraId(UUID cameraId) {
         this.cameraId = cameraId;
