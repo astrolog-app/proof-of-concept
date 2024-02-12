@@ -1,7 +1,9 @@
 package ui.customComponents;
 
+import models.calibrationLibrary.CalibrationType;
 import models.equipment.*;
 import ui.popUps.EquipmentItemPanel;
+import ui.popUps.LibraryRowEditor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,8 +12,14 @@ import java.util.*;
 import java.util.List;
 
 public class CustomComboBox extends JComboBox<String> {
+    private enum BoxType {
+        EQUIPMENT,
+        CALIBRATION
+    }
     private final EquipmentType equipmentType;
+    private final CalibrationType calibrationType;
     private final Equipment equipment;
+    private final BoxType boxType;
     private final String newItemString = "Add New...";
     private final List<String> content = new ArrayList<>();
     private boolean nullItem = true;
@@ -19,41 +27,26 @@ public class CustomComboBox extends JComboBox<String> {
 
     public CustomComboBox(EquipmentType equipmentType, Equipment equipment) {
         this.equipmentType = equipmentType;
+        this.calibrationType = null;
         this.equipment = equipment;
+        this.boxType = BoxType.EQUIPMENT;
 
+        init();
+    }
+
+    public CustomComboBox(CalibrationType calibrationType, Equipment equipment) {
+        this.equipmentType = null;
+        this.calibrationType = calibrationType;
+        this.equipment = equipment;
+        this.boxType = BoxType.CALIBRATION;
+
+        init();
+    }
+
+    private void init() {
         updateData();
         setFontsAndColorsForItems(this);
-
-        addItemListener(e -> {
-            if (getSelectedItem() != null && !getSelectedItem().equals(newItemString)) {
-                removeItem(null);
-                nullItem = false;
-            }
-
-            if (e.getStateChange() == ItemEvent.SELECTED) {
-                if (getSelectedIndex() != 0) {
-                    selectedIndex = getSelectedIndex();
-                    if (nullItem) {
-                        selectedIndex = 0;
-                    }
-                }
-            }
-        });
-
-        addActionListener(e -> {
-            if (getSelectedItem() != null && getSelectedItem().equals(newItemString)) {
-                List<String> oldList = new ArrayList<>(content);
-
-                new EquipmentItemPanel(equipmentType, equipment, null);
-                updateData();
-                setSelectedIndex(selectedIndex);
-
-                if (oldList.size() != content.size()) {
-                    removeItem(null);
-                    setSelectedItem(findNewItem(oldList));
-                }
-            }
-        });
+        handleActions();
     }
 
     private void updateData() {
@@ -65,36 +58,43 @@ public class CustomComboBox extends JComboBox<String> {
         }
         addItem(newItemString);
 
-        switch (equipmentType) {
-            case TELESCOPE -> {
-                for (Telescope t : equipment.getTelescopes().values()) {
-                    content.add(t.getViewName());
+        switch (boxType) {
+            case EQUIPMENT -> {
+                switch (equipmentType) {
+                    case TELESCOPE -> {
+                        for (Telescope t : equipment.getTelescopes().values()) {
+                            content.add(t.getViewName());
+                        }
+                    }
+                    case MOUNT -> {
+                        for (Mount m : equipment.getMounts().values()) {
+                            content.add(m.getViewName());
+                        }
+                    }
+                    case CAMERA -> {
+                        for (Camera c : equipment.getCameras().values()) {
+                            content.add(c.getViewName());
+                        }
+                    }
+                    case FILTER -> {
+                        for (Filter f : equipment.getFilters().values()) {
+                            content.add(f.getViewName());
+                        }
+                    }
+                    case FLATTENER -> {
+                        for (Flattener f : equipment.getFlatteners().values()) {
+                            content.add(f.getViewName());
+                        }
+                    }
+                    case ACCESSOIRE -> {
+                        for (Accessoire a : equipment.getAccessoires().values()) {
+                            content.add(a.getViewName());
+                        }
+                    }
                 }
             }
-            case MOUNT -> {
-                for (Mount m : equipment.getMounts().values()) {
-                    content.add(m.getViewName());
-                }
-            }
-            case CAMERA -> {
-                for (Camera c : equipment.getCameras().values()) {
-                    content.add(c.getViewName());
-                }
-            }
-            case FILTER -> {
-                for (Filter f : equipment.getFilters().values()) {
-                    content.add(f.getViewName());
-                }
-            }
-            case FLATTENER -> {
-                for (Flattener f : equipment.getFlatteners().values()) {
-                    content.add(f.getViewName());
-                }
-            }
-            case ACCESSOIRE -> {
-                for (Accessoire a : equipment.getAccessoires().values()) {
-                    content.add(a.getViewName());
-                }
+            case CALIBRATION -> {
+                switch (calibrationType) {}
             }
         }
 
@@ -132,6 +132,42 @@ public class CustomComboBox extends JComboBox<String> {
                 }
 
                 return component;
+            }
+        });
+    }
+
+    private void handleActions() {
+        addItemListener(e -> {
+            if (getSelectedItem() != null && !getSelectedItem().equals(newItemString)) {
+                removeItem(null);
+                nullItem = false;
+            }
+
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                if (getSelectedIndex() != 0) {
+                    selectedIndex = getSelectedIndex();
+                    if (nullItem) {
+                        selectedIndex = 0;
+                    }
+                }
+            }
+        });
+
+        addActionListener(e -> {
+            if (getSelectedItem() != null && getSelectedItem().equals(newItemString)) {
+                List<String> oldList = new ArrayList<>(content);
+
+                switch (boxType) {
+                    case EQUIPMENT -> new EquipmentItemPanel(equipmentType, equipment, null);
+                    case CALIBRATION -> new LibraryRowEditor(null, null, null, null, null); // TODO: finish
+                }
+                updateData();
+                setSelectedIndex(selectedIndex);
+
+                if (oldList.size() != content.size()) {
+                    removeItem(null);
+                    setSelectedItem(findNewItem(oldList));
+                }
             }
         });
     }
