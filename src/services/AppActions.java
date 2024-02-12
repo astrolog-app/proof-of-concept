@@ -49,7 +49,7 @@ public class AppActions {
 
             // start up the mainUI and check for valid licence
             SwingUtilities.invokeLater(() -> {
-                MainUI mainUI = new MainUI(licence, appConfig, imagingSessions, isConfig, library, equipment, library);
+                MainUI mainUI = new MainUI(licence, appConfig, imagingSessions, isConfig, library, equipment);
                 LicenceChecker licenceChecker = new LicenceChecker(licence, mainUI);
 
                 licenceChecker.check();
