@@ -129,7 +129,11 @@ public class LibraryRowEditor extends JDialog {
             library.add(calibrationLibrary);
 
             CalibrationLibraryStore.save(library, null);
-            tableModel.fireTableDataChanged();
+
+            // if tableModel is null, the editor isn't in relation with any table
+            if (tableModel != null) {
+                tableModel.fireTableDataChanged();
+            }
             dispose();
         });
 

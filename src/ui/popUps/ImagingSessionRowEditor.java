@@ -1,6 +1,9 @@
 package ui.popUps;
 
+import models.calibrationLibrary.CalibrationLibrary;
+import models.calibrationLibrary.CalibrationType;
 import models.equipment.*;
+import models.settings.AppConfig;
 import models.tableModels.ImagingSessionTableModel;
 import models.imagingSessions.*;
 import services.fileHandler.ImagingSessionStore;
@@ -10,10 +13,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class NewImagingSessionManually extends JDialog {
+public class ImagingSessionRowEditor extends JDialog {
     private final Equipment equipment;
     private final ImagingSessionTableModel isTableModel;
     private final List<ImagingSession> imagingSessions;
+    private final AppConfig appConfig;
+    private final List<CalibrationLibrary> calibrationLibrary;
 
     private JPanel mainPanel;
     private JPanel lightPanel;
@@ -37,19 +42,19 @@ public class NewImagingSessionManually extends JDialog {
     private JButton cancelButton;
     private JSpinner temp;
     private JSpinner avgSeeing;
-    private JComboBox telescope;
-    private JComboBox camera;
+    private JComboBox<String> telescope;
+    private JComboBox<String> camera;
     private JSpinner subLengthFlat;
-    private JComboBox libraryBias;
-    private JComboBox libraryDark;
+    private CustomComboBox libraryBias;
+    private CustomComboBox libraryDark;
     private JSpinner avgCloudCover;
-    private JComboBox flattener;
+    private JComboBox<String> flattener;
     private JSpinner integratedSubs;
     private JSpinner chipTemp;
     private JSpinner offset;
     private JSpinner gain;
     private JTextArea textArea1;
-    private JComboBox mount;
+    private JComboBox<String> mount;
     private JTextField imageFolderField;
     private JButton changeImageFolder;
     private JLabel flatFramesLabel;
@@ -66,10 +71,13 @@ public class NewImagingSessionManually extends JDialog {
     private JLabel libraryBiasLabel;
     private JLabel dateDarkLabel;
 
-    public NewImagingSessionManually(Equipment equipment, ImagingSession session, ImagingSessionTableModel isTableModel, List<ImagingSession> imagingSessions) {
+    public ImagingSessionRowEditor(Equipment equipment, ImagingSession session, ImagingSessionTableModel isTableModel,
+                                   List<ImagingSession> imagingSessions, AppConfig appConfig, List<CalibrationLibrary> calibrationLibrary) {
         this.equipment = equipment;
         this.isTableModel = isTableModel;
         this.imagingSessions = imagingSessions;
+        this.appConfig = appConfig;
+        this.calibrationLibrary = calibrationLibrary;
         imageFolderField.setEnabled(false);
 
         updateFlatPanelState();
@@ -286,5 +294,7 @@ public class NewImagingSessionManually extends JDialog {
         camera = new CustomComboBox(EquipmentType.CAMERA, equipment);
         flattener = new CustomComboBox(EquipmentType.FLATTENER, equipment);
         mount =  new CustomComboBox(EquipmentType.MOUNT, equipment);
+        libraryDark = new CustomComboBox(CalibrationType.DARK, equipment, appConfig, calibrationLibrary);
+        libraryBias = new CustomComboBox(CalibrationType.BIAS, equipment, appConfig, calibrationLibrary);
     }
 }

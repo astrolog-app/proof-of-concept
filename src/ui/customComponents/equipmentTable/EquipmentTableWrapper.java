@@ -3,7 +3,7 @@ package ui.customComponents.equipmentTable;
 import models.equipment.Equipment;
 import models.equipment.EquipmentItem;
 import models.equipment.EquipmentType;
-import ui.popUps.EquipmentItemPanel;
+import ui.popUps.EquipmentRowEditor;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -33,9 +33,9 @@ public class EquipmentTableWrapper {
     }
 
     private void handleActions() {
-        addButton.addActionListener(e -> new EquipmentItemPanel(equipmentType, equipment, null));
+        addButton.addActionListener(e -> new EquipmentRowEditor(equipmentType, equipment, null));
 
-        editButton.addActionListener(e -> new EquipmentItemPanel(
+        editButton.addActionListener(e -> new EquipmentRowEditor(
                 equipmentType,
                 equipment,
                 equipmentTable1.getTableModel().getEquipmentItem(equipmentTable1.getSelectedRow())

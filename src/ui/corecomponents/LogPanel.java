@@ -1,6 +1,7 @@
 package ui.corecomponents;
 
 import controllers.ImagingSessionController;
+import models.calibrationLibrary.CalibrationLibrary;
 import models.equipment.Equipment;
 import models.imagingSessions.ImagingSession;
 import models.settings.AppConfig;
@@ -21,6 +22,7 @@ public class LogPanel {
     private final Equipment equipment;
     private final List<ImagingSession> imagingSessions;
     private final ImagingSessionConfig isConfig;
+    private final List<CalibrationLibrary> calibrationLibrary;
 
     AppConfig appConfig;
     private JPanel panel1;
@@ -38,11 +40,13 @@ public class LogPanel {
     private JButton searchButton;
     private JButton saveBackupConfigButton;
 
-    public LogPanel(AppConfig appConfig, Equipment equipment, List<ImagingSession> imagingSessions, ImagingSessionConfig isConfig) {
+    public LogPanel(AppConfig appConfig, Equipment equipment, List<ImagingSession> imagingSessions,
+                    ImagingSessionConfig isConfig, List<CalibrationLibrary> calibrationLibrary) {
         this.appConfig = appConfig;
         this.equipment = equipment;
         this.imagingSessions = imagingSessions;
         this.isConfig = isConfig;
+        this.calibrationLibrary = calibrationLibrary;
 
         updateTableButtonState();
 
@@ -69,12 +73,14 @@ public class LogPanel {
             ConfigurationStore.save(appConfig, null,null);
         });
 
-        manuallyButton.addActionListener(e -> imagingSessionController.addImagingSessionManually(equipment, imagingSessions));
+        manuallyButton.addActionListener(e -> imagingSessionController.addImagingSessionManually(equipment, imagingSessions, appConfig, calibrationLibrary));
         deleteButton.addActionListener(e -> imagingSessionController.removeImagingSession());
         editButton.addActionListener(e -> imagingSessionController.editImagingSession(equipment, imagingSessionTable1
                         .getTableModel()
                         .getSession(imagingSessionTable1.getSelectedRow()),
-                imagingSessions
+                imagingSessions,
+                appConfig,
+                calibrationLibrary
         ));
         xMarkButton.addActionListener(e -> {
             searchField.setText("");
@@ -99,7 +105,7 @@ public class LogPanel {
     }
 
     private void createUIComponents() {
-        imagingSessionTable1 = new ImagingSessionTable(equipment, this, imagingSessions, isConfig);
+        imagingSessionTable1 = new ImagingSessionTable(equipment, this, imagingSessions, isConfig, appConfig, calibrationLibrary);
         imagingSessionController = new ImagingSessionController(imagingSessionTable1.getTableModel(), imagingSessionTable1);
         imagingSessionTable1.setImagingSessionController(imagingSessionController);
     }

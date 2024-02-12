@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.util.*;
 import java.util.List;
 
-public class EquipmentItemPanel extends JDialog {
+public class EquipmentRowEditor extends JDialog {
     private final EquipmentType equipmentType;
     private JPanel mainPanel;
     private JButton saveButton;
@@ -37,7 +37,7 @@ public class EquipmentItemPanel extends JDialog {
     private JLabel filterTypeLabel;
     private JComboBox<String> filterType;
 
-    public EquipmentItemPanel(EquipmentType equipmentType, Equipment equipment, EquipmentItem equipmentItem) {
+    public EquipmentRowEditor(EquipmentType equipmentType, Equipment equipment, EquipmentItem equipmentItem) {
         this.equipmentType = equipmentType;
 
         List<String> brandList = new ArrayList<>(equipment.getAllBrands());

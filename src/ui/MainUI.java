@@ -15,7 +15,9 @@ import java.awt.*;
 import java.util.List;
 
 public class MainUI extends JFrame {
-    public MainUI(Licence licence, AppConfig appConfig, List<ImagingSession> imagingSessions, ImagingSessionConfig isConfig, List<CalibrationLibrary> library, Equipment equipment) {
+    public MainUI(Licence licence, AppConfig appConfig, List<ImagingSession> imagingSessions,
+                  ImagingSessionConfig isConfig, List<CalibrationLibrary> library,
+                  Equipment equipment, List<CalibrationLibrary> calibrationLibrary) {
         Image img = Toolkit.getDefaultToolkit().getImage(Paths.IMAGE_PATH + "app_logo.png");
         setIconImage(img);
 
@@ -27,7 +29,7 @@ public class MainUI extends JFrame {
         }
         JTabbedPane tabbedPane = new JTabbedPane(tabPlacement);
 
-        LogPanel logPanelClass = new LogPanel(appConfig, equipment, imagingSessions, isConfig);
+        LogPanel logPanelClass = new LogPanel(appConfig, equipment, imagingSessions, isConfig, calibrationLibrary);
         JPanel imagingHistoryPanel = logPanelClass.getPanel();
 
         EquipmentPanel equipmentPanelClass = new EquipmentPanel(equipment);

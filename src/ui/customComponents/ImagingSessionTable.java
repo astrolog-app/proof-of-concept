@@ -1,6 +1,8 @@
 package ui.customComponents;
 
 import controllers.ImagingSessionController;
+import models.calibrationLibrary.CalibrationLibrary;
+import models.settings.AppConfig;
 import models.tableModels.ImagingSessionTableModel;
 import models.imagingSessions.ImagingSession;
 import models.settings.LoggerColumns;
@@ -24,18 +26,23 @@ public class ImagingSessionTable extends JTable {
     private ImagingSessionController imagingSessionController;
     private final Equipment equipment;
     private final LogPanel logPanel;
+    private final AppConfig appConfig;
+    private final List<CalibrationLibrary> calibrationLibrary;
     private final ImagingSessionTableModel tableModel;
     private TableRowSorter<TableModel> sorter;
     private final List<ImagingSession> imagingSessions;
     private LoggerColumns sortedColumn;
     private SortOrder sortingDirection;
 
-    public ImagingSessionTable(Equipment equipment, LogPanel logPanel, List<ImagingSession> imagingSessions, ImagingSessionConfig isConfig) {
+    public ImagingSessionTable(Equipment equipment, LogPanel logPanel,
+                               List<ImagingSession> imagingSessions, ImagingSessionConfig isConfig, AppConfig appConfig, List<CalibrationLibrary> calibrationLibrary) {
         this.logPanel = logPanel;
         this.equipment = equipment;
         this.tableModel = new ImagingSessionTableModel(imagingSessions, equipment, isConfig);
         this.imagingSessions = imagingSessions;
         this.isConfig = isConfig;
+        this.appConfig = appConfig;
+        this.calibrationLibrary = calibrationLibrary;
 
         createTable();
         setColumnsWidth();
@@ -146,11 +153,11 @@ public class ImagingSessionTable extends JTable {
         popupMenu.add(menuItem1);
 
         JMenuItem menuItem2 = new JMenuItem("Add Manually");
-        menuItem2.addActionListener((ActionEvent e) -> imagingSessionController.addImagingSessionManually(equipment, imagingSessions));
+        menuItem2.addActionListener((ActionEvent e) -> imagingSessionController.addImagingSessionManually(equipment, imagingSessions, appConfig, calibrationLibrary));
         popupMenu.add(menuItem2);
 
         JMenuItem menuItem4 = new JMenuItem("Edit");
-        menuItem4.addActionListener((ActionEvent e) -> imagingSessionController.editImagingSession(equipment, tableModel.getSession(getSelectedRow()), imagingSessions));
+        menuItem4.addActionListener((ActionEvent e) -> imagingSessionController.editImagingSession(equipment, tableModel.getSession(getSelectedRow()), imagingSessions, appConfig, calibrationLibrary));
         menuItem4.setEnabled(enableAll);
         popupMenu.add(menuItem4);
 
