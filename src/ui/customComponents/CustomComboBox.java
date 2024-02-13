@@ -4,8 +4,8 @@ import models.calibrationLibrary.CalibrationLibrary;
 import models.calibrationLibrary.CalibrationType;
 import models.equipment.*;
 import models.settings.AppConfig;
-import ui.popUps.EquipmentRowEditor;
-import ui.popUps.LibraryRowEditor;
+import ui.popUps.rowEditors.EquipmentRowEditor;
+import ui.popUps.rowEditors.LibraryRowEditor;
 
 import javax.swing.*;
 import java.awt.*;

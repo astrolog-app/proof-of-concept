@@ -6,7 +6,7 @@ import models.settings.AppConfig;
 import models.tableModels.ImagingSessionTableModel;
 import models.imagingSessions.ImagingSession;
 import ui.customComponents.ImagingSessionTable;
-import ui.popUps.ImagingSessionRowEditor;
+import ui.popUps.rowEditors.ImagingSessionRowEditor;
 
 import javax.swing.*;
 import java.util.List;

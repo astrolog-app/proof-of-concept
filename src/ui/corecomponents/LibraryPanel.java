@@ -4,7 +4,7 @@ import models.calibrationLibrary.CalibrationLibrary;
 import models.equipment.Equipment;
 import models.settings.AppConfig;
 import ui.customComponents.LibraryTable;
-import ui.popUps.LibraryRowEditor;
+import ui.popUps.rowEditors.LibraryRowEditor;
 
 import javax.swing.*;
 import java.util.List;

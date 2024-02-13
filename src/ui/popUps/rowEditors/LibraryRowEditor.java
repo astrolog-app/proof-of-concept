@@ -1,4 +1,4 @@
-package ui.popUps;
+package ui.popUps.rowEditors;
 
 import models.calibrationLibrary.CalibrationLibrary;
 import models.calibrationLibrary.CalibrationType;

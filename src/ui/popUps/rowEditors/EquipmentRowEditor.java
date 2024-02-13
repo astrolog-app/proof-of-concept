@@ -1,4 +1,4 @@
-package ui.popUps;
+package ui.popUps.rowEditors;
 
 import models.equipment.*;
 import services.fileHandler.EquipmentStore;

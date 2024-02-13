@@ -3,7 +3,7 @@ package ui.customComponents.equipmentTable;
 import models.equipment.Equipment;
 import models.equipment.EquipmentItem;
 import models.equipment.EquipmentType;
-import ui.popUps.EquipmentRowEditor;
+import ui.popUps.rowEditors.EquipmentRowEditor;
 
 import javax.swing.*;
 import java.util.ArrayList;
