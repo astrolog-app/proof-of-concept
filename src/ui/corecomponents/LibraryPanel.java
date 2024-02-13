@@ -28,12 +28,13 @@ public class LibraryPanel {
     }
 
     private void handleActions() {
-        addButton.addActionListener(e -> new LibraryRowEditor(null, equipment, library, libraryTable1.getTableModel(), appConfig));
+        addButton.addActionListener(e -> new LibraryRowEditor(null, equipment, library, libraryTable1.getTableModel(), appConfig, null));
         editButton.addActionListener(e -> new LibraryRowEditor(libraryTable1.getTableModel().getLibraryRow(libraryTable1.getSelectedRow()),
                 equipment,
                 library,
                 libraryTable1.getTableModel(),
-                appConfig));
+                appConfig,
+                null));
     }
 
     public void updateButtonState() {

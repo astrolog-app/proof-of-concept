@@ -22,6 +22,7 @@ public class LibraryRowEditor extends JDialog {
     private final List<CalibrationLibrary> library;
     private final LibraryTableModel tableModel;
     private final AppConfig appConfig;
+    private final CalibrationType calType;
     private String prevPath = "";
     private String prevCamera = "";
     private String prevCalibrationType = "Flat";
@@ -40,14 +41,25 @@ public class LibraryRowEditor extends JDialog {
     private JButton changeButton;
     private JLabel subLengthLabel;
 
-    public LibraryRowEditor(CalibrationLibrary libraryRow, Equipment equipment, List<CalibrationLibrary> library, LibraryTableModel tableModel, AppConfig appConfig) {
+    public LibraryRowEditor(CalibrationLibrary libraryRow, Equipment equipment, List<CalibrationLibrary> library,
+                            LibraryTableModel tableModel, AppConfig appConfig, CalibrationType calibrationType) {
         this.libraryRow = libraryRow;
         this.equipment = equipment;
         this.library = library;
         this.tableModel = tableModel;
         this.appConfig = appConfig;
+        this.calType = calibrationType;
 
         edit = libraryRow != null;
+
+        if (calType != null) { // TODO: clean up
+            this.calibrationType.setEnabled(false);
+
+            this.calibrationType.setSelectedItem(calibrationType.getName());
+            boolean b = !Objects.equals(this.calibrationType.getSelectedItem(), CalibrationType.BIAS.getName());
+            subLength.setEnabled(b);
+            subLengthLabel.setEnabled(b);
+        }
 
         setSpinnerModels();
         fillUpUI();
@@ -113,10 +125,10 @@ public class LibraryRowEditor extends JDialog {
 
     private void handleActions() {
         cancelButton.addActionListener(e -> dispose());
-        saveButton.addActionListener(e -> {
+        saveButton.addActionListener(e -> { // TODO: check for duplicates
             CalibrationLibrary calibrationLibrary = new CalibrationLibrary();
 
-            calibrationLibrary.setPath(pathField.getText()); // TODO: check for valid path
+            calibrationLibrary.setPath(pathField.getText());
             calibrationLibrary.setCameraId(camera.getSelectedEquipmentItem().getId());
             calibrationLibrary.setCalibrationType(CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString()));
             calibrationLibrary.setGain((Integer) gain.getValue());

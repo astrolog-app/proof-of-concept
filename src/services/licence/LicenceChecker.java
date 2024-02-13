@@ -23,7 +23,7 @@ public class LicenceChecker {
 
     private void checkLicenceFile() {
         if (licence == null || (licence.getLicenceKey() == null && licence.getLicenceType() != LicenceType.LITE)) {
-            Timer timer = new Timer(750, e -> new LicenceRequest(parentFrame));
+            Timer timer = new Timer(300, e -> new LicenceRequest(parentFrame));
 
             timer.setRepeats(false);
             timer.start();

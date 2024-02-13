@@ -158,7 +158,7 @@ public class CustomComboBox extends JComboBox<String> {
 
                 switch (boxType) {
                     case EQUIPMENT -> new EquipmentRowEditor(equipmentType, equipment, null);
-                    case CALIBRATION -> new LibraryRowEditor(null, equipment, calibrationLibrary, null, appConfig);
+                    case CALIBRATION -> new LibraryRowEditor(null, equipment, calibrationLibrary, null, appConfig, calibrationType);
                 }
                 updateData();
                 setSelectedIndex(selectedIndex);
