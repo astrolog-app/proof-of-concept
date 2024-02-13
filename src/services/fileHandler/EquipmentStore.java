@@ -72,24 +72,24 @@ public class EquipmentStore {
         ObjectMapper objectMapper = new ObjectMapper();
 
         // TODO: clean up
-        List<List<EquipmentItem>> list  = new ArrayList<>();
+        EquipmentWrapper ew = new EquipmentWrapper();
 
-        List<EquipmentItem> telescopes = new ArrayList<>(equipment.getTelescopes().values());
-        List<EquipmentItem> mounts = new ArrayList<>(equipment.getMounts().values());
-        List<EquipmentItem> filters = new ArrayList<>(equipment.getFilters().values());
-        List<EquipmentItem> flatteners = new ArrayList<>(equipment.getFlatteners().values());
-        List<EquipmentItem> cameras = new ArrayList<>(equipment.getCameras().values());
-        List<EquipmentItem> accessoires = new ArrayList<>(equipment.getAccessoires().values());
+        List<Telescope> telescopes = equipment.getTelescopes().values().stream().toList();
+        List<Mount> mounts = equipment.getMounts().values().stream().toList();
+        List<Filter> filters = equipment.getFilters().values().stream().toList();
+        List<Flattener> flatteners = equipment.getFlatteners().values().stream().toList();
+        List<Camera> cameras = equipment.getCameras().values().stream().toList();
+        List<Accessoire> accessoires = equipment.getAccessoires().values().stream().toList();
 
-         list.add(telescopes);
-         list.add(mounts);
-         list.add(filters);
-         list.add(flatteners);
-         list.add(cameras);
-         list.add(accessoires);
+        ew.setTelescopes(telescopes);
+        ew.setMounts(mounts);
+        ew.setFilters(filters);
+        ew.setFlatteners(flatteners);
+        ew.setCameras(cameras);
+        ew.setAccessoires(accessoires);
 
         try {
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(configPath), list);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(configPath), ew);
 
             logger.info("saved Equipment successfully");
         } catch (Exception e) {
