@@ -5,6 +5,8 @@ import models.license.LicenceType;
 import services.fileHandler.LicenceStore;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Objects;
@@ -34,6 +36,13 @@ public class LicenceRequest extends JDialog {
         setVisible(true);
     }
 
+    private void updateButtonState() {
+        boolean lite = Objects.equals(licenceComboBox.getSelectedItem(), LicenceType.LITE.getName());
+        boolean key = !keyTextField.getText().isEmpty();
+
+        activateButton.setEnabled(lite || key);
+    }
+
     private void handleActions() {
         addWindowListener(new WindowAdapter() {
             @Override
@@ -54,7 +63,26 @@ public class LicenceRequest extends JDialog {
             parentFrame.setTitle("AstroLog " + licence.getLicenceType().getName());
             dispose();
         });
-        licenceComboBox.addActionListener(e -> updateLicenceFieldState());
+        licenceComboBox.addActionListener(e -> {
+            updateLicenceFieldState();
+            updateButtonState();
+        });
+        keyTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateButtonState();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateButtonState();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateButtonState();
+            }
+        });
     }
 
     private void updateLicenceFieldState() {

@@ -24,7 +24,7 @@ public class AppActions {
     private static final Logger logger = AppLogger.getLogger();
     private StartUpPanel startUpPanel;
     private Licence licence;
-    private AppConfig appConfig = new AppConfig();
+    private AppConfig appConfig;
     private List<ImagingSession> imagingSessions = new ArrayList<>();
     private ImagingSessionConfig isConfig = new ImagingSessionConfig();
     private List<CalibrationLibrary> library = new ArrayList<>();
@@ -36,8 +36,9 @@ public class AppActions {
      */
     public void initialize() {
         licence = LicenceStore.load();
+        appConfig = ConfigurationStore.loadAppConfig();
 
-        if (licence != null) {
+        if (appConfig != null) {
             FlatDarkLaf.setup();
             startUpPanel = new StartUpPanel();
 
@@ -65,12 +66,8 @@ public class AppActions {
 
     private void loadJson() {
         sleep(500);
-        appConfig = ConfigurationStore.loadAppConfig();
-        startUpPanel.setProgressLabel("loading configuration.json");
-        startUpPanel.increaseProgress();
-
-        sleep(100);
         isConfig = ConfigurationStore.loadImagingSessionConfig();
+        startUpPanel.setProgressLabel("loading configuration.json");
         startUpPanel.increaseProgress();
 
         sleep(100);

@@ -133,7 +133,7 @@ public class EquipmentRowEditor extends JDialog {
         megapixelLabel.setVisible(false);
 
         spacer6.setVisible(false);
-        colorRadioButton.setVisible(false); // TODO: handle radio buttons
+        colorRadioButton.setVisible(false);
         monochromeRadioButton.setVisible(false);
 
         spacer7.setVisible(false);
