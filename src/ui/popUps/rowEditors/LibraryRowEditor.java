@@ -12,6 +12,7 @@ import ui.customComponents.CustomComboBox;
 import javax.swing.*;
 import java.awt.event.ItemEvent;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -125,7 +126,7 @@ public class LibraryRowEditor extends JDialog {
 
     private void handleActions() {
         cancelButton.addActionListener(e -> dispose());
-        saveButton.addActionListener(e -> { // TODO: check for duplicates
+        saveButton.addActionListener(e -> {
             CalibrationLibrary calibrationLibrary = new CalibrationLibrary();
 
             calibrationLibrary.setPath(pathField.getText());
@@ -135,18 +136,28 @@ public class LibraryRowEditor extends JDialog {
             calibrationLibrary.setSubLength((Integer) subLength.getValue());
             calibrationLibrary.setTotalSubs((Integer) totalSubs.getValue());
 
-            if (edit) {
-                library.remove(libraryRow);
-            }
-            library.add(calibrationLibrary);
+            if (!checkForDuplicates(calibrationLibrary)) {
+                if (edit) {
+                    library.remove(libraryRow);
+                }
+                library.add(calibrationLibrary);
 
-            CalibrationLibraryStore.save(library, null);
+                CalibrationLibraryStore.save(library, null);
 
-            // if tableModel is null, the editor isn't in relation with any table
-            if (tableModel != null) {
-                tableModel.fireTableDataChanged();
+                // if tableModel is null, the editor isn't in relation with any table
+                if (tableModel != null) {
+                    tableModel.fireTableDataChanged();
+                }
+                dispose();
+            } else {
+                // TODO: gain and sub length get neglected
+                JOptionPane.showConfirmDialog(null,
+                        "An entry with this camera and calibration type already exists.",
+                        "Invalid Entry",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE
+                );
             }
-            dispose();
         });
 
         camera.addItemListener(e -> {
@@ -181,6 +192,18 @@ public class LibraryRowEditor extends JDialog {
                 updateButtonState();
             }
         });
+    }
+
+    private boolean checkForDuplicates(CalibrationLibrary lib) {
+        for (CalibrationLibrary l : library) {
+            if (l.getCalibrationType() == lib.getCalibrationType()) {
+                if (l.getCamera(equipment).getViewName().equals(lib.getCamera(equipment).getViewName())) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     private void createUIComponents() {

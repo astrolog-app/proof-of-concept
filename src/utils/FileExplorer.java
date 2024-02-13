@@ -19,10 +19,6 @@ public class FileExplorer {
         // Check if the file exists
         File file = new File(path);
         if (!file.exists()) {
-            // hardcode YES_NO_OPTION to disable translation
-            UIManager.put("OptionPane.yesButtonText", "Yes");
-            UIManager.put("OptionPane.noButtonText", "No");
-
             JOptionPane.showConfirmDialog(null,
                     "The path of your library entry seems invalid.",
                     "Invalid Configured Path",
