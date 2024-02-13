@@ -157,7 +157,7 @@
             </constraints>
             <properties>
               <font size="11"/>
-              <text value="© Rouven Spaar V.0.01"/>
+              <text value="© Rouven Spaar V.0.9.0"/>
             </properties>
           </component>
           <component id="d0ea1" class="javax.swing.JLabel" binding="restartMessage">

@@ -4,12 +4,12 @@ import java.util.UUID;
 
 public class Camera extends EquipmentItem {
     private String chipSize;
-    private int megaPixel;
+    private Double megaPixel;
     private boolean rgb;
 
     public Camera() {}
 
-    public Camera(UUID id, boolean used, String name, String brand, String chipSize, int megaPixel, boolean rgb) {
+    public Camera(UUID id, boolean used, String name, String brand, String chipSize, Double megaPixel, boolean rgb) {
         super(id, used, brand, name);
         this.chipSize = chipSize;
         this.megaPixel = megaPixel;
@@ -23,10 +23,10 @@ public class Camera extends EquipmentItem {
         this.chipSize = chipSize;
     }
 
-    public int getMegaPixel() {
+    public Double getMegaPixel() {
         return megaPixel;
     }
-    public void setMegaPixel(int megaPixel) {
+    public void setMegaPixel(Double megaPixel) {
         this.megaPixel = megaPixel;
     }
 
@@ -39,7 +39,7 @@ public class Camera extends EquipmentItem {
 
     @Override
     public String[] getProperties() {
-        return new String[]{getChipSize(), Integer.toString(getMegaPixel()), String.valueOf(getRgb())};
+        return new String[]{getChipSize(), Double.toString(getMegaPixel()), String.valueOf(getRgb())};
     }
 
     @Override

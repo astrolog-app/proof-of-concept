@@ -18,9 +18,9 @@ public class SettingsPanel {
     private NavigationBarPlacement momentaryNavBarPlacement;
     private boolean momentaryStartInFullscreen;
 
-    private AppTheme originalTheme;
-    private NavigationBarPlacement originalNavBarPlacement;
-    private boolean originalStartInFullscreen;
+    private final AppTheme originalTheme;
+    private final NavigationBarPlacement originalNavBarPlacement;
+    private final boolean originalStartInFullscreen;
 
     private JPanel mainPanel;
     private JTextField folderPathField;
@@ -31,7 +31,7 @@ public class SettingsPanel {
     private JButton restartAppButton;
     private JRadioButton startInFullscreenRadioButton;
     private JRadioButton doNotStartInFullscreenRadioButton;
-    private JComboBox navigationBarPlacementDropdown;
+    private JComboBox<String> navigationBarPlacementDropdown;
     private JLabel placeHolder1;
     private JLabel restartMessage;
 

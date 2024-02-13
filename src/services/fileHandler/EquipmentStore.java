@@ -6,10 +6,7 @@ import services.AppLogger;
 import utils.Paths;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class EquipmentStore {
@@ -74,8 +71,20 @@ public class EquipmentStore {
         String configPath = Objects.requireNonNullElse(path, Paths.EQUIPMENT_PATH);
         ObjectMapper objectMapper = new ObjectMapper();
 
+        // TODO: clean up
+        List<List<EquipmentItem>> list  = new ArrayList<>();
+
+        List<Telescope> telescopes = equipment.getTelescopes().values().stream().toList();
+        List<Mount> mounts = equipment.getMounts().values().stream().toList();
+        List<Filter> filters = equipment.getFilters().values().stream().toList();
+        List<Flattener> flatteners = equipment.getFlatteners().values().stream().toList();
+        List<Camera> cameras = equipment.getCameras().values().stream().toList();
+        List<Accessoire> accessoires = equipment.getAccessoires().values().stream().toList();
+
+//         list.add(telescopes); // TODO: finish
+
         try {
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(configPath), equipment);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(configPath), list);
 
             logger.info("saved Equipment successfully");
         } catch (Exception e) {
