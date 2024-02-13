@@ -2,14 +2,19 @@ package ui.popUps;
 
 import models.license.Licence;
 import models.license.LicenceType;
+import services.AppLogger;
 import services.fileHandler.LicenceStore;
+import utils.User;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public class LicenceRequest extends JDialog {
     private final JFrame parentFrame;
@@ -58,6 +63,7 @@ public class LicenceRequest extends JDialog {
             } else {
                 licence.setLicenceKey(keyTextField.getText());
             }
+            licence.setComputerName(User.getComputerName());
 
             LicenceStore.save(licence);
             parentFrame.setTitle("AstroLog " + licence.getLicenceType().getName());

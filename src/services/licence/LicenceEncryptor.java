@@ -1,5 +1,7 @@
 package services.licence;
 
+import services.AppLogger;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -10,10 +12,12 @@ import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.security.spec.KeySpec;
 import java.util.Base64;
+import java.util.logging.Logger;
 
-public class LicenceFileEncryptor {
+public class LicenceEncryptor {
+    private static final Logger logger = AppLogger.getLogger();
     private static final int KEY_LENGTH = 256;
-    private static final int ITERATION_COUNT = 65536;
+    private static final int ITERATION_COUNT = 78932;
     private static final String secretKey = "7d8as2dX4sadwsaawnhvfk5n2n6k7kk2k";
     private static final String salt = "jadlawJhj5WAjkda233bkJDSdajk7bnjrqio";
 
@@ -39,8 +43,8 @@ public class LicenceFileEncryptor {
 
             return Base64.getEncoder().encodeToString(encryptedData);
         } catch (Exception e) {
-            // Handle the exception properly
-            e.printStackTrace();
+            logger.severe("couldn't encrypt file");
+
             return null;
         }
     }
@@ -67,8 +71,8 @@ public class LicenceFileEncryptor {
             byte[] decryptedText = cipher.doFinal(cipherText);
             return new String(decryptedText, StandardCharsets.UTF_8);
         } catch (Exception e) {
-            // Handle the exception properly
-            e.printStackTrace();
+            logger.severe("couldn't decrypt file");
+
             return null;
         }
     }

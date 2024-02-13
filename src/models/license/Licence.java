@@ -3,7 +3,7 @@ package models.license;
 public class Licence {
     private LicenceType licenceType;
     private String licenceKey;
-    private String purchaseDate;
+    private String computerName;
 
     public Licence() {}
 
@@ -21,10 +21,10 @@ public class Licence {
         this.licenceKey = licenceKey;
     }
 
-    public String getPurchaseDate() {
-        return purchaseDate;
+    public String getComputerName() {
+        return computerName;
     }
-    public void setPurchaseDate(String purchaseDate) {
-        this.purchaseDate = purchaseDate;
+    public void setComputerName(String computerName) {
+        this.computerName = computerName;
     }
 }

@@ -3,10 +3,13 @@ package services.fileHandler;
 import models.license.Licence;
 import org.codehaus.jackson.map.ObjectMapper;
 import services.AppLogger;
+import services.licence.LicenceEncryptor;
 import utils.Paths;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.logging.Logger;
 
 public class LicenceStore {
@@ -16,13 +19,16 @@ public class LicenceStore {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            Licence licence = objectMapper.readValue(new File(Paths.LICENCE_PATH), Licence.class);
+            byte[] encryptedLicenceBytes = Files.readAllBytes(new File(Paths.LICENCE_PATH).toPath());
+            String encryptedLicence = new String(encryptedLicenceBytes, StandardCharsets.UTF_8);
 
-            logger.info("loaded Licence successfully");
+            // Decrypt the encrypted licence string
+            String decryptedLicence = LicenceEncryptor.decrypt(encryptedLicence);
 
-            return licence;
+            // Convert the decrypted JSON string back to Licence object
+            return objectMapper.readValue(decryptedLicence, Licence.class);
         } catch (IOException e) {
-            logger.severe("couldn't load Licence:" + "\t" + e.getMessage());
+            logger.warning("couldn't load Licence:" + "\t" + e.getMessage());
 
             return null;
         }
@@ -32,7 +38,11 @@ public class LicenceStore {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(Paths.LICENCE_PATH), licence);
+            String licenceJson = objectMapper.writeValueAsString(licence);
+
+            String encryptedLicence = LicenceEncryptor.encrypt(licenceJson);
+
+            Files.write(java.nio.file.Paths.get(Paths.LICENCE_PATH), encryptedLicence.getBytes());
 
             logger.info("saved Licence successfully");
         } catch (Exception e) {

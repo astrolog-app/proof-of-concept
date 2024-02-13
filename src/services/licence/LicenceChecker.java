@@ -16,6 +16,7 @@ public class LicenceChecker {
     }
 
     public void check() {
+        // TODO: check for right user
         checkLicenceFile();
         checkApiRequest();
     }
