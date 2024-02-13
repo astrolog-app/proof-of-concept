@@ -90,33 +90,7 @@ public class Equipment {
         accessoires.remove(accessoire.getId(), accessoire);
     }
 
-    @JsonIgnore
-    public HashSet<String> getAllBrands() {
-        HashSet<String> brands = new HashSet<>();
-
-        for (Telescope t : telescopes.values()) {
-            brands.add(t.getBrand());
-        }
-        for (Camera c : cameras.values()) {
-            brands.add(c.getBrand());
-        }
-        for (Mount m : mounts.values()) {
-            brands.add(m.getBrand());
-        }
-        for (Filter fi : filters.values()) {
-            brands.add(fi.getBrand());
-        }
-        for (Flattener fl : flatteners.values()) {
-            brands.add(fl.getBrand());
-        }
-        for (Accessoire a : accessoires.values()) {
-            brands.add(a.getBrand());
-        }
-
-        return brands;
-    }
-
-    public EquipmentItem getItemFromViewName(String viewName) {
+    private List<EquipmentItem> createEquipmentItemList() {
         List<EquipmentItem> items = new ArrayList<>();
         items.addAll(telescopes.values());
         items.addAll(cameras.values());
@@ -124,6 +98,22 @@ public class Equipment {
         items.addAll(filters.values());
         items.addAll(flatteners.values());
         items.addAll(accessoires.values());
+
+        return items;
+    }
+
+    @JsonIgnore
+    public HashSet<String> getAllBrands() {
+        HashSet<String> brands = new HashSet<>();
+        List<EquipmentItem> items = createEquipmentItemList();
+
+        items.forEach(e -> brands.add(e.getBrand()));
+
+        return brands;
+    }
+
+    public EquipmentItem getItemFromViewName(String viewName) {
+        List<EquipmentItem> items = createEquipmentItemList();
 
         for (EquipmentItem e : items) {
             if (e.getViewName().equals(viewName)) {

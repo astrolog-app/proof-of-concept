@@ -3,7 +3,6 @@ package ui.customComponents;
 import models.calibrationLibrary.CalibrationLibrary;
 import models.calibrationLibrary.CalibrationType;
 import models.equipment.*;
-import models.imagingSessions.BiasFrame;
 import models.settings.AppConfig;
 import ui.popUps.EquipmentRowEditor;
 import ui.popUps.LibraryRowEditor;
@@ -70,36 +69,12 @@ public class CustomComboBox extends JComboBox<String> {
         switch (boxType) {
             case EQUIPMENT -> {
                 switch (equipmentType) {
-                    case TELESCOPE -> {
-                        for (Telescope t : equipment.getTelescopes().values()) {
-                            content.add(t.getViewName());
-                        }
-                    }
-                    case MOUNT -> {
-                        for (Mount m : equipment.getMounts().values()) {
-                            content.add(m.getViewName());
-                        }
-                    }
-                    case CAMERA -> {
-                        for (Camera c : equipment.getCameras().values()) {
-                            content.add(c.getViewName());
-                        }
-                    }
-                    case FILTER -> {
-                        for (Filter f : equipment.getFilters().values()) {
-                            content.add(f.getViewName());
-                        }
-                    }
-                    case FLATTENER -> {
-                        for (Flattener f : equipment.getFlatteners().values()) {
-                            content.add(f.getViewName());
-                        }
-                    }
-                    case ACCESSOIRE -> {
-                        for (Accessoire a : equipment.getAccessoires().values()) {
-                            content.add(a.getViewName());
-                        }
-                    }
+                    case TELESCOPE -> equipment.getTelescopes().values().forEach(t -> content.add(t.getViewName()));
+                    case MOUNT -> equipment.getMounts().values().forEach(m -> content.add(m.getViewName()));
+                    case CAMERA -> equipment.getCameras().values().forEach(c -> content.add(c.getViewName()));
+                    case FILTER -> equipment.getFilters().values().forEach(f -> content.add(f.getViewName()));
+                    case FLATTENER -> equipment.getFlatteners().values().forEach(f -> content.add(f.getViewName()));
+                    case ACCESSOIRE -> equipment.getAccessoires().values().forEach(a -> content.add(a.getViewName()));
                 }
             }
             case CALIBRATION -> {
