@@ -6,6 +6,7 @@ public class AppConfig {
     private NavigationBarPlacement navigationBarPlacement;
     private boolean enableRegularBackups;
     private boolean startInFullscreen;
+    private boolean showUpdates;
 
     public AppTheme getTheme() {
         return theme;
@@ -40,5 +41,12 @@ public class AppConfig {
     }
     public void setStartInFullscreen(boolean startInFullscreen) {
         this.startInFullscreen = startInFullscreen;
+    }
+
+    public boolean getShowUpdates() {
+        return showUpdates;
+    }
+    public void setShowUpdates(boolean showUpdates) {
+        this.showUpdates = showUpdates;
     }
 }

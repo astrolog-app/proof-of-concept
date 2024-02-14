@@ -72,7 +72,7 @@ public class ConfigurationStore {
         try {
             writer.writeValue(new File(configPath), parentNode);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.severe("couldn't save AppConfig and/or ImagingSessionConfig:" + "\t" + e.getMessage());
         }
     }
 }
