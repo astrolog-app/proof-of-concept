@@ -5,17 +5,20 @@ import services.fileHandler.ConfigurationStore;
 import utils.User;
 
 import javax.swing.*;
+import java.util.List;
 
 public class NewUpdate extends JDialog {
     private final AppConfig appConfig;
+    private final List<String> releaseNotes;
     private JPanel mainPanel;
     private JButton updateNowButton;
     private JButton closeButton;
     private JLabel versionLabel;
     private JCheckBox showUpdatesCheckBox;
 
-    public NewUpdate(AppConfig appConfig, String version) {
+    public NewUpdate(AppConfig appConfig, String version, List<String> releaseNotes) {
         this.appConfig = appConfig;
+        this.releaseNotes = releaseNotes;
 
         versionLabel.setText("AstroLog V " + version);
 
