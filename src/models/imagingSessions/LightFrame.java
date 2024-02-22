@@ -6,7 +6,6 @@ import java.util.UUID;
 
 public class LightFrame extends ImagingFrame {
     private String target;
-    private Double subLength;
     private Integer integratedSubs;
     private UUID filterID;
     private Double gain;
@@ -24,8 +23,8 @@ public class LightFrame extends ImagingFrame {
 
     public LightFrame() {}
 
-    public LightFrame(String date, Integer totalSubs) {
-        super(date, totalSubs);
+    public LightFrame(String date, Integer totalSubs, Double subLength) {
+        super(date, totalSubs, subLength);
     }
 
     public String getTarget() {
@@ -33,13 +32,6 @@ public class LightFrame extends ImagingFrame {
     }
     public void setTarget(String target) {
         this.target = target;
-    }
-
-    public Double getSubLength() {
-        return subLength;
-    }
-    public void setSubLength(Double subLength) {
-        this.subLength = subLength;
     }
 
     public Integer getIntegratedSubs() {

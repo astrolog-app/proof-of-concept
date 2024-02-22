@@ -27,7 +27,7 @@ public class LibraryRowEditor extends JDialog {
     private String prevCamera = "";
     private String prevCalibrationType = "Flat";
     private int prevGain = 0;
-    private int prevSubLength = 0;
+    private double prevSubLength = 0;
     private int prevTotalSubs = 0;
     private JPanel mainPanel;
     private JComboBox<String> calibrationType;
@@ -132,7 +132,7 @@ public class LibraryRowEditor extends JDialog {
             calibrationFrame.setCameraId(camera.getSelectedEquipmentItem().getId());
             calibrationFrame.setCalibrationType(CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString()));
             calibrationFrame.setGain((Integer) gain.getValue());
-            calibrationFrame.setSubLength((Integer) subLength.getValue());
+            calibrationFrame.setSubLength((Double) subLength.getValue());
             calibrationFrame.setTotalSubs((Integer) totalSubs.getValue());
 
             if (!checkForDuplicates(calibrationFrame)) {

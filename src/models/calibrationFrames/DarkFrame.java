@@ -7,8 +7,8 @@ public class DarkFrame extends ImagingFrame {
 
     public DarkFrame() {}
 
-    public DarkFrame(String date, Integer totalSubs) {
-        super(date, totalSubs);
+    public DarkFrame(String date, Integer totalSubs, Double subLength) {
+        super(date, totalSubs, subLength);
     }
 
     public double getCameraTemp() {
