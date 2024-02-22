@@ -2,8 +2,8 @@ package models.tableModels;
 
 import models.equipment.Equipment;
 import models.equipment.EquipmentItem;
-import models.imagingSessions.ImagingSession;
-import models.imagingSessions.LightFrame;
+import models.ImagingSession;
+import models.imagingFrames.LightFrame;
 import models.settings.ImagingSessionConfig;
 import models.settings.LoggerColumns;
 

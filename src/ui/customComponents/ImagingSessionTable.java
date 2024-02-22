@@ -1,10 +1,10 @@
 package ui.customComponents;
 
 import controllers.ImagingSessionController;
-import models.imagingSessions.calibrationFrames.CalibrationFrame;
+import models.imagingFrames.CalibrationFrame;
 import models.settings.AppConfig;
 import models.tableModels.ImagingSessionTableModel;
-import models.imagingSessions.ImagingSession;
+import models.ImagingSession;
 import models.settings.LoggerColumns;
 import models.equipment.Equipment;
 import models.settings.ImagingSessionConfig;

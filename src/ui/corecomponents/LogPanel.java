@@ -1,9 +1,9 @@
 package ui.corecomponents;
 
 import controllers.ImagingSessionController;
-import models.imagingSessions.calibrationFrames.CalibrationFrame;
+import models.imagingFrames.CalibrationFrame;
 import models.equipment.Equipment;
-import models.imagingSessions.ImagingSession;
+import models.ImagingSession;
 import models.settings.AppConfig;
 import models.settings.ImagingSessionConfig;
 import services.fileHandler.ConfigurationStore;

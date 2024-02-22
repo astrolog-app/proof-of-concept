@@ -1,17 +1,37 @@
 [ {
   "id" : "f242f857-00c2-432f-b0a0-6bb0723ce5ca",
   "cameraId" : "8d00c203-a73f-4a9c-ad3b-aa608aaa8f97",
-  "calibrationType" : "DARK",
-  "subLength" : 300,
-  "gain" : 100,
+  "date" : null,
   "totalSubs" : 50,
+  "subLength" : 300.0,
+  "gain" : 100,
+  "calibrationType" : "DARK",
   "path" : "/venv"
 }, {
   "id" : "52e8b486-aa6a-495b-9c02-b28f6caf3547",
   "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
-  "calibrationType" : "DARK",
-  "subLength" : 2,
-  "gain" : 4,
+  "date" : null,
   "totalSubs" : 7,
+  "subLength" : 2.0,
+  "gain" : 4,
+  "calibrationType" : "DARK",
   "path" : "/Downloads"
+}, {
+  "id" : "793f344b-66eb-4559-965e-ff15dc8702d1",
+  "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
+  "date" : null,
+  "totalSubs" : 0,
+  "subLength" : 0.0,
+  "gain" : 0,
+  "calibrationType" : "BIAS",
+  "path" : "/home/ursaminor0131"
+}, {
+  "id" : "ab975e89-c2ba-4266-8719-914d1cba9c37",
+  "cameraId" : "8d00c203-a73f-4a9c-ad3b-aa608aaa8f97",
+  "date" : null,
+  "totalSubs" : 0,
+  "subLength" : 0.0,
+  "gain" : 0,
+  "calibrationType" : "BIAS",
+  "path" : "/home/ursaminor0131"
 } ]

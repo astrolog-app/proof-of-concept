@@ -1,6 +1,6 @@
 package ui.corecomponents;
 
-import models.imagingSessions.calibrationFrames.CalibrationFrame;
+import models.imagingFrames.CalibrationFrame;
 import models.equipment.Equipment;
 import models.settings.AppConfig;
 import ui.customComponents.LibraryTable;

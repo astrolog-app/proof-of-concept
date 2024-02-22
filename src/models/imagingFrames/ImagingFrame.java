@@ -1,4 +1,4 @@
-package models.imagingSessions;
+package models.imagingFrames;
 
 import models.equipment.Camera;
 import models.equipment.Equipment;

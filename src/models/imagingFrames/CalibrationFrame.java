@@ -1,6 +1,4 @@
-package models.imagingSessions.calibrationFrames;
-
-import models.imagingSessions.ImagingFrame;
+package models.imagingFrames;
 
 import java.util.UUID;
 

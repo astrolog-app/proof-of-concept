@@ -1,10 +1,10 @@
 package controllers;
 
-import models.imagingSessions.calibrationFrames.CalibrationFrame;
+import models.imagingFrames.CalibrationFrame;
 import models.equipment.Equipment;
 import models.settings.AppConfig;
 import models.tableModels.ImagingSessionTableModel;
-import models.imagingSessions.ImagingSession;
+import models.ImagingSession;
 import ui.customComponents.ImagingSessionTable;
 import ui.popUps.rowEditors.ImagingSessionRowEditor;
 

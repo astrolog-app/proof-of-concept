@@ -1,13 +1,10 @@
 package ui.popUps.rowEditors;
 
-import models.imagingSessions.calibrationFrames.BiasFrame;
-import models.imagingSessions.calibrationFrames.CalibrationFrame;
-import models.imagingSessions.calibrationFrames.CalibrationType;
-import models.imagingSessions.calibrationFrames.DarkFrame;
+import models.ImagingSession;
+import models.imagingFrames.*;
 import models.equipment.*;
 import models.settings.AppConfig;
 import models.tableModels.ImagingSessionTableModel;
-import models.imagingSessions.*;
 import services.fileHandler.ImagingSessionStore;
 import ui.customComponents.CustomComboBox;
 

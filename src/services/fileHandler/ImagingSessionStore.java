@@ -1,6 +1,6 @@
 package services.fileHandler;
 
-import models.imagingSessions.ImagingSession;
+import models.ImagingSession;
 import org.codehaus.jackson.map.ObjectMapper;
 import services.AppLogger;
 import utils.Paths;

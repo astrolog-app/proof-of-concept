@@ -1,7 +1,9 @@
-package models.imagingSessions;
+package models;
 
-import models.imagingSessions.calibrationFrames.BiasFrame;
-import models.imagingSessions.calibrationFrames.DarkFrame;
+import models.imagingFrames.BiasFrame;
+import models.imagingFrames.DarkFrame;
+import models.imagingFrames.FlatFrame;
+import models.imagingFrames.LightFrame;
 
 public class ImagingSession {
     private String projectID;

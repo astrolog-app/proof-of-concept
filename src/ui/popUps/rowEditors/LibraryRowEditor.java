@@ -1,7 +1,7 @@
 package ui.popUps.rowEditors;
 
-import models.imagingSessions.calibrationFrames.CalibrationFrame;
-import models.imagingSessions.calibrationFrames.CalibrationType;
+import models.imagingFrames.CalibrationFrame;
+import models.imagingFrames.CalibrationType;
 import models.equipment.Equipment;
 import models.equipment.EquipmentType;
 import models.settings.AppConfig;
@@ -132,7 +132,7 @@ public class LibraryRowEditor extends JDialog {
             calibrationFrame.setCameraId(camera.getSelectedEquipmentItem().getId());
             calibrationFrame.setCalibrationType(CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString()));
             calibrationFrame.setGain((Integer) gain.getValue());
-            calibrationFrame.setSubLength((Double) subLength.getValue());
+            calibrationFrame.setSubLength(Double.valueOf((Integer) subLength.getValue()));
             calibrationFrame.setTotalSubs((Integer) totalSubs.getValue());
 
             if (!checkForDuplicates(calibrationFrame)) {

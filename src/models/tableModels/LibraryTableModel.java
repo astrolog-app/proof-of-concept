@@ -1,6 +1,6 @@
 package models.tableModels;
 
-import models.imagingSessions.calibrationFrames.CalibrationFrame;
+import models.imagingFrames.CalibrationFrame;
 import models.equipment.Equipment;
 
 import javax.swing.table.AbstractTableModel;
