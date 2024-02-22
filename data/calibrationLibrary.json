@@ -8,30 +8,12 @@
   "calibrationType" : "DARK",
   "path" : "/venv"
 }, {
-  "id" : "52e8b486-aa6a-495b-9c02-b28f6caf3547",
+  "id" : "9098f852-cb76-4f7c-825c-2856692df0c3",
   "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
   "date" : null,
-  "totalSubs" : 7,
-  "subLength" : 2.0,
-  "gain" : 4,
+  "totalSubs" : 1,
+  "subLength" : 1.0,
+  "gain" : 1,
   "calibrationType" : "DARK",
-  "path" : "/Downloads"
-}, {
-  "id" : "793f344b-66eb-4559-965e-ff15dc8702d1",
-  "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
-  "date" : null,
-  "totalSubs" : 0,
-  "subLength" : 0.0,
-  "gain" : 0,
-  "calibrationType" : "BIAS",
-  "path" : "/home/ursaminor0131"
-}, {
-  "id" : "ab975e89-c2ba-4266-8719-914d1cba9c37",
-  "cameraId" : "8d00c203-a73f-4a9c-ad3b-aa608aaa8f97",
-  "date" : null,
-  "totalSubs" : 0,
-  "subLength" : 0.0,
-  "gain" : 0,
-  "calibrationType" : "BIAS",
-  "path" : "/home/ursaminor0131"
+  "path" : "/ursaminor0131/Téléchargements"
 } ]

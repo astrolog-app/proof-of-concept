@@ -4,6 +4,7 @@ import models.imagingFrames.CalibrationFrame;
 import models.imagingFrames.CalibrationType;
 import models.equipment.*;
 import models.settings.AppConfig;
+import ui.popUps.NewBrand;
 import ui.popUps.rowEditors.EquipmentRowEditor;
 import ui.popUps.rowEditors.LibraryRowEditor;
 
@@ -16,7 +17,8 @@ import java.util.List;
 public class CustomComboBox extends JComboBox<String> {
     private enum BoxType {
         EQUIPMENT,
-        CALIBRATION
+        CALIBRATION,
+        BRAND
     }
     private final EquipmentType equipmentType;
     private final CalibrationType calibrationType;
@@ -28,6 +30,7 @@ public class CustomComboBox extends JComboBox<String> {
     private final List<String> content = new ArrayList<>();
     private boolean nullItem = true;
     private int selectedIndex = 0;
+    private String newBrand = "";
 
     public CustomComboBox(EquipmentType equipmentType, Equipment equipment) {
         this.equipmentType = equipmentType;
@@ -51,6 +54,17 @@ public class CustomComboBox extends JComboBox<String> {
         init();
     }
 
+    public CustomComboBox(Equipment equipment) {
+        this.equipmentType = null;
+        this.calibrationType = null;
+        this.equipment = equipment;
+        this.boxType = BoxType.BRAND;
+        this.appConfig = null;
+        this.calibrationFrame = null;
+
+        init();
+    }
+
     private void init() {
         updateData();
         setFontsAndColorsForItems(this);
@@ -61,10 +75,9 @@ public class CustomComboBox extends JComboBox<String> {
         removeAllItems();
         content.clear();
 
-        if (nullItem) {
-            addItem(null);
+        if (!newBrand.isEmpty()) {
+            content.add(newBrand);
         }
-        addItem(newItemString);
 
         switch (boxType) {
             case EQUIPMENT -> {
@@ -95,7 +108,15 @@ public class CustomComboBox extends JComboBox<String> {
                     }
                 }
             }
+            case BRAND -> content.addAll(equipment.getAllBrands());
         }
+
+        content.sort(String.CASE_INSENSITIVE_ORDER);
+
+        if (nullItem) {
+            addItem(null);
+        }
+        addItem(newItemString);
 
         for (String s : content) {
             addItem(s);
@@ -159,6 +180,7 @@ public class CustomComboBox extends JComboBox<String> {
                 switch (boxType) {
                     case EQUIPMENT -> new EquipmentRowEditor(equipmentType, equipment, null);
                     case CALIBRATION -> new LibraryRowEditor(null, equipment, calibrationFrame, null, appConfig, calibrationType);
+                    case BRAND -> new NewBrand(this);
                 }
                 updateData();
                 setSelectedIndex(selectedIndex);
@@ -183,5 +205,11 @@ public class CustomComboBox extends JComboBox<String> {
 
     public EquipmentItem getSelectedEquipmentItem() {
         return equipment.getItemFromViewName(Objects.requireNonNull(getSelectedItem()).toString());
+    }
+
+    public void selectNewBrand(String newBrand) {
+        this.newBrand = newBrand;
+        updateData();
+        setSelectedItem(newBrand);
     }
 }

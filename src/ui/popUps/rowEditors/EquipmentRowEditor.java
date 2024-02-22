@@ -2,6 +2,7 @@ package ui.popUps.rowEditors;
 
 import models.equipment.*;
 import services.fileHandler.EquipmentStore;
+import ui.customComponents.CustomComboBox;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -49,13 +50,6 @@ public class EquipmentRowEditor extends JDialog {
         this.equipment = equipment;
 
         edit = equipmentItem != null;
-
-        List<String> brandList = new ArrayList<>(equipment.getAllBrands());
-        Collections.sort(brandList);
-
-        for (String brand : brandList) {
-            brandField.addItem(brand);
-        }
 
         setAllInvisible();
         setSpinnerModels();
@@ -275,5 +269,9 @@ public class EquipmentRowEditor extends JDialog {
         });
         brandField.addActionListener(e -> updateButtonState());
         isUsedCheckBox.addActionListener(e -> updateButtonState());
+    }
+
+    private void createUIComponents() {
+        brandField = new CustomComboBox(equipment);
     }
 }
