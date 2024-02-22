@@ -1,6 +1,6 @@
 package ui.corecomponents;
 
-import models.calibrationLibrary.CalibrationLibrary;
+import models.calibrationFrames.CalibrationFrame;
 import models.equipment.Equipment;
 import models.settings.AppConfig;
 import ui.customComponents.LibraryTable;
@@ -11,14 +11,14 @@ import java.util.List;
 
 public class LibraryPanel {
     private final Equipment equipment;
-    private final List<CalibrationLibrary> library;
+    private final List<CalibrationFrame> library;
     private final AppConfig appConfig;
     private JPanel panel;
     private LibraryTable libraryTable1;
     private JButton addButton;
     private JButton editButton;
 
-    public LibraryPanel(Equipment equipment, List<CalibrationLibrary> library, AppConfig appConfig) {
+    public LibraryPanel(Equipment equipment, List<CalibrationFrame> library, AppConfig appConfig) {
         this.equipment = equipment;
         this.library = library;
         this.appConfig = appConfig;

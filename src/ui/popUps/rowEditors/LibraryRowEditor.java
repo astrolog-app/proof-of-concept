@@ -1,7 +1,7 @@
 package ui.popUps.rowEditors;
 
-import models.calibrationLibrary.CalibrationLibrary;
-import models.calibrationLibrary.CalibrationType;
+import models.calibrationFrames.CalibrationFrame;
+import models.calibrationFrames.CalibrationType;
 import models.equipment.Equipment;
 import models.equipment.EquipmentType;
 import models.settings.AppConfig;
@@ -12,15 +12,14 @@ import ui.customComponents.CustomComboBox;
 import javax.swing.*;
 import java.awt.event.ItemEvent;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class LibraryRowEditor extends JDialog {
     private final boolean edit;
-    private final CalibrationLibrary libraryRow;
+    private final CalibrationFrame libraryRow;
     private final Equipment equipment;
-    private final List<CalibrationLibrary> library;
+    private final List<CalibrationFrame> library;
     private final LibraryTableModel tableModel;
     private final AppConfig appConfig;
     private final CalibrationType calType;
@@ -42,7 +41,7 @@ public class LibraryRowEditor extends JDialog {
     private JButton changeButton;
     private JLabel subLengthLabel;
 
-    public LibraryRowEditor(CalibrationLibrary libraryRow, Equipment equipment, List<CalibrationLibrary> library,
+    public LibraryRowEditor(CalibrationFrame libraryRow, Equipment equipment, List<CalibrationFrame> library,
                             LibraryTableModel tableModel, AppConfig appConfig, CalibrationType calibrationType) {
         this.libraryRow = libraryRow;
         this.equipment = equipment;
@@ -127,20 +126,20 @@ public class LibraryRowEditor extends JDialog {
     private void handleActions() {
         cancelButton.addActionListener(e -> dispose());
         saveButton.addActionListener(e -> {
-            CalibrationLibrary calibrationLibrary = new CalibrationLibrary();
+            CalibrationFrame calibrationFrame = new CalibrationFrame();
 
-            calibrationLibrary.setPath(pathField.getText());
-            calibrationLibrary.setCameraId(camera.getSelectedEquipmentItem().getId());
-            calibrationLibrary.setCalibrationType(CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString()));
-            calibrationLibrary.setGain((Integer) gain.getValue());
-            calibrationLibrary.setSubLength((Integer) subLength.getValue());
-            calibrationLibrary.setTotalSubs((Integer) totalSubs.getValue());
+            calibrationFrame.setPath(pathField.getText());
+            calibrationFrame.setCameraId(camera.getSelectedEquipmentItem().getId());
+            calibrationFrame.setCalibrationType(CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString()));
+            calibrationFrame.setGain((Integer) gain.getValue());
+            calibrationFrame.setSubLength((Integer) subLength.getValue());
+            calibrationFrame.setTotalSubs((Integer) totalSubs.getValue());
 
-            if (!checkForDuplicates(calibrationLibrary)) {
+            if (!checkForDuplicates(calibrationFrame)) {
                 if (edit) {
                     library.remove(libraryRow);
                 }
-                library.add(calibrationLibrary);
+                library.add(calibrationFrame);
 
                 CalibrationLibraryStore.save(library, null);
 
@@ -194,8 +193,8 @@ public class LibraryRowEditor extends JDialog {
         });
     }
 
-    private boolean checkForDuplicates(CalibrationLibrary lib) {
-        for (CalibrationLibrary l : library) {
+    private boolean checkForDuplicates(CalibrationFrame lib) {
+        for (CalibrationFrame l : library) {
             if (l.getCalibrationType() == lib.getCalibrationType()) {
                 if (l.getCamera(equipment).getViewName().equals(lib.getCamera(equipment).getViewName())) {
                     return true;

@@ -58,9 +58,9 @@ public class ImagingSessionTableModel extends AbstractTableModel {
                 case DATE -> formatString(lf.getDate());
                 case TARGET -> formatString(lf.getTarget());
                 case SUB_LENGTH -> formatDouble(lf.getSubLength());
-                case TOTAL_SUBS -> formatDouble(lf.getTotalSubs());
+                case TOTAL_SUBS -> lf.getTotalSubs();
                 case TOTAL_EXPOSURE -> formatDouble(calculateTotalExposure(lf.getTotalSubs(), lf.getSubLength()));
-                case INTEGRATED_SUBS -> formatDouble(lf.getIntegratedSubs());
+                case INTEGRATED_SUBS -> lf.getIntegratedSubs();
                 case INTEGRATED_EXPOSURE -> formatDouble(calculateTotalExposure(lf.getIntegratedSubs(), lf.getSubLength()));
                 case FILTER -> formatEquipmentName(lf.getFilter(equipment));
                 case GAIN -> formatDouble(lf.getGain());
@@ -110,12 +110,12 @@ public class ImagingSessionTableModel extends AbstractTableModel {
         return s;
     }
 
-    private Double calculateTotalExposure(Double totalSubs, Double subLength) {
+    private Double calculateTotalExposure(Integer totalSubs, Double subLength) {
         if (totalSubs == null || subLength == null) {
             return null;
         }
 
-        return totalSubs * subLength;
+        return Double.valueOf(totalSubs) * subLength;
     }
 
     public ImagingSession getSession(int rowIndex) {

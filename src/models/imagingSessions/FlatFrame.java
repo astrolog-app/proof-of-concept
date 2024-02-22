@@ -5,7 +5,7 @@ public class FlatFrame extends ImagingFrame {
 
     public FlatFrame() {}
 
-    public FlatFrame(String date, Double totalSubs) {
+    public FlatFrame(String date, Integer totalSubs) {
         super(date, totalSubs);
     }
 

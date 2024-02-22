@@ -7,7 +7,7 @@ import java.util.UUID;
 public class LightFrame extends ImagingFrame {
     private String target;
     private Double subLength;
-    private Double integratedSubs;
+    private Integer integratedSubs;
     private UUID filterID;
     private Double gain;
     private Double offset;
@@ -24,7 +24,7 @@ public class LightFrame extends ImagingFrame {
 
     public LightFrame() {}
 
-    public LightFrame(String date, Double totalSubs) {
+    public LightFrame(String date, Integer totalSubs) {
         super(date, totalSubs);
     }
 
@@ -42,10 +42,10 @@ public class LightFrame extends ImagingFrame {
         this.subLength = subLength;
     }
 
-    public Double getIntegratedSubs() {
+    public Integer getIntegratedSubs() {
         return integratedSubs;
     }
-    public void setIntegratedSubs(Double integratedSubs) {
+    public void setIntegratedSubs(Integer integratedSubs) {
         this.integratedSubs = integratedSubs;
     }
 

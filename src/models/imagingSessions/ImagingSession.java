@@ -1,5 +1,8 @@
 package models.imagingSessions;
 
+import models.calibrationFrames.BiasFrame;
+import models.calibrationFrames.DarkFrame;
+
 public class ImagingSession {
     private String projectID;
     private String folderDir;

@@ -2,7 +2,7 @@ package services;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import models.calibrationLibrary.CalibrationLibrary;
+import models.calibrationFrames.CalibrationFrame;
 import models.equipment.Equipment;
 import models.imagingSessions.ImagingSession;
 import models.license.Licence;
@@ -27,7 +27,7 @@ public class AppActions {
     private AppConfig appConfig;
     private List<ImagingSession> imagingSessions = new ArrayList<>();
     private ImagingSessionConfig isConfig = new ImagingSessionConfig();
-    private List<CalibrationLibrary> library = new ArrayList<>();
+    private List<CalibrationFrame> library = new ArrayList<>();
     private Equipment equipment = new Equipment();
 
     /**

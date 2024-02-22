@@ -1,6 +1,6 @@
 package ui;
 
-import models.calibrationLibrary.CalibrationLibrary;
+import models.calibrationFrames.CalibrationFrame;
 import models.imagingSessions.ImagingSession;
 import models.license.Licence;
 import models.settings.AppConfig;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MainUI extends JFrame {
     public MainUI(Licence licence, AppConfig appConfig, List<ImagingSession> imagingSessions,
-                  ImagingSessionConfig isConfig, List<CalibrationLibrary> library,
+                  ImagingSessionConfig isConfig, List<CalibrationFrame> library,
                   Equipment equipment) {
         Image img = Toolkit.getDefaultToolkit().getImage(Paths.IMAGE_PATH + "app_logo.png");
         setIconImage(img);

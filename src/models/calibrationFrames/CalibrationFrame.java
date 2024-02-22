@@ -1,11 +1,11 @@
-package models.calibrationLibrary;
+package models.calibrationFrames;
 
 import models.equipment.Camera;
 import models.equipment.Equipment;
 
 import java.util.UUID;
 
-public class CalibrationLibrary {
+public class CalibrationFrame {
     private UUID id;
     private UUID cameraId;
     private CalibrationType calibrationType;
@@ -14,7 +14,7 @@ public class CalibrationLibrary {
     private Integer totalSubs;
     private String path;
 
-    public CalibrationLibrary() {
+    public CalibrationFrame() {
         id = UUID.randomUUID();
     }
 

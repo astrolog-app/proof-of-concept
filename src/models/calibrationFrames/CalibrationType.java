@@ -1,4 +1,4 @@
-package models.calibrationLibrary;
+package models.calibrationFrames;
 
 public enum CalibrationType {
     DARK("Dark"),

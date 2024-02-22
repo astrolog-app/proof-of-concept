@@ -1,6 +1,6 @@
 package ui.customComponents;
 
-import models.calibrationLibrary.CalibrationLibrary;
+import models.calibrationFrames.CalibrationFrame;
 import models.equipment.Equipment;
 import models.settings.AppConfig;
 import models.tableModels.LibraryTableModel;
@@ -18,7 +18,7 @@ public class LibraryTable extends JTable {
     private final AppConfig appConfig;
     private LibraryTableModel libraryTableModel;
 
-    public LibraryTable(Equipment equipment, List<CalibrationLibrary> calibrationLibraries, LibraryPanel libraryPanel, AppConfig appConfig) {
+    public LibraryTable(Equipment equipment, List<CalibrationFrame> calibrationLibraries, LibraryPanel libraryPanel, AppConfig appConfig) {
         this.equipment = equipment;
         this.libraryPanel = libraryPanel;
         this.appConfig = appConfig;
@@ -27,7 +27,7 @@ public class LibraryTable extends JTable {
         handleActions();
     }
 
-    private void createTable(List<CalibrationLibrary> calibrationLibraries) {
+    private void createTable(List<CalibrationFrame> calibrationLibraries) {
         setModel(libraryTableModel= new LibraryTableModel(equipment, calibrationLibraries));
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         showHorizontalLines = true;

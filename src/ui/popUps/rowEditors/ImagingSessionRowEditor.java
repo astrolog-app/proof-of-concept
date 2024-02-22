@@ -1,7 +1,9 @@
 package ui.popUps.rowEditors;
 
-import models.calibrationLibrary.CalibrationLibrary;
-import models.calibrationLibrary.CalibrationType;
+import models.calibrationFrames.BiasFrame;
+import models.calibrationFrames.CalibrationFrame;
+import models.calibrationFrames.CalibrationType;
+import models.calibrationFrames.DarkFrame;
 import models.equipment.*;
 import models.settings.AppConfig;
 import models.tableModels.ImagingSessionTableModel;
@@ -18,7 +20,7 @@ public class ImagingSessionRowEditor extends JDialog {
     private final ImagingSessionTableModel isTableModel;
     private final List<ImagingSession> imagingSessions;
     private final AppConfig appConfig;
-    private final List<CalibrationLibrary> calibrationLibrary;
+    private final List<CalibrationFrame> calibrationFrame;
 
     private JPanel mainPanel;
     private JPanel lightPanel;
@@ -72,12 +74,12 @@ public class ImagingSessionRowEditor extends JDialog {
     private JLabel dateDarkLabel;
 
     public ImagingSessionRowEditor(Equipment equipment, ImagingSession session, ImagingSessionTableModel isTableModel,
-                                   List<ImagingSession> imagingSessions, AppConfig appConfig, List<CalibrationLibrary> calibrationLibrary) {
+                                   List<ImagingSession> imagingSessions, AppConfig appConfig, List<CalibrationFrame> calibrationFrame) {
         this.equipment = equipment;
         this.isTableModel = isTableModel;
         this.imagingSessions = imagingSessions;
         this.appConfig = appConfig;
-        this.calibrationLibrary = calibrationLibrary;
+        this.calibrationFrame = calibrationFrame;
         imageFolderField.setEnabled(false);
 
         updateFlatPanelState();
@@ -111,8 +113,8 @@ public class ImagingSessionRowEditor extends JDialog {
 
         target.setText(session.getLightFrame().getTarget());
         subLengthLight.setValue(checkSessionValue(session.getLightFrame().getSubLength()));
-        totalSubsLight.setValue(checkSessionValue(session.getLightFrame().getTotalSubs()));
-        integratedSubs.setValue(checkSessionValue(session.getLightFrame().getIntegratedSubs()));
+        totalSubsLight.setValue(checkIntegerSessionValue(session.getLightFrame().getTotalSubs()));
+        integratedSubs.setValue(checkIntegerSessionValue(session.getLightFrame().getIntegratedSubs()));
 //        filter.setSelectedItem();
         gain.setValue(checkSessionValue(session.getLightFrame().getGain()));
         offset.setValue(checkSessionValue(session.getLightFrame().getOffset()));
@@ -141,6 +143,14 @@ public class ImagingSessionRowEditor extends JDialog {
     private Double checkSessionValue(Double d) {
         if (d == null) {
             return 0.0;
+        }
+
+        return d;
+    }
+
+    private Integer checkIntegerSessionValue(Integer d) {
+        if (d == null) {
+            return 0;
         }
 
         return d;
@@ -294,7 +304,7 @@ public class ImagingSessionRowEditor extends JDialog {
         camera = new CustomComboBox(EquipmentType.CAMERA, equipment);
         flattener = new CustomComboBox(EquipmentType.FLATTENER, equipment);
         mount =  new CustomComboBox(EquipmentType.MOUNT, equipment);
-        libraryDark = new CustomComboBox(CalibrationType.DARK, equipment, appConfig, calibrationLibrary);
-        libraryBias = new CustomComboBox(CalibrationType.BIAS, equipment, appConfig, calibrationLibrary);
+        libraryDark = new CustomComboBox(CalibrationType.DARK, equipment, appConfig, calibrationFrame);
+        libraryBias = new CustomComboBox(CalibrationType.BIAS, equipment, appConfig, calibrationFrame);
     }
 }

@@ -1,6 +1,6 @@
 package models.tableModels;
 
-import models.calibrationLibrary.CalibrationLibrary;
+import models.calibrationFrames.CalibrationFrame;
 import models.equipment.Equipment;
 
 import javax.swing.table.AbstractTableModel;
@@ -9,9 +9,9 @@ import java.util.List;
 public class LibraryTableModel extends AbstractTableModel {
     // TODO: add sorting
     private final Equipment equipment;
-    private final List<CalibrationLibrary> data;
+    private final List<CalibrationFrame> data;
 
-    public LibraryTableModel(Equipment equipment, List<CalibrationLibrary> data) {
+    public LibraryTableModel(Equipment equipment, List<CalibrationFrame> data) {
         this.equipment = equipment;
         this.data = data;
     }
@@ -40,7 +40,7 @@ public class LibraryTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        CalibrationLibrary lib = data.get(rowIndex);
+        CalibrationFrame lib = data.get(rowIndex);
 
         return switch (columnIndex) {
             case 0 -> lib.getCamera(equipment).getViewName();
@@ -52,7 +52,7 @@ public class LibraryTableModel extends AbstractTableModel {
         };
     }
 
-    public CalibrationLibrary getLibraryRow(int rowIndex) {
+    public CalibrationFrame getLibraryRow(int rowIndex) {
         if (rowIndex == -1)
             return null;
 

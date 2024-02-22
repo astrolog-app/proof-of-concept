@@ -1,11 +1,13 @@
-package models.imagingSessions;
+package models.calibrationFrames;
+
+import models.imagingSessions.ImagingFrame;
 
 public class BiasFrame extends ImagingFrame {
     private double subLength;
 
     public BiasFrame() {}
 
-    public BiasFrame(String date, Double totalSubs) {
+    public BiasFrame(String date, Integer totalSubs) {
         super(date, totalSubs);
     }
 

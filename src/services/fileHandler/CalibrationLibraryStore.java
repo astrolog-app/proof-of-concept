@@ -1,7 +1,6 @@
 package services.fileHandler;
 
-import models.calibrationLibrary.CalibrationLibrary;
-import models.imagingSessions.ImagingSession;
+import models.calibrationFrames.CalibrationFrame;
 import org.codehaus.jackson.map.ObjectMapper;
 import services.AppLogger;
 import utils.Paths;
@@ -17,17 +16,17 @@ import java.util.logging.Logger;
 public class CalibrationLibraryStore {
     private static final Logger logger = AppLogger.getLogger();
 
-    public static List<CalibrationLibrary> load() {
+    public static List<CalibrationFrame> load() {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            CalibrationLibrary[] calibrationLibraries = objectMapper.readValue(new File(Paths.CALIBRATION_LIBRARY_PATH), CalibrationLibrary[].class);
+            CalibrationFrame[] calibrationLibraries = objectMapper.readValue(new File(Paths.CALIBRATION_LIBRARY_PATH), CalibrationFrame[].class);
 
-            List<CalibrationLibrary> calibrationLibraryList = new ArrayList<>(Arrays.asList(calibrationLibraries));
+            List<CalibrationFrame> calibrationFrameList = new ArrayList<>(Arrays.asList(calibrationLibraries));
 
             logger.info("loaded List<CalibrationLibrary> successfully");
 
-            return calibrationLibraryList;
+            return calibrationFrameList;
         } catch (IOException e) {
             logger.severe("couldn't load List<CalibrationLibrary>:" + "\t" + e.getMessage());
 
@@ -35,7 +34,7 @@ public class CalibrationLibraryStore {
         }
     }
 
-    public static void save(List<CalibrationLibrary> calibrationLibraries, String path) {
+    public static void save(List<CalibrationFrame> calibrationLibraries, String path) {
         String configPath = Objects.requireNonNullElse(path, Paths.CALIBRATION_LIBRARY_PATH);
         ObjectMapper objectMapper = new ObjectMapper();
 

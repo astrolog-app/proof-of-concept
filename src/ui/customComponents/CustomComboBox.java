@@ -1,7 +1,7 @@
 package ui.customComponents;
 
-import models.calibrationLibrary.CalibrationLibrary;
-import models.calibrationLibrary.CalibrationType;
+import models.calibrationFrames.CalibrationFrame;
+import models.calibrationFrames.CalibrationType;
 import models.equipment.*;
 import models.settings.AppConfig;
 import ui.popUps.rowEditors.EquipmentRowEditor;
@@ -23,7 +23,7 @@ public class CustomComboBox extends JComboBox<String> {
     private final Equipment equipment;
     private final BoxType boxType;
     private final AppConfig appConfig;
-    private final List<CalibrationLibrary> calibrationLibrary;
+    private final List<CalibrationFrame> calibrationFrame;
     private final String newItemString = "Add New...";
     private final List<String> content = new ArrayList<>();
     private boolean nullItem = true;
@@ -35,18 +35,18 @@ public class CustomComboBox extends JComboBox<String> {
         this.equipment = equipment;
         this.boxType = BoxType.EQUIPMENT;
         this.appConfig = null;
-        this.calibrationLibrary = null;
+        this.calibrationFrame = null;
 
         init();
     }
 
-    public CustomComboBox(CalibrationType calibrationType, Equipment equipment, AppConfig appConfig, List<CalibrationLibrary> calibrationLibrary) {
+    public CustomComboBox(CalibrationType calibrationType, Equipment equipment, AppConfig appConfig, List<CalibrationFrame> calibrationFrame) {
         this.equipmentType = null;
         this.calibrationType = calibrationType;
         this.equipment = equipment;
         this.boxType = BoxType.CALIBRATION;
         this.appConfig = appConfig;
-        this.calibrationLibrary = calibrationLibrary;
+        this.calibrationFrame = calibrationFrame;
 
         init();
     }
@@ -80,14 +80,14 @@ public class CustomComboBox extends JComboBox<String> {
             case CALIBRATION -> {
                 switch (calibrationType) {
                     case BIAS -> {
-                        for (CalibrationLibrary lib : calibrationLibrary) {
+                        for (CalibrationFrame lib : calibrationFrame) {
                             if (lib.getCalibrationType() == CalibrationType.BIAS) {
                                 content.add(lib.getCamera(equipment).getViewName());
                             }
                         }
                     }
                     case DARK -> {
-                        for (CalibrationLibrary lib : calibrationLibrary) {
+                        for (CalibrationFrame lib : calibrationFrame) {
                             if (lib.getCalibrationType() == CalibrationType.DARK) {
                                 content.add(lib.getCamera(equipment).getViewName());
                             }
@@ -158,7 +158,7 @@ public class CustomComboBox extends JComboBox<String> {
 
                 switch (boxType) {
                     case EQUIPMENT -> new EquipmentRowEditor(equipmentType, equipment, null);
-                    case CALIBRATION -> new LibraryRowEditor(null, equipment, calibrationLibrary, null, appConfig, calibrationType);
+                    case CALIBRATION -> new LibraryRowEditor(null, equipment, calibrationFrame, null, appConfig, calibrationType);
                 }
                 updateData();
                 setSelectedIndex(selectedIndex);
