@@ -1,9 +1,9 @@
 package ui.popUps.rowEditors;
 
-import models.calibrationFrames.BiasFrame;
-import models.calibrationFrames.CalibrationFrame;
-import models.calibrationFrames.CalibrationType;
-import models.calibrationFrames.DarkFrame;
+import models.imagingSessions.calibrationFrames.BiasFrame;
+import models.imagingSessions.calibrationFrames.CalibrationFrame;
+import models.imagingSessions.calibrationFrames.CalibrationType;
+import models.imagingSessions.calibrationFrames.DarkFrame;
 import models.equipment.*;
 import models.settings.AppConfig;
 import models.tableModels.ImagingSessionTableModel;
@@ -116,7 +116,7 @@ public class ImagingSessionRowEditor extends JDialog {
         totalSubsLight.setValue(checkIntegerSessionValue(session.getLightFrame().getTotalSubs()));
         integratedSubs.setValue(checkIntegerSessionValue(session.getLightFrame().getIntegratedSubs()));
 //        filter.setSelectedItem();
-        gain.setValue(checkSessionValue(session.getLightFrame().getGain()));
+        gain.setValue(checkIntegerSessionValue(session.getLightFrame().getGain()));
         offset.setValue(checkSessionValue(session.getLightFrame().getOffset()));
         chipTemp.setValue(checkSessionValue(session.getLightFrame().getCameraTemp()));
         temp.setValue(checkSessionValue(session.getLightFrame().getOutsideTemp()));

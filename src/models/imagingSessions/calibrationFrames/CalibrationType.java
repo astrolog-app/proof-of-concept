@@ -1,4 +1,4 @@
-package models.calibrationFrames;
+package models.imagingSessions.calibrationFrames;
 
 public enum CalibrationType {
     DARK("Dark"),

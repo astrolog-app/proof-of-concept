@@ -2,7 +2,7 @@ package services;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import models.calibrationFrames.CalibrationFrame;
+import models.imagingSessions.calibrationFrames.CalibrationFrame;
 import models.equipment.Equipment;
 import models.imagingSessions.ImagingSession;
 import models.license.Licence;

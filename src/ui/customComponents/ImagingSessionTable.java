@@ -1,7 +1,7 @@
 package ui.customComponents;
 
 import controllers.ImagingSessionController;
-import models.calibrationFrames.CalibrationFrame;
+import models.imagingSessions.calibrationFrames.CalibrationFrame;
 import models.settings.AppConfig;
 import models.tableModels.ImagingSessionTableModel;
 import models.imagingSessions.ImagingSession;

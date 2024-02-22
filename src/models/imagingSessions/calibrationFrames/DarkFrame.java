@@ -1,14 +1,16 @@
-package models.calibrationFrames;
+package models.imagingSessions.calibrationFrames;
 
 import models.imagingSessions.ImagingFrame;
+
+import java.util.UUID;
 
 public class DarkFrame extends ImagingFrame {
     private double cameraTemp;
 
     public DarkFrame() {}
 
-    public DarkFrame(String date, Integer totalSubs, Double subLength) {
-        super(date, totalSubs, subLength);
+    public DarkFrame(UUID id, UUID cameraId, String date, Integer totalSubs, Double subLength, Integer gain) {
+        super(id, cameraId, date, totalSubs, subLength, gain);
     }
 
     public double getCameraTemp() {

@@ -1,7 +1,7 @@
 package ui.customComponents;
 
-import models.calibrationFrames.CalibrationFrame;
-import models.calibrationFrames.CalibrationType;
+import models.imagingSessions.calibrationFrames.CalibrationFrame;
+import models.imagingSessions.calibrationFrames.CalibrationType;
 import models.equipment.*;
 import models.settings.AppConfig;
 import ui.popUps.rowEditors.EquipmentRowEditor;

@@ -1,6 +1,6 @@
 package controllers;
 
-import models.calibrationFrames.CalibrationFrame;
+import models.imagingSessions.calibrationFrames.CalibrationFrame;
 import models.equipment.Equipment;
 import models.settings.AppConfig;
 import models.tableModels.ImagingSessionTableModel;

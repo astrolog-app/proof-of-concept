@@ -1,6 +1,6 @@
 package services.fileHandler;
 
-import models.calibrationFrames.CalibrationFrame;
+import models.imagingSessions.calibrationFrames.CalibrationFrame;
 import org.codehaus.jackson.map.ObjectMapper;
 import services.AppLogger;
 import utils.Paths;

@@ -1,6 +1,6 @@
 package ui;
 
-import models.calibrationFrames.CalibrationFrame;
+import models.imagingSessions.calibrationFrames.CalibrationFrame;
 import models.imagingSessions.ImagingSession;
 import models.license.Licence;
 import models.settings.AppConfig;

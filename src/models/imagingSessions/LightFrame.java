@@ -8,7 +8,6 @@ public class LightFrame extends ImagingFrame {
     private String target;
     private Integer integratedSubs;
     private UUID filterID;
-    private Double gain;
     private Double offset;
     private Double cameraTemp;
     private Double outsideTemp;
@@ -18,13 +17,12 @@ public class LightFrame extends ImagingFrame {
     private UUID telescopeID;
     private UUID flattenerID;
     private UUID mountID;
-    private UUID cameraID;
     private String notes;
 
     public LightFrame() {}
 
-    public LightFrame(String date, Integer totalSubs, Double subLength) {
-        super(date, totalSubs, subLength);
+    public LightFrame(String date,UUID cameraId, Integer totalSubs, Double subLength, Integer gain) {
+        super(null, cameraId,  date, totalSubs, subLength, gain);
     }
 
     public String getTarget() {
@@ -46,13 +44,6 @@ public class LightFrame extends ImagingFrame {
     }
     public void setFilterID(UUID filterID) {
         this.filterID = filterID;
-    }
-
-    public Double getGain() {
-        return gain;
-    }
-    public void setGain(Double gain) {
-        this.gain = gain;
     }
 
     public Double getOffset() {
@@ -116,13 +107,6 @@ public class LightFrame extends ImagingFrame {
     }
     public void setMountID(UUID mountID) {
         this.mountID = mountID;
-    }
-
-    public Camera getCamera(Equipment equipment) {
-        return equipment.getCameras().get(cameraID);
-    }
-    public void setCameraID(UUID cameraID) {
-        this.cameraID = cameraID;
     }
 
     public String getNotes() {

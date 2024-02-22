@@ -1,7 +1,7 @@
 package ui.popUps.rowEditors;
 
-import models.calibrationFrames.CalibrationFrame;
-import models.calibrationFrames.CalibrationType;
+import models.imagingSessions.calibrationFrames.CalibrationFrame;
+import models.imagingSessions.calibrationFrames.CalibrationType;
 import models.equipment.Equipment;
 import models.equipment.EquipmentType;
 import models.settings.AppConfig;

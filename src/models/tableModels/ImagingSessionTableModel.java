@@ -63,7 +63,7 @@ public class ImagingSessionTableModel extends AbstractTableModel {
                 case INTEGRATED_SUBS -> lf.getIntegratedSubs();
                 case INTEGRATED_EXPOSURE -> formatDouble(calculateTotalExposure(lf.getIntegratedSubs(), lf.getSubLength()));
                 case FILTER -> formatEquipmentName(lf.getFilter(equipment));
-                case GAIN -> formatDouble(lf.getGain());
+                case GAIN -> lf.getGain();
                 case OFFSET -> formatDouble(lf.getOffset());
                 case CAMERA_TEMP -> formatDouble(lf.getCameraTemp());
                 case OUTSIDE_TEMP -> formatDouble(lf.getOutsideTemp());
