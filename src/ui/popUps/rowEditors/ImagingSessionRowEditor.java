@@ -17,7 +17,7 @@ public class ImagingSessionRowEditor extends JDialog {
     private final ImagingSessionTableModel isTableModel;
     private final List<ImagingSession> imagingSessions;
     private final AppConfig appConfig;
-    private final List<CalibrationFrame> calibrationFrame;
+    private final List<CalibrationFrame> calibrationFrames;
 
     private JPanel mainPanel;
     private JPanel lightPanel;
@@ -71,12 +71,12 @@ public class ImagingSessionRowEditor extends JDialog {
     private JLabel dateDarkLabel;
 
     public ImagingSessionRowEditor(Equipment equipment, ImagingSession session, ImagingSessionTableModel isTableModel,
-                                   List<ImagingSession> imagingSessions, AppConfig appConfig, List<CalibrationFrame> calibrationFrame) {
+                                   List<ImagingSession> imagingSessions, AppConfig appConfig, List<CalibrationFrame> calibrationFrames) {
         this.equipment = equipment;
         this.isTableModel = isTableModel;
         this.imagingSessions = imagingSessions;
         this.appConfig = appConfig;
-        this.calibrationFrame = calibrationFrame;
+        this.calibrationFrames = calibrationFrames;
         imageFolderField.setEnabled(false);
 
         updateFlatPanelState();
@@ -223,10 +223,13 @@ public class ImagingSessionRowEditor extends JDialog {
 
         FlatFrame ff = new FlatFrame();
 
+        calibrationFrames.add(df);
+        calibrationFrames.add(bf);
+
         newSession.setLightFrame(lf);
-        newSession.setDarkFrame(df);
-        newSession.setBiasFrame(bf);
         newSession.setFlatFrame(ff);
+        newSession.setDarkFrameId(df.getId());
+        newSession.setBiasFrameId(bf.getId());
 
         return newSession;
     }
@@ -301,7 +304,7 @@ public class ImagingSessionRowEditor extends JDialog {
         camera = new CustomComboBox(EquipmentType.CAMERA, equipment);
         flattener = new CustomComboBox(EquipmentType.FLATTENER, equipment);
         mount =  new CustomComboBox(EquipmentType.MOUNT, equipment);
-        libraryDark = new CustomComboBox(CalibrationType.DARK, equipment, appConfig, calibrationFrame);
-        libraryBias = new CustomComboBox(CalibrationType.BIAS, equipment, appConfig, calibrationFrame);
+        libraryDark = new CustomComboBox(CalibrationType.DARK, equipment, appConfig, calibrationFrames);
+        libraryBias = new CustomComboBox(CalibrationType.BIAS, equipment, appConfig, calibrationFrames);
     }
 }

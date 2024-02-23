@@ -1,17 +1,17 @@
 package models;
 
-import models.imagingFrames.BiasFrame;
-import models.imagingFrames.DarkFrame;
-import models.imagingFrames.FlatFrame;
-import models.imagingFrames.LightFrame;
+import models.imagingFrames.*;
+
+import java.util.List;
+import java.util.UUID;
 
 public class ImagingSession {
     private String projectID;
     private String folderDir;
     private LightFrame lightFrame;
-    private DarkFrame darkFrame;
     private FlatFrame flatFrame;
-    private BiasFrame biasFrame;
+    private UUID darkFrameId;
+    private UUID biasFrameId;
 
     public String getProjectID() {
         return projectID;
@@ -34,13 +34,15 @@ public class ImagingSession {
         this.lightFrame = lightFrame;
     }
 
-    public DarkFrame getDarkFrame() {
-        return darkFrame;
-    }
-    public void setDarkFrame(DarkFrame darkFrame) {
-        this.darkFrame = darkFrame;
-    }
+    public DarkFrame getDarkFrame(List<CalibrationFrame> calibrationFrames) {
+        for (CalibrationFrame c : calibrationFrames) {
+            if (c.getId() == darkFrameId) {
+                return (DarkFrame) c;
+            }
+        }
 
+        return null;
+    }
     public FlatFrame getFlatFrame() {
         return flatFrame;
     }
@@ -48,10 +50,26 @@ public class ImagingSession {
         this.flatFrame = flatFrame;
     }
 
-    public BiasFrame getBiasFrame() {
-        return biasFrame;
+    public UUID getDarkFrameId() {
+        return darkFrameId;
     }
-    public void setBiasFrame(BiasFrame biasFrame) {
-        this.biasFrame = biasFrame;
+    public void setDarkFrameId(UUID darkFrameId) {
+        this.darkFrameId = darkFrameId;
+    }
+
+    public BiasFrame getBiasFrame(List<CalibrationFrame> calibrationFrames) {
+        for (CalibrationFrame c : calibrationFrames) {
+            if (c.getId() == biasFrameId) {
+                return (BiasFrame) c;
+            }
+        }
+
+        return null;
+    }
+    public UUID getBiasFrameId() {
+        return biasFrameId;
+    }
+    public void setBiasFrameId(UUID biasFrameId) {
+        this.biasFrameId = biasFrameId;
     }
 }
