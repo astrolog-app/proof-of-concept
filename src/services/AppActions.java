@@ -48,6 +48,8 @@ public class AppActions {
             setApplicationTheme();
             startUpPanel.dispose();
 
+            checkForNull();
+
             // start up the mainUI and check for valid licence
             SwingUtilities.invokeLater(() -> {
                 MainUI mainUI = new MainUI(licence, appConfig, imagingSessions, isConfig, library, equipment);
@@ -91,6 +93,20 @@ public class AppActions {
             Thread.sleep(ms);
         } catch (Exception e) {
             logger.severe("failed to execute Thread.sleep");
+        }
+    }
+
+    private void checkForNull() {
+        if (imagingSessions == null) {
+            imagingSessions = new ArrayList<>();
+        }
+
+        if (equipment == null) {
+            equipment = new Equipment();
+        }
+
+        if (library == null) {
+            library = new ArrayList<>();
         }
     }
 
