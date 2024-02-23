@@ -11,6 +11,7 @@ import ui.customComponents.CustomComboBox;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import java.util.UUID;
 
 public class ImagingSessionRowEditor extends JDialog {
     private final Equipment equipment;
@@ -26,7 +27,6 @@ public class ImagingSessionRowEditor extends JDialog {
     private JPanel flatPanel;
     private JCheckBox flatCheckBox;
     private JSpinner totalSubsFlat;
-    private JTextField dateFlat;
     private JTextField dateLight;
     private JTextField target;
     private JSpinner subLengthLight;
@@ -59,7 +59,6 @@ public class ImagingSessionRowEditor extends JDialog {
     private JLabel flatFramesLabel;
     private JSeparator flatSeparator;
     private JLabel subLengthFlatLabel;
-    private JLabel dateFlatLabel;
     private JLabel totalSubsFlatLabel;
     private JLabel darkFramesLabel;
     private JLabel biasFramesLabel;
@@ -133,7 +132,6 @@ public class ImagingSessionRowEditor extends JDialog {
 //        totalSubsBias.setValue();
 //
 //        subLengthFlat.setValue();
-//        dateFlat.setText();
 //        totalSubsFlat.setValue();
     }
 
@@ -217,19 +215,32 @@ public class ImagingSessionRowEditor extends JDialog {
 //        lf.setFlattener();
 //        lf.setMount();
 
-        DarkFrame df = new DarkFrame();
+        DarkFrame df = null;
+        UUID dfId = null;
+        if (darkCheckBox.isSelected()) {
+            df = new DarkFrame();
+            dfId = df.getId();
+        }
 
-        BiasFrame bf = new BiasFrame();
+        BiasFrame bf = null;
+        UUID bfId = null;
+        if (biasCheckBox.isSelected()) {
+            bf = new BiasFrame();
+            bfId = bf.getId();
+        }
 
-        FlatFrame ff = new FlatFrame();
+        FlatFrame ff = null;
+        if (flatCheckBox.isSelected()) {
+            ff = new FlatFrame();
+        }
 
         calibrationFrames.add(df);
         calibrationFrames.add(bf);
 
         newSession.setLightFrame(lf);
         newSession.setFlatFrame(ff);
-        newSession.setDarkFrameId(df.getId());
-        newSession.setBiasFrameId(bf.getId());
+        newSession.setDarkFrameId(dfId);
+        newSession.setBiasFrameId(bfId);
 
         return newSession;
     }
@@ -280,19 +291,15 @@ public class ImagingSessionRowEditor extends JDialog {
 
     private void updateFlatPanelState() {
         if (flatCheckBox.isSelected()) {
-            dateFlat.setEnabled(true);
             subLengthFlat.setEnabled(true);
             totalSubsFlat.setEnabled(true);
             flatFramesLabel.setEnabled(true);
-            dateFlatLabel.setEnabled(true);
             totalSubsFlatLabel.setEnabled(true);
             subLengthFlatLabel.setEnabled(true);
         } else {
-            dateFlat.setEnabled(false);
             subLengthFlat.setEnabled(false);
             totalSubsFlat.setEnabled(false);
             flatFramesLabel.setEnabled(false);
-            dateFlatLabel.setEnabled(false);
             totalSubsFlatLabel.setEnabled(false);
             subLengthFlatLabel.setEnabled(false);
         }

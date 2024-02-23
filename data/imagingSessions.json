@@ -1,83 +1,47 @@
-[
-  {
-    "projectID": null,
-    "folderDir": null,
-    "lightFrame": {
-      "date": "01.12.2023",
-      "target": "NGC 7000",
-      "subLength": 300,
-      "totalSubs": 10,
-      "integratedSubs": 8,
-      "filterID": "b9177f55-02d6-40b3-8eb4-3ee939c0647d",
-      "gain": 800,
-      "offset": null,
-      "cameraTemp": null,
-      "outsideTemp": 12,
-      "averageSeeing": 3.5,
-      "averageCloudCover": 0.33,
-      "averageMoon": 0.77,
-      "telescopeID": "7133fa61-599d-425f-a2f3-2b04304f02d8",
-      "flattenerID": null,
-      "mountID": "0c46ede3-a387-402f-b057-5a8471566d8f",
-      "cameraId": "76a4468d-b33d-4285-b7ad-a936891a1291",
-      "notes": null
-    },
-    "darkFrame": null,
-    "flatFrame": null,
-    "biasFrame": null
+[ {
+  "projectID" : null,
+  "folderDir" : null,
+  "lightFrame" : {
+    "id" : "6a18a9d4-b7e3-40d9-86a5-deaaa87af050",
+    "cameraId" : null,
+    "totalSubs" : null,
+    "subLength" : null,
+    "gain" : null,
+    "date" : "d",
+    "target" : "as",
+    "integratedSubs" : null,
+    "offset" : null,
+    "cameraTemp" : null,
+    "outsideTemp" : null,
+    "averageSeeing" : null,
+    "averageCloudCover" : null,
+    "averageMoon" : null,
+    "notes" : null
   },
-  {
-    "projectID": null,
-    "folderDir": null,
-    "lightFrame": {
-      "date": "02.12.2023",
-      "target": "M 32",
-      "subLength": 300,
-      "totalSubs": 10,
-      "integratedSubs": 8,
-      "filterID": "b9177f55-02d6-40b3-8eb4-3ee939c0647d",
-      "gain": 800,
-      "offset": null,
-      "cameraTemp": null,
-      "outsideTemp": 12,
-      "averageSeeing": 3.5,
-      "averageCloudCover": 0.33,
-      "averageMoon": 0.77,
-      "telescopeID": "7133fa61-599d-425f-a2f3-2b04304f02d8",
-      "flattenerID": null,
-      "mountID": "0c46ede3-a387-402f-b057-5a8471566d8f",
-      "cameraId": "76a4468d-b33d-4285-b7ad-a936891a1291",
-      "notes": null
-    },
-    "darkFrame": null,
-    "flatFrame": null,
-    "biasFrame": null
+  "flatFrame" : null,
+  "darkFrameId" : null,
+  "biasFrameId" : null
+}, {
+  "projectID" : null,
+  "folderDir" : null,
+  "lightFrame" : {
+    "id" : "9a9b17fc-6c0a-4a07-9486-507c0e8f8448",
+    "cameraId" : null,
+    "totalSubs" : null,
+    "subLength" : null,
+    "gain" : null,
+    "date" : "ddds",
+    "target" : "dd",
+    "integratedSubs" : null,
+    "offset" : null,
+    "cameraTemp" : null,
+    "outsideTemp" : null,
+    "averageSeeing" : null,
+    "averageCloudCover" : null,
+    "averageMoon" : null,
+    "notes" : null
   },
-  {
-    "projectID": null,
-    "folderDir": null,
-    "lightFrame": {
-      "date": "04.12.2023",
-      "target": "M 41",
-      "subLength": 300,
-      "totalSubs": 10,
-      "integratedSubs": 8,
-      "filterID": "b9177f55-02d6-40b3-8eb4-3ee939c0647d",
-      "gain": 800,
-      "offset": null,
-      "cameraTemp": null,
-      "outsideTemp": 12,
-      "averageSeeing": 3.5,
-      "averageCloudCover": 0.33,
-      "averageMoon": 0.77,
-      "telescopeID": "7133fa61-599d-425f-a2f3-2b04304f02d8",
-      "flattenerID": null,
-      "mountID": "0c46ede3-a387-402f-b057-5a8471566d8f",
-      "cameraId": "76a4468d-b33d-4285-b7ad-a936891a1291",
-      "notes": null
-    },
-    "darkFrame": null,
-    "flatFrame": null,
-    "biasFrame": null
-  }
-]
+  "flatFrame" : null,
+  "darkFrameId" : "83964c1d-c14a-4b3a-a494-df4992d53551",
+  "biasFrameId" : null
+} ]

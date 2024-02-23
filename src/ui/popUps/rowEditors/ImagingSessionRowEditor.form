@@ -714,31 +714,11 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="52bfe" class="javax.swing.JSpinner" binding="totalSubsFlat">
-                        <constraints>
-                          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties/>
-                      </component>
-                      <component id="bc735" class="javax.swing.JTextField" binding="dateFlat">
-                        <constraints>
-                          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties/>
-                      </component>
                       <component id="1517e" class="javax.swing.JSpinner" binding="subLengthFlat">
                         <constraints>
                           <grid row="0" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties/>
-                      </component>
-                      <component id="fd544" class="javax.swing.JLabel" binding="dateFlatLabel">
-                        <constraints>
-                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Date:"/>
-                        </properties>
                       </component>
                       <component id="238a9" class="javax.swing.JLabel" binding="subLengthFlatLabel">
                         <constraints>
@@ -748,14 +728,6 @@
                           <text value="Sub Length:"/>
                         </properties>
                       </component>
-                      <component id="9c20c" class="javax.swing.JLabel" binding="totalSubsFlatLabel">
-                        <constraints>
-                          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Total Subs:"/>
-                        </properties>
-                      </component>
                       <component id="279e2" class="javax.swing.JLabel">
                         <constraints>
                           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -763,6 +735,20 @@
                         <properties>
                           <text value=""/>
                         </properties>
+                      </component>
+                      <component id="9c20c" class="javax.swing.JLabel" binding="totalSubsFlatLabel">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Total Subs:"/>
+                        </properties>
+                      </component>
+                      <component id="52bfe" class="javax.swing.JSpinner" binding="totalSubsFlat">
+                        <constraints>
+                          <grid row="2" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties/>
                       </component>
                     </children>
                   </grid>
