@@ -5,6 +5,7 @@ import models.equipment.*;
 import java.util.UUID;
 
 public class LightFrame extends ImagingFrame {
+    private String date;
     private String target;
     private Integer integratedSubs;
     private UUID filterID;
@@ -21,8 +22,16 @@ public class LightFrame extends ImagingFrame {
 
     public LightFrame() {}
 
-    public LightFrame(String date,UUID cameraId, Integer totalSubs, Double subLength, Integer gain) {
-        super(null, cameraId,  date, totalSubs, subLength, gain);
+    public LightFrame(String date, UUID cameraId, Integer totalSubs, Double subLength, Integer gain) {
+        super(null, cameraId,  totalSubs, subLength, gain);
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getTarget() {

@@ -8,7 +8,6 @@ import java.util.UUID;
 public class ImagingFrame {
     private UUID id;
     private UUID cameraId;
-    private String date;
     private Integer totalSubs;
     private Double subLength;
     private Integer gain;
@@ -17,10 +16,9 @@ public class ImagingFrame {
         id = UUID.randomUUID();
     }
 
-    public ImagingFrame(UUID id, UUID cameraId, String date, Integer totalSubs, Double subLength, Integer gain) {
+    public ImagingFrame(UUID id, UUID cameraId, Integer totalSubs, Double subLength, Integer gain) {
         this.id = id;
         this.cameraId = cameraId;
-        this.date = date;
         this.totalSubs = totalSubs;
         this.subLength = subLength;
         this.gain = gain;
@@ -42,13 +40,6 @@ public class ImagingFrame {
     }
     public void setCameraId(UUID cameraId) {
         this.cameraId = cameraId;
-    }
-
-    public String getDate() {
-        return date;
-    }
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public Integer getTotalSubs() {
