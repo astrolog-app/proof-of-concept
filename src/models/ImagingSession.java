@@ -6,18 +6,22 @@ import java.util.List;
 import java.util.UUID;
 
 public class ImagingSession {
-    private String projectID;
+    private UUID id;
     private String folderDir;
     private LightFrame lightFrame;
     private FlatFrame flatFrame;
     private UUID darkFrameId;
     private UUID biasFrameId;
 
-    public String getProjectID() {
-        return projectID;
+    public ImagingSession() {
+        id = UUID.randomUUID();
     }
-    public void setProjectID(String projectID) {
-        this.projectID = projectID;
+
+    public UUID getId() {
+        return id;
+    }
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getFolderDir() {

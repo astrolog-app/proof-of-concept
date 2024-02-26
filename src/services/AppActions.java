@@ -2,6 +2,7 @@ package services;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import models.ImagingProject;
 import models.imagingFrames.CalibrationFrame;
 import models.equipment.Equipment;
 import models.ImagingSession;
@@ -29,6 +30,7 @@ public class AppActions {
     private ImagingSessionConfig isConfig = new ImagingSessionConfig();
     private List<CalibrationFrame> library = new ArrayList<>();
     private Equipment equipment = new Equipment();
+    private List<ImagingProject> imagingProjects = new ArrayList<>();
 
     /**
      * initializes the application and looks if the
@@ -67,7 +69,7 @@ public class AppActions {
     }
 
     private void loadJson() {
-        sleep(500);
+        sleep(400);
         isConfig = ConfigurationStore.loadImagingSessionConfig();
         startUpPanel.setProgressLabel("loading configuration.json");
         startUpPanel.increaseProgress();
@@ -78,13 +80,18 @@ public class AppActions {
         startUpPanel.increaseProgress();
 
         sleep(100);
-        imagingSessions = ImagingSessionStore.loadImagingSessions();
+        imagingSessions = ImagingSessionStore.load();
         startUpPanel.setProgressLabel("loading imagingSessions.json");
         startUpPanel.increaseProgress();
 
         sleep(100);
         library = CalibrationLibraryStore.load();
         startUpPanel.setProgressLabel("loading calibrationLibrary.json");
+        startUpPanel.increaseProgress();
+
+        sleep(100);
+        imagingProjects = ImagingProjectStore.load();
+        startUpPanel.setProgressLabel("loading imagingProjects.json");
         startUpPanel.increaseProgress();
     }
 

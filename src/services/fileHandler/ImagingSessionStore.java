@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class ImagingSessionStore {
     private static final Logger logger = AppLogger.getLogger();
 
-    public static List<ImagingSession> loadImagingSessions() {
+    public static List<ImagingSession> load() {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
