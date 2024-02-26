@@ -154,18 +154,18 @@ public class ImagingSessionRowEditor extends JDialog {
     private void setSpinnerModels() {
         avgCloudCover.setModel(new SpinnerNumberModel(0,0,100,1));
 
-        subLengthLight.setModel(new SpinnerNumberModel(0, 0, null, 1));
-        totalSubsLight.setModel(new SpinnerNumberModel(0, 0, null, 1));
-        integratedSubs.setModel(new SpinnerNumberModel(0, 0, null, 1));
-        gain.setModel(new SpinnerNumberModel(0, 0, null, 1));
-        offset.setModel(new SpinnerNumberModel(0, 0, null, 1));
-        temp.setModel(new SpinnerNumberModel(0, 0, null, 1));
-        subLengthFlat.setModel(new SpinnerNumberModel(0, 0, null, 1));
-        totalSubsBias.setModel(new SpinnerNumberModel(0, 0, null, 1));
-        totalSubsDark.setModel(new SpinnerNumberModel(0, 0, null, 1));
-        totalSubsFlat.setModel(new SpinnerNumberModel(0, 0, null, 1));
+        subLengthLight.setModel(new SpinnerNumberModel(0, 0, 10000, 1));
+        totalSubsLight.setModel(new SpinnerNumberModel(0, 0, 10000, 1));
+        integratedSubs.setModel(new SpinnerNumberModel(0, 0, 10000, 1));
+        gain.setModel(new SpinnerNumberModel(0, 0, 10000, 1));
+        offset.setModel(new SpinnerNumberModel(0, 0, 10000, 1));
+        temp.setModel(new SpinnerNumberModel(0, 0, 10000, 1));
+        subLengthFlat.setModel(new SpinnerNumberModel(0, 0, 10000, 1));
+        totalSubsBias.setModel(new SpinnerNumberModel(0, 0, 10000, 1));
+        totalSubsDark.setModel(new SpinnerNumberModel(0, 0, 10000, 1));
+        totalSubsFlat.setModel(new SpinnerNumberModel(0, 0, 10000, 1));
 
-        chipTemp.setModel(new SpinnerNumberModel(0, 0, 10000, 0.1));
+        chipTemp.setModel(new SpinnerNumberModel(0, -10000, 10000, 0.1));
         avgSeeing.setModel(new SpinnerNumberModel(0, 0, 10000, 0.01));
     }
 
@@ -234,8 +234,11 @@ public class ImagingSessionRowEditor extends JDialog {
             ff = new FlatFrame();
         }
 
-        calibrationFrames.add(df);
-        calibrationFrames.add(bf);
+        /*
+            introduces a bug when adding two imaging sessions:
+            calibrationFrames.add(df);
+            calibrationFrames.add(bf);
+         */
 
         newSession.setLightFrame(lf);
         newSession.setFlatFrame(ff);
