@@ -7,6 +7,7 @@ import models.settings.AppConfig;
 import models.tableModels.ImagingSessionTableModel;
 import services.fileHandler.ImagingSessionStore;
 import ui.customComponents.CustomComboBox;
+import ui.customComponents.CustomFileChooser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,8 +55,6 @@ public class ImagingSessionRowEditor extends JDialog {
     private JSpinner gain;
     private JTextArea textArea1;
     private JComboBox<String> mount;
-    private JTextField imageFolderField;
-    private JButton changeImageFolder;
     private JLabel flatFramesLabel;
     private JSeparator flatSeparator;
     private JLabel subLengthFlatLabel;
@@ -68,6 +67,8 @@ public class ImagingSessionRowEditor extends JDialog {
     private JLabel dateBiasLabel;
     private JLabel libraryBiasLabel;
     private JLabel dateDarkLabel;
+    private JComboBox<String> filter;
+    private JPanel fileChooser;
 
     public ImagingSessionRowEditor(Equipment equipment, ImagingSession session, ImagingSessionTableModel isTableModel,
                                    List<ImagingSession> imagingSessions, AppConfig appConfig, List<CalibrationFrame> calibrationFrames) {
@@ -76,7 +77,6 @@ public class ImagingSessionRowEditor extends JDialog {
         this.imagingSessions = imagingSessions;
         this.appConfig = appConfig;
         this.calibrationFrames = calibrationFrames;
-        imageFolderField.setEnabled(false);
 
         updateFlatPanelState();
         updateDarkPanelState();
@@ -105,7 +105,7 @@ public class ImagingSessionRowEditor extends JDialog {
     }
 
     private void fillOutPanel(ImagingSession session) {
-        imageFolderField.setText(session.getFolderDir());
+        ((CustomFileChooser) fileChooser).setPath(session.getFolderDir());
 
         target.setText(session.getLightFrame().getTarget());
         subLengthLight.setValue(checkSessionValue(session.getLightFrame().getSubLength()));
@@ -186,10 +186,6 @@ public class ImagingSessionRowEditor extends JDialog {
         flatCheckBox.addActionListener(e -> updateFlatPanelState());
         darkCheckBox.addActionListener(e -> updateDarkPanelState());
         biasCheckBox.addActionListener(e -> updateBiasPanelState());
-        changeImageFolder.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.showDialog(null, "Select Imaging Folder");
-        });
     }
 
     private ImagingSession createNewSession() {
@@ -309,7 +305,14 @@ public class ImagingSessionRowEditor extends JDialog {
     }
 
     private void createUIComponents() {
-//        filter = new CustomComboBox(filterNames, EquipmentType.TELESCOPE, equipment);
+        fileChooser = new CustomFileChooser(appConfig, "Choose Folder:") {
+            @Override
+            public void fileChanged() {
+
+            }
+        };
+
+        filter = new CustomComboBox(EquipmentType.FILTER, equipment);
         telescope = new CustomComboBox(EquipmentType.TELESCOPE, equipment);
         camera = new CustomComboBox(EquipmentType.CAMERA, equipment);
         flattener = new CustomComboBox(EquipmentType.FLATTENER, equipment);
