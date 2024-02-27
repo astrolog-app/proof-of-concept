@@ -7,6 +7,7 @@ public class AppConfig {
     private boolean enableRegularBackups;
     private boolean startInFullscreen;
     private boolean showUpdates;
+    private TempType tempType;
 
     public AppTheme getTheme() {
         return theme;
@@ -48,5 +49,12 @@ public class AppConfig {
     }
     public void setShowUpdates(boolean showUpdates) {
         this.showUpdates = showUpdates;
+    }
+
+    public TempType getTempType() {
+        return tempType;
+    }
+    public void setTempType(TempType tempType) {
+        this.tempType = tempType;
     }
 }
