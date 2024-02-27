@@ -8,10 +8,10 @@ import models.settings.AppConfig;
 import models.tableModels.LibraryTableModel;
 import services.fileHandler.CalibrationLibraryStore;
 import ui.customComponents.CustomComboBox;
+import ui.customComponents.CustomFileChooser;
 
 import javax.swing.*;
 import java.awt.event.ItemEvent;
-import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,9 +37,8 @@ public class LibraryRowEditor extends JDialog {
     private JSpinner gain;
     private JSpinner subLength;
     private JSpinner totalSubs;
-    private JTextField pathField;
-    private JButton changeButton;
     private JLabel subLengthLabel;
+    private JPanel fileChooser;
 
     public LibraryRowEditor(CalibrationFrame libraryRow, Equipment equipment, List<CalibrationFrame> library,
                             LibraryTableModel tableModel, AppConfig appConfig, CalibrationType calibrationType) {
@@ -81,7 +80,7 @@ public class LibraryRowEditor extends JDialog {
 
     private void updateButtonState() {
         boolean notNull = this.camera.getSelectedItem() != null;
-        boolean path = !pathField.getText().equals(prevPath);
+        boolean path = !((CustomFileChooser) fileChooser).getPath().equals(prevPath);
         boolean camera = !Objects.equals(this.camera.getSelectedItem(), prevCamera);
         boolean calibrationType = !Objects.equals(this.calibrationType.getSelectedItem(), prevCalibrationType);
         boolean gain = !this.gain.getValue().equals(prevGain);
@@ -97,7 +96,7 @@ public class LibraryRowEditor extends JDialog {
 
     private void fillUpUI() {
         if (libraryRow != null) {
-            pathField.setText(libraryRow.getPath());
+            ((CustomFileChooser) fileChooser).setPath(libraryRow.getPath());
             prevPath = libraryRow.getPath();
 
             camera.setSelectedItem(libraryRow.getCamera(equipment).getViewName());
@@ -128,7 +127,7 @@ public class LibraryRowEditor extends JDialog {
         saveButton.addActionListener(e -> {
             CalibrationFrame calibrationFrame = new CalibrationFrame();
 
-            calibrationFrame.setPath(pathField.getText());
+            calibrationFrame.setPath(((CustomFileChooser) fileChooser).getPath());
             calibrationFrame.setCameraId(camera.getSelectedEquipmentItem().getId());
             calibrationFrame.setCalibrationType(CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString()));
             calibrationFrame.setGain((Integer) gain.getValue());
@@ -178,19 +177,6 @@ public class LibraryRowEditor extends JDialog {
         gain.addChangeListener(e -> updateButtonState());
         subLength.addChangeListener(e -> updateButtonState());
         totalSubs.addChangeListener(e -> updateButtonState());
-
-        changeButton.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Select Folder");
-            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-            int userSelection = fileChooser.showDialog(null, "Select");
-            if (userSelection == JFileChooser.APPROVE_OPTION) {
-                File selectedFolder = fileChooser.getSelectedFile();
-                pathField.setText(selectedFolder.getAbsolutePath().replace(appConfig.getFolderPath(),""));
-                updateButtonState();
-            }
-        });
     }
 
     private boolean checkForDuplicates(CalibrationFrame lib) {
@@ -207,5 +193,11 @@ public class LibraryRowEditor extends JDialog {
 
     private void createUIComponents() {
         camera = new CustomComboBox(EquipmentType.CAMERA, equipment);
+        fileChooser = new CustomFileChooser(appConfig, "Choose Folder:") {
+            @Override
+            public void fileChanged() {
+                updateButtonState();
+            }
+        };
     }
 }

@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class CustomFileChooser extends JPanel {
+public abstract class CustomFileChooser extends JPanel {
     private final AppConfig appConfig;
     private final JTextField pathField = new JTextField();
     private final JButton changeButton = new JButton("Change");
@@ -34,8 +34,17 @@ public class CustomFileChooser extends JPanel {
             if (userSelection == JFileChooser.APPROVE_OPTION) {
                 File selectedFolder = fileChooser.getSelectedFile();
                 pathField.setText(selectedFolder.getAbsolutePath().replace(appConfig.getFolderPath(),""));
-                // TODO: updateButtonState
+                fileChanged();
             }
         });
     }
+
+    public String getPath() {
+        return pathField.getText();
+    }
+    public void setPath(String path) {
+        pathField.setText(path);
+    }
+
+    public abstract void fileChanged();
 }
