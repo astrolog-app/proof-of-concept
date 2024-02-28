@@ -2,6 +2,7 @@ package ui;
 
 import models.imagingFrames.CalibrationFrame;
 import models.ImagingSession;
+import models.imagingFrames.ImagingFrameList;
 import models.license.Licence;
 import models.settings.AppConfig;
 import models.equipment.Equipment;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class MainUI extends JFrame {
     public MainUI(Licence licence, AppConfig appConfig, List<ImagingSession> imagingSessions,
-                  ImagingSessionConfig isConfig, List<CalibrationFrame> library,
+                  ImagingSessionConfig isConfig, ImagingFrameList imagingFrameList,
                   Equipment equipment) {
         Image img = Toolkit.getDefaultToolkit().getImage(Paths.IMAGE_PATH + "app_logo.png");
         setIconImage(img);
@@ -29,13 +30,13 @@ public class MainUI extends JFrame {
         }
         JTabbedPane tabbedPane = new JTabbedPane(tabPlacement);
 
-        LogPanel logPanelClass = new LogPanel(appConfig, equipment, imagingSessions, isConfig, library);
+        LogPanel logPanelClass = new LogPanel(appConfig, equipment, imagingSessions, isConfig, imagingFrameList);
         JPanel imagingHistoryPanel = logPanelClass.getPanel();
 
         EquipmentPanel equipmentPanelClass = new EquipmentPanel(equipment);
         JPanel equipmentPanel = equipmentPanelClass.getPanel();
 
-        LibraryPanel libraryPanelClass = new LibraryPanel(equipment, library, appConfig);
+        LibraryPanel libraryPanelClass = new LibraryPanel(equipment, imagingFrameList, appConfig);
         JPanel libraryPanel = libraryPanelClass.getPanel();
 
         SettingsPanel settingsPanelClass = new SettingsPanel(appConfig);

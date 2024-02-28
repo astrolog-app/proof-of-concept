@@ -6,6 +6,7 @@ import models.ImagingProject;
 import models.imagingFrames.CalibrationFrame;
 import models.equipment.Equipment;
 import models.ImagingSession;
+import models.imagingFrames.ImagingFrameList;
 import models.license.Licence;
 import models.settings.AppConfig;
 import models.settings.AppTheme;
@@ -28,9 +29,9 @@ public class AppActions {
     private AppConfig appConfig;
     private List<ImagingSession> imagingSessions = new ArrayList<>();
     private ImagingSessionConfig isConfig = new ImagingSessionConfig();
-    private List<CalibrationFrame> library = new ArrayList<>();
     private Equipment equipment = new Equipment();
     private List<ImagingProject> imagingProjects = new ArrayList<>();
+    private ImagingFrameList imagingFrameList = new ImagingFrameList();
 
     /**
      * initializes the application and looks if the
@@ -54,7 +55,7 @@ public class AppActions {
 
             // start up the mainUI and check for valid licence
             SwingUtilities.invokeLater(() -> {
-                MainUI mainUI = new MainUI(licence, appConfig, imagingSessions, isConfig, library, equipment);
+                MainUI mainUI = new MainUI(licence, appConfig, imagingSessions, isConfig, imagingFrameList, equipment);
                 LicenceChecker licenceChecker = new LicenceChecker(licence, mainUI);
 
                 licenceChecker.check();
@@ -85,8 +86,8 @@ public class AppActions {
         startUpPanel.increaseProgress();
 
         sleep(100);
-        library = CalibrationLibraryStore.load();
-        startUpPanel.setProgressLabel("loading calibrationLibrary.json");
+        imagingFrameList = ImagingFrameStore.load();
+        startUpPanel.setProgressLabel("loading imagingFrames.json");
         startUpPanel.increaseProgress();
 
         sleep(100);
@@ -112,8 +113,8 @@ public class AppActions {
             equipment = new Equipment();
         }
 
-        if (library == null) {
-            library = new ArrayList<>();
+        if (imagingFrameList == null) {
+            imagingFrameList = new ImagingFrameList();
         }
     }
 

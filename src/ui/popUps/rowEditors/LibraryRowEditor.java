@@ -4,9 +4,10 @@ import models.imagingFrames.CalibrationFrame;
 import models.imagingFrames.CalibrationType;
 import models.equipment.Equipment;
 import models.equipment.EquipmentType;
+import models.imagingFrames.ImagingFrameList;
 import models.settings.AppConfig;
 import models.tableModels.LibraryTableModel;
-import services.fileHandler.CalibrationLibraryStore;
+import services.fileHandler.ImagingFrameStore;
 import ui.customComponents.CustomComboBox;
 import ui.customComponents.CustomFileChooser;
 
@@ -19,7 +20,7 @@ public class LibraryRowEditor extends JDialog {
     private final boolean edit;
     private final CalibrationFrame libraryRow;
     private final Equipment equipment;
-    private final List<CalibrationFrame> library;
+    private final ImagingFrameList imagingFrameList;
     private final LibraryTableModel tableModel;
     private final AppConfig appConfig;
     private final CalibrationType calType;
@@ -40,11 +41,11 @@ public class LibraryRowEditor extends JDialog {
     private JLabel subLengthLabel;
     private JPanel fileChooser;
 
-    public LibraryRowEditor(CalibrationFrame libraryRow, Equipment equipment, List<CalibrationFrame> library,
+    public LibraryRowEditor(CalibrationFrame libraryRow, Equipment equipment, ImagingFrameList imagingFrameList,
                             LibraryTableModel tableModel, AppConfig appConfig, CalibrationType calibrationType) {
         this.libraryRow = libraryRow;
         this.equipment = equipment;
-        this.library = library;
+        this.imagingFrameList = imagingFrameList;
         this.tableModel = tableModel;
         this.appConfig = appConfig;
         this.calType = calibrationType;
@@ -136,11 +137,11 @@ public class LibraryRowEditor extends JDialog {
 
             if (!checkForDuplicates(calibrationFrame)) {
                 if (edit) {
-                    library.remove(libraryRow);
+                    imagingFrameList.removeCalibrationFrame(libraryRow, Objects.requireNonNull(CalibrationType.getEnum(calibrationType.getName())));
                 }
-                library.add(calibrationFrame);
+                imagingFrameList.addCalibrationFrame(libraryRow, Objects.requireNonNull(CalibrationType.getEnum(calibrationType.getName())));
 
-                CalibrationLibraryStore.save(library, null);
+                ImagingFrameStore.save(imagingFrameList, null);
 
                 // if tableModel is null, the editor isn't in relation with any table
                 if (tableModel != null) {
@@ -180,9 +181,9 @@ public class LibraryRowEditor extends JDialog {
     }
 
     private boolean checkForDuplicates(CalibrationFrame lib) {
-        for (CalibrationFrame l : library) {
-            if (l.getCalibrationType() == lib.getCalibrationType()) {
-                if (l.getCamera(equipment).getViewName().equals(lib.getCamera(equipment).getViewName())) {
+        for (CalibrationFrame f : imagingFrameList.getCalibrationFrames()) {
+            if (f.getCalibrationType() == lib.getCalibrationType()) {
+                if (f.getCamera(equipment).getViewName().equals(lib.getCamera(equipment).getViewName())) {
                     return true;
                 }
             }

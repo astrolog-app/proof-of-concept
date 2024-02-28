@@ -2,6 +2,7 @@ package ui.corecomponents;
 
 import models.imagingFrames.CalibrationFrame;
 import models.equipment.Equipment;
+import models.imagingFrames.ImagingFrameList;
 import models.settings.AppConfig;
 import ui.customComponents.LibraryTable;
 import ui.popUps.rowEditors.LibraryRowEditor;
@@ -11,16 +12,16 @@ import java.util.List;
 
 public class LibraryPanel {
     private final Equipment equipment;
-    private final List<CalibrationFrame> library;
+    private final ImagingFrameList imagingFrameList;
     private final AppConfig appConfig;
     private JPanel panel;
     private LibraryTable libraryTable1;
     private JButton addButton;
     private JButton editButton;
 
-    public LibraryPanel(Equipment equipment, List<CalibrationFrame> library, AppConfig appConfig) {
+    public LibraryPanel(Equipment equipment, ImagingFrameList imagingFrameList, AppConfig appConfig) {
         this.equipment = equipment;
-        this.library = library;
+        this.imagingFrameList = imagingFrameList;
         this.appConfig = appConfig;
 
         updateButtonState();
@@ -28,10 +29,10 @@ public class LibraryPanel {
     }
 
     private void handleActions() {
-        addButton.addActionListener(e -> new LibraryRowEditor(null, equipment, library, libraryTable1.getTableModel(), appConfig, null));
+        addButton.addActionListener(e -> new LibraryRowEditor(null, equipment, imagingFrameList, libraryTable1.getTableModel(), appConfig, null));
         editButton.addActionListener(e -> new LibraryRowEditor(libraryTable1.getTableModel().getLibraryRow(libraryTable1.getSelectedRow()),
                 equipment,
-                library,
+                imagingFrameList,
                 libraryTable1.getTableModel(),
                 appConfig,
                 null));
@@ -43,7 +44,7 @@ public class LibraryPanel {
     }
 
     private void createUIComponents() {
-        libraryTable1 = new LibraryTable(equipment, library, this, appConfig);
+        libraryTable1 = new LibraryTable(equipment, imagingFrameList, this, appConfig);
     }
 
     public JPanel getPanel() {

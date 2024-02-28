@@ -1,8 +1,8 @@
 [ {
   "id" : "044b7c65-f1c3-4634-95f3-b7b4af0a803b",
   "folderDir" : null,
-  "lightFrame" : "b7d68b1d-03b5-44bc-9c6c-712eb7f58400",
-  "flatFrame" : null,
+  "lightFrameId" : "b7d68b1d-03b5-44bc-9c6c-712eb7f58400",
+  "flatFrameId" : null,
   "darkFrameId" : null,
   "biasFrameId" : null
 } ]

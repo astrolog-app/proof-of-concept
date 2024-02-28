@@ -2,6 +2,7 @@ package ui.customComponents;
 
 import models.imagingFrames.CalibrationFrame;
 import models.equipment.Equipment;
+import models.imagingFrames.ImagingFrameList;
 import models.settings.AppConfig;
 import models.tableModels.LibraryTableModel;
 import ui.corecomponents.LibraryPanel;
@@ -18,17 +19,17 @@ public class LibraryTable extends JTable {
     private final AppConfig appConfig;
     private LibraryTableModel libraryTableModel;
 
-    public LibraryTable(Equipment equipment, List<CalibrationFrame> calibrationLibraries, LibraryPanel libraryPanel, AppConfig appConfig) {
+    public LibraryTable(Equipment equipment, ImagingFrameList imagingFrameList, LibraryPanel libraryPanel, AppConfig appConfig) {
         this.equipment = equipment;
         this.libraryPanel = libraryPanel;
         this.appConfig = appConfig;
 
-        createTable(calibrationLibraries);
+        createTable(imagingFrameList);
         handleActions();
     }
 
-    private void createTable(List<CalibrationFrame> calibrationLibraries) {
-        setModel(libraryTableModel= new LibraryTableModel(equipment, calibrationLibraries));
+    private void createTable(ImagingFrameList imagingFrameList) {
+        setModel(libraryTableModel= new LibraryTableModel(equipment, imagingFrameList));
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         showHorizontalLines = true;
         setRowHeight(30);

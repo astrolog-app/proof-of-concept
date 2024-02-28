@@ -2,6 +2,7 @@ package models.tableModels;
 
 import models.imagingFrames.CalibrationFrame;
 import models.equipment.Equipment;
+import models.imagingFrames.ImagingFrameList;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
@@ -11,9 +12,9 @@ public class LibraryTableModel extends AbstractTableModel {
     private final Equipment equipment;
     private final List<CalibrationFrame> data;
 
-    public LibraryTableModel(Equipment equipment, List<CalibrationFrame> data) {
+    public LibraryTableModel(Equipment equipment, ImagingFrameList imagingFrameList) {
         this.equipment = equipment;
-        this.data = data;
+        this.data = imagingFrameList.getCalibrationFrames();
     }
 
     @Override

@@ -1,8 +1,6 @@
 package models.imagingFrames;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class ImagingFrameList {
     private Map<UUID, LightFrame> lightFrames = new HashMap<>();
@@ -60,5 +58,26 @@ public class ImagingFrameList {
     }
     public void removeFlatFrame(FlatFrame flatFrame) {
         flatFrames.remove(flatFrame.getId(), flatFrame);
+    }
+
+    public List<CalibrationFrame> getCalibrationFrames() {
+        List<CalibrationFrame> l = new ArrayList<>();
+
+        l.addAll(darkFrames.values());
+        l.addAll(biasFrames.values());
+
+        return l;
+    }
+    public void addCalibrationFrame(CalibrationFrame calibrationFrame, CalibrationType calibrationType) {
+        switch (calibrationType) {
+            case DARK -> addDarkFrame((DarkFrame) calibrationFrame);
+            case BIAS -> addBiasFrame((BiasFrame) calibrationFrame);
+        }
+    }
+    public void removeCalibrationFrame(CalibrationFrame calibrationFrame, CalibrationType calibrationType) {
+        switch (calibrationType) {
+            case DARK -> removeDarkFrame((DarkFrame) calibrationFrame);
+            case BIAS -> removeBiasFrame((BiasFrame) calibrationFrame);
+        }
     }
 }

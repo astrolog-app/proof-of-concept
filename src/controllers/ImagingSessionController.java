@@ -2,6 +2,7 @@ package controllers;
 
 import models.imagingFrames.CalibrationFrame;
 import models.equipment.Equipment;
+import models.imagingFrames.ImagingFrameList;
 import models.settings.AppConfig;
 import models.tableModels.ImagingSessionTableModel;
 import models.ImagingSession;
@@ -20,8 +21,8 @@ public class ImagingSessionController {
         this.imagingSessionTable = imagingSessionTable;
     }
 
-    public void addImagingSessionManually(Equipment equipment, List<ImagingSession> imagingSessions, AppConfig appConfig, List<CalibrationFrame> calibrationFrame) {
-        new ImagingSessionRowEditor(equipment, null, isTableModel, imagingSessions, appConfig, calibrationFrame);
+    public void addImagingSessionManually(Equipment equipment, List<ImagingSession> imagingSessions, AppConfig appConfig, ImagingFrameList imagingFrameList) {
+        new ImagingSessionRowEditor(equipment, null, isTableModel, imagingSessions, appConfig, imagingFrameList);
         // TODO: update sorting
     }
 
@@ -46,7 +47,7 @@ public class ImagingSessionController {
         }
     }
 
-    public void editImagingSession(Equipment equipment, ImagingSession session, List<ImagingSession> imagingSessions, AppConfig appConfig, List<CalibrationFrame> calibrationFrame) {
-        ImagingSessionRowEditor n = new ImagingSessionRowEditor(equipment, session, isTableModel, imagingSessions, appConfig, calibrationFrame);
+    public void editImagingSession(Equipment equipment, ImagingSession session, List<ImagingSession> imagingSessions, AppConfig appConfig, ImagingFrameList imagingFrameList) {
+        ImagingSessionRowEditor n = new ImagingSessionRowEditor(equipment, session, isTableModel, imagingSessions, appConfig, imagingFrameList);
     }
 }
