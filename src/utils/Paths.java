@@ -9,7 +9,7 @@ public class Paths {
     public static final String DATA_PATH = PROJECT_PATH + "data" + File.separator;
     public static final String BACKUP_PATH = DATA_PATH + "backup" + File.separator;
     public static final String IMAGE_PATH = DATA_PATH + "images" + File.separator;
-    public static final String LOG_PATH  = DATA_PATH + "log" + File.separator;
+    public static final String LOG_PATH  = DATA_PATH + "log" + File.separator + "app" + File.separator;
 
     // file paths:
     public static final String CALIBRATION_LIBRARY_PATH = DATA_PATH + "calibrationLibrary.json";
