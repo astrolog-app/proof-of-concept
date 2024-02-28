@@ -39,7 +39,7 @@ public class ImagingSessionTable extends JTable {
                                ImagingSessionConfig isConfig, AppConfig appConfig, ImagingFrameList imagingFrameList) {
         this.logPanel = logPanel;
         this.equipment = equipment;
-        this.tableModel = new ImagingSessionTableModel(imagingSessions, equipment, isConfig);
+        this.tableModel = new ImagingSessionTableModel(imagingSessions, equipment, isConfig, imagingFrameList);
         this.imagingSessions = imagingSessions;
         this.isConfig = isConfig;
         this.appConfig = appConfig;

@@ -68,12 +68,6 @@ public class ImagingFrameList {
 
         return l;
     }
-    public void addCalibrationFrame(CalibrationFrame calibrationFrame, CalibrationType calibrationType) {
-        switch (calibrationType) {
-            case DARK -> addDarkFrame((DarkFrame) calibrationFrame);
-            case BIAS -> addBiasFrame((BiasFrame) calibrationFrame);
-        }
-    }
     public void removeCalibrationFrame(CalibrationFrame calibrationFrame, CalibrationType calibrationType) {
         switch (calibrationType) {
             case DARK -> removeDarkFrame((DarkFrame) calibrationFrame);

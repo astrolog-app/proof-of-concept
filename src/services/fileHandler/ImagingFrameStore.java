@@ -1,6 +1,6 @@
 package services.fileHandler;
 
-import models.imagingFrames.ImagingFrameList;
+import models.imagingFrames.*;
 import org.codehaus.jackson.map.ObjectMapper;
 import services.AppLogger;
 import utils.Paths;
@@ -17,11 +17,28 @@ public class ImagingFrameStore {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            ImagingFrameList imagingFrameList = objectMapper.readValue(new File(Paths.IMAGING_FRAMES_PATH), ImagingFrameList.class);
+            ImagingFrameListWrapper imagingFrameList = objectMapper.readValue(new File(Paths.IMAGING_FRAMES_PATH), ImagingFrameListWrapper.class);
 
             logger.info("loaded ImagingFrameList successfully");
 
-            return imagingFrameList;
+            ImagingFrameList i = new ImagingFrameList();
+
+            for (LightFrame l : imagingFrameList.getLightFrames()) {
+                i.addLightFrame(l);
+            }
+            for (DarkFrame d : imagingFrameList.getDarkFrames()) {
+                d.setCalibrationType(CalibrationType.DARK);
+                i.addDarkFrame(d);
+            }
+            for (BiasFrame b : imagingFrameList.getBiasFrames()) {
+                b.setCalibrationType(CalibrationType.BIAS);
+                i.addBiasFrame(b);
+            }
+            for (FlatFrame f : imagingFrameList.getFlatFrames()) {
+                i.addFlatFrame(f);
+            }
+
+            return i;
         } catch (IOException e) {
             logger.severe("couldn't load ImagingFrameList:" + "\t" + e.getMessage());
 

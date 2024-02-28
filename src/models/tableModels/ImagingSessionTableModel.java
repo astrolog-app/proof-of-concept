@@ -3,6 +3,7 @@ package models.tableModels;
 import models.equipment.Equipment;
 import models.equipment.EquipmentItem;
 import models.ImagingSession;
+import models.imagingFrames.ImagingFrameList;
 import models.imagingFrames.LightFrame;
 import models.settings.ImagingSessionConfig;
 import models.settings.LoggerColumns;
@@ -16,11 +17,14 @@ public class ImagingSessionTableModel extends AbstractTableModel {
     private final List<ImagingSession> data;
     private final List<LoggerColumns> selectedColumns;
     private final Equipment equipment;
+    private final ImagingFrameList imagingFrameList;
 
-    public ImagingSessionTableModel(List<ImagingSession> imagingSessions, Equipment equipment, ImagingSessionConfig isConfig) {
+    public ImagingSessionTableModel(List<ImagingSession> imagingSessions, Equipment equipment,
+                                    ImagingSessionConfig isConfig, ImagingFrameList imagingFrameList) {
         data = imagingSessions;
         selectedColumns = isConfig.getSelectedColumns(); // TODO: change
         this.equipment = equipment;
+        this.imagingFrameList = imagingFrameList;
     }
 
     public void removeSession(ImagingSession session) {
@@ -52,7 +56,7 @@ public class ImagingSessionTableModel extends AbstractTableModel {
         if (data != null) {
             ImagingSession is = data.get(rowIndex);
             LoggerColumns lc = selectedColumns.get(columnIndex);
-            LightFrame lf = is.getLightFrame();
+            LightFrame lf = is.getLightFrame(imagingFrameList, is.getLightFrameId());
 
             return switch (lc) {
                 case DATE -> formatString(lf.getDate());

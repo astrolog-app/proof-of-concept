@@ -1,10 +1,8 @@
 package ui.popUps.rowEditors;
 
-import models.imagingFrames.CalibrationFrame;
-import models.imagingFrames.CalibrationType;
+import models.imagingFrames.*;
 import models.equipment.Equipment;
 import models.equipment.EquipmentType;
-import models.imagingFrames.ImagingFrameList;
 import models.settings.AppConfig;
 import models.tableModels.LibraryTableModel;
 import services.fileHandler.ImagingFrameStore;
@@ -26,7 +24,7 @@ public class LibraryRowEditor extends JDialog {
     private final CalibrationType calType;
     private String prevPath = "";
     private String prevCamera = "";
-    private String prevCalibrationType = "Flat";
+    private CalibrationType prevCalibrationType;
     private int prevGain = 0;
     private double prevSubLength = 0;
     private int prevTotalSubs = 0;
@@ -83,7 +81,7 @@ public class LibraryRowEditor extends JDialog {
         boolean notNull = this.camera.getSelectedItem() != null;
         boolean path = !((CustomFileChooser) fileChooser).getPath().equals(prevPath);
         boolean camera = !Objects.equals(this.camera.getSelectedItem(), prevCamera);
-        boolean calibrationType = !Objects.equals(this.calibrationType.getSelectedItem(), prevCalibrationType);
+        boolean calibrationType = !Objects.equals(CalibrationType.getEnum(Objects.requireNonNull(this.calibrationType.getSelectedItem()).toString()), prevCalibrationType);
         boolean gain = !this.gain.getValue().equals(prevGain);
         boolean subLength = !this.subLength.getValue().equals(prevSubLength);
         boolean totalSubs = !this.totalSubs.getValue().equals(prevTotalSubs);
@@ -104,7 +102,7 @@ public class LibraryRowEditor extends JDialog {
             prevCamera = libraryRow.getCamera(equipment).getViewName();
 
             calibrationType.setSelectedItem(libraryRow.getCalibrationType().getName());
-            prevCalibrationType = libraryRow.getCalibrationType().getName();
+            prevCalibrationType = libraryRow.getCalibrationType();
 
             gain.setValue(libraryRow.getGain());
             prevGain = libraryRow.getGain();
@@ -132,14 +130,15 @@ public class LibraryRowEditor extends JDialog {
             calibrationFrame.setCameraId(camera.getSelectedEquipmentItem().getId());
             calibrationFrame.setCalibrationType(CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString()));
             calibrationFrame.setGain((Integer) gain.getValue());
-            calibrationFrame.setSubLength(Double.valueOf((Integer) subLength.getValue()));
+            calibrationFrame.setSubLength((Double) subLength.getValue());
             calibrationFrame.setTotalSubs((Integer) totalSubs.getValue());
 
             if (!checkForDuplicates(calibrationFrame)) {
                 if (edit) {
-                    imagingFrameList.removeCalibrationFrame(libraryRow, Objects.requireNonNull(CalibrationType.getEnum(calibrationType.getName())));
+                    imagingFrameList.removeCalibrationFrame(libraryRow, prevCalibrationType);
                 }
-                imagingFrameList.addCalibrationFrame(libraryRow, Objects.requireNonNull(CalibrationType.getEnum(calibrationType.getName())));
+
+                // TODO: add row to ImagingFrameList
 
                 ImagingFrameStore.save(imagingFrameList, null);
 

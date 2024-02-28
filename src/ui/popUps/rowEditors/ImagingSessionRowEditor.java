@@ -107,17 +107,17 @@ public class ImagingSessionRowEditor extends JDialog {
     private void fillOutPanel(ImagingSession session) {
         ((CustomFileChooser) fileChooser).setPath(session.getFolderDir());
 
-        target.setText(session.getLightFrame().getTarget());
-        subLengthLight.setValue(checkSessionValue(session.getLightFrame().getSubLength()));
-        totalSubsLight.setValue(checkIntegerSessionValue(session.getLightFrame().getTotalSubs()));
-        integratedSubs.setValue(checkIntegerSessionValue(session.getLightFrame().getIntegratedSubs()));
+        target.setText(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getTarget());
+        subLengthLight.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getSubLength()));
+        totalSubsLight.setValue(checkIntegerSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getTotalSubs()));
+        integratedSubs.setValue(checkIntegerSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getIntegratedSubs()));
 //        filter.setSelectedItem();
-        gain.setValue(checkIntegerSessionValue(session.getLightFrame().getGain()));
-        offset.setValue(checkSessionValue(session.getLightFrame().getOffset()));
-        chipTemp.setValue(checkSessionValue(session.getLightFrame().getCameraTemp()));
-        temp.setValue(checkSessionValue(session.getLightFrame().getOutsideTemp()));
-        avgSeeing.setValue(checkSessionValue(session.getLightFrame().getAverageSeeing()));
-        avgCloudCover.setValue(checkSessionValue(session.getLightFrame().getAverageCloudCover()));
+        gain.setValue(checkIntegerSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getGain()));
+        offset.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getOffset()));
+        chipTemp.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getCameraTemp()));
+        temp.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getOutsideTemp()));
+        avgSeeing.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getAverageSeeing()));
+        avgCloudCover.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getAverageCloudCover()));
 //        telescope.setSelectedItem();
 //        camera.setSelectedItem();
 //        flattener.setSelectedItem();

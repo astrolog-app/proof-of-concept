@@ -1,9 +1,6 @@
 package models;
 
-import models.imagingFrames.BiasFrame;
-import models.imagingFrames.DarkFrame;
-import models.imagingFrames.FlatFrame;
-import models.imagingFrames.LightFrame;
+import models.imagingFrames.*;
 
 import java.util.UUID;
 
@@ -33,8 +30,8 @@ public class ImagingSession {
         this.folderDir = folderDir;
     }
 
-    public LightFrame getLightFrame() {
-        return null;
+    public LightFrame getLightFrame(ImagingFrameList imagingFrameList, UUID lightFrameId) {
+        return imagingFrameList.getLightFrames().get(lightFrameId);
     }
     public UUID getLightFrameId() {
         return lightFrameId;

@@ -33,7 +33,7 @@
       "id" : "3a67f76e-2cda-4363-be16-e73774283eaf",
       "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
       "totalSubs" : 2,
-      "subLength" : 2.0,
+      "subLength" : 0,
       "gain" : 2,
       "path" : "/ursaminor0131/Téléchargements"
     }
@@ -44,8 +44,7 @@
       "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
       "totalSubs" : 2,
       "subLength" : 2.0,
-      "gain" : 2,
-      "path" : "/ursaminor0131/Téléchargements"
+      "gain" : 2
     }
   ]
 }
