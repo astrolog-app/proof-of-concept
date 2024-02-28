@@ -1,15 +1,17 @@
 package models;
 
-import models.imagingFrames.*;
+import models.imagingFrames.BiasFrame;
+import models.imagingFrames.DarkFrame;
+import models.imagingFrames.FlatFrame;
+import models.imagingFrames.LightFrame;
 
-import java.util.List;
 import java.util.UUID;
 
 public class ImagingSession {
     private UUID id;
     private String folderDir;
-    private LightFrame lightFrame;
-    private FlatFrame flatFrame;
+    private UUID lightFrameId;
+    private UUID flatFrameId;
     private UUID darkFrameId;
     private UUID biasFrameId;
 
@@ -32,28 +34,28 @@ public class ImagingSession {
     }
 
     public LightFrame getLightFrame() {
-        return lightFrame;
-    }
-    public void setLightFrame(LightFrame lightFrame) {
-        this.lightFrame = lightFrame;
-    }
-
-    public DarkFrame getDarkFrame(List<CalibrationFrame> calibrationFrames) {
-        for (CalibrationFrame c : calibrationFrames) {
-            if (c.getId() == darkFrameId) {
-                return (DarkFrame) c;
-            }
-        }
-
         return null;
     }
-    public FlatFrame getFlatFrame() {
-        return flatFrame;
+    public UUID getLightFrameId() {
+        return lightFrameId;
     }
-    public void setFlatFrame(FlatFrame flatFrame) {
-        this.flatFrame = flatFrame;
+    public void setLightFrameId(UUID lightFrameId) {
+        this.lightFrameId = lightFrameId;
     }
 
+    public FlatFrame getFlatFrame() {
+        return null;
+    }
+    public UUID getFlatFrameId() {
+        return flatFrameId;
+    }
+    public void setFlatFrameId(UUID flatFrameId) {
+        this.flatFrameId = flatFrameId;
+    }
+
+    public DarkFrame getDarkFrame() {
+        return null;
+    }
     public UUID getDarkFrameId() {
         return darkFrameId;
     }
@@ -61,13 +63,7 @@ public class ImagingSession {
         this.darkFrameId = darkFrameId;
     }
 
-    public BiasFrame getBiasFrame(List<CalibrationFrame> calibrationFrames) {
-        for (CalibrationFrame c : calibrationFrames) {
-            if (c.getId() == biasFrameId) {
-                return (BiasFrame) c;
-            }
-        }
-
+    public BiasFrame getBiasFrame() {
         return null;
     }
     public UUID getBiasFrameId() {
