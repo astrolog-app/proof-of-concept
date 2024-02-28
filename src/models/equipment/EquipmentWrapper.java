@@ -2,8 +2,10 @@ package models.equipment;
 
 import java.util.List;
 
+/**
+ * Used for jackson only.
+ */
 public class EquipmentWrapper {
-    // TODO: cleanUp (delete)
     private List<Telescope> telescopes;
     private List<Camera> cameras;
     private List<Mount> mounts;
