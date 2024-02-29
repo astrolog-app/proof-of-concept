@@ -5,6 +5,8 @@ import models.imagingFrames.CalibrationType;
 import models.equipment.*;
 import models.imagingFrames.ImagingFrameList;
 import models.settings.AppConfig;
+import services.licence.LicenceChecker;
+import ui.MainUI;
 import ui.popUps.NewBrand;
 import ui.popUps.rowEditors.EquipmentRowEditor;
 import ui.popUps.rowEditors.LibraryRowEditor;
@@ -179,9 +181,9 @@ public class CustomComboBox extends JComboBox<String> {
                 List<String> oldList = new ArrayList<>(content);
 
                 switch (boxType) {
-                    case EQUIPMENT -> new EquipmentRowEditor(equipmentType, equipment, null);
-                    case CALIBRATION -> new LibraryRowEditor(null, equipment, imagingFrameList, null, appConfig, calibrationType);
-                    case BRAND -> new NewBrand(this);
+                    case EQUIPMENT -> SwingUtilities.invokeLater(() -> new EquipmentRowEditor(equipmentType, equipment, null));
+                    case CALIBRATION -> SwingUtilities.invokeLater(() -> new LibraryRowEditor(null, equipment, imagingFrameList, null, appConfig, calibrationType));
+                    case BRAND -> SwingUtilities.invokeLater(() -> new NewBrand(this));
                 }
                 updateData();
                 setSelectedIndex(selectedIndex);

@@ -7,6 +7,7 @@ import models.settings.AppConfig;
 import models.tableModels.ImagingSessionTableModel;
 import models.ImagingSession;
 import ui.customComponents.ImagingSessionTable;
+import ui.popUps.NewBrand;
 import ui.popUps.rowEditors.ImagingSessionRowEditor;
 
 import javax.swing.*;
@@ -22,7 +23,8 @@ public class ImagingSessionController {
     }
 
     public void addImagingSessionManually(Equipment equipment, List<ImagingSession> imagingSessions, AppConfig appConfig, ImagingFrameList imagingFrameList) {
-        new ImagingSessionRowEditor(equipment, null, isTableModel, imagingSessions, appConfig, imagingFrameList);
+
+        SwingUtilities.invokeLater(() -> new ImagingSessionRowEditor(equipment, null, isTableModel, imagingSessions, appConfig, imagingFrameList));
         // TODO: update sorting
     }
 
@@ -48,6 +50,7 @@ public class ImagingSessionController {
     }
 
     public void editImagingSession(Equipment equipment, ImagingSession session, List<ImagingSession> imagingSessions, AppConfig appConfig, ImagingFrameList imagingFrameList) {
-        ImagingSessionRowEditor n = new ImagingSessionRowEditor(equipment, session, isTableModel, imagingSessions, appConfig, imagingFrameList);
+        SwingUtilities.invokeLater(() -> new ImagingSessionRowEditor(equipment, session, isTableModel, imagingSessions, appConfig, imagingFrameList));
+
     }
 }

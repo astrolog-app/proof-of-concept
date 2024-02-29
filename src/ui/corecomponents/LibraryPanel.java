@@ -29,13 +29,13 @@ public class LibraryPanel {
     }
 
     private void handleActions() {
-        addButton.addActionListener(e -> new LibraryRowEditor(null, equipment, imagingFrameList, libraryTable1.getTableModel(), appConfig, null));
-        editButton.addActionListener(e -> new LibraryRowEditor(libraryTable1.getTableModel().getLibraryRow(libraryTable1.getSelectedRow()),
+        addButton.addActionListener(e -> SwingUtilities.invokeLater(() -> new LibraryRowEditor(null, equipment, imagingFrameList, libraryTable1.getTableModel(), appConfig, null)));
+        editButton.addActionListener(e -> SwingUtilities.invokeLater(() -> new LibraryRowEditor(libraryTable1.getTableModel().getLibraryRow(libraryTable1.getSelectedRow()),
                 equipment,
                 imagingFrameList,
                 libraryTable1.getTableModel(),
                 appConfig,
-                null));
+                null)));
     }
 
     public void updateButtonState() {

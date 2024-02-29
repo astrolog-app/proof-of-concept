@@ -33,13 +33,13 @@ public class EquipmentTableWrapper {
     }
 
     private void handleActions() {
-        addButton.addActionListener(e -> new EquipmentRowEditor(equipmentType, equipment, null));
+        addButton.addActionListener(e -> SwingUtilities.invokeLater(() -> new EquipmentRowEditor(equipmentType, equipment, null)));
 
-        editButton.addActionListener(e -> new EquipmentRowEditor(
+        editButton.addActionListener(e -> SwingUtilities.invokeLater(() -> new EquipmentRowEditor(
                 equipmentType,
                 equipment,
                 equipmentTable1.getTableModel().getEquipmentItem(equipmentTable1.getSelectedRow())
-        ));
+        )));
 
         equipmentTable1.getSelectionModel().addListSelectionListener(e -> updateEditButtonState());
     }
