@@ -18,4 +18,5 @@ public class Paths {
     public static final String IMAGING_PROJECTS_PATH = DATA_PATH + "imagingProjects.json";
     public static final String IMAGING_SESSIONS_PATH = DATA_PATH + "imagingSessions.json";
     public static final String LICENCE_PATH = DATA_PATH + "licence.txt";
+    public static final String RELEASE_NOTE_PATH = DATA_PATH + "releaseNotes.json";
 }

@@ -58,6 +58,7 @@ public class AppActions {
                 MainUI mainUI = new MainUI(licence, appConfig, imagingSessions, isConfig, imagingFrameList, equipment);
                 LicenceChecker licenceChecker = new LicenceChecker(licence, mainUI);
 
+                UpdateChecker.check(appConfig);
                 licenceChecker.check();
             });
         } else {
