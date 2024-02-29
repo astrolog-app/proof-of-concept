@@ -5,10 +5,9 @@ import models.settings.AppTheme;
 import models.settings.NavigationBarPlacement;
 import services.AppActions;
 import services.fileHandler.ConfigurationStore;
+import utils.Application;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SettingsPanel {
     private final AppConfig appConfig;
@@ -34,6 +33,7 @@ public class SettingsPanel {
     private JComboBox<String> navigationBarPlacementDropdown;
     private JLabel placeHolder1;
     private JLabel restartMessage;
+    private JLabel version;
 
     public SettingsPanel(AppConfig appConfig) {
         this.appConfig = appConfig;
@@ -52,6 +52,8 @@ public class SettingsPanel {
         themeHandler();
         navigationBarPlacementHandler();
         fullscreenHandler();
+
+        version.setText("© Rouven Spaar V." + Application.VERSION);
 
         restartAppButton.addActionListener(e -> AppActions.restart());
 

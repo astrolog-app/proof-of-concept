@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ReleaseNotes {
     private boolean updated;
+    private boolean show;
     private String version;
     private String releaseDate;
     private List<String> features;
@@ -14,6 +15,13 @@ public class ReleaseNotes {
     }
     public void setUpdated(boolean updated) {
         this.updated = updated;
+    }
+
+    public boolean getShow() {
+        return show;
+    }
+    public void setShow(boolean show) {
+        this.show = show;
     }
 
     public String getVersion() {

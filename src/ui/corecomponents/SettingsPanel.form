@@ -151,7 +151,7 @@
               <text value="Restart"/>
             </properties>
           </component>
-          <component id="61cd7" class="javax.swing.JLabel">
+          <component id="61cd7" class="javax.swing.JLabel" binding="version">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>

@@ -2,16 +2,13 @@ package ui.popUps;
 
 import models.ReleaseNotes;
 import models.settings.AppConfig;
-import services.AppLogger;
 import services.fileHandler.ConfigurationStore;
-import utils.Paths;
+import services.fileHandler.ReleaseNotesStore;
+import utils.Application;
 
 import javax.swing.*;
-import java.io.IOException;
-import java.util.logging.Logger;
 
 public class NewUpdate extends JDialog {
-    private static final Logger logger = AppLogger.getLogger();
     private final AppConfig appConfig;
     private final ReleaseNotes releaseNotes;
     private JPanel mainPanel;
@@ -21,11 +18,11 @@ public class NewUpdate extends JDialog {
     private JCheckBox showUpdatesCheckBox;
     private JEditorPane releaseNotesPane;
 
-    public NewUpdate(AppConfig appConfig, ReleaseNotes releaseNotes, boolean afterUpdate) {
+    public NewUpdate(AppConfig appConfig, ReleaseNotes releaseNotes) {
         this.appConfig = appConfig;
         this.releaseNotes = releaseNotes;
 
-        versionLabel.setText("AstroLog V " + releaseNotes.getVersion());
+        versionLabel.setText("AstroLog V." + releaseNotes.getVersion());
 
         createReleaseNotesPane();
 
@@ -33,7 +30,7 @@ public class NewUpdate extends JDialog {
 
         setModal(true);
         setContentPane(mainPanel);
-        if (afterUpdate) {
+        if (releaseNotes.getUpdated()) {
             setTitle("Release Notes");
         } else {
             setTitle("New Update Available");
@@ -55,19 +52,23 @@ public class NewUpdate extends JDialog {
         StringBuilder str = new StringBuilder();
         str.append("<html><body>");
 
-        str.append("<h1>Features:</h1>");
-        str.append("<ul>");
-        for (String s : releaseNotes.getFeatures()) {
-            str.append("<li style=\"font-size: 1.2em;\">").append(s).append("</li>");
+        if (!releaseNotes.getFeatures().isEmpty()) {
+            str.append("<h1>Features:</h1>");
+            str.append("<ul>");
+            for (String s : releaseNotes.getFeatures()) {
+                str.append("<li style=\"font-size: 1.2em;\">").append(s).append("</li>");
+            }
+            str.append("</ul>");
         }
-        str.append("</ul>");
 
-        str.append("<h1>Bug Fixes:</h1>");
-        str.append("<ul>");
-        for (String s : releaseNotes.getBugFixes()) {
-            str.append("<li style=\"font-size: 1.2em;\">").append(s).append("</li>");
+        if (!releaseNotes.getBugFixes().isEmpty()) {
+            str.append("<h1>Bug Fixes:</h1>");
+            str.append("<ul>");
+            for (String s : releaseNotes.getBugFixes()) {
+                str.append("<li style=\"font-size: 1.2em;\">").append(s).append("</li>");
+            }
+            str.append("</ul>");
         }
-        str.append("</ul>");
 
         str.append("<br></br>");
         str.append("<p style=\"font-size: 1.2em;\">Release Date: ").append(releaseNotes.getReleaseDate()).append("</p>");
@@ -78,41 +79,15 @@ public class NewUpdate extends JDialog {
     }
 
     private void handleActions() {
-        closeButton.addActionListener(e -> dispose());
-        updateNowButton.addActionListener(e -> updateApp());
+        closeButton.addActionListener(e -> {
+            if (releaseNotes.getUpdated()) {
+                ReleaseNotesStore.delete();
+            }
+            dispose();
+        });
+        updateNowButton.addActionListener(e -> Application.update());
         showUpdatesCheckBox.addActionListener(e -> {
-            appConfig.setShowUpdates(!showUpdatesCheckBox.isSelected());
             ConfigurationStore.save(appConfig, null, null);
         });
-    }
-
-    private void updateApp() {
-        String command; // path to the executable file
-
-        // Determine OS and set command accordingly
-        String osName = System.getProperty("os.name").toLowerCase();
-        if (osName.contains("windows")) {
-            command = Paths.PROJECT_PATH + "update.exe"; // Windows path
-        } else {
-            command = Paths.PROJECT_PATH + "update"; // Linux or macOS path
-        }
-
-        try {
-            ProcessBuilder processBuilder = new ProcessBuilder(command);
-            processBuilder.inheritIO(); // Redirects the process's standard output and error streams to the Java process.
-            Process process = processBuilder.start();
-
-            // Wait for the process to finish
-            int exitCode = process.waitFor();
-            if (exitCode == 0) {
-                logger.info("Executable executed successfully");
-            } else {
-                logger.severe("Executable execution failed with error code: " + exitCode);
-            }
-
-            System.exit(0);
-        } catch (IOException | InterruptedException e) {
-            logger.severe("couldn't update application:" + "\t" + e.getMessage());
-        }
     }
 }

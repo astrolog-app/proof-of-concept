@@ -1,6 +1,7 @@
 {
   "updated" : false,
-  "version" : "0.9.0",
+  "show" : true,
+  "version" : "0.9.1",
   "releaseDate" : "20.02.2024",
   "features" : [
     "one",

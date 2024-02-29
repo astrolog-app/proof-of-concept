@@ -9,15 +9,17 @@ import javax.swing.*;
 
 public class UpdateChecker {
     public static void check(AppConfig appConfig) {
-        ReleaseNotes r = ReleaseNotesStore.load();
+        if (appConfig.getCheckForUpdates()) {
+            ReleaseNotes r = ReleaseNotesStore.load();
 
-        if (r != null && appConfig.getShowUpdates()) {
-            SwingUtilities.invokeLater(() -> {
-                Timer timer = new Timer(300, e -> new NewUpdate(appConfig, r, true));
+            if (r != null && r.getShow()) {
+                SwingUtilities.invokeLater(() -> {
+                    Timer timer = new Timer(300, e -> new NewUpdate(appConfig, r));
 
-                timer.setRepeats(false);
-                timer.start();
-            });
+                    timer.setRepeats(false);
+                    timer.start();
+                });
+            }
         }
     }
 }

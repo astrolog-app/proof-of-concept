@@ -6,7 +6,6 @@ public class AppConfig {
     private NavigationBarPlacement navigationBarPlacement;
     private boolean enableRegularBackups;
     private boolean startInFullscreen;
-    private boolean showUpdates;
     private TempType tempType;
     private boolean checkForUpdates;
     private boolean showReleaseNotesAfterUpdate;
@@ -44,13 +43,6 @@ public class AppConfig {
     }
     public void setStartInFullscreen(boolean startInFullscreen) {
         this.startInFullscreen = startInFullscreen;
-    }
-
-    public boolean getShowUpdates() {
-        return showUpdates;
-    }
-    public void setShowUpdates(boolean showUpdates) {
-        this.showUpdates = showUpdates;
     }
 
     public TempType getTempType() {
