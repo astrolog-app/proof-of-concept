@@ -68,6 +68,14 @@ public class ImagingFrameList {
 
         return l;
     }
+    public void addCalibrationFrame(CalibrationFrame calibrationFrame) {
+        if (calibrationFrame instanceof DarkFrame) {
+            addDarkFrame((DarkFrame) calibrationFrame);
+        }
+        if (calibrationFrame instanceof BiasFrame) {
+            addBiasFrame((BiasFrame) calibrationFrame);
+        }
+    }
     public void removeCalibrationFrame(CalibrationFrame calibrationFrame, CalibrationType calibrationType) {
         switch (calibrationType) {
             case DARK -> removeDarkFrame((DarkFrame) calibrationFrame);

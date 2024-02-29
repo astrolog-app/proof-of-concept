@@ -2,6 +2,7 @@ package models.tableModels;
 
 import models.imagingFrames.CalibrationFrame;
 import models.equipment.Equipment;
+import models.imagingFrames.DarkFrame;
 import models.imagingFrames.ImagingFrameList;
 
 import javax.swing.table.AbstractTableModel;
@@ -24,7 +25,7 @@ public class LibraryTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -33,8 +34,9 @@ public class LibraryTableModel extends AbstractTableModel {
             case 0 -> "Camera";
             case 1 -> "Calibration Type";
             case 2 -> "Gain";
-            case 3 -> "Sub Length";
-            case 4 -> "Total Subs";
+            case 3 -> "Camera Temp";
+            case 4 -> "Sub Length";
+            case 5 -> "Total Subs";
             default -> "";
         };
     }
@@ -47,8 +49,13 @@ public class LibraryTableModel extends AbstractTableModel {
             case 0 -> lib.getCamera(equipment).getViewName();
             case 1 -> lib.getCalibrationType().getName();
             case 2 -> lib.getGain();
-            case 3 -> lib.getSubLength();
-            case 4 -> lib.getTotalSubs();
+            case 3 -> {
+                if (lib instanceof DarkFrame)
+                    yield ((DarkFrame) lib).getCameraTemp();
+                yield "-";
+            }
+            case 4 -> lib.getSubLength();
+            case 5 -> lib.getTotalSubs();
             default -> null;
         };
     }
