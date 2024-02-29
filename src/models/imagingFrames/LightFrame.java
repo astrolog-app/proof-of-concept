@@ -19,12 +19,14 @@ public class LightFrame extends ImagingFrame {
     private UUID flattenerID;
     private UUID mountID;
     private String notes;
+    private Double subLength;
 
     public LightFrame() {}
 
     public LightFrame(String date, UUID cameraId, Integer totalSubs, Double subLength, Integer gain) {
-        super(null, cameraId,  totalSubs, subLength, gain);
+        super(null, cameraId,  totalSubs, gain);
         this.date = date;
+        this.subLength = subLength;
     }
 
     public String getDate() {
@@ -123,5 +125,12 @@ public class LightFrame extends ImagingFrame {
     }
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public Double getSubLength() {
+        return subLength;
+    }
+    public void setSubLength(Double subLength) {
+        this.subLength = subLength;
     }
 }

@@ -9,18 +9,16 @@ public class ImagingFrame {
     private UUID id;
     private UUID cameraId;
     private Integer totalSubs;
-    private Double subLength;
     private Integer gain;
 
     public ImagingFrame() {
         id = UUID.randomUUID();
     }
 
-    public ImagingFrame(UUID id, UUID cameraId, Integer totalSubs, Double subLength, Integer gain) {
+    public ImagingFrame(UUID id, UUID cameraId, Integer totalSubs, Integer gain) {
         this.id = id;
         this.cameraId = cameraId;
         this.totalSubs = totalSubs;
-        this.subLength = subLength;
         this.gain = gain;
     }
 
@@ -47,13 +45,6 @@ public class ImagingFrame {
     }
     public void setTotalSubs(Integer totalSubs) {
         this.totalSubs = totalSubs;
-    }
-
-    public Double getSubLength() {
-        return subLength;
-    }
-    public void setSubLength(Double subLength) {
-        this.subLength = subLength;
     }
 
     public Integer getGain() {

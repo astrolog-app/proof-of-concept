@@ -33,8 +33,8 @@ public class LibraryTableModel extends AbstractTableModel {
             case 0 -> "Camera";
             case 1 -> "Calibration Type";
             case 2 -> "Gain";
-            case 3 -> "Camera Temp";
-            case 4 -> "Sub Length";
+            case 3 -> "Sub Length";
+            case 4 -> "Camera Temp";
             case 5 -> "Total Subs";
             default -> "";
         };
@@ -50,10 +50,14 @@ public class LibraryTableModel extends AbstractTableModel {
             case 2 -> lib.getGain();
             case 3 -> {
                 if (lib instanceof DarkFrame)
+                    yield ((DarkFrame) lib).getSubLength();
+                yield "-";
+            }
+            case 4 -> {
+                if (lib instanceof DarkFrame)
                     yield ((DarkFrame) lib).getCameraTemp();
                 yield "-";
             }
-            case 4 -> lib.getSubLength();
             case 5 -> lib.getTotalSubs();
             default -> null;
         };

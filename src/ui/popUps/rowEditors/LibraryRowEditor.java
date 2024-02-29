@@ -26,6 +26,7 @@ public class LibraryRowEditor extends JDialog {
     private CalibrationType prevCalibrationType;
     private int prevGain = 0;
     private double prevSubLength = 0;
+    private double prevCameraTemp = 0;
     private int prevTotalSubs = 0;
     private JPanel mainPanel;
     private JComboBox<String> calibrationType;
@@ -37,6 +38,8 @@ public class LibraryRowEditor extends JDialog {
     private JSpinner totalSubs;
     private JLabel subLengthLabel;
     private JPanel fileChooser;
+    private JSpinner cameraTemp;
+    private JLabel cameraTempLabel;
 
     public LibraryRowEditor(CalibrationFrame libraryRow, Equipment equipment, ImagingFrameList imagingFrameList,
                             LibraryTableModel tableModel, AppConfig appConfig, CalibrationType calibrationType) {
@@ -56,6 +59,9 @@ public class LibraryRowEditor extends JDialog {
             boolean b = !Objects.equals(this.calibrationType.getSelectedItem(), CalibrationType.BIAS.getName());
             subLength.setEnabled(b);
             subLengthLabel.setEnabled(b);
+
+            cameraTemp.setEnabled(b);
+            cameraTempLabel.setEnabled(b);
         }
 
         setSpinnerModels();
@@ -70,7 +76,7 @@ public class LibraryRowEditor extends JDialog {
         } else {
             setTitle("Add New Library Entry");
         }
-        setSize(500, 350);
+        setSize(500, 375);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -83,10 +89,11 @@ public class LibraryRowEditor extends JDialog {
         boolean calibrationType = !Objects.equals(CalibrationType.getEnum(Objects.requireNonNull(this.calibrationType.getSelectedItem()).toString()), prevCalibrationType);
         boolean gain = !this.gain.getValue().equals(prevGain);
         boolean subLength = !this.subLength.getValue().equals(prevSubLength);
+        boolean cameraTemp = !this.cameraTemp.getValue().equals(prevCameraTemp);
         boolean totalSubs = !this.totalSubs.getValue().equals(prevTotalSubs);
 
         if (edit) {
-            saveButton.setEnabled(notNull && (path || camera || calibrationType || gain || subLength || totalSubs));
+            saveButton.setEnabled(notNull && (path || camera || calibrationType || gain || subLength || cameraTemp || totalSubs));
         } else {
             saveButton.setEnabled(notNull && path && camera);
         }
@@ -106,8 +113,14 @@ public class LibraryRowEditor extends JDialog {
             gain.setValue(libraryRow.getGain());
             prevGain = libraryRow.getGain();
 
-            subLength.setValue(libraryRow.getSubLength());
-            prevSubLength = libraryRow.getSubLength();
+            if (prevCalibrationType == CalibrationType.DARK) {
+                subLength.setValue(((DarkFrame) libraryRow).getSubLength());
+                prevSubLength = ((DarkFrame) libraryRow).getSubLength();
+
+                cameraTemp.setValue(((DarkFrame) libraryRow).getCameraTemp());
+                prevCameraTemp = ((DarkFrame) libraryRow).getCameraTemp();
+            }
+
 
             totalSubs.setValue(libraryRow.getTotalSubs());
             prevTotalSubs = libraryRow.getTotalSubs();
@@ -118,6 +131,7 @@ public class LibraryRowEditor extends JDialog {
         gain.setModel(new SpinnerNumberModel(0,0,10000,1));
         subLength.setModel(new SpinnerNumberModel(0,0,10000,1));
         totalSubs.setModel(new SpinnerNumberModel(0,0,10000,1));
+        cameraTemp.setModel(new SpinnerNumberModel(0,0,10000,0.1));
     }
 
     private void handleActions() {
@@ -126,19 +140,21 @@ public class LibraryRowEditor extends JDialog {
             CalibrationType ct = CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString());
             CalibrationFrame calibrationFrame = new CalibrationFrame();
 
-            switch (ct) {
-                case DARK -> calibrationFrame = new DarkFrame();
-                case BIAS -> calibrationFrame = new BiasFrame();
+            if (ct != null) {
+                switch (ct) {
+                    case DARK -> calibrationFrame = new DarkFrame();
+                    case BIAS -> calibrationFrame = new BiasFrame();
+                }
             }
 
             calibrationFrame.setPath(((CustomFileChooser) fileChooser).getPath());
             calibrationFrame.setCameraId(camera.getSelectedEquipmentItem().getId());
             calibrationFrame.setCalibrationType(CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString()));
             calibrationFrame.setGain((Integer) gain.getValue());
-            calibrationFrame.setSubLength(Double.valueOf((Integer) subLength.getValue()));
             calibrationFrame.setTotalSubs((Integer) totalSubs.getValue());
             if (ct == CalibrationType.DARK) {
-//                (DarkFrame) calibrationFrame.setCameraId(); TODO
+                ((DarkFrame) calibrationFrame).setSubLength((Double) subLength.getValue());
+                ((DarkFrame) calibrationFrame).setCameraTemp((Double) cameraTemp.getValue());
             }
 
             if (!checkForDuplicates(calibrationFrame)) {
@@ -177,13 +193,17 @@ public class LibraryRowEditor extends JDialog {
                 boolean b = !Objects.equals(calibrationType.getSelectedItem(), CalibrationType.BIAS.getName());
                 subLength.setEnabled(b);
                 subLengthLabel.setEnabled(b);
+                cameraTemp.setEnabled(b);
+                cameraTempLabel.setEnabled(b);
                 if (!b) {
                     subLength.setValue(0);
+                    cameraTemp.setValue(0);
                 }
             }
         });
         gain.addChangeListener(e -> updateButtonState());
         subLength.addChangeListener(e -> updateButtonState());
+        cameraTemp.addChangeListener(e -> updateButtonState());
         totalSubs.addChangeListener(e -> updateButtonState());
     }
 

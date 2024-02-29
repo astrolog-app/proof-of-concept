@@ -10,9 +10,9 @@ public class CalibrationFrame extends ImagingFrame {
 
     public CalibrationFrame() {}
 
-    public CalibrationFrame(Integer totalSubs, Double subLength, UUID id, UUID cameraId,
+    public CalibrationFrame(Integer totalSubs, UUID id, UUID cameraId,
                             CalibrationType calibrationType, Integer gain, String path) {
-        super(id, cameraId, totalSubs, subLength, gain);
+        super(id, cameraId, totalSubs, gain);
         this.calibrationType = calibrationType;
         this.path = path;
     }

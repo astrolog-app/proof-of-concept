@@ -1,50 +1,41 @@
 {
-  "lightFrames": [
-    {
-      "id" : "b7d68b1d-03b5-44bc-9c6c-712eb7f58400",
-      "cameraId" : null,
-      "totalSubs" : null,
-      "subLength" : null,
-      "gain" : null,
-      "date" : "12.01.2024",
-      "target" : "NGC 7000",
-      "integratedSubs" : null,
-      "offset" : null,
-      "cameraTemp" : null,
-      "outsideTemp" : null,
-      "averageSeeing" : null,
-      "averageCloudCover" : null,
-      "averageMoon" : null,
-      "notes" : null
-    }
-  ],
-  "darkFrames": [
-    {
-      "id" : "3a67f76e-2cda-4363-be16-e73774283eaf",
-      "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
-      "totalSubs" : 2,
-      "subLength" : 2.0,
-      "gain" : 2,
-      "path" : "/ursaminor0131/Téléchargements"
-    }
-  ],
-  "biasFrames": [
-    {
-      "id" : "3a67f76e-2cda-4363-be16-e73774283eaf",
-      "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
-      "totalSubs" : 2,
-      "subLength" : 0,
-      "gain" : 2,
-      "path" : "/ursaminor0131/Téléchargements"
-    }
-  ],
-  "flatFrames": [
-    {
-      "id" : "3a67f76e-2cda-4363-be16-e73774283eaf",
-      "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
-      "totalSubs" : 2,
-      "subLength" : 2.0,
-      "gain" : 2
-    }
-  ]
+  "lightFrames" : [ {
+    "id" : "b7d68b1d-03b5-44bc-9c6c-712eb7f58400",
+    "cameraId" : null,
+    "totalSubs" : null,
+    "subLength" : null,
+    "gain" : null,
+    "date" : "12.01.2024",
+    "target" : "NGC 7000",
+    "integratedSubs" : null,
+    "offset" : null,
+    "cameraTemp" : null,
+    "outsideTemp" : null,
+    "averageSeeing" : null,
+    "averageCloudCover" : null,
+    "averageMoon" : null,
+    "notes" : null
+  } ],
+  "darkFrames" : [ {
+    "id" : "e353dce0-65c7-43c4-b2bd-b57465aa9a1d",
+    "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
+    "totalSubs" : 2,
+    "subLength" : 2.0,
+    "gain" : 0,
+    "path" : "/ursaminor0131/Téléchargements",
+    "cameraTemp" : 17
+  } ],
+  "biasFrames" : [ {
+    "id" : "3a67f76e-2cda-4363-be16-e73774283eaf",
+    "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
+    "totalSubs" : 2,
+    "gain" : 2,
+    "path" : "/ursaminor0131/Téléchargements"
+  } ],
+  "flatFrames" : [ {
+    "id" : "3a67f76e-2cda-4363-be16-e73774283eaf",
+    "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
+    "totalSubs" : 2,
+    "gain" : 2
+  } ]
 }
