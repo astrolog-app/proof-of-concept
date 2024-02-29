@@ -1,8 +1,14 @@
 {
+  "updated" : false,
   "version" : "0.9.0",
-  "bulletPoints" : [
+  "releaseDate" : "20.02.2024",
+  "features" : [
     "one",
     "two",
     "three"
+  ],
+  "bugFixes": [
+    "one",
+    "two"
   ]
 }

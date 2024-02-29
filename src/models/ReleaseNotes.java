@@ -3,8 +3,18 @@ package models;
 import java.util.List;
 
 public class ReleaseNotes {
+    private boolean updated;
     private String version;
-    private List<String> bulletPoints;
+    private String releaseDate;
+    private List<String> features;
+    private List<String> bugFixes;
+
+    public boolean getUpdated() {
+        return updated;
+    }
+    public void setUpdated(boolean updated) {
+        this.updated = updated;
+    }
 
     public String getVersion() {
         return version;
@@ -13,10 +23,24 @@ public class ReleaseNotes {
         this.version = version;
     }
 
-    public List<String> getBulletPoints() {
-        return bulletPoints;
+    public String getReleaseDate() {
+        return releaseDate;
     }
-    public void setBulletPoints(List<String> bulletPoints) {
-        this.bulletPoints = bulletPoints;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public List<String> getFeatures() {
+        return features;
+    }
+    public void setFeatures(List<String> features) {
+        this.features = features;
+    }
+
+    public List<String> getBugFixes() {
+        return bugFixes;
+    }
+    public void setBugFixes(List<String> bugFixes) {
+        this.bugFixes = bugFixes;
     }
 }

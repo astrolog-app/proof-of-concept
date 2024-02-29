@@ -3,7 +3,7 @@ package utils;
 import java.io.File;
 
 public class Paths {
-    private static final String PROJECT_PATH = System.getProperty("user.dir") + File.separator;
+    public static final String PROJECT_PATH = System.getProperty("user.dir") + File.separator;
 
     // folder paths:
     public static final String DATA_PATH = PROJECT_PATH + "data" + File.separator;

@@ -4,7 +4,7 @@ import models.ReleaseNotes;
 import models.settings.AppConfig;
 import services.AppLogger;
 import services.fileHandler.ConfigurationStore;
-import utils.User;
+import utils.Paths;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -27,6 +27,8 @@ public class NewUpdate extends JDialog {
 
         versionLabel.setText("AstroLog V " + releaseNotes.getVersion());
 
+        createReleaseNotesPane();
+
         handleActions();
 
         setModal(true);
@@ -37,9 +39,42 @@ public class NewUpdate extends JDialog {
             setTitle("New Update Available");
         }
         setResizable(false);
-        setSize(500, 600);
+        setSize(450, 575);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private void createReleaseNotesPane() {
+        releaseNotesPane.setContentType("text/html");
+        releaseNotesPane.setText(buildReleaseNotesString());
+
+        releaseNotesPane.setEditable(false);
+    }
+
+    private String buildReleaseNotesString() {
+        StringBuilder str = new StringBuilder();
+        str.append("<html><body>");
+
+        str.append("<h1>Features:</h1>");
+        str.append("<ul>");
+        for (String s : releaseNotes.getFeatures()) {
+            str.append("<li style=\"font-size: 1.2em;\">").append(s).append("</li>");
+        }
+        str.append("</ul>");
+
+        str.append("<h1>Bug Fixes:</h1>");
+        str.append("<ul>");
+        for (String s : releaseNotes.getBugFixes()) {
+            str.append("<li style=\"font-size: 1.2em;\">").append(s).append("</li>");
+        }
+        str.append("</ul>");
+
+        str.append("<br></br>");
+        str.append("<p style=\"font-size: 1.2em;\">Release Date: ").append(releaseNotes.getReleaseDate()).append("</p>");
+
+        str.append("</body></html>");
+
+        return str.toString();
     }
 
     private void handleActions() {
@@ -52,15 +87,14 @@ public class NewUpdate extends JDialog {
     }
 
     private void updateApp() {
-        // TODO: finish
         String command; // path to the executable file
 
         // Determine OS and set command accordingly
         String osName = System.getProperty("os.name").toLowerCase();
         if (osName.contains("windows")) {
-            command = "path\\to\\your\\executable.exe"; // Windows path
+            command = Paths.PROJECT_PATH + "update.exe"; // Windows path
         } else {
-            command = "./path/to/your/executable"; // Linux or macOS path
+            command = Paths.PROJECT_PATH + "update"; // Linux or macOS path
         }
 
         try {
@@ -71,9 +105,9 @@ public class NewUpdate extends JDialog {
             // Wait for the process to finish
             int exitCode = process.waitFor();
             if (exitCode == 0) {
-                System.out.println("Executable executed successfully");
+                logger.info("Executable executed successfully");
             } else {
-                System.err.println("Executable execution failed with error code: " + exitCode);
+                logger.severe("Executable execution failed with error code: " + exitCode);
             }
 
             System.exit(0);
