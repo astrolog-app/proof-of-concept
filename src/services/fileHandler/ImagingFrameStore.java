@@ -51,7 +51,14 @@ public class ImagingFrameStore {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(configPath), imagingFrameList);
+            ImagingFrameListWrapper i = new ImagingFrameListWrapper();
+
+            i.setLightFrames(imagingFrameList.getLightFrames().values().stream().toList());
+            i.setDarkFrames(imagingFrameList.getDarkFrames().values().stream().toList());
+            i.setBiasFrames(imagingFrameList.getBiasFrames().values().stream().toList());
+            i.setFlatFrames(imagingFrameList.getFlatFrames().values().stream().toList());
+
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(configPath), i);
 
             logger.info("saved ImagingFrameList successfully");
         } catch (Exception e) {

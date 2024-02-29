@@ -1,5 +1,7 @@
 package models.imagingFrames;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.*;
 
 public class ImagingFrameList {
@@ -60,6 +62,7 @@ public class ImagingFrameList {
         flatFrames.remove(flatFrame.getId(), flatFrame);
     }
 
+    @JsonIgnore
     public List<CalibrationFrame> getCalibrationFrames() {
         List<CalibrationFrame> l = new ArrayList<>();
 
@@ -75,6 +78,7 @@ public class ImagingFrameList {
         if (calibrationFrame instanceof BiasFrame) {
             addBiasFrame((BiasFrame) calibrationFrame);
         }
+        System.out.println();
     }
     public void removeCalibrationFrame(CalibrationFrame calibrationFrame, CalibrationType calibrationType) {
         switch (calibrationType) {

@@ -1,5 +1,7 @@
 package models.imagingFrames;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.UUID;
 
 public class CalibrationFrame extends ImagingFrame {
@@ -15,6 +17,7 @@ public class CalibrationFrame extends ImagingFrame {
         this.path = path;
     }
 
+    @JsonIgnore
     public CalibrationType getCalibrationType() {
         return calibrationType;
     }

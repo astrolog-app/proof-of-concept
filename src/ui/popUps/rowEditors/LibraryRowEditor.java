@@ -11,7 +11,6 @@ import ui.customComponents.CustomFileChooser;
 
 import javax.swing.*;
 import java.awt.event.ItemEvent;
-import java.util.List;
 import java.util.Objects;
 
 public class LibraryRowEditor extends JDialog {
@@ -138,7 +137,7 @@ public class LibraryRowEditor extends JDialog {
                     imagingFrameList.removeCalibrationFrame(libraryRow, prevCalibrationType);
                 }
 
-                // TODO: add row to ImagingFrameList
+                imagingFrameList.addCalibrationFrame(calibrationFrame);
 
                 ImagingFrameStore.save(imagingFrameList, null);
 
