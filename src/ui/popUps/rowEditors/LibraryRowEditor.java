@@ -123,14 +123,23 @@ public class LibraryRowEditor extends JDialog {
     private void handleActions() {
         cancelButton.addActionListener(e -> dispose());
         saveButton.addActionListener(e -> {
+            CalibrationType ct = CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString());
             CalibrationFrame calibrationFrame = new CalibrationFrame();
+
+            switch (ct) {
+                case DARK -> calibrationFrame = new DarkFrame();
+                case BIAS -> calibrationFrame = new BiasFrame();
+            }
 
             calibrationFrame.setPath(((CustomFileChooser) fileChooser).getPath());
             calibrationFrame.setCameraId(camera.getSelectedEquipmentItem().getId());
             calibrationFrame.setCalibrationType(CalibrationType.getEnum(Objects.requireNonNull(calibrationType.getSelectedItem()).toString()));
             calibrationFrame.setGain((Integer) gain.getValue());
-            calibrationFrame.setSubLength((Double) subLength.getValue());
+            calibrationFrame.setSubLength(Double.valueOf((Integer) subLength.getValue()));
             calibrationFrame.setTotalSubs((Integer) totalSubs.getValue());
+            if (ct == CalibrationType.DARK) {
+//                (DarkFrame) calibrationFrame.setCameraId(); TODO
+            }
 
             if (!checkForDuplicates(calibrationFrame)) {
                 if (edit) {

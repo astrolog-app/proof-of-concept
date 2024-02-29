@@ -15,20 +15,22 @@ import java.util.List;
 
 public class LibraryTable extends JTable {
     private final Equipment equipment;
+    private final ImagingFrameList imagingFrameList;
     private final LibraryPanel libraryPanel;
     private final AppConfig appConfig;
     private LibraryTableModel libraryTableModel;
 
     public LibraryTable(Equipment equipment, ImagingFrameList imagingFrameList, LibraryPanel libraryPanel, AppConfig appConfig) {
         this.equipment = equipment;
+        this.imagingFrameList = imagingFrameList;
         this.libraryPanel = libraryPanel;
         this.appConfig = appConfig;
 
-        createTable(imagingFrameList);
+        createTable();
         handleActions();
     }
 
-    private void createTable(ImagingFrameList imagingFrameList) {
+    private void createTable() {
         setModel(libraryTableModel= new LibraryTableModel(equipment, imagingFrameList));
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         showHorizontalLines = true;

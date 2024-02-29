@@ -6,21 +6,20 @@ import models.imagingFrames.DarkFrame;
 import models.imagingFrames.ImagingFrameList;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.List;
 
 public class LibraryTableModel extends AbstractTableModel {
     // TODO: add sorting
     private final Equipment equipment;
-    private final List<CalibrationFrame> data;
+    private final ImagingFrameList data;
 
     public LibraryTableModel(Equipment equipment, ImagingFrameList imagingFrameList) {
         this.equipment = equipment;
-        this.data = imagingFrameList.getCalibrationFrames();
+        this.data = imagingFrameList;
     }
 
     @Override
     public int getRowCount() {
-        return data.size();
+        return data.getCalibrationFrames().size();
     }
 
     @Override
@@ -43,7 +42,7 @@ public class LibraryTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        CalibrationFrame lib = data.get(rowIndex);
+        CalibrationFrame lib = data.getCalibrationFrames().get(rowIndex);
 
         return switch (columnIndex) {
             case 0 -> lib.getCamera(equipment).getViewName();
@@ -64,6 +63,6 @@ public class LibraryTableModel extends AbstractTableModel {
         if (rowIndex == -1)
             return null;
 
-        return data.get(rowIndex);
+        return data.getCalibrationFrames().get(rowIndex);
     }
 }

@@ -78,7 +78,6 @@ public class ImagingFrameList {
         if (calibrationFrame instanceof BiasFrame) {
             addBiasFrame((BiasFrame) calibrationFrame);
         }
-        System.out.println();
     }
     public void removeCalibrationFrame(CalibrationFrame calibrationFrame, CalibrationType calibrationType) {
         switch (calibrationType) {

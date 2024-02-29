@@ -131,10 +131,7 @@ public class ImagingSessionTable extends JTable {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int columnIndex = columnAtPoint(e.getPoint());
-                System.out.println("Column " + columnIndex + " clicked");
                 updateSortingInfo();
-                System.out.println(sortedColumn);
-                System.out.println(sortingDirection);
                 tableModel.updateDataSorting(sortedColumn, sortingDirection);
             }
         });
