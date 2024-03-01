@@ -46,6 +46,7 @@ public class NewUpdate extends JDialog {
         releaseNotesPane.setText(buildReleaseNotesString());
 
         releaseNotesPane.setEditable(false);
+        releaseNotesPane.setFocusable(false);
     }
 
     private String buildReleaseNotesString() {
@@ -82,6 +83,9 @@ public class NewUpdate extends JDialog {
         closeButton.addActionListener(e -> {
             if (releaseNotes.getUpdated()) {
                 ReleaseNotesStore.delete();
+            } else if (showUpdatesCheckBox.isSelected()) {
+                releaseNotes.setShow(false);
+                ReleaseNotesStore.save(releaseNotes, null);
             }
             dispose();
         });

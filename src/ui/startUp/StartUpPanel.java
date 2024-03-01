@@ -23,7 +23,7 @@ public class StartUpPanel extends JDialog {
         setVisible(true);
 
         progressBar1.setMinimum(0);
-        progressBar1.setMaximum(7);
+        progressBar1.setMaximum(8);
     }
 
     private void createUIComponents() {

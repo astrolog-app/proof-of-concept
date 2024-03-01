@@ -2,24 +2,21 @@ package services;
 
 import models.ReleaseNotes;
 import models.settings.AppConfig;
-import services.fileHandler.ReleaseNotesStore;
 import ui.popUps.NewUpdate;
 
 import javax.swing.*;
 
 public class UpdateChecker {
-    public static void check(AppConfig appConfig) {
-        if (appConfig.getCheckForUpdates()) {
-            ReleaseNotes r = ReleaseNotesStore.load();
+    public static void fetch() {}
 
-            if (r != null && r.getShow()) {
-                SwingUtilities.invokeLater(() -> {
-                    Timer timer = new Timer(300, e -> new NewUpdate(appConfig, r));
+    public static void showNewUpdates(AppConfig appConfig, ReleaseNotes releaseNotes) {
+        if (releaseNotes != null && releaseNotes.getShow()) {
+            SwingUtilities.invokeLater(() -> {
+                Timer timer = new Timer(300, e -> new NewUpdate(appConfig, releaseNotes));
 
-                    timer.setRepeats(false);
-                    timer.start();
-                });
-            }
+                timer.setRepeats(false);
+                timer.start();
+            });
         }
     }
 }

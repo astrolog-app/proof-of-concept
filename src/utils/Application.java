@@ -9,6 +9,14 @@ public class Application {
     private static final Logger logger = AppLogger.getLogger();
     public static String VERSION = "0.9.0";
 
+    public static void sleep(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (Exception e) {
+            logger.severe("failed to execute Thread.sleep");
+        }
+    }
+
     public static void update() {
         String command; // path to the executable file
 
