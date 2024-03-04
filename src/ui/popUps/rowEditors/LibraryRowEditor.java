@@ -129,7 +129,7 @@ public class LibraryRowEditor extends JDialog {
 
     private void setSpinnerModels() {
         gain.setModel(new SpinnerNumberModel(0,0,10000,1));
-        subLength.setModel(new SpinnerNumberModel(0,0,10000,1));
+        subLength.setModel(new SpinnerNumberModel(0,0,10000,0.1));
         totalSubs.setModel(new SpinnerNumberModel(0,0,10000,1));
         cameraTemp.setModel(new SpinnerNumberModel(0,0,10000,0.1));
     }
