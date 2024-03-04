@@ -71,37 +71,36 @@ public class AppActions {
     }
 
     private void loadJson() {
-        Application.sleep(400);
-        isConfig = ConfigurationStore.loadImagingSessionConfig();
+        Application.sleep(300);
         startUpPanel.setProgressLabel("loading configuration.json");
+        isConfig = ConfigurationStore.loadImagingSessionConfig();
         startUpPanel.increaseProgress();
 
         Application.sleep(50);
-        equipment = EquipmentStore.load();
         startUpPanel.setProgressLabel("loading equipment.json");
+        equipment = EquipmentStore.load();
         startUpPanel.increaseProgress();
 
         Application.sleep(50);
-        imagingSessions = ImagingSessionStore.load();
         startUpPanel.setProgressLabel("loading imagingSessions.json");
+        imagingSessions = ImagingSessionStore.load();
         startUpPanel.increaseProgress();
 
         Application.sleep(50);
-        imagingFrameList = ImagingFrameStore.load();
         startUpPanel.setProgressLabel("loading imagingFrames.json");
+        imagingFrameList = ImagingFrameStore.load();
         startUpPanel.increaseProgress();
 
         Application.sleep(50);
-        imagingProjects = ImagingProjectStore.load();
         startUpPanel.setProgressLabel("loading imagingProjects.json");
+        imagingProjects = ImagingProjectStore.load();
         startUpPanel.increaseProgress();
 
         if (appConfig.getCheckForUpdates()) {
-            Application.sleep(50);
-            UpdateChecker.fetch();
-            Application.sleep(200); // TODO: fetch() is maybe async
-            releaseNotes = ReleaseNotesStore.load();
             startUpPanel.setProgressLabel("check for new updates");
+            // TODO: fetch it async
+            UpdateChecker.fetch();
+            releaseNotes = ReleaseNotesStore.load();
         }
 
         startUpPanel.increaseProgress();

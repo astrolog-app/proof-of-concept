@@ -2,6 +2,7 @@ package services;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
+import utils.Paths;
 
 import java.io.*;
 import java.net.*;
@@ -27,7 +28,7 @@ public class GitHubAPI {
     private static List<String> getVersions() {
         List<String> versions = new ArrayList<>();
 
-        String folderPath = "assets/versions"; // Leave empty to get root folder contents
+        String folderPath = "assets/releases"; // Leave empty to get root folder contents
 
         try {
             URI apiUrl = new URI("https", "api.github.com", "/repos/" + repoOwner + "/" + repoName + "/contents/" + folderPath, null);
@@ -72,9 +73,10 @@ public class GitHubAPI {
         return versions;
     }
 
-    public static void downloadFile(String path) {
+    public static void downloadFile(String version, String file) {
         try {
-            URI apiUrl = new URI("https://raw.githubusercontent.com/" + repoOwner + "/" + repoName + "/main/assets/versions/1.1.1/releaseNotes.json");
+            String baseString = "https://raw.githubusercontent.com/";
+            URI apiUrl = new URI(baseString + repoOwner + "/" + repoName + "/main/assets/releases/" + version + "/" + file);
 
             // Create HTTP connection
             URL url = apiUrl.toURL();
@@ -85,7 +87,7 @@ public class GitHubAPI {
             // Check if the request was successful
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream inputStream = connection.getInputStream();
-                FileOutputStream outputStream = new FileOutputStream("downloaded_file.txt"); // Specify the path to save the downloaded file
+                FileOutputStream outputStream = new FileOutputStream(Paths.DATA_PATH + file); // Specify the path to save the downloaded file
 
                 byte[] buffer = new byte[4096];
                 int bytesRead;
@@ -95,12 +97,12 @@ public class GitHubAPI {
 
                 outputStream.close();
                 inputStream.close();
-                System.out.println("File downloaded successfully!");
+                logger.info(file + " downloaded successfully!");
             } else {
-                System.out.println("Failed to download file. HTTP error code: " + connection.getResponseCode());
+                logger.severe("Failed to download file. HTTP error code: " + connection.getResponseCode());
             }
         } catch (IOException | URISyntaxException e) {
-            logger.severe(e.getMessage());
+            logger.warning(e.getMessage());
         }
     }
 }
