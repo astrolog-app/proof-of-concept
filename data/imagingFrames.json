@@ -17,6 +17,14 @@
     "subLength" : null
   } ],
   "darkFrames" : [ {
+    "id" : "1690c5d1-db74-4cb4-8c3e-84e8cefec2cc",
+    "cameraId" : "8d00c203-a73f-4a9c-ad3b-aa608aaa8f97",
+    "totalSubs" : 0,
+    "gain" : 0,
+    "path" : "C:\\Users\\rouve\\Documents",
+    "cameraTemp" : 0.0,
+    "subLength" : 0.19999999999999998
+  }, {
     "id" : "e353dce0-65c7-43c4-b2bd-b57465aa9a1d",
     "cameraId" : "76a4468d-b33d-4285-b7ad-a936891a1291",
     "totalSubs" : 2,
