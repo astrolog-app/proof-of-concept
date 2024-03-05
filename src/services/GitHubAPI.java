@@ -22,7 +22,11 @@ public class GitHubAPI {
         Collections.sort(versions);
 
         // Get the last (highest) version from the sorted list
-        return versions.get(versions.size() - 1);
+        if (!versions.isEmpty()) {
+            return versions.get(versions.size() - 1);
+        } else {
+            return null;
+        }
     }
 
     private static List<String> getVersions() {
