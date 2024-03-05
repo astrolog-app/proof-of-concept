@@ -4,17 +4,16 @@ import models.ReleaseNotes;
 import models.settings.AppConfig;
 import services.fileHandler.ReleaseNotesStore;
 import ui.popUps.NewUpdate;
-import utils.Application;
 
 import javax.swing.*;
-import java.util.Objects;
 
 public class UpdateChecker {
     public static void fetch() {
         ReleaseNotes releaseNotes = ReleaseNotesStore.load();
         String newestVersion = GitHubAPI.getNewestVersion();
 
-        if (!Application.VERSION.equals(newestVersion)) {
+        // if the release notes are not present or there are newer release notes, the app downloads the newest release notes
+        if (releaseNotes == null || !releaseNotes.getVersion().equals(newestVersion)) {
             GitHubAPI.downloadFile(newestVersion, "releaseNotes.json");
         }
     }
