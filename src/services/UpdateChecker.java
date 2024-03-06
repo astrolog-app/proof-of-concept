@@ -12,7 +12,7 @@ public class UpdateChecker {
      * fetches the GitHubAPI and looks for the most recent update and downloads the releaseNotes.json
      * if a new update is available
      */
-    public static void fetch() {
+    public static void lookForNewUpdates() {
         ReleaseNotes releaseNotes = ReleaseNotesStore.load();
         String newestVersion = GitHubAPI.getNewestVersion();
 

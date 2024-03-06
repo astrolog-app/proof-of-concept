@@ -10,7 +10,10 @@ import ui.customComponents.CustomComboBox;
 import ui.customComponents.CustomFileChooser;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.ItemEvent;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,12 +23,9 @@ public class ImagingSessionRowEditor extends JDialog {
     private final List<ImagingSession> imagingSessions;
     private final AppConfig appConfig;
     private final ImagingFrameList imagingFrameList;
+    private final boolean edit;
 
     private JPanel mainPanel;
-    private JPanel lightPanel;
-    private JPanel darkPanel;
-    private JPanel biasPanel;
-    private JPanel flatPanel;
     private JCheckBox flatCheckBox;
     private JSpinner totalSubsFlat;
     private JTextField dateLight;
@@ -69,6 +69,8 @@ public class ImagingSessionRowEditor extends JDialog {
     private JLabel dateDarkLabel;
     private JComboBox<String> filter;
     private JPanel fileChooser;
+    private String prevFile = "";
+    private String prevTarget = "";
 
     public ImagingSessionRowEditor(Equipment equipment, ImagingSession session, ImagingSessionTableModel isTableModel,
                                    List<ImagingSession> imagingSessions, AppConfig appConfig, ImagingFrameList imagingFrameList) {
@@ -77,17 +79,14 @@ public class ImagingSessionRowEditor extends JDialog {
         this.imagingSessions = imagingSessions;
         this.appConfig = appConfig;
         this.imagingFrameList = imagingFrameList;
+        edit = session != null;
+        saveButton.setEnabled(false);
 
         updateFlatPanelState();
         updateDarkPanelState();
         updateBiasPanelState();
 
         setSpinnerModels();
-
-        if (session != null) {
-            fillOutPanel(session);
-        }
-
         handleActions(session);
 
         setModal(true);
@@ -105,19 +104,20 @@ public class ImagingSessionRowEditor extends JDialog {
     }
 
     private void fillOutPanel(ImagingSession session) {
-        ((CustomFileChooser) fileChooser).setPath(session.getFolderDir());
+        if (edit) {
+            ((CustomFileChooser) fileChooser).setPath(session.getFolderDir());
 
-        target.setText(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getTarget());
-        subLengthLight.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getSubLength()));
-        totalSubsLight.setValue(checkIntegerSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getTotalSubs()));
-        integratedSubs.setValue(checkIntegerSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getIntegratedSubs()));
+            target.setText(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getTarget());
+            subLengthLight.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getSubLength()));
+            totalSubsLight.setValue(checkIntegerSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getTotalSubs()));
+            integratedSubs.setValue(checkIntegerSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getIntegratedSubs()));
 //        filter.setSelectedItem();
-        gain.setValue(checkIntegerSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getGain()));
-        offset.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getOffset()));
-        chipTemp.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getCameraTemp()));
-        temp.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getOutsideTemp()));
-        avgSeeing.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getAverageSeeing()));
-        avgCloudCover.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getAverageCloudCover()));
+            gain.setValue(checkIntegerSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getGain()));
+            offset.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getOffset()));
+            chipTemp.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getCameraTemp()));
+            temp.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getOutsideTemp()));
+            avgSeeing.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getAverageSeeing()));
+            avgCloudCover.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getAverageCloudCover()));
 //        telescope.setSelectedItem();
 //        camera.setSelectedItem();
 //        flattener.setSelectedItem();
@@ -133,6 +133,7 @@ public class ImagingSessionRowEditor extends JDialog {
 //
 //        subLengthFlat.setValue();
 //        totalSubsFlat.setValue();
+        }
     }
 
     private Double checkSessionValue(Double d) {
@@ -186,6 +187,44 @@ public class ImagingSessionRowEditor extends JDialog {
         flatCheckBox.addActionListener(e -> updateFlatPanelState());
         darkCheckBox.addActionListener(e -> updateDarkPanelState());
         biasCheckBox.addActionListener(e -> updateBiasPanelState());
+
+        dateLight.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateButtonState();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateButtonState();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateButtonState();
+            }
+        });
+        target.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateButtonState();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateButtonState();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateButtonState();
+            }
+        });
+        camera.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                updateButtonState();
+            }
+        });
     }
 
     private ImagingSession createNewSession() {
@@ -305,11 +344,18 @@ public class ImagingSessionRowEditor extends JDialog {
         }
     }
 
+    private void updateButtonState() {
+        boolean file = !prevFile.equals(((CustomFileChooser) fileChooser).getPath());
+        boolean target = !prevTarget.equals(this.target.getText());
+
+        saveButton.setEnabled(file && target);
+    }
+
     private void createUIComponents() {
         fileChooser = new CustomFileChooser(appConfig, "Choose Folder:") {
             @Override
             public void fileChanged() {
-
+                updateButtonState();
             }
         };
 

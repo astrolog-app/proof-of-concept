@@ -99,7 +99,7 @@ public class AppActions {
         if (appConfig.getCheckForUpdates()) {
             startUpPanel.setProgressLabel("check for new updates");
             // TODO: fetch it async
-            UpdateChecker.fetch();
+            UpdateChecker.lookForNewUpdates();
             releaseNotes = ReleaseNotesStore.load();
         }
 
