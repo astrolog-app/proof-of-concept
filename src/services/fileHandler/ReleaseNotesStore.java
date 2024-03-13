@@ -1,12 +1,8 @@
 package services.fileHandler;
 
 import models.ReleaseNotes;
-import models.settings.AppConfig;
-import models.settings.ImagingSessionConfig;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
-import org.codehaus.jackson.node.ObjectNode;
 import services.AppLogger;
 import utils.Paths;
 

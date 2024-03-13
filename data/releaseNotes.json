@@ -1,8 +1,10 @@
 {
   "updated" : false,
-  "show" : false,
+  "show" : true,
   "version" : "1.1.1",
   "releaseDate" : "20.02.2024",
-  "features" : [ "one", "two", "three" ],
-  "bugFixes" : [ "one", "two" ]
+  "description" : {
+     "features" : ["one", "two", "three"],
+     "bugFixes": ["one", "two"]
+  }
 }

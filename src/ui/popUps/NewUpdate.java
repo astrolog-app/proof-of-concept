@@ -7,6 +7,8 @@ import services.fileHandler.ReleaseNotesStore;
 import utils.Application;
 
 import javax.swing.*;
+import java.util.List;
+import java.util.Map;
 
 public class NewUpdate extends JDialog {
     private final AppConfig appConfig;
@@ -53,30 +55,44 @@ public class NewUpdate extends JDialog {
         StringBuilder str = new StringBuilder();
         str.append("<html><body>");
 
-        if (!releaseNotes.getFeatures().isEmpty()) {
-            str.append("<h1>Features:</h1>");
-            str.append("<ul>");
-            for (String s : releaseNotes.getFeatures()) {
-                str.append("<li style=\"font-size: 1.2em;\">").append(s).append("</li>");
-            }
-            str.append("</ul>");
-        }
+        Map<String, List<String>> description = releaseNotes.getDescription();
+        List<String> descriptionKeys = description.keySet().stream().toList();
 
-        if (!releaseNotes.getBugFixes().isEmpty()) {
-            str.append("<h1>Bug Fixes:</h1>");
-            str.append("<ul>");
-            for (String s : releaseNotes.getBugFixes()) {
-                str.append("<li style=\"font-size: 1.2em;\">").append(s).append("</li>");
+        for (String s : descriptionKeys) {
+            if (!description.get(s).isEmpty()) {
+                str.append("<h1>").append(formatDescriptionTitle(s)).append("</h1>");
+                str.append("<ul>");
+                for (String point : description.get(s)) {
+                    str.append("<li style=\"font-size: 1.2rem;\">").append(point).append("</li>");
+                }
+                str.append("</ul>");
             }
-            str.append("</ul>");
         }
 
         str.append("<br></br>");
-        str.append("<p style=\"font-size: 1.2em;\">Release Date: ").append(releaseNotes.getReleaseDate()).append("</p>");
+        str.append("<p style=\"font-size: 1.2rem;\">Release Date: ").append(releaseNotes.getReleaseDate()).append("</p>");
 
         str.append("</body></html>");
 
         return str.toString();
+    }
+
+    private String formatDescriptionTitle(String s) {
+        char[] charArray = s.toCharArray();
+        StringBuilder strBuilder = new StringBuilder();
+
+        for (int i = 0; i < charArray.length; i++) {
+            if (i == 0) {
+                strBuilder.append(Character.toUpperCase(charArray[0]));
+            } else if (Character.isUpperCase(charArray[i])) {
+                strBuilder.append(" ");
+                strBuilder.append(charArray[i]);
+            } else {
+                strBuilder.append(charArray[i]);
+            }
+        }
+
+        return strBuilder.toString();
     }
 
     private void handleActions() {

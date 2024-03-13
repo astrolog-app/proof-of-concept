@@ -1,14 +1,14 @@
 package models;
 
 import java.util.List;
+import java.util.Map;
 
 public class ReleaseNotes {
     private boolean updated;
     private boolean show;
     private String version;
     private String releaseDate;
-    private List<String> features;
-    private List<String> bugFixes;
+    private Map<String, List<String>> description;
 
     public boolean getUpdated() {
         return updated;
@@ -38,17 +38,11 @@ public class ReleaseNotes {
         this.releaseDate = releaseDate;
     }
 
-    public List<String> getFeatures() {
-        return features;
-    }
-    public void setFeatures(List<String> features) {
-        this.features = features;
+    public Map<String, List<String>> getDescription() {
+        return description;
     }
 
-    public List<String> getBugFixes() {
-        return bugFixes;
-    }
-    public void setBugFixes(List<String> bugFixes) {
-        this.bugFixes = bugFixes;
+    public void setDescription(Map<String, List<String>> description) {
+        this.description = description;
     }
 }
