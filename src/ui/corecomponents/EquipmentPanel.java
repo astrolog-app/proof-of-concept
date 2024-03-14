@@ -2,6 +2,7 @@ package ui.corecomponents;
 
 import models.EquipmentListModel;
 import models.equipment.Equipment;
+import ui.customComponents.equipmentPanelContent.EquipmentPanelContentWrapper;
 
 import javax.swing.*;
 
@@ -26,6 +27,6 @@ public class EquipmentPanel {
     }
 
     private void createUIComponents() {
-        content = new JPanel();
+        content = new EquipmentPanelContentWrapper();
     }
 }
