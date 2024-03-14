@@ -14,11 +14,12 @@ import java.util.logging.Logger;
 public class ReleaseNotesStore {
     private static final Logger logger = AppLogger.getLogger();
 
-    public static ReleaseNotes load() {
+    public static ReleaseNotes load(String path) {
+        String releaseNotesPath = Objects.requireNonNullElse(path, Paths.DATA_PATH);
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            JsonNode j = objectMapper.readTree(new File(Paths.RELEASE_NOTE_PATH));
+            JsonNode j = objectMapper.readTree(new File(releaseNotesPath + "releaseNotes.json"));
 
             ReleaseNotes releaseNotes = objectMapper.readValue(j, ReleaseNotes.class);
 

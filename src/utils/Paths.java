@@ -8,6 +8,7 @@ public class Paths {
     // folder paths:
     public static final String DATA_PATH = PROJECT_PATH + "data" + File.separator;
     public static final String BACKUP_PATH = DATA_PATH + "backup" + File.separator;
+    public static final String CACHE_PATH = PROJECT_PATH + "cache" + File.separator;
     public static final String IMAGE_PATH = DATA_PATH + "images" + File.separator;
     public static final String LOG_PATH  = PROJECT_PATH + "log" + File.separator + "app" + File.separator;
 

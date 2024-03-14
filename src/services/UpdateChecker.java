@@ -4,21 +4,29 @@ import models.ReleaseNotes;
 import models.settings.AppConfig;
 import services.fileHandler.ReleaseNotesStore;
 import ui.popUps.NewUpdate;
+import utils.FileSystem;
+import utils.Paths;
 
 import javax.swing.*;
 
 public class UpdateChecker {
     /**
-     * fetches the GitHubAPI and looks for the most recent update and downloads the releaseNotes.json
-     * if a new update is available
+     * downloads a releaseNotes file and it in the cache folder, and overwrites the existing one
+     * if the downloaded one comes from a newer release
      */
     public static void lookForNewUpdates() {
-        ReleaseNotes releaseNotes = ReleaseNotesStore.load();
-        String newestVersion = GitHubAPI.getNewestVersion();
+        ReleaseNotes releaseNotes = ReleaseNotesStore.load(null);
+        String newestVersion = null;
+
+        R2.downloadLatestReleaseNotes();
+        ReleaseNotes newReleaseNotes = ReleaseNotesStore.load(Paths.CACHE_PATH);
+        if (newReleaseNotes != null) {
+            newestVersion = newReleaseNotes.getVersion();
+        }
 
         // if the release notes are not present or there are newer release notes, the app downloads the newest release notes
         if (releaseNotes == null || (newestVersion != null && !releaseNotes.getVersion().equals(newestVersion))) {
-            GitHubAPI.downloadFile(newestVersion, "releaseNotes.json");
+            FileSystem.copyFile("releaseNotes.json", Paths.CACHE_PATH, Paths.DATA_PATH);
         }
     }
 
