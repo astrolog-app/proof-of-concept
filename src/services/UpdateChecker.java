@@ -11,8 +11,8 @@ import javax.swing.*;
 
 public class UpdateChecker {
     /**
-     * downloads a releaseNotes file and it in the cache folder, and overwrites the existing one
-     * if the downloaded one comes from a newer release
+     * downloads a releaseNotes file, saves it in the cache folder, and overwrites the existing one
+     * if the downloaded one is from a newer release
      */
     public static void lookForNewUpdates() {
         ReleaseNotes releaseNotes = ReleaseNotesStore.load(null);
@@ -24,7 +24,6 @@ public class UpdateChecker {
             newestVersion = newReleaseNotes.getVersion();
         }
 
-        // if the release notes are not present or there are newer release notes, the app downloads the newest release notes
         if (releaseNotes == null || (newestVersion != null && !releaseNotes.getVersion().equals(newestVersion))) {
             FileSystem.copyFile("releaseNotes.json", Paths.CACHE_PATH, Paths.DATA_PATH);
         }
