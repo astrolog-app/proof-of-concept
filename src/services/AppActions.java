@@ -62,7 +62,7 @@ public class AppActions {
                 licenceChecker.check();
             });
         } else {
-            logger.info("licence is null");
+            logger.info("appConfig is null");
             logger.info("starting WelcomeDialogue");
 
             FlatLightLaf.setup();

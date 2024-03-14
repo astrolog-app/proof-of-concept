@@ -1,5 +1,9 @@
 package models.settings;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public enum LoggerColumns {
     DATE("Date"),
     TARGET("Target"),
@@ -29,5 +33,9 @@ public enum LoggerColumns {
 
     public String getName() {
         return name;
+    }
+
+    public static List<LoggerColumns> getAllColumns() {
+        return new ArrayList<>(Arrays.asList(LoggerColumns.values()));
     }
 }

@@ -8,7 +8,6 @@ public class AppConfig {
     private boolean startInFullscreen;
     private TempType tempType;
     private boolean checkForUpdates;
-    private boolean showReleaseNotesAfterUpdate;
 
     public AppTheme getTheme() {
         return theme;
@@ -57,12 +56,5 @@ public class AppConfig {
     }
     public void setCheckForUpdates(boolean checkForUpdates) {
         this.checkForUpdates = checkForUpdates;
-    }
-
-    public boolean getShowReleaseNotesAfterUpdate() {
-        return showReleaseNotesAfterUpdate;
-    }
-    public void setShowReleaseNotesAfterUpdate(boolean showReleaseNotesAfterUpdate) {
-        this.showReleaseNotesAfterUpdate = showReleaseNotesAfterUpdate;
     }
 }
