@@ -1,8 +1,6 @@
 package ui.corecomponents;
 
 import models.equipment.Equipment;
-import models.equipment.EquipmentType;
-import ui.customComponents.equipmentTable.EquipmentTableWrapper;
 
 import javax.swing.*;
 
@@ -10,7 +8,11 @@ public class EquipmentPanel {
     private final Equipment equipment;
     private JPanel mainPanel;
     private JLabel placeHolder1;
-    private EquipmentTableWrapper abc;
+    private JTabbedPane tabbedPane1;
+    private JList<String> list1;
+    private JList<String> list2;
+    private JList<String> list3;
+    private JPanel content;
 
     public EquipmentPanel(Equipment equipment) {
         this.equipment = equipment;
@@ -21,6 +23,6 @@ public class EquipmentPanel {
     }
 
     private void createUIComponents() {
-        abc = new EquipmentTableWrapper(equipment, EquipmentType.CAMERA);
+        content = new JPanel();
     }
 }
