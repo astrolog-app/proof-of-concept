@@ -1,5 +1,6 @@
 package ui.corecomponents;
 
+import models.EquipmentListModel;
 import models.equipment.Equipment;
 
 import javax.swing.*;
@@ -16,6 +17,8 @@ public class EquipmentPanel {
 
     public EquipmentPanel(Equipment equipment) {
         this.equipment = equipment;
+
+        list1.setModel(new EquipmentListModel(equipment));
     }
 
     public JPanel getPanel() {

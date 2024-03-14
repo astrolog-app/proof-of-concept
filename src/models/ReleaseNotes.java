@@ -41,7 +41,6 @@ public class ReleaseNotes {
     public Map<String, List<String>> getDescription() {
         return description;
     }
-
     public void setDescription(Map<String, List<String>> description) {
         this.description = description;
     }
