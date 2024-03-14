@@ -30,7 +30,7 @@ public class ConfigurationStore {
 
             return appConfig;
         } catch (IOException e) {
-            logger.severe("couldn't load AppConfig:" + "\t" + e.getMessage());
+            logger.warning("couldn't load AppConfig:" + "\t" + e.getMessage());
 
             return null;
         }

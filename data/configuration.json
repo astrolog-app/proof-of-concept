@@ -6,8 +6,7 @@
     "enableRegularBackups" : true,
     "startInFullscreen" : false,
     "tempType" : "CELSIUS",
-    "checkForUpdates" : true,
-    "showReleaseNotesAfterUpdate" : true
+    "checkForUpdates" : true
   },
   "imagingSessionConfig" : {
     "selectedColumns" : [ "DATE", "TARGET", "SUB_LENGTH", "TOTAL_SUBS", "TOTAL_EXPOSURE", "INTEGRATED_SUBS", "INTEGRATED_EXPOSURE", "FILTER", "GAIN", "OFFSET", "CAMERA_TEMP", "OUTSIDE_TEMP", "AVERAGE_SEEING", "AVERAGE_CLOUD_COVER", "AVERAGE_MOON", "TELESCOPE", "FLATTENER", "MOUNT", "CAMERA", "NOTES" ],

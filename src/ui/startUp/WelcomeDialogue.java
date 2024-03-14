@@ -1,4 +1,4 @@
-package ui.startUp.welcome;
+package ui.startUp;
 
 import models.settings.AppConfig;
 import models.settings.ImagingSessionConfig;
@@ -17,8 +17,6 @@ public class WelcomeDialogue extends JFrame {
     private JButton nextButton;
     private JButton previousButton;
     private JLabel stepLabel;
-    private JComboBox<String> comboBox1;
-    private JTextField textField1;
     private JPanel stepOne;
     private JPanel stepTwo;
     private JButton button1;
@@ -34,7 +32,6 @@ public class WelcomeDialogue extends JFrame {
         stepLabel.setText(stepText);
 
         checkPanelState();
-        checkLicenseFieldState();
         checkButtonState(stepCount);
         handleActions();
         add(panel1);
@@ -48,7 +45,13 @@ public class WelcomeDialogue extends JFrame {
 
     private void checkButtonState(int stepCount) {
         previousButton.setEnabled(stepCount != 1);
+
         nextButton.setEnabled(stepCount != 4);
+
+        if (this.stepCount == 3 && !iAcceptTheTermsCheckBox.isSelected()) {
+            nextButton.setEnabled(false);
+        }
+
         this.stepCount = stepCount;
     }
 
@@ -71,7 +74,6 @@ public class WelcomeDialogue extends JFrame {
     }
 
     private void handleActions() {
-        comboBox1.addActionListener(e -> checkLicenseFieldState());
         previousButton.addActionListener(e -> {
             checkButtonState(stepCount - 1);
             updateLabel();
@@ -87,10 +89,7 @@ public class WelcomeDialogue extends JFrame {
             ConfigurationStore.save(appConfig, isConfig, null);
             AppActions.restart();
         });
-    }
-
-    private void checkLicenseFieldState(){
-        textField1.setEnabled(comboBox1.getSelectedIndex() != 0);
+        iAcceptTheTermsCheckBox.addActionListener(e -> checkButtonState(stepCount));
     }
 
     private void createDefaultAppConfig() {

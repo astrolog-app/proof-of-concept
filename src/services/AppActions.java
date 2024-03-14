@@ -15,7 +15,7 @@ import services.fileHandler.*;
 import services.licence.LicenceChecker;
 import ui.MainUI;
 import ui.startUp.StartUpPanel;
-import ui.startUp.welcome.WelcomeDialogue;
+import ui.startUp.WelcomeDialogue;
 import utils.Application;
 
 import javax.swing.*;
