@@ -71,6 +71,8 @@ public class ConfigurationStore {
 
         try {
             writer.writeValue(new File(configPath), parentNode);
+
+            logger.info("saved configuration.json successfully");
         } catch (IOException e) {
             logger.severe("couldn't save AppConfig and/or ImagingSessionConfig:" + "\t" + e.getMessage());
         }
