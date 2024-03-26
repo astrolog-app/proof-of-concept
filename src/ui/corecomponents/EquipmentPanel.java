@@ -6,8 +6,6 @@ import ui.customComponents.equipmentPanelContent.EquipmentPanelContentWrapper;
 import ui.popUps.EquipmentTypeSelector;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class EquipmentPanel {
     private final Equipment equipment;
@@ -24,7 +22,7 @@ public class EquipmentPanel {
     public EquipmentPanel(Equipment equipment) {
         this.equipment = equipment;
 
-        list1.setModel(new EquipmentListModel(equipment));
+        list1.setModel(new EquipmentListModel(equipment, EquipmentListModel.State.USED));
 
         handleActions();
     }

@@ -8,11 +8,19 @@ import javax.swing.*;
 import java.util.*;
 
 public class EquipmentListModel extends AbstractListModel<String> {
+    public enum State {
+        USED,
+        UNUSED,
+        ALL
+    }
+    private final State state;
     private final List<String> finalList = new ArrayList<>();
     private final List<String> cameras = new ArrayList<>();
     private final List<String> telescopes = new ArrayList<>();
 
-    public EquipmentListModel(Equipment equipment) {
+    public EquipmentListModel(Equipment equipment, State state) {
+        this.state = state;
+
         for (Camera c : equipment.getCameras().values().stream().toList()) {
             cameras.add(c.getViewName());
         }
