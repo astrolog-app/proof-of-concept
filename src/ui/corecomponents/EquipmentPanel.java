@@ -22,8 +22,18 @@ public class EquipmentPanel {
     public EquipmentPanel(Equipment equipment) {
         this.equipment = equipment;
 
-        list1.setModel(new EquipmentListModel(equipment, EquipmentListModel.State.USED));
+        EquipmentListModel elm = new EquipmentListModel(equipment, EquipmentListModel.State.USED);
 
+        list1.setModel(elm);
+        list2.setModel(elm);
+        list3.setModel(elm);
+
+
+        list1.addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) {
+                ((EquipmentPanelContentWrapper) content).changeTitle(list1.getSelectedValue());
+            }
+        });
         handleActions();
     }
 
@@ -36,6 +46,6 @@ public class EquipmentPanel {
     }
 
     private void createUIComponents() {
-        content = new EquipmentPanelContentWrapper();
+        content = new EquipmentPanelContentWrapper("test");
     }
 }

@@ -4,9 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class EquipmentPanelContentWrapper extends JPanel {
-    public EquipmentPanelContentWrapper() {
+    private final EquipmentPanelContent e;
+
+    public EquipmentPanelContentWrapper(String title) {
         setLayout(new BorderLayout());
-        EquipmentPanelContent e = new EquipmentPanelContent();
+        e = new EquipmentPanelContent(title);
         add(e.getPanel());
+    }
+
+    public void changeTitle(String title) {
+        e.changeTitle(title);
     }
 }

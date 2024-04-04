@@ -28,7 +28,6 @@ public class LogPanel {
     AppConfig appConfig;
     private JPanel panel1;
     private JLabel placeHolder1;
-    private JButton automaticallyButton;
     private JButton manuallyButton;
     private JButton createLocalBackupButton;
     private JCheckBox enableRegularBackupsCheckBox;

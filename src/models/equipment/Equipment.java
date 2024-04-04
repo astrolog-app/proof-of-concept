@@ -90,7 +90,7 @@ public class Equipment {
         accessoires.remove(accessoire.getId(), accessoire);
     }
 
-    private List<EquipmentItem> createEquipmentItemList() {
+    public List<EquipmentItem> createEquipmentItemList() {
         List<EquipmentItem> items = new ArrayList<>();
         items.addAll(telescopes.values());
         items.addAll(cameras.values());
