@@ -49,7 +49,7 @@ public class AppActions {
             setApplicationTheme();
             startUpPanel.dispose();
 
-            // start up the mainUI and check for valid licence
+            // start up the mainUI
             SwingUtilities.invokeLater(() -> {
                 MainUI mainUI = new MainUI(appConfig, imagingSessions, isConfig, imagingFrameList, equipment);
 
