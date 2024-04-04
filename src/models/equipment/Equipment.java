@@ -123,4 +123,28 @@ public class Equipment {
 
         return null;
     }
+
+    public EquipmentType getEquipmentTypeFromViewName(String viewName) {
+        EquipmentItem item = getItemFromViewName(viewName);
+        if (item instanceof Telescope) {
+            return EquipmentType.TELESCOPE;
+        }
+        if (item instanceof Camera) {
+            return EquipmentType.CAMERA;
+        }
+        if (item instanceof Flattener) {
+            return EquipmentType.FLATTENER;
+        }
+        if (item instanceof Filter) {
+            return EquipmentType.FILTER;
+        }
+        if (item instanceof Mount) {
+            return EquipmentType.MOUNT;
+        }
+        if (item instanceof Accessoire) {
+            return EquipmentType.ACCESSOIRE;
+        }
+
+        return null;
+    }
 }
