@@ -172,9 +172,8 @@ public class LibraryRowEditor extends JDialog {
                 }
                 dispose();
             } else {
-                // TODO: gain and sub length get neglected
                 JOptionPane.showConfirmDialog(null,
-                        "An entry with this camera and calibration type already exists.",
+                        "Such an entry already exists.",
                         "Invalid Entry",
                         JOptionPane.DEFAULT_OPTION,
                         JOptionPane.INFORMATION_MESSAGE
@@ -208,11 +207,46 @@ public class LibraryRowEditor extends JDialog {
     }
 
     private boolean checkForDuplicates(CalibrationFrame lib) {
+        boolean camera;
+        boolean calibrationType;
+        boolean gain;
+        boolean subLength;
+        boolean cameraTemp;
+
         for (CalibrationFrame f : imagingFrameList.getCalibrationFrames()) {
+            camera = false;
+            calibrationType = false;
+            gain = false;
+
+            if (CalibrationType.getEnum(Objects.requireNonNull(this.calibrationType.getSelectedItem()).toString()) == CalibrationType.DARK) {
+                subLength = false;
+                cameraTemp = false;
+            } else {
+                subLength = true;
+                cameraTemp = true;
+            }
+
+            if (f.getCamera(equipment).getViewName().equals(lib.getCamera(equipment).getViewName())) {
+                camera = true;
+            }
             if (f.getCalibrationType() == lib.getCalibrationType()) {
-                if (f.getCamera(equipment).getViewName().equals(lib.getCamera(equipment).getViewName())) {
-                    return true;
+                calibrationType = true;
+            }
+            if (Objects.equals(f.getGain(), lib.getGain())) {
+                gain = true;
+            }
+
+            if (CalibrationType.getEnum(Objects.requireNonNull(this.calibrationType.getSelectedItem()).toString()) == CalibrationType.DARK && calibrationType) {
+                if (Objects.equals(((DarkFrame) f).getSubLength(), ((DarkFrame) lib).getSubLength())) {
+                    subLength = true;
                 }
+                if (Objects.equals(((DarkFrame) f).getCameraTemp(), ((DarkFrame) lib).getCameraTemp())) {
+                    cameraTemp = true;
+                }
+            }
+
+            if (camera && calibrationType && gain && subLength && cameraTemp) {
+                return true;
             }
         }
 

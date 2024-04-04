@@ -90,7 +90,7 @@ public class Equipment {
         accessoires.remove(accessoire.getId(), accessoire);
     }
 
-    private List<EquipmentItem> createEquipmentItemList() {
+    public List<EquipmentItem> createEquipmentItemList() {
         List<EquipmentItem> items = new ArrayList<>();
         items.addAll(telescopes.values());
         items.addAll(cameras.values());
@@ -119,6 +119,30 @@ public class Equipment {
             if (e.getViewName().equals(viewName)) {
                 return e;
             }
+        }
+
+        return null;
+    }
+
+    public EquipmentType getEquipmentTypeFromViewName(String viewName) {
+        EquipmentItem item = getItemFromViewName(viewName);
+        if (item instanceof Telescope) {
+            return EquipmentType.TELESCOPE;
+        }
+        if (item instanceof Camera) {
+            return EquipmentType.CAMERA;
+        }
+        if (item instanceof Flattener) {
+            return EquipmentType.FLATTENER;
+        }
+        if (item instanceof Filter) {
+            return EquipmentType.FILTER;
+        }
+        if (item instanceof Mount) {
+            return EquipmentType.MOUNT;
+        }
+        if (item instanceof Accessoire) {
+            return EquipmentType.ACCESSOIRE;
         }
 
         return null;

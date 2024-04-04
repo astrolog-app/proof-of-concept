@@ -88,6 +88,7 @@ public class ImagingSessionRowEditor extends JDialog {
 
         setSpinnerModels();
         handleActions(session);
+        fillOutPanel(session);
 
         setModal(true);
         add(mainPanel);
@@ -107,6 +108,7 @@ public class ImagingSessionRowEditor extends JDialog {
         if (edit) {
             ((CustomFileChooser) fileChooser).setPath(session.getFolderDir());
 
+            dateLight.setText(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getDate());
             target.setText(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getTarget());
             subLengthLight.setValue(checkSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getSubLength()));
             totalSubsLight.setValue(checkIntegerSessionValue(session.getLightFrame(imagingFrameList, session.getLightFrameId()).getTotalSubs()));

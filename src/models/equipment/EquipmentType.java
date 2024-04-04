@@ -16,4 +16,14 @@ public enum EquipmentType {
     public String getName() {
         return name;
     }
+
+    public static EquipmentType getEnum(String name) {
+        for (EquipmentType equipmentType : EquipmentType.values()) {
+            if (equipmentType.getName().equalsIgnoreCase(name)) {
+                return equipmentType;
+            }
+        }
+
+        return null;
+    }
 }
