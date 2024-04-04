@@ -5,8 +5,6 @@ import models.imagingFrames.CalibrationType;
 import models.equipment.*;
 import models.imagingFrames.ImagingFrameList;
 import models.settings.AppConfig;
-import services.licence.LicenceChecker;
-import ui.MainUI;
 import ui.popUps.NewBrand;
 import ui.popUps.rowEditors.EquipmentRowEditor;
 import ui.popUps.rowEditors.LibraryRowEditor;

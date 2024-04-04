@@ -2,7 +2,6 @@ package ui;
 
 import models.ImagingSession;
 import models.imagingFrames.ImagingFrameList;
-import models.license.Licence;
 import models.settings.AppConfig;
 import models.equipment.Equipment;
 import models.settings.ImagingSessionConfig;
@@ -15,7 +14,7 @@ import java.awt.*;
 import java.util.List;
 
 public class MainUI extends JFrame {
-    public MainUI(Licence licence, AppConfig appConfig, List<ImagingSession> imagingSessions,
+    public MainUI(AppConfig appConfig, List<ImagingSession> imagingSessions,
                   ImagingSessionConfig isConfig, ImagingFrameList imagingFrameList,
                   Equipment equipment) {
         Image img = Toolkit.getDefaultToolkit().getImage(Paths.IMAGE_PATH + "app_logo.png");

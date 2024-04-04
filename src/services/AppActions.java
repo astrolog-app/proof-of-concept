@@ -7,12 +7,10 @@ import models.ReleaseNotes;
 import models.equipment.Equipment;
 import models.ImagingSession;
 import models.imagingFrames.ImagingFrameList;
-import models.license.Licence;
 import models.settings.AppConfig;
 import models.settings.AppTheme;
 import models.settings.ImagingSessionConfig;
 import services.fileHandler.*;
-import services.licence.LicenceChecker;
 import ui.MainUI;
 import ui.startUp.StartUpPanel;
 import ui.startUp.WelcomeDialogue;
@@ -26,7 +24,6 @@ import java.util.logging.Logger;
 public class AppActions {
     private static final Logger logger = AppLogger.getLogger();
     private StartUpPanel startUpPanel;
-    private Licence licence;
     private AppConfig appConfig;
     private List<ImagingSession> imagingSessions = new ArrayList<>();
     private ImagingSessionConfig isConfig = new ImagingSessionConfig();
@@ -40,7 +37,6 @@ public class AppActions {
      * application is started for the first time
      */
     public void initialize() {
-        licence = LicenceStore.load();
         appConfig = ConfigurationStore.loadAppConfig();
 
         if (appConfig != null) {
@@ -55,11 +51,9 @@ public class AppActions {
 
             // start up the mainUI and check for valid licence
             SwingUtilities.invokeLater(() -> {
-                MainUI mainUI = new MainUI(licence, appConfig, imagingSessions, isConfig, imagingFrameList, equipment);
-                LicenceChecker licenceChecker = new LicenceChecker(licence, mainUI);
+                MainUI mainUI = new MainUI(appConfig, imagingSessions, isConfig, imagingFrameList, equipment);
 
                 UpdateChecker.showNewUpdates(appConfig, releaseNotes);
-                licenceChecker.check();
             });
         } else {
             logger.info("appConfig is null");
