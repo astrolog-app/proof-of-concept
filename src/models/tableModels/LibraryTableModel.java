@@ -4,6 +4,9 @@ import models.imagingFrames.CalibrationFrame;
 import models.equipment.Equipment;
 import models.imagingFrames.DarkFrame;
 import models.imagingFrames.ImagingFrameList;
+import models.settings.AppConfig;
+import models.settings.TempType;
+import utils.Temp;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -11,10 +14,12 @@ public class LibraryTableModel extends AbstractTableModel {
     // TODO: add sorting
     private final Equipment equipment;
     private final ImagingFrameList data;
+    private final AppConfig appConfig;
 
-    public LibraryTableModel(Equipment equipment, ImagingFrameList imagingFrameList) {
+    public LibraryTableModel(Equipment equipment, ImagingFrameList imagingFrameList, AppConfig appConfig) {
         this.equipment = equipment;
         this.data = imagingFrameList;
+        this.appConfig = appConfig;
     }
 
     @Override
@@ -54,8 +59,14 @@ public class LibraryTableModel extends AbstractTableModel {
                 yield "-";
             }
             case 4 -> {
-                if (lib instanceof DarkFrame)
-                    yield ((DarkFrame) lib).getCameraTemp();
+                if (lib instanceof DarkFrame) {
+                    Double cameraTemp = ((DarkFrame) lib).getCameraTemp();
+                    if (appConfig.getTempType().equals(TempType.CELSIUS)) {
+                        yield cameraTemp;
+                    } else {
+                        yield Temp.toFahrenheit(cameraTemp);
+                    }
+                }
                 yield "-";
             }
             case 5 -> lib.getTotalSubs();

@@ -5,8 +5,11 @@ import models.equipment.EquipmentItem;
 import models.ImagingSession;
 import models.imagingFrames.ImagingFrameList;
 import models.imagingFrames.LightFrame;
+import models.settings.AppConfig;
 import models.settings.ImagingSessionConfig;
 import models.settings.LoggerColumns;
+import models.settings.TempType;
+import utils.Temp;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -18,13 +21,16 @@ public class ImagingSessionTableModel extends AbstractTableModel {
     private final List<LoggerColumns> selectedColumns;
     private final Equipment equipment;
     private final ImagingFrameList imagingFrameList;
+    private final AppConfig appConfig;
 
     public ImagingSessionTableModel(List<ImagingSession> imagingSessions, Equipment equipment,
-                                    ImagingSessionConfig isConfig, ImagingFrameList imagingFrameList) {
+                                    ImagingSessionConfig isConfig, ImagingFrameList imagingFrameList,
+                                    AppConfig appConfig) {
         data = imagingSessions;
         selectedColumns = isConfig.getSelectedColumns(); // TODO: change
         this.equipment = equipment;
         this.imagingFrameList = imagingFrameList;
+        this.appConfig = appConfig;
     }
 
     public void removeSession(ImagingSession session) {
@@ -69,8 +75,22 @@ public class ImagingSessionTableModel extends AbstractTableModel {
                 case FILTER -> formatEquipmentName(lf.getFilter(equipment));
                 case GAIN -> lf.getGain();
                 case OFFSET -> formatDouble(lf.getOffset());
-                case CAMERA_TEMP -> formatDouble(lf.getCameraTemp());
-                case OUTSIDE_TEMP -> formatDouble(lf.getOutsideTemp());
+                case CAMERA_TEMP -> {
+                    double cameraTemp = lf.getCameraTemp();
+                    if (appConfig.getTempType() == TempType.CELSIUS) {
+                        yield formatDouble(cameraTemp);
+                    } else {
+                        yield formatDouble(Temp.toFahrenheit(cameraTemp));
+                    }
+                }
+                case OUTSIDE_TEMP -> {
+                    double outsideTemp = lf.getOutsideTemp();
+                    if (appConfig.getTempType() == TempType.CELSIUS) {
+                        yield formatDouble(outsideTemp);
+                    } else {
+                        yield formatDouble(Temp.toFahrenheit(outsideTemp));
+                    }
+                }
                 case AVERAGE_SEEING -> formatDouble(lf.getAverageSeeing());
                 case AVERAGE_CLOUD_COVER -> formatDouble(lf.getAverageCloudCover());
                 case AVERAGE_MOON -> formatDouble(lf.getAverageMoon());

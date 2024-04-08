@@ -243,8 +243,8 @@ public class ImagingSessionRowEditor extends JDialog {
 //        lf.setFilter();
         //lf.setGain((Double) gain.getValue());
         //lf.setOffset((Double) gain.getValue());
-        //lf.setCameraTemp((Double) gain.getValue());
-        //lf.setOutsideTemp((Double) temp.getValue());
+        //lf.setCameraTemp((Double) gain.getValue()); TODO: Fahrenheit
+        //lf.setOutsideTemp((Double) temp.getValue()); TODO: Fahrenheit
         //lf.setAverageSeeing((Double) avgSeeing.getValue());
         //lf.setAverageCloudCover((Double) avgCloudCover.getValue());
 //        lf.setTelescope();

@@ -4,10 +4,12 @@ import models.imagingFrames.*;
 import models.equipment.Equipment;
 import models.equipment.EquipmentType;
 import models.settings.AppConfig;
+import models.settings.TempType;
 import models.tableModels.LibraryTableModel;
 import services.fileHandler.ImagingFrameStore;
 import ui.customComponents.CustomComboBox;
 import ui.customComponents.CustomFileChooser;
+import utils.Temp;
 
 import javax.swing.*;
 import java.awt.event.ItemEvent;
@@ -154,7 +156,11 @@ public class LibraryRowEditor extends JDialog {
             calibrationFrame.setTotalSubs((Integer) totalSubs.getValue());
             if (ct == CalibrationType.DARK) {
                 ((DarkFrame) calibrationFrame).setSubLength((Double) subLength.getValue());
-                ((DarkFrame) calibrationFrame).setCameraTemp((Double) cameraTemp.getValue());
+                if (appConfig.getTempType() == TempType.CELSIUS) {
+                    ((DarkFrame) calibrationFrame).setCameraTemp((Double) cameraTemp.getValue());
+                } else {
+                    ((DarkFrame) calibrationFrame).setCameraTemp(Temp.toCelsius((Double) cameraTemp.getValue()));
+                }
             }
 
             if (!checkForDuplicates(calibrationFrame)) {

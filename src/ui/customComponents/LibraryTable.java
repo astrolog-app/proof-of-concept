@@ -31,7 +31,7 @@ public class LibraryTable extends JTable {
     }
 
     private void createTable() {
-        setModel(libraryTableModel = new LibraryTableModel(equipment, imagingFrameList));
+        setModel(libraryTableModel = new LibraryTableModel(equipment, imagingFrameList, appConfig));
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         showHorizontalLines = true;
         setRowHeight(30);
