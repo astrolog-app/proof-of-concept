@@ -1,18 +1,30 @@
 package ui.customComponents.equipmentPanelContent;
 
+import models.equipment.Equipment;
+import models.equipment.EquipmentItem;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class EquipmentPanelContentWrapper extends JPanel {
-    private final EquipmentPanelContent e;
+    private final Equipment equipment;
+    private EquipmentPanelContent e;
 
-    public EquipmentPanelContentWrapper(String title) {
+    public EquipmentPanelContentWrapper(Equipment equipment, EquipmentItem item) {
+        this.equipment = equipment;
+
         setLayout(new BorderLayout());
-        e = new EquipmentPanelContent(title);
-        add(e.getPanel());
+        if (item == null) {
+            add(new JLabel("Null"));
+        } else {
+            e = new EquipmentPanelContent(equipment, item);
+            add(e.getPanel());
+        }
     }
 
-    public void changeTitle(String title) {
-        e.changeTitle(title);
+    public void setItem(EquipmentItem item) {
+        EquipmentPanelContent eq = new EquipmentPanelContent(equipment, item);
+        add(eq.getPanel());
+        revalidate();
     }
 }

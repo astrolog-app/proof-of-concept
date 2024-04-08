@@ -124,8 +124,7 @@ public class Equipment {
         return null;
     }
 
-    public EquipmentType getEquipmentTypeFromViewName(String viewName) {
-        EquipmentItem item = getItemFromViewName(viewName);
+    public EquipmentType getEquipmentType(EquipmentItem item) {
         if (item instanceof Telescope) {
             return EquipmentType.TELESCOPE;
         }

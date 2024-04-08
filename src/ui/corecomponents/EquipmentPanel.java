@@ -14,7 +14,6 @@ public class EquipmentPanel {
     private String selectedEquipment;
     private JPanel mainPanel;
     private JLabel placeHolder1;
-    private JTabbedPane tabbedPane1;
     private JList<String> list1;
     private JList<String> list2;
     private JList<String> list3;
@@ -28,23 +27,21 @@ public class EquipmentPanel {
         EquipmentListModel elm = new EquipmentListModel(equipment, EquipmentListModel.State.USED);
 
         list1.setModel(elm);
-        list2.setModel(elm);
-        list3.setModel(elm);
 
         handleActions();
     }
 
     private void handleActions() {
-        addButton.addActionListener(e -> new EquipmentTypeSelector(equipment));
-        editButton.addActionListener(e -> new EquipmentRowEditor(
-                equipment.getEquipmentTypeFromViewName(selectedEquipment),
-                equipment,
-                equipment.getItemFromViewName(selectedEquipment))
-        );
+        //addButton.addActionListener(e -> new EquipmentTypeSelector(equipment));
+        //editButton.addActionListener(e -> new EquipmentRowEditor(
+        //        equipment.getEquipmentTypeFromViewName(selectedEquipment),
+        //        equipment,
+                        //        equipment.getItemFromViewName(selectedEquipment))
+        //);
 
         list1.addListSelectionListener(event -> {
             if (!event.getValueIsAdjusting()) {
-                ((EquipmentPanelContentWrapper) content).changeTitle(list1.getSelectedValue());
+                ((EquipmentPanelContentWrapper) content).setItem(equipment.getItemFromViewName(list1.getSelectedValue()));
                 selectedEquipment = list1.getSelectedValue();
             }
         });
@@ -55,6 +52,6 @@ public class EquipmentPanel {
     }
 
     private void createUIComponents() {
-        content = new EquipmentPanelContentWrapper("test");
+        content = new EquipmentPanelContentWrapper(equipment, null);
     }
 }
