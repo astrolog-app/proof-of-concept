@@ -31,7 +31,7 @@ public class MainUI extends JFrame {
         LogPanel logPanelClass = new LogPanel(appConfig, equipment, imagingSessions, isConfig, imagingFrameList);
         JPanel imagingHistoryPanel = logPanelClass.getPanel();
 
-        EquipmentPanel equipmentPanelClass = new EquipmentPanel(equipment);
+        EquipmentPanel equipmentPanelClass = new EquipmentPanel(equipment, appConfig);
         JPanel equipmentPanel = equipmentPanelClass.getPanel();
 
         LibraryPanel libraryPanelClass = new LibraryPanel(equipment, imagingFrameList, appConfig);

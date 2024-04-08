@@ -1,6 +1,9 @@
 package ui.customComponents.equipmentPanelContent;
 
 import models.equipment.*;
+import models.settings.AppConfig;
+import ui.popUps.rowEditors.EquipmentRowEditor;
+import utils.Images;
 
 import javax.swing.*;
 
@@ -17,8 +20,9 @@ public class EquipmentPanelContent {
     private JLabel used;
     private JLabel titleBrand;
     private JLabel titleName;
+    private JButton editButton;
 
-    public EquipmentPanelContent(Equipment equipment, EquipmentItem item) {
+    public EquipmentPanelContent(Equipment equipment, EquipmentItem item, AppConfig appConfig) {
         titleBrand.setText(item.getBrand());
         titleName.setText(item.getName());
         EquipmentType type = equipment.getEquipmentType(item);
@@ -30,6 +34,10 @@ public class EquipmentPanelContent {
             used.setText("No");
         }
 
+        ImageIcon binIcon = Images.getThemeBasedIcon(appConfig, "edit", 30, 30  );
+        editButton.setIcon(binIcon);
+        editButton.setText("");
+
         setAllInvisible();
 
         switch (type) {
@@ -39,8 +47,8 @@ public class EquipmentPanelContent {
                 label2.setVisible(true);
                 value2.setVisible(true);
 
-                label1.setText("Focal Length:");
-                label2.setText("Aperture:");
+                label1.setText("Focal Length [mm]:");
+                label2.setText("Aperture [mm]:");
                 value1.setText(Integer.toString(((Telescope) item).getFocalLength()));
                 value2.setText(Integer.toString(((Telescope) item).getAperture()));
             }
@@ -55,7 +63,7 @@ public class EquipmentPanelContent {
                 label1.setVisible(true);
                 value1.setVisible(true);
 
-                label1.setText("Factor");
+                label1.setText("Magnification:");
                 value1.setText(((Flattener) item).getFactor() + "x");
             }
             case CAMERA -> {
@@ -79,6 +87,8 @@ public class EquipmentPanelContent {
             }
             case MOUNT, ACCESSOIRE -> {}
         }
+
+        editButton.addActionListener(e -> new EquipmentRowEditor(type, equipment, item));
     }
 
     private void setAllInvisible() {
