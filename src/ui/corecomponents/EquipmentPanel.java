@@ -2,10 +2,7 @@ package ui.corecomponents;
 
 import models.EquipmentListModel;
 import models.equipment.Equipment;
-import models.equipment.EquipmentType;
 import ui.customComponents.equipmentPanelContent.EquipmentPanelContentWrapper;
-import ui.popUps.EquipmentTypeSelector;
-import ui.popUps.rowEditors.EquipmentRowEditor;
 
 import javax.swing.*;
 
@@ -15,8 +12,6 @@ public class EquipmentPanel {
     private JPanel mainPanel;
     private JLabel placeHolder1;
     private JList<String> list1;
-    private JList<String> list2;
-    private JList<String> list3;
     private JPanel content;
     private JButton addButton;
     private JButton editButton;

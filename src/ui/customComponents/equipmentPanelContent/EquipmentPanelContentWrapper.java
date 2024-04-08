@@ -8,22 +8,24 @@ import java.awt.*;
 
 public class EquipmentPanelContentWrapper extends JPanel {
     private final Equipment equipment;
-    private EquipmentPanelContent e;
+    private EquipmentItem item;
 
     public EquipmentPanelContentWrapper(Equipment equipment, EquipmentItem item) {
         this.equipment = equipment;
+        this.item = item;
 
         setLayout(new BorderLayout());
-        if (item == null) {
+        if (this.item == null) {
             add(new JLabel("Null"));
         } else {
-            e = new EquipmentPanelContent(equipment, item);
+            EquipmentPanelContent e = new EquipmentPanelContent(equipment, this.item);
             add(e.getPanel());
         }
     }
 
     public void setItem(EquipmentItem item) {
-        EquipmentPanelContent eq = new EquipmentPanelContent(equipment, item);
+        this.item = item;
+        EquipmentPanelContent eq = new EquipmentPanelContent(equipment, this.item);
         add(eq.getPanel());
         revalidate();
     }

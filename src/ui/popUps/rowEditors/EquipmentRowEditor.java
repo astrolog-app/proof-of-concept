@@ -234,7 +234,7 @@ public class EquipmentRowEditor extends JDialog {
                     equipment.addFlattener(flattener);
                 }
                 case CAMERA -> {
-                    String chipSize = chipSizeLabel.getText();
+                    String chipSize = Objects.requireNonNull(this.chipSize.getSelectedItem()).toString();
                     Double megaPixel = (Double) megapixel.getValue();
                     boolean rgb = colorRadioButton.isSelected();
 

@@ -8,18 +8,30 @@ public class EquipmentPanelContent {
     private final EquipmentItem item;
     private final EquipmentType type;
     private JPanel panel1;
-    private JLabel title;
     private JLabel value1;
     private JLabel value2;
     private JLabel label2;
     private JLabel label1;
     private JLabel label3;
     private JLabel value3;
+    private JLabel brand;
+    private JLabel name;
+    private JLabel used;
+    private JLabel titleBrand;
+    private JLabel titleName;
 
     public EquipmentPanelContent(Equipment equipment, EquipmentItem item) {
         this.item = item;
-        this.title.setText(item.getViewName());
+        titleBrand.setText(item.getBrand());
+        titleName.setText(item.getName());
         type = equipment.getEquipmentType(item);
+        brand.setText(item.getBrand());
+        name.setText(item.getName());
+        if (item.getUsed()) {
+            used.setText("Yes");
+        } else {
+            used.setText("No");
+        }
 
         setAllInvisible();
 
