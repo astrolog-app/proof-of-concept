@@ -5,8 +5,6 @@ import models.equipment.*;
 import javax.swing.*;
 
 public class EquipmentPanelContent {
-    private final EquipmentItem item;
-    private final EquipmentType type;
     private JPanel panel1;
     private JLabel value1;
     private JLabel value2;
@@ -21,10 +19,9 @@ public class EquipmentPanelContent {
     private JLabel titleName;
 
     public EquipmentPanelContent(Equipment equipment, EquipmentItem item) {
-        this.item = item;
         titleBrand.setText(item.getBrand());
         titleName.setText(item.getName());
-        type = equipment.getEquipmentType(item);
+        EquipmentType type = equipment.getEquipmentType(item);
         brand.setText(item.getBrand());
         name.setText(item.getName());
         if (item.getUsed()) {
@@ -61,7 +58,6 @@ public class EquipmentPanelContent {
                 label1.setText("Factor");
                 value1.setText(((Flattener) item).getFactor() + "x");
             }
-            case MOUNT, ACCESSOIRE -> {}
             case CAMERA -> {
                 label1.setVisible(true);
                 value1.setVisible(true);
@@ -81,6 +77,7 @@ public class EquipmentPanelContent {
                     value3.setText("Monochrome");
                 }
             }
+            case MOUNT, ACCESSOIRE -> {}
         }
     }
 

@@ -24,9 +24,11 @@ public class EquipmentPanelContentWrapper extends JPanel {
     }
 
     public void setItem(EquipmentItem item) {
+        removeAll();
         this.item = item;
         EquipmentPanelContent eq = new EquipmentPanelContent(equipment, this.item);
         add(eq.getPanel());
         revalidate();
+        repaint();
     }
 }
