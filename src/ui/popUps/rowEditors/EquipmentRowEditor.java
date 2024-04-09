@@ -4,6 +4,7 @@ import models.EquipmentListModel;
 import models.equipment.*;
 import services.fileHandler.EquipmentStore;
 import ui.customComponents.CustomComboBox;
+import ui.customComponents.equipmentPanelContent.EquipmentPanelContentWrapper;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -16,6 +17,7 @@ public class EquipmentRowEditor extends JDialog {
     private final Equipment equipment;
     private final EquipmentItem equipmentItem;
     private final EquipmentListModel model;
+    private final EquipmentPanelContentWrapper wrapper;
     private JPanel mainPanel;
     private JButton saveButton;
     private JButton cancelButton;
@@ -49,11 +51,12 @@ public class EquipmentRowEditor extends JDialog {
     private boolean prevUsed = true;
 
     public EquipmentRowEditor(EquipmentType equipmentType, Equipment equipment, EquipmentItem equipmentItem,
-                              EquipmentListModel model) {
+                              EquipmentListModel model, EquipmentPanelContentWrapper wrapper) {
         this.equipmentType = equipmentType;
         this.equipment = equipment;
         this.equipmentItem = equipmentItem;
         this.model = model;
+        this.wrapper = wrapper;
 
         edit = equipmentItem != null;
 
@@ -210,6 +213,7 @@ public class EquipmentRowEditor extends JDialog {
         saveButton.addActionListener(e -> {
             String name = nameField.getText();
             String brand = Objects.requireNonNull(brandField.getSelectedItem()).toString();
+            EquipmentItem item = equipmentItem;
 
             switch (equipmentType) {
                 case TELESCOPE -> {
@@ -218,26 +222,31 @@ public class EquipmentRowEditor extends JDialog {
 
                     Telescope telescope = new Telescope(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand, focalLength, aperture);
                     equipment.addTelescope(telescope);
+                    item = telescope;
                 }
                 case ACCESSOIRE -> {
                     Accessoire accessoire = new Accessoire(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand);
                     equipment.addAccessoire(accessoire);
+                    item = accessoire;
                 }
                 case MOUNT -> {
                     Mount mount = new Mount(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand);
                     equipment.addMount(mount);
+                    item = mount;
                 }
                 case FILTER -> {
                     String filterType = filterTypeLabel.getText();
 
                     Filter filter = new Filter(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand, filterType);
                     equipment.addFilter(filter);
+                    item = filter;
                 }
                 case FLATTENER -> {
                     double _factor = (double) factor.getValue();
 
                     Flattener flattener = new Flattener(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand, _factor);
                     equipment.addFlattener(flattener);
+                    item = flattener;
                 }
                 case CAMERA -> {
                     String chipSize = Objects.requireNonNull(this.chipSize.getSelectedItem()).toString();
@@ -246,6 +255,7 @@ public class EquipmentRowEditor extends JDialog {
 
                     Camera camera = new Camera(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand, chipSize, megaPixel, rgb);
                     equipment.addCamera(camera);
+                    item = camera;
                 }
             }
             if (edit) {
@@ -255,6 +265,9 @@ public class EquipmentRowEditor extends JDialog {
             EquipmentStore.save(equipment, null);
             if (model != null) {
                 model.update();
+            } // TODO: combine
+            if (wrapper != null) {
+                wrapper.setItem(item);
             }
             dispose();
         });

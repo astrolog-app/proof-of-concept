@@ -179,7 +179,7 @@ public class CustomComboBox extends JComboBox<String> {
                 List<String> oldList = new ArrayList<>(content);
 
                 switch (boxType) {
-                    case EQUIPMENT -> SwingUtilities.invokeLater(() -> new EquipmentRowEditor(equipmentType, equipment, null, null));
+                    case EQUIPMENT -> SwingUtilities.invokeLater(() -> new EquipmentRowEditor(equipmentType, equipment, null, null, null));
                     case CALIBRATION -> SwingUtilities.invokeLater(() -> new LibraryRowEditor(null, equipment, imagingFrameList, null, appConfig, calibrationType));
                     case BRAND -> SwingUtilities.invokeLater(() -> new NewBrand(this));
                 }

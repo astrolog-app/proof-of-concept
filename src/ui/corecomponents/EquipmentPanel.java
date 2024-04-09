@@ -7,26 +7,23 @@ import ui.customComponents.equipmentPanelContent.EquipmentPanelContentWrapper;
 import ui.popUps.EquipmentTypeSelector;
 
 import javax.swing.*;
-import java.awt.event.ItemEvent;
-import java.util.Objects;
 
 public class EquipmentPanel {
     private final Equipment equipment;
     private final AppConfig appConfig;
-    private final EquipmentListModel elm;
+    private EquipmentListModel elm;
     private String selectedEquipment;
     private JPanel mainPanel;
     private JLabel placeHolder1;
     private JList<String> list1;
     private JPanel content;
     private JButton addButton;
-    private JComboBox listStateBox;
+    private JComboBox<String> listStateBox;
     private JButton editButton;
 
     public EquipmentPanel(Equipment equipment, AppConfig appConfig) {
         this.equipment = equipment;
         this.appConfig = appConfig;
-        elm = new EquipmentListModel(equipment, EquipmentListModel.State.USED);
 
         list1.setModel(elm);
 
@@ -34,7 +31,7 @@ public class EquipmentPanel {
     }
 
     private void handleActions() {
-        addButton.addActionListener(e -> new EquipmentTypeSelector(equipment, elm));
+        addButton.addActionListener(e -> new EquipmentTypeSelector(equipment, elm, (EquipmentPanelContentWrapper) content));
 
         list1.addListSelectionListener(event -> {
             if (!event.getValueIsAdjusting()) {
@@ -61,6 +58,7 @@ public class EquipmentPanel {
     }
 
     private void createUIComponents() {
-        content = new EquipmentPanelContentWrapper(equipment, null, appConfig);
+        elm = new EquipmentListModel(equipment, EquipmentListModel.State.USED);
+        content = new EquipmentPanelContentWrapper(equipment, null, appConfig, elm);
     }
 }
