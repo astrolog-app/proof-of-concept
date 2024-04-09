@@ -14,6 +14,7 @@ import java.util.List;
 public class EquipmentRowEditor extends JDialog {
     private final EquipmentType equipmentType;
     private final Equipment equipment;
+    private final EquipmentItem equipmentItem;
     private final EquipmentListModel model;
     private JPanel mainPanel;
     private JButton saveButton;
@@ -51,6 +52,7 @@ public class EquipmentRowEditor extends JDialog {
                               EquipmentListModel model) {
         this.equipmentType = equipmentType;
         this.equipment = equipment;
+        this.equipmentItem = equipmentItem;
         this.model = model;
 
         edit = equipmentItem != null;
@@ -245,6 +247,9 @@ public class EquipmentRowEditor extends JDialog {
                     Camera camera = new Camera(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand, chipSize, megaPixel, rgb);
                     equipment.addCamera(camera);
                 }
+            }
+            if (edit) {
+                equipment.removeEquipmentItem(equipmentItem);
             }
 
             EquipmentStore.save(equipment, null);

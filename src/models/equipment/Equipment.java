@@ -90,6 +90,28 @@ public class Equipment {
         accessoires.remove(accessoire.getId(), accessoire);
     }
 
+    public void removeEquipmentItem(EquipmentItem e) {
+        if (e instanceof Telescope) {
+            removeTelescope((Telescope) e);
+        }
+        if (e instanceof Camera) {
+            removeCamera((Camera) e);
+        }
+        if (e instanceof Mount) {
+            removeMount((Mount) e);
+        }
+        if (e instanceof Filter) {
+            removeFilter((Filter) e);
+        }
+        if (e instanceof Flattener) {
+            removeFlattener((Flattener) e);
+        }
+        if (e instanceof Accessoire) {
+            removeAccessoire((Accessoire) e);
+        }
+
+    }
+
     public List<EquipmentItem> createEquipmentItemList() {
         List<EquipmentItem> items = new ArrayList<>();
         items.addAll(telescopes.values());
