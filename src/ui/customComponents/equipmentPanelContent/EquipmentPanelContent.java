@@ -1,8 +1,8 @@
 package ui.customComponents.equipmentPanelContent;
 
-import models.EquipmentListModel;
 import models.equipment.*;
 import models.settings.AppConfig;
+import ui.corecomponents.EquipmentPanel;
 import ui.popUps.rowEditors.EquipmentRowEditor;
 import utils.Images;
 
@@ -24,7 +24,7 @@ public class EquipmentPanelContent {
     private JButton editButton;
 
     public EquipmentPanelContent(Equipment equipment, EquipmentItem item, AppConfig appConfig,
-                                 EquipmentListModel listModel, EquipmentPanelContentWrapper wrapper) {
+                                 EquipmentPanel equipmentPanel) {
         titleBrand.setText(item.getBrand());
         titleName.setText(item.getName());
         EquipmentType type = equipment.getEquipmentType(item);
@@ -90,7 +90,7 @@ public class EquipmentPanelContent {
             case MOUNT, ACCESSOIRE -> {}
         }
 
-        editButton.addActionListener(e -> new EquipmentRowEditor(type, equipment, item, listModel, wrapper));
+        editButton.addActionListener(e -> new EquipmentRowEditor(type, equipment, item, equipmentPanel));
     }
 
     private void setAllInvisible() {

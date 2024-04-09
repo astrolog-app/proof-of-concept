@@ -3,6 +3,7 @@ package ui.popUps;
 import models.EquipmentListModel;
 import models.equipment.Equipment;
 import models.equipment.EquipmentType;
+import ui.corecomponents.EquipmentPanel;
 import ui.customComponents.equipmentPanelContent.EquipmentPanelContentWrapper;
 import ui.popUps.rowEditors.EquipmentRowEditor;
 
@@ -12,7 +13,7 @@ import java.util.Objects;
 public class EquipmentTypeSelector extends JDialog {
     private final Equipment equipment;
     private final EquipmentListModel model;
-    private final EquipmentPanelContentWrapper wrapper;
+    private final EquipmentPanel equipmentPanel;
     private JPanel mainPanel;
     private JButton continueButton;
     private JButton cancelButton;
@@ -24,10 +25,10 @@ public class EquipmentTypeSelector extends JDialog {
     private JRadioButton accessoireRadioButton;
     private JRadioButton selectedRadioButton = telescopeRadioButton;
 
-    public EquipmentTypeSelector(Equipment equipment, EquipmentListModel model, EquipmentPanelContentWrapper wrapper) {
+    public EquipmentTypeSelector(Equipment equipment, EquipmentListModel model, EquipmentPanel equipmentPanel) {
         this.equipment = equipment;
         this.model = model;
-        this.wrapper = wrapper;
+        this.equipmentPanel = equipmentPanel;
 
         telescopeRadioButton.setSelected(true);
         handleActions();
@@ -46,7 +47,7 @@ public class EquipmentTypeSelector extends JDialog {
         continueButton.addActionListener(e -> {
             SwingUtilities.invokeLater(() ->
                     new EquipmentRowEditor(Objects.requireNonNull(EquipmentType.getEnum(selectedRadioButton.getText())),
-                            equipment, null, model, wrapper)
+                            equipment, null, equipmentPanel)
                 );
                 dispose();
             }

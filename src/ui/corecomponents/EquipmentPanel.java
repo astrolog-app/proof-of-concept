@@ -11,7 +11,7 @@ import javax.swing.*;
 public class EquipmentPanel {
     private final Equipment equipment;
     private final AppConfig appConfig;
-    private EquipmentListModel elm;
+    private final EquipmentListModel elm;
     private String selectedEquipment;
     private JPanel mainPanel;
     private JLabel placeHolder1;
@@ -24,6 +24,7 @@ public class EquipmentPanel {
     public EquipmentPanel(Equipment equipment, AppConfig appConfig) {
         this.equipment = equipment;
         this.appConfig = appConfig;
+        elm = new EquipmentListModel(equipment, EquipmentListModel.State.USED);
 
         list1.setModel(elm);
 
@@ -31,7 +32,7 @@ public class EquipmentPanel {
     }
 
     private void handleActions() {
-        addButton.addActionListener(e -> new EquipmentTypeSelector(equipment, elm, (EquipmentPanelContentWrapper) content));
+        addButton.addActionListener(e -> new EquipmentTypeSelector(equipment, elm, this));
 
         list1.addListSelectionListener(event -> {
             if (!event.getValueIsAdjusting()) {
@@ -53,12 +54,16 @@ public class EquipmentPanel {
         });
     }
 
+    public void update() {
+        elm.update();
+        ((EquipmentPanelContentWrapper) content).setItem(equipment.getItemFromViewName(list1.getSelectedValue()));
+    }
+
     public JPanel getPanel() {
         return mainPanel;
     }
 
     private void createUIComponents() {
-        elm = new EquipmentListModel(equipment, EquipmentListModel.State.USED);
-        content = new EquipmentPanelContentWrapper(equipment, null, appConfig, elm);
+        content = new EquipmentPanelContentWrapper(equipment, null, appConfig, this);
     }
 }
