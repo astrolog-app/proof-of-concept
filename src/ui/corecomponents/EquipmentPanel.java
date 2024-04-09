@@ -34,7 +34,7 @@ public class EquipmentPanel {
     }
 
     private void handleActions() {
-        addButton.addActionListener(e -> new EquipmentTypeSelector(equipment));
+        addButton.addActionListener(e -> new EquipmentTypeSelector(equipment, elm));
 
         list1.addListSelectionListener(event -> {
             if (!event.getValueIsAdjusting()) {

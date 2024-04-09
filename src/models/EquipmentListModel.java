@@ -13,26 +13,26 @@ public class EquipmentListModel extends AbstractListModel<String> {
         ALL
     }
 
+    private final Equipment equipment;
     private State state;
-    private final List<EquipmentItem> equipmentItemList;
     private List<EquipmentItem> itemList;
 
     public EquipmentListModel(Equipment equipment, State state) {
+        this.equipment = equipment;
         this.state = state;
 
-        equipmentItemList = equipment.createEquipmentItemList();
         setItemList();
     }
 
     private void setItemList() {
         switch (state) {
-            case USED -> itemList = equipmentItemList.stream()
+            case USED -> itemList = equipment.createEquipmentItemList().stream()
                     .filter(EquipmentItem::getUsed)
                     .toList();
-            case UNUSED -> itemList = equipmentItemList.stream()
+            case UNUSED -> itemList = equipment.createEquipmentItemList().stream()
                     .filter(item -> !item.getUsed())
                     .toList();
-            case ALL -> itemList = equipmentItemList;
+            case ALL -> itemList = equipment.createEquipmentItemList();
         }
     }
 
@@ -48,6 +48,10 @@ public class EquipmentListModel extends AbstractListModel<String> {
 
     public void changeState (State state) {
         this.state = state;
+        update();
+    }
+
+    public void update() {
         setItemList();
         fireContentsChanged(this, 0, getSize() - 1);
     }

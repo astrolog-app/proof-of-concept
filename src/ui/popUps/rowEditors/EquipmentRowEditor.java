@@ -1,5 +1,6 @@
 package ui.popUps.rowEditors;
 
+import models.EquipmentListModel;
 import models.equipment.*;
 import services.fileHandler.EquipmentStore;
 import ui.customComponents.CustomComboBox;
@@ -13,6 +14,7 @@ import java.util.List;
 public class EquipmentRowEditor extends JDialog {
     private final EquipmentType equipmentType;
     private final Equipment equipment;
+    private final EquipmentListModel model;
     private JPanel mainPanel;
     private JButton saveButton;
     private JButton cancelButton;
@@ -45,9 +47,11 @@ public class EquipmentRowEditor extends JDialog {
     private String prevBrand = "";
     private boolean prevUsed = true;
 
-    public EquipmentRowEditor(EquipmentType equipmentType, Equipment equipment, EquipmentItem equipmentItem) {
+    public EquipmentRowEditor(EquipmentType equipmentType, Equipment equipment, EquipmentItem equipmentItem,
+                              EquipmentListModel model) {
         this.equipmentType = equipmentType;
         this.equipment = equipment;
+        this.model = model;
 
         edit = equipmentItem != null;
 
@@ -244,6 +248,9 @@ public class EquipmentRowEditor extends JDialog {
             }
 
             EquipmentStore.save(equipment, null);
+            if (model != null) {
+                model.update();
+            }
             dispose();
         });
 

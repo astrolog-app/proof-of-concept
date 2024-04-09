@@ -88,7 +88,7 @@ public class EquipmentPanelContent {
             case MOUNT, ACCESSOIRE -> {}
         }
 
-        editButton.addActionListener(e -> new EquipmentRowEditor(type, equipment, item));
+        editButton.addActionListener(e -> new EquipmentRowEditor(type, equipment, item, null));
     }
 
     private void setAllInvisible() {
