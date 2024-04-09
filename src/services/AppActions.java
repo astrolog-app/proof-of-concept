@@ -2,7 +2,6 @@ package services;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import models.ImagingProject;
 import models.ReleaseNotes;
 import models.equipment.Equipment;
 import models.ImagingSession;
@@ -28,7 +27,6 @@ public class AppActions {
     private List<ImagingSession> imagingSessions = new ArrayList<>();
     private ImagingSessionConfig isConfig = new ImagingSessionConfig();
     private Equipment equipment = new Equipment();
-    private List<ImagingProject> imagingProjects = new ArrayList<>();
     private ImagingFrameList imagingFrameList = new ImagingFrameList();
     private ReleaseNotes releaseNotes;
 
@@ -83,11 +81,6 @@ public class AppActions {
         Application.sleep(50);
         startUpPanel.setProgressLabel("loading imagingFrames.json");
         imagingFrameList = ImagingFrameStore.load();
-        startUpPanel.increaseProgress();
-
-        Application.sleep(50);
-        startUpPanel.setProgressLabel("loading imagingProjects.json");
-        imagingProjects = ImagingProjectStore.load();
         startUpPanel.increaseProgress();
 
         if (appConfig.getCheckForUpdates()) {
