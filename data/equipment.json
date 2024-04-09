@@ -1,7 +1,7 @@
 {
   "telescopes" : [ {
     "id" : "7133fa61-599d-425f-a2f3-2b04304f02d8",
-    "used" : true,
+    "used" : false,
     "brand" : "Sky-Watcher",
     "name" : "Esprit 100",
     "focalLength" : 550,
@@ -16,7 +16,7 @@
   } ],
   "cameras" : [ {
     "id" : "8d00c203-a73f-4a9c-ad3b-aa608aaa8f97",
-    "used" : true,
+    "used" : false,
     "brand" : "ZWO",
     "name" : "ASI 2600MM",
     "chipSize" : "APS_C",

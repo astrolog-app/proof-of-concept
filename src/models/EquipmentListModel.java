@@ -12,22 +12,43 @@ public class EquipmentListModel extends AbstractListModel<String> {
         UNUSED,
         ALL
     }
-    private final State state;
+
+    private State state;
     private final List<EquipmentItem> equipmentItemList;
+    private List<EquipmentItem> itemList;
 
     public EquipmentListModel(Equipment equipment, State state) {
         this.state = state;
 
         equipmentItemList = equipment.createEquipmentItemList();
+        setItemList();
+    }
+
+    private void setItemList() {
+        switch (state) {
+            case USED -> itemList = equipmentItemList.stream()
+                    .filter(EquipmentItem::getUsed)
+                    .toList();
+            case UNUSED -> itemList = equipmentItemList.stream()
+                    .filter(item -> !item.getUsed())
+                    .toList();
+            case ALL -> itemList = equipmentItemList;
+        }
     }
 
     @Override
     public int getSize() {
-        return equipmentItemList.size();
+        return itemList.size();
     }
 
     @Override
     public String getElementAt(int index) {
-        return equipmentItemList.get(index).getViewName();
+        return itemList.get(index).getViewName();
+    }
+
+    public void changeState (State state) {
+        this.state = state;
+        setItemList();
+        fireContentsChanged(this, 0, getSize() - 1);
     }
 }
