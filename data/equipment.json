@@ -50,11 +50,5 @@
     "brand" : "TS-OPTICS",
     "name" : "0.79x Photoline",
     "factor" : 0.79
-  } ],
-  "accessoires" : [ {
-    "id" : "dd6ecce2-7c6f-4229-8478-e77899b21251",
-    "used" : true,
-    "brand" : "Pegasus-Astro",
-    "name" : "PowerBox Advanced"
   } ]
 }

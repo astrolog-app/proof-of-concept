@@ -5,8 +5,7 @@ public enum EquipmentType {
     CAMERA("Camera"),
     FLATTENER("Flattener"),
     FILTER("Filter"),
-    MOUNT("Mount"),
-    ACCESSOIRE("Accessoire");
+    MOUNT("Mount");
     private final String name;
 
     EquipmentType(String name) {

@@ -10,7 +10,6 @@ public class Equipment {
     private Map<UUID, Mount> mounts = new HashMap<>();
     private Map<UUID, Filter> filters = new HashMap<>();
     private Map<UUID, Flattener> flatteners = new HashMap<>();
-    private Map<UUID, Accessoire> accessoires = new HashMap<>();
 
     public Map<UUID, Telescope> getTelescopes() {
         return telescopes;
@@ -77,19 +76,6 @@ public class Equipment {
         flatteners.remove(flattener.getId(), flattener);
     }
 
-    public Map<UUID, Accessoire> getAccessoires() {
-        return accessoires;
-    }
-    public void setAccessoires(Map<UUID, Accessoire> accessoires) {
-        this.accessoires = accessoires;
-    }
-    public void addAccessoire(Accessoire accessoire) {
-        accessoires.put(accessoire.getId(), accessoire);
-    }
-    public void removeAccessoire(Accessoire accessoire) {
-        accessoires.remove(accessoire.getId(), accessoire);
-    }
-
     public void removeEquipmentItem(EquipmentItem e) {
         if (e instanceof Telescope) {
             removeTelescope((Telescope) e);
@@ -106,10 +92,6 @@ public class Equipment {
         if (e instanceof Flattener) {
             removeFlattener((Flattener) e);
         }
-        if (e instanceof Accessoire) {
-            removeAccessoire((Accessoire) e);
-        }
-
     }
 
     public List<EquipmentItem> createEquipmentItemList() {
@@ -119,7 +101,6 @@ public class Equipment {
         items.addAll(mounts.values());
         items.addAll(filters.values());
         items.addAll(flatteners.values());
-        items.addAll(accessoires.values());
 
         return items;
     }
@@ -161,9 +142,6 @@ public class Equipment {
         }
         if (item instanceof Mount) {
             return EquipmentType.MOUNT;
-        }
-        if (item instanceof Accessoire) {
-            return EquipmentType.ACCESSOIRE;
         }
 
         return null;

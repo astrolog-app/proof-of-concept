@@ -22,7 +22,6 @@ public class EquipmentTypeSelector extends JDialog {
     private JRadioButton mountRadioButton;
     private JRadioButton filterRadioButton;
     private JRadioButton flattenerRadioButton;
-    private JRadioButton accessoireRadioButton;
     private JRadioButton selectedRadioButton = telescopeRadioButton;
 
     public EquipmentTypeSelector(Equipment equipment, EquipmentListModel model, EquipmentPanel equipmentPanel) {
@@ -37,7 +36,7 @@ public class EquipmentTypeSelector extends JDialog {
         setContentPane(mainPanel);
         setTitle("Select Equipment Type");
         setResizable(false);
-        setSize(350, 275);
+        setSize(350, 250);
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -58,7 +57,6 @@ public class EquipmentTypeSelector extends JDialog {
         mountRadioButton.addActionListener(e -> selectRadioButton(mountRadioButton));
         filterRadioButton.addActionListener(e -> selectRadioButton(filterRadioButton));
         flattenerRadioButton.addActionListener(e -> selectRadioButton(flattenerRadioButton));
-        accessoireRadioButton.addActionListener(e -> selectRadioButton(accessoireRadioButton));
     }
 
     private void selectRadioButton(JRadioButton radioButton) {
@@ -67,7 +65,6 @@ public class EquipmentTypeSelector extends JDialog {
         mountRadioButton.setSelected(false);
         filterRadioButton.setSelected(false);
         flattenerRadioButton.setSelected(false);
-        accessoireRadioButton.setSelected(false);
 
         selectedRadioButton = radioButton;
         radioButton.setSelected(true);

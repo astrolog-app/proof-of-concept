@@ -88,7 +88,6 @@ public class CustomComboBox extends JComboBox<String> {
                     case CAMERA -> equipment.getCameras().values().forEach(c -> content.add(c.getViewName()));
                     case FILTER -> equipment.getFilters().values().forEach(f -> content.add(f.getViewName()));
                     case FLATTENER -> equipment.getFlatteners().values().forEach(f -> content.add(f.getViewName()));
-                    case ACCESSOIRE -> equipment.getAccessoires().values().forEach(a -> content.add(a.getViewName()));
                 }
             }
             case CALIBRATION -> {

@@ -11,7 +11,6 @@ public class EquipmentWrapper {
     private List<Mount> mounts;
     private List<Filter> filters;
     private List<Flattener> flatteners;
-    private List<Accessoire> accessoires;
 
     public List<Telescope> getTelescopes() {
         return telescopes;
@@ -46,12 +45,5 @@ public class EquipmentWrapper {
     }
     public void setFlatteners(List<Flattener> flatteners) {
         this.flatteners = flatteners;
-    }
-
-    public List<Accessoire> getAccessoires() {
-        return accessoires;
-    }
-    public void setAccessoires(List<Accessoire> accessoires) {
-        this.accessoires = accessoires;
     }
 }

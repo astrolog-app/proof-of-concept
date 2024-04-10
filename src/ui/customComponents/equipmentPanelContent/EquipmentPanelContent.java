@@ -100,7 +100,7 @@ public class EquipmentPanelContent {
                     value3.setText("Monochrome");
                 }
             }
-            case MOUNT, ACCESSOIRE -> {}
+            case MOUNT -> {}
         }
     }
 

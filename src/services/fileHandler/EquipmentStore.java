@@ -41,12 +41,6 @@ public class EquipmentStore {
             }
             equipment.setFlatteners(flattenerMap);
 
-            Map<UUID, Accessoire> accessoireMap = new HashMap<>();
-            for (Accessoire a : equipmentWrapper.getAccessoires()) {
-                accessoireMap.put(a.getId(), a);
-            }
-            equipment.setAccessoires(accessoireMap);
-
             Map<UUID, Filter> filterMap = new HashMap<>();
             for (Filter f : equipmentWrapper.getFilters()) {
                 filterMap.put(f.getId(), f);
@@ -79,14 +73,12 @@ public class EquipmentStore {
         List<Filter> filters = equipment.getFilters().values().stream().toList();
         List<Flattener> flatteners = equipment.getFlatteners().values().stream().toList();
         List<Camera> cameras = equipment.getCameras().values().stream().toList();
-        List<Accessoire> accessoires = equipment.getAccessoires().values().stream().toList();
 
         ew.setTelescopes(telescopes);
         ew.setMounts(mounts);
         ew.setFilters(filters);
         ew.setFlatteners(flatteners);
         ew.setCameras(cameras);
-        ew.setAccessoires(accessoires);
 
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(configPath), ew);

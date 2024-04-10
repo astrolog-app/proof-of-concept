@@ -192,7 +192,7 @@ public class EquipmentRowEditor extends JDialog {
 
                 setSize(500, 230);
             }
-            case ACCESSOIRE, MOUNT -> setSize(500, 180);
+            case MOUNT -> setSize(500, 180);
         }
     }
 
@@ -241,10 +241,6 @@ public class EquipmentRowEditor extends JDialog {
 
                         Telescope telescope = new Telescope(id, isUsedCheckBox.isSelected(), name, brand, focalLength, aperture);
                         equipment.addTelescope(telescope);
-                    }
-                    case ACCESSOIRE -> {
-                        Accessoire accessoire = new Accessoire(id, isUsedCheckBox.isSelected(), brand, name);
-                        equipment.addAccessoire(accessoire);
                     }
                     case MOUNT -> {
                         Mount mount = new Mount(id, isUsedCheckBox.isSelected(), brand, name);
