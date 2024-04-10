@@ -1,6 +1,5 @@
 package ui.customComponents.equipmentPanelContent;
 
-import models.EquipmentListModel;
 import models.equipment.Equipment;
 import models.equipment.EquipmentItem;
 import models.settings.AppConfig;
@@ -14,6 +13,8 @@ public class EquipmentPanelContentWrapper extends JPanel {
     private EquipmentItem item;
     private final AppConfig appConfig;
     private final EquipmentPanel equipmentPanel;
+    private EquipmentPanelContent e;
+    private boolean showNull = true;
 
     public EquipmentPanelContentWrapper(Equipment equipment, EquipmentItem item, AppConfig appConfig,
                                         EquipmentPanel equipmentPanel) {
@@ -23,20 +24,28 @@ public class EquipmentPanelContentWrapper extends JPanel {
         this.equipmentPanel = equipmentPanel;
 
         setLayout(new BorderLayout());
-        if (this.item == null) {
-            add(new JLabel("Null"));
+
+        if (item == null) {
+            add(new JLabel("Select Equipment Item"));
         } else {
-            EquipmentPanelContent e = new EquipmentPanelContent(equipment, this.item, appConfig, equipmentPanel);
+            e = new EquipmentPanelContent(equipment, this.item, appConfig, equipmentPanel);
             add(e.getPanel());
+            showNull = false;
         }
     }
 
     public void setItem(EquipmentItem item) {
-        removeAll();
         this.item = item;
-        EquipmentPanelContent eq = new EquipmentPanelContent(equipment, this.item, appConfig, equipmentPanel);
-        add(eq.getPanel());
-        revalidate();
-        repaint();
+
+        if (showNull) {
+            removeAll();
+            e = new EquipmentPanelContent(equipment, this.item, appConfig, equipmentPanel);
+            add(e.getPanel());
+            revalidate();
+            repaint();
+            showNull = false;
+        } else {
+            e.setItem(item);
+        }
     }
 }

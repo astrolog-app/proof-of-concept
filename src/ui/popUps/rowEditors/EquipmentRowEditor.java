@@ -209,53 +209,79 @@ public class EquipmentRowEditor extends JDialog {
         saveButton.addActionListener(e -> {
             String name = nameField.getText();
             String brand = Objects.requireNonNull(brandField.getSelectedItem()).toString();
-
-            switch (equipmentType) {
-                case TELESCOPE -> {
-                    int focalLength = (int) focalLengthField.getValue();
-                    int aperture = (int) apertureField.getValue();
-
-                    Telescope telescope = new Telescope(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand, focalLength, aperture);
-                    equipment.addTelescope(telescope);
-                }
-                case ACCESSOIRE -> {
-                    Accessoire accessoire = new Accessoire(UUID.randomUUID(), isUsedCheckBox.isSelected(), brand, name);
-                    equipment.addAccessoire(accessoire);
-                }
-                case MOUNT -> {
-                    Mount mount = new Mount(UUID.randomUUID(), isUsedCheckBox.isSelected(), brand, name);
-                    equipment.addMount(mount);
-                }
-                case FILTER -> {
-                    String filterType = filterTypeLabel.getText();
-
-                    Filter filter = new Filter(UUID.randomUUID(), isUsedCheckBox.isSelected(), brand, name, filterType);
-                    equipment.addFilter(filter);
-                }
-                case FLATTENER -> {
-                    double _factor = (double) factor.getValue();
-
-                    Flattener flattener = new Flattener(UUID.randomUUID(), isUsedCheckBox.isSelected(), brand, name, _factor);
-                    equipment.addFlattener(flattener);
-                }
-                case CAMERA -> {
-                    String chipSize = Objects.requireNonNull(this.chipSize.getSelectedItem()).toString();
-                    Double megaPixel = (Double) megapixel.getValue();
-                    boolean rgb = colorRadioButton.isSelected();
-
-                    Camera camera = new Camera(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand, chipSize, megaPixel, rgb);
-                    equipment.addCamera(camera);
-                }
-            }
+            UUID id;
             if (edit) {
-                equipment.removeEquipmentItem(equipmentItem);
+                id = equipmentItem.getId();
+            } else {
+                id = UUID.randomUUID();
             }
 
-            EquipmentStore.save(equipment, null);
-            dispose();
+            String viewName = brand + " " + name;
+            boolean b = false;
+            for (EquipmentItem item : equipment.createEquipmentItemList()) {
+                if (item.getViewName().equals(viewName)) {
+                    b = true;
+                    break;
+                }
+            }
 
-            if (equipmentPanel != null)
-                equipmentPanel.update();
+            // check for duplicates
+            if (!edit && b) {
+                JOptionPane.showConfirmDialog(null,
+                        "This " + equipment.getEquipmentType(equipment.getItemFromViewName(viewName)).getName().toLowerCase() + " already exists!",
+                        "Invalid Entry",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            } else {
+                switch (equipmentType) {
+                    case TELESCOPE -> {
+                        int focalLength = (int) focalLengthField.getValue();
+                        int aperture = (int) apertureField.getValue();
+
+                        Telescope telescope = new Telescope(id, isUsedCheckBox.isSelected(), name, brand, focalLength, aperture);
+                        equipment.addTelescope(telescope);
+                    }
+                    case ACCESSOIRE -> {
+                        Accessoire accessoire = new Accessoire(id, isUsedCheckBox.isSelected(), brand, name);
+                        equipment.addAccessoire(accessoire);
+                    }
+                    case MOUNT -> {
+                        Mount mount = new Mount(id, isUsedCheckBox.isSelected(), brand, name);
+                        equipment.addMount(mount);
+                    }
+                    case FILTER -> {
+                        String filterType = filterTypeLabel.getText();
+
+                        Filter filter = new Filter(id, isUsedCheckBox.isSelected(), brand, name, filterType);
+                        equipment.addFilter(filter);
+                    }
+                    case FLATTENER -> {
+                        double _factor = (double) factor.getValue();
+
+                        Flattener flattener = new Flattener(id, isUsedCheckBox.isSelected(), brand, name, _factor);
+                        equipment.addFlattener(flattener);
+                    }
+                    case CAMERA -> {
+                        String chipSize = Objects.requireNonNull(this.chipSize.getSelectedItem()).toString();
+                        Double megaPixel = (Double) megapixel.getValue();
+                        boolean rgb = colorRadioButton.isSelected();
+
+                        Camera camera = new Camera(id, isUsedCheckBox.isSelected(), name, brand, chipSize, megaPixel, rgb);
+                        equipment.addCamera(camera);
+                    }
+                }
+
+                if (edit) {
+                    equipment.removeEquipmentItem(equipmentItem);
+                }
+
+                EquipmentStore.save(equipment, null);
+                dispose();
+
+                if (equipmentPanel != null)
+                    equipmentPanel.update();
+            }
         });
 
         brandField.addActionListener(e -> brandField.removeItem(null));

@@ -9,6 +9,10 @@ import utils.Images;
 import javax.swing.*;
 
 public class EquipmentPanelContent {
+    private final Equipment equipment;
+    private EquipmentItem item;
+    private final EquipmentPanel equipmentPanel;
+    private EquipmentType type;
     private JPanel panel1;
     private JLabel value1;
     private JLabel value2;
@@ -25,9 +29,22 @@ public class EquipmentPanelContent {
 
     public EquipmentPanelContent(Equipment equipment, EquipmentItem item, AppConfig appConfig,
                                  EquipmentPanel equipmentPanel) {
+        this.equipment = equipment;
+        this.item = item;
+        this.equipmentPanel = equipmentPanel;
+        type = equipment.getEquipmentType(item);
+
+        ImageIcon binIcon = Images.getThemeBasedIcon(appConfig, "edit", 30, 30);
+        editButton.setIcon(binIcon);
+        editButton.setText("");
+
+        update();
+        handleActions();
+    }
+
+    private void update() {
         titleBrand.setText(item.getBrand());
         titleName.setText(item.getName());
-        EquipmentType type = equipment.getEquipmentType(item);
         brand.setText(item.getBrand());
         name.setText(item.getName());
         if (item.getUsed()) {
@@ -35,10 +52,6 @@ public class EquipmentPanelContent {
         } else {
             used.setText("No");
         }
-
-        ImageIcon binIcon = Images.getThemeBasedIcon(appConfig, "edit", 30, 30  );
-        editButton.setIcon(binIcon);
-        editButton.setText("");
 
         setAllInvisible();
 
@@ -89,7 +102,9 @@ public class EquipmentPanelContent {
             }
             case MOUNT, ACCESSOIRE -> {}
         }
+    }
 
+    private void handleActions() {
         editButton.addActionListener(e -> new EquipmentRowEditor(type, equipment, item, equipmentPanel));
     }
 
@@ -100,6 +115,14 @@ public class EquipmentPanelContent {
         value2.setVisible(false);
         label3.setVisible(false);
         value3.setVisible(false);
+    }
+
+    public void setItem(EquipmentItem item) {
+        if (item != null) {
+            this.item = item;
+            type = equipment.getEquipmentType(item);
+            update();
+        }
     }
 
     public JPanel getPanel() {
