@@ -1,17 +1,14 @@
 package ui.popUps.rowEditors;
 
-import models.EquipmentListModel;
 import models.equipment.*;
 import services.fileHandler.EquipmentStore;
 import ui.corecomponents.EquipmentPanel;
 import ui.customComponents.CustomComboBox;
-import ui.customComponents.equipmentPanelContent.EquipmentPanelContentWrapper;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.util.*;
-import java.util.List;
 
 public class EquipmentRowEditor extends JDialog {
     private final EquipmentType equipmentType;
@@ -222,7 +219,7 @@ public class EquipmentRowEditor extends JDialog {
                     equipment.addTelescope(telescope);
                 }
                 case ACCESSOIRE -> {
-                    Accessoire accessoire = new Accessoire(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand);
+                    Accessoire accessoire = new Accessoire(UUID.randomUUID(), isUsedCheckBox.isSelected(), brand, name);
                     equipment.addAccessoire(accessoire);
                 }
                 case MOUNT -> {
@@ -232,13 +229,13 @@ public class EquipmentRowEditor extends JDialog {
                 case FILTER -> {
                     String filterType = filterTypeLabel.getText();
 
-                    Filter filter = new Filter(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand, filterType);
+                    Filter filter = new Filter(UUID.randomUUID(), isUsedCheckBox.isSelected(), brand, name, filterType);
                     equipment.addFilter(filter);
                 }
                 case FLATTENER -> {
                     double _factor = (double) factor.getValue();
 
-                    Flattener flattener = new Flattener(UUID.randomUUID(), isUsedCheckBox.isSelected(), name, brand, _factor);
+                    Flattener flattener = new Flattener(UUID.randomUUID(), isUsedCheckBox.isSelected(), brand, name, _factor);
                     equipment.addFlattener(flattener);
                 }
                 case CAMERA -> {
@@ -255,11 +252,10 @@ public class EquipmentRowEditor extends JDialog {
             }
 
             EquipmentStore.save(equipment, null);
+            dispose();
 
             if (equipmentPanel != null)
                 equipmentPanel.update();
-
-            dispose();
         });
 
         brandField.addActionListener(e -> brandField.removeItem(null));
